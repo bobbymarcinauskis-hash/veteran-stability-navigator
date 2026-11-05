@@ -185,10 +185,10 @@ function extractOutputText(data) {
 }
 
 async function askOpenAI(instructions, messages, maxOutputTokens) {
-  const response = await fetch("https://api.openai.com/v1/responses", {
+  const response = await fetch("https://veteran.services.ai.azure.com/openai/v1/responses", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${API_KEY}`,
+      "api-key": API_KEY,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
