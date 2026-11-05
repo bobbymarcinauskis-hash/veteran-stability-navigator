@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Veteran Stability Navigator</title>
 
   <style>
     :root {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
+      color-scheme: light;
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
       color: #263247;
       background: #f6f4f0;
       line-height: 1.6;
@@ -84,12 +90,13 @@
     .entry-screen {
       min-height: 100vh;
       padding: 28px clamp(24px, 6vw, 90px) 70px;
-      background: linear-gradient(
-        115deg,
-        #f7f5f1 0%,
-        #f7f5f1 66%,
-        #e8e3de 100%
-      );
+      background:
+        linear-gradient(
+          115deg,
+          #f7f5f1 0%,
+          #f7f5f1 66%,
+          #e8e3de 100%
+        );
     }
 
     .entry-brand {
@@ -418,11 +425,34 @@
         width: 100%;
       }
     }
+
+    @media print {
+      .no-print,
+      header,
+      .intro,
+      .progress,
+      footer {
+        display: none !important;
+      }
+
+      body,
+      main,
+      .card {
+        background: #fff;
+        box-shadow: none;
+        border: 0;
+      }
+
+      .card {
+        padding: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Entry -->
+  <!-- Welcome screens -->
+
   <div id="entry-screen" class="entry-screen">
     <div class="entry-brand">
       <span class="entry-mark" aria-hidden="true">VN</span>
@@ -440,7 +470,10 @@
       </p>
 
       <div class="actions">
-        <button type="button" id="new-user">I’m new here</button>
+        <button type="button" id="new-user">
+          I’m new here
+        </button>
+
         <button type="button" id="returning-user" class="secondary">
           I’m returning
         </button>
@@ -458,8 +491,13 @@
       </p>
 
       <div class="actions">
-        <button type="button" id="begin">Let’s begin</button>
-        <button type="button" class="secondary" id="back-new">Back</button>
+        <button type="button" id="begin">
+          Let’s begin
+        </button>
+
+        <button type="button" id="back-new" class="secondary">
+          Back
+        </button>
       </div>
     </section>
 
@@ -473,7 +511,11 @@
         you can restore it below.
       </p>
 
-      <p id="returning-message" class="status" aria-live="polite"></p>
+      <p
+        id="returning-message"
+        class="status"
+        aria-live="polite"
+      ></p>
 
       <div class="actions">
         <button type="button" id="restore-progress">
@@ -499,7 +541,8 @@
     </section>
   </div>
 
-  <!-- Main app -->
+  <!-- Main application -->
+
   <div id="application" hidden>
     <header>
       <div class="header-inner">
@@ -524,14 +567,17 @@
 
         <div class="notice">
           <strong>If you need immediate help</strong>
-          This prototype is not an emergency service. In the U.S., if you
-          or someone else is in immediate danger, call 911. For the Veterans
-          Crisis Line, call 988 and press 1.
+
+          This prototype is not an emergency service. In the U.S.,
+          if you or someone else is in immediate danger, call 911.
+          For the Veterans Crisis Line, call 988 and press 1.
         </div>
 
         <div class="notice">
-          <strong>About this demo</strong>
-          Support organizations are fictional. No referral is sent.
+          <strong>About this prototype</strong>
+
+          The directory entries are unverified sample data from the
+          prototype. No referral is sent to an organization.
           If you use the optional AI conversation or AI summary, the
           relevant conversation is sent through this app’s server to
           OpenAI for processing.
@@ -540,45 +586,60 @@
 
       <nav aria-label="Progress">
         <ol class="progress">
-          <li class="active" aria-current="step"><span>1</span> Your story</li>
-          <li><span>2</span> Your needs</li>
-          <li><span>3</span> Review</li>
-          <li><span>4</span> Options</li>
+          <li class="active" aria-current="step">
+            <span>1</span> Your story
+          </li>
+
+          <li>
+            <span>2</span> Your needs
+          </li>
+
+          <li>
+            <span>3</span> Review
+          </li>
+
+          <li>
+            <span>4</span> Options
+          </li>
         </ol>
       </nav>
 
-      <!-- Step 1 -->
+      <!-- STEP 1 -->
+
       <section class="card" id="step-0" aria-labelledby="heading-0">
-        <h2 id="heading-0" tabindex="-1">Let’s start where you are</h2>
+        <h2 id="heading-0" tabindex="-1">
+          Let’s start where you are
+        </h2>
 
         <p>
-          You do not need to describe trauma, military experiences, or
-          anything else you would rather keep private.
+          You do not need to describe trauma, military experiences,
+          or anything else you would rather keep private.
         </p>
 
         <div class="panel">
           <h3>Choose how you’d like to begin</h3>
 
           <p class="small">
-            The AI assistant can ask one question at a time to help clarify
-            your needs. It is not a human counselor and may make mistakes.
-            You can stop using it at any time.
+            The AI assistant can ask one question at a time to help
+            clarify your needs. It is not a human counselor and may
+            make mistakes. You can stop using it at any time.
           </p>
 
           <p class="small">
-            If you choose AI, your messages and the conversation history
-            are sent to this app’s server and OpenAI. Avoid sharing Social
-            Security numbers, account numbers, or other details you do not
-            want processed. This prototype’s server does not intentionally
-            save conversation content, but API-provider data handling and
-            retention may still apply.
+            If you choose AI, your messages and conversation history
+            are sent to this app’s server and OpenAI. Avoid sharing
+            Social Security numbers, account numbers, or other details
+            you do not want processed. The prototype server does not
+            intentionally save conversation content, but API-provider
+            data handling and retention may still apply.
           </p>
 
           <label class="check-row">
             <input type="checkbox" id="ai-consent">
+
             <span>
-              I understand the information above and choose to use the
-              AI conversation.
+              I understand the information above and choose to use
+              the AI conversation.
             </span>
           </label>
 
@@ -591,14 +652,16 @@
               Write my own story instead
             </button>
           </div>
+
+          <p id="intake-status" class="status" aria-live="polite"></p>
         </div>
 
         <div id="chat-area" hidden>
           <h3>Conversation</h3>
 
           <p class="small">
-            You can answer briefly, say “skip,” or continue to the next
-            step whenever you’re ready. Only messages you send are included.
+            You can answer briefly, say “skip,” or continue whenever
+            you’re ready.
           </p>
 
           <div
@@ -609,7 +672,9 @@
             aria-live="polite"
           ></div>
 
-          <label class="field-label" for="chat-input">Your response</label>
+          <label class="field-label" for="chat-input">
+            Your response
+          </label>
 
           <textarea
             id="chat-input"
@@ -618,10 +683,16 @@
           ></textarea>
 
           <div class="actions">
-            <button type="button" id="send-message">Send response</button>
+            <button type="button" id="send-message">
+              Send response
+            </button>
 
-            <button type="button" id="use-conversation" class="secondary">
-              Use conversation and continue
+            <button
+              type="button"
+              id="use-conversation"
+              class="secondary"
+            >
+              Continue with what I’ve shared
             </button>
 
             <button type="button" id="stop-chat" class="text-button">
@@ -644,35 +715,45 @@
           ></textarea>
 
           <p class="small">
-            This text stays in the browser unless you choose to save it
-            on this device. The manual path does not send it to OpenAI.
+            This text stays in the browser unless you choose to save
+            it on this device. The manual path does not send it to OpenAI.
           </p>
 
           <div class="actions">
-            <button type="button" id="manual-continue">Continue</button>
+            <button type="button" id="manual-continue">
+              Continue
+            </button>
           </div>
         </div>
       </section>
 
-      <!-- Step 2 -->
-      <section class="card" id="step-1" aria-labelledby="heading-1" hidden>
+      <!-- STEP 2 -->
+
+      <section
+        class="card"
+        id="step-1"
+        aria-labelledby="heading-1"
+        hidden
+      >
         <h2 id="heading-1" tabindex="-1">
           What kind of support would help?
         </h2>
 
-        <p>Every question is optional. Select anything that applies.</p>
+        <p>
+          Every question is optional. Select anything that applies.
+        </p>
 
         <fieldset>
           <legend>What would you like help with?</legend>
 
           <label class="check-row">
             <input type="checkbox" name="need" value="rent">
-            Rent or an urgent bill
+            Rent, utilities, or another urgent bill
           </label>
 
           <label class="check-row">
             <input type="checkbox" name="need" value="food">
-            Food
+            Food or food benefits
           </label>
 
           <label class="check-row">
@@ -683,6 +764,11 @@
           <label class="check-row">
             <input type="checkbox" name="need" value="work">
             Work or job training
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox" name="need" value="medical">
+            Healthcare or medical support
           </label>
         </fieldset>
 
@@ -711,15 +797,34 @@
           <option>Transportation is a challenge</option>
         </select>
 
+        <p class="small">
+          Your transportation answer appears in your review. This
+          prototype does not verify transit access or use it to rank
+          organizations.
+        </p>
+
         <div class="actions">
-          <button type="button" class="secondary" data-go="0">Back</button>
-          <button type="button" id="to-review">Review my information</button>
+          <button type="button" class="secondary" data-go="0">
+            Back
+          </button>
+
+          <button type="button" id="to-review">
+            Review my information
+          </button>
         </div>
       </section>
 
-      <!-- Step 3 -->
-      <section class="card" id="step-2" aria-labelledby="heading-2" hidden>
-        <h2 id="heading-2" tabindex="-1">Review your summary</h2>
+      <!-- STEP 3 -->
+
+      <section
+        class="card"
+        id="step-2"
+        aria-labelledby="heading-2"
+        hidden
+      >
+        <h2 id="heading-2" tabindex="-1">
+          Review your summary
+        </h2>
 
         <p>
           Check the summary carefully. You can edit it, leave it blank,
@@ -730,19 +835,29 @@
           <h3>Optional AI draft</h3>
 
           <p class="small">
-            If you select this button, the conversation will be sent to
-            OpenAI again to create a draft. Check it for mistakes and
-            remove anything you do not want included.
+            If you select this button, the conversation will be sent
+            to OpenAI again to create a draft. Check it for mistakes
+            and remove anything you do not want included.
           </p>
 
-          <button type="button" id="generate-summary" class="secondary">
+          <button
+            type="button"
+            id="generate-summary"
+            class="secondary"
+          >
             Create an AI summary
           </button>
 
-          <p id="summary-status" class="status" aria-live="polite"></p>
+          <p
+            id="summary-status"
+            class="status"
+            aria-live="polite"
+          ></p>
         </div>
 
-        <label class="field-label" for="summary">Your editable summary</label>
+        <label class="field-label" for="summary">
+          Your editable summary
+        </label>
 
         <textarea
           id="summary"
@@ -753,28 +868,112 @@
         <div class="panel" id="review-details"></div>
 
         <div class="actions">
-          <button type="button" class="secondary" data-go="1">Back</button>
-          <button type="button" id="to-options">See support options</button>
+          <button type="button" class="secondary" data-go="1">
+            Back
+          </button>
+
+          <button type="button" id="to-options">
+            See support options
+          </button>
         </div>
       </section>
 
-      <!-- Step 4 -->
-      <section class="card" id="step-3" aria-labelledby="heading-3" hidden>
-        <h2 id="heading-3" tabindex="-1">Your possible next steps</h2>
+      <!-- STEP 4 -->
+
+      <section
+        class="card"
+        id="step-3"
+        aria-labelledby="heading-3"
+        hidden
+      >
+        <h2 id="heading-3" tabindex="-1">
+          Your possible next steps
+        </h2>
 
         <p>
-          These fictional suggestions use only the needs you selected.
-          They do not account for location, transportation, eligibility,
-          urgency, or availability.
+          These entries come from the regional directory in your
+          teammate’s prototype. They have not been verified. Inclusion
+          does not guarantee that an organization can help.
         </p>
+
+        <div class="notice">
+          <strong>Please confirm details before traveling or calling.</strong>
+
+          Distances are approximate straight-line distances from a ZIP-area
+          reference point—not travel distances. This prototype does not
+          determine eligibility, availability, transit access, or whether
+          a particular service is currently offered.
+        </div>
+
+        <div class="panel no-print">
+          <h3>Find options near an included ZIP area</h3>
+
+          <p class="small">
+            This version supports these preloaded ZIP areas: 07601,
+            07102, 15222, 15213, 15205, 92101, and 78205. It does not
+            send your ZIP to an outside lookup service.
+          </p>
+
+          <label class="field-label" for="search-zip">
+            Five-digit ZIP code
+          </label>
+
+          <input
+            type="text"
+            id="search-zip"
+            inputmode="numeric"
+            maxlength="5"
+            placeholder="For example: 07601"
+          >
+
+          <label class="field-label" for="search-radius">
+            Approximate search radius
+          </label>
+
+          <select id="search-radius">
+            <option value="5">Within 5 miles</option>
+            <option value="10">Within 10 miles</option>
+            <option value="15" selected>Within 15 miles</option>
+            <option value="25">Within 25 miles</option>
+            <option value="50">Within 50 miles</option>
+          </select>
+
+          <div class="actions">
+            <button type="button" id="find-organizations">
+              Find possible options
+            </button>
+          </div>
+
+          <p
+            id="directory-status"
+            class="status"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <div class="panel">
+          <h3>Your choices</h3>
+
+          <p id="main-choice">Main option: Not selected</p>
+          <p id="backup-choice">Backup option: Not selected</p>
+
+          <p class="small">
+            Choices are kept only for this session. They are not sent
+            or included in saved progress.
+          </p>
+        </div>
 
         <div id="matches"></div>
 
-        <fieldset>
-          <legend>What would you be comfortable sharing?</legend>
+        <fieldset class="no-print">
+          <legend>
+            What would you be comfortable sharing?
+          </legend>
 
           <p class="small">
             This is a preview only. Nothing is sent to an organization.
+            The summary is free text, so review it for sensitive details
+            even if another checkbox is unchecked.
           </p>
 
           <label class="check-row">
@@ -800,32 +999,59 @@
 
         <div class="panel">
           <h3>Sharing preview</h3>
+
           <div id="sharing-preview"></div>
+
+          <div class="actions no-print">
+            <button type="button" id="copy-preview" class="secondary">
+              Copy preview
+            </button>
+
+            <button type="button" id="print-preview" class="secondary">
+              Print this page
+            </button>
+          </div>
+
+          <p id="copy-status" class="status no-print" aria-live="polite"></p>
         </div>
 
-        <div class="panel">
+        <div class="panel no-print">
           <h3>Save your progress on this device</h3>
 
           <p class="small">
-            Saving is optional. Your story, edited summary, and answers
-            will be stored in this browser and may be visible to anyone
-            using this browser profile. The conversation itself and
-            sharing selections are not saved.
+            Saving is optional. Your written story, edited summary,
+            and answers will be stored in this browser and may be visible
+            to anyone using this browser profile. The AI conversation,
+            directory search, organization choices, and sharing selections
+            are not saved.
           </p>
 
-          <button type="button" id="save-progress" class="secondary">
+          <button
+            type="button"
+            id="save-progress"
+            class="secondary"
+          >
             Save progress on this device
           </button>
 
-          <p id="save-message" class="status" aria-live="polite"></p>
+          <p
+            id="save-message"
+            class="status"
+            aria-live="polite"
+          ></p>
         </div>
 
-        <div class="actions">
-          <button type="button" class="secondary" data-go="2">Back</button>
-          <button type="button" id="reset" class="secondary">Start over</button>
+        <div class="actions no-print">
+          <button type="button" class="secondary" data-go="2">
+            Back
+          </button>
+
+          <button type="button" id="reset" class="secondary">
+            Start over
+          </button>
         </div>
 
-        <p class="small">
+        <p class="small no-print">
           Start over clears the current form and conversation, but does
           not delete any previously saved copy.
         </p>
@@ -842,48 +1068,325 @@
     const STORAGE_KEY = "veteran-navigator-progress-v2";
 
     const labels = {
-      rent: "Rent or an urgent bill",
-      food: "Food",
+      rent: "Rent, utilities, or another urgent bill",
+      food: "Food or food benefits",
       housing: "A place to stay or permanent housing",
-      work: "Work or job training"
+      work: "Work or job training",
+      medical: "Healthcare or medical support"
     };
 
-    // Fictional demonstration organizations.
+    const ZIP_AREAS = {
+      "07601": {
+        city: "Hackensack",
+        state: "NJ",
+        lat: 40.8868,
+        lon: -74.0435
+      },
+      "07102": {
+        city: "Newark",
+        state: "NJ",
+        lat: 40.7357,
+        lon: -74.1724
+      },
+      "15222": {
+        city: "Pittsburgh",
+        state: "PA",
+        lat: 40.4485,
+        lon: -79.9904
+      },
+      "15213": {
+        city: "Pittsburgh",
+        state: "PA",
+        lat: 40.4406,
+        lon: -79.9559
+      },
+      "15205": {
+        city: "Pittsburgh",
+        state: "PA",
+        lat: 40.4312,
+        lon: -80.0685
+      },
+      "92101": {
+        city: "San Diego",
+        state: "CA",
+        lat: 32.7157,
+        lon: -117.1611
+      },
+      "78205": {
+        city: "San Antonio",
+        state: "TX",
+        lat: 29.4241,
+        lon: -98.4936
+      }
+    };
+
+    /*
+      Directory records adapted from the teammate's supplied prototype.
+
+      IMPORTANT:
+      These records are unverified. Their names, categories, addresses,
+      phone numbers, and coordinates may be incorrect or out of date.
+    */
+
     const organizations = [
       {
-        name: "Riverbend Veterans Resource Center",
-        services: ["rent", "food", "work"],
-        description:
-          "A fictional center offering emergency assistance, food referrals, and job-search help.",
-        access: "Downtown Riverbend, near the Route 4 bus stop."
+        id: "nj_bcvso",
+        name: "Bergen County Division of Veteran Services & NJ DMAVA VSO",
+        address: "One Bergen County Plaza, 2nd Floor, Hackensack, NJ 07601",
+        phone: "(201) 336-6325",
+        lat: 40.8788,
+        lon: -74.0422,
+        categories: ["financial", "food", "medical", "work"]
       },
       {
-        name: "Eastfield Family Services",
-        services: ["rent", "food"],
-        description:
-          "A fictional provider offering emergency rent help and food assistance.",
-        access:
-          "Eastfield; not on a bus line. Phone appointments may be available."
+        id: "nj_onestop",
+        name: "Bergen County One-Stop Career Center",
+        address: "60 State Street, 2nd Floor, Hackensack, NJ 07601",
+        phone: "(201) 329-9600",
+        lat: 40.8859,
+        lon: -74.0439,
+        categories: ["work"]
       },
       {
-        name: "Northside Veterans Housing Collaborative",
-        services: ["housing"],
-        description:
-          "A fictional organization helping veterans experiencing homelessness find permanent housing.",
-        access:
-          "North Riverbend, on the Route 2 bus line. Does not cover past-due rent for someone who still has housing."
+        id: "nj_ssvf_ca",
+        name: "Community Hope — Hope for Veterans",
+        address: "175 Washington Ave, Dumont / Hackensack Service Hub, NJ 07601",
+        phone: "(855) 483-8466",
+        lat: 40.8921,
+        lon: -74.0398,
+        categories: ["financial", "food"]
       },
       {
-        name: "Riverbend Workforce Center",
-        services: ["work"],
-        description:
-          "A fictional center offering job-search help, résumé reviews, and training.",
-        access: "Downtown Riverbend, on the Route 4 bus line."
+        id: "nj_va_cboc",
+        name: "Hackensack VA Clinic",
+        address: "385 Prospect Avenue, Hackensack, NJ 07601",
+        phone: "(201) 342-4536",
+        lat: 40.8942,
+        lon: -74.0568,
+        categories: ["medical"]
+      },
+      {
+        id: "nj_vet_center",
+        name: "Secaucus / Bergen Vet Center",
+        address: "110A Meadowlands Parkway, Suite 102, Secaucus, NJ 07094",
+        phone: "(201) 223-7787",
+        lat: 40.7931,
+        lon: -74.0683,
+        categories: ["medical", "work"]
+      },
+      {
+        id: "nj_cfa_food",
+        name: "Center for Food Action",
+        address: "192 W. Demarest Avenue, Englewood / Hackensack Hub, NJ 07631",
+        phone: "(201) 569-1804",
+        lat: 40.8995,
+        lon: -73.9821,
+        categories: ["food", "financial"]
+      },
+      {
+        id: "nj_catholic_charities",
+        name: "Catholic Charities Archdiocese of Newark — Veterans Program",
+        address: "590 North 7th Street, Newark, NJ 07107",
+        phone: "(855) 768-7932",
+        lat: 40.7641,
+        lon: -74.1823,
+        categories: ["financial", "food"]
+      },
+      {
+        id: "nj_gi_go",
+        name: "GI Go Fund",
+        address: "436 Central Avenue, Newark / Northern NJ Hub, NJ 07107",
+        phone: "(862) 240-1755",
+        lat: 40.7478,
+        lon: -74.1912,
+        categories: ["work", "financial", "food"]
+      },
+      {
+        id: "nj_east_orange_vamc",
+        name: "East Orange VA Medical Center",
+        address: "385 Tremont Avenue, East Orange, NJ 07018",
+        phone: "(973) 676-1000",
+        lat: 40.7521,
+        lon: -74.2361,
+        categories: ["medical"]
+      },
+      {
+        id: "nj_varbo_newark",
+        name: "Newark VA Regional Benefit Office",
+        address: "20 Washington Place, Newark, NJ 07102",
+        phone: "(800) 827-1000",
+        lat: 40.7429,
+        lon: -74.1704,
+        categories: ["medical", "work", "financial"]
+      },
+      {
+        id: "nj_bergen_bss",
+        name: "Bergen County Board of Social Services",
+        address: "218 Route 17 North, Rochelle Park, NJ 07662",
+        phone: "(201) 368-4200",
+        lat: 40.9088,
+        lon: -74.0725,
+        categories: ["food", "financial"]
+      },
+      {
+        id: "nj_lyons_homeless",
+        name: "Lyons VA Medical Center — Domiciliary",
+        address: "151 Knollcroft Road, Lyons, NJ 07939",
+        phone: "(908) 647-0180",
+        lat: 40.6652,
+        lon: -74.5491,
+        categories: ["financial", "medical"]
+      },
+
+      {
+        id: "pgh_vlp",
+        name: "Veterans Leadership Program of Western PA",
+        address: "2934 Smallman Street, Pittsburgh, PA 15201",
+        phone: "(412) 481-8200",
+        lat: 40.4581,
+        lon: -79.9742,
+        categories: ["financial", "food", "work"]
+      },
+      {
+        id: "pgh_careerlink",
+        name: "PA CareerLink Pittsburgh / Allegheny County",
+        address: "2201 Liberty Avenue, Pittsburgh, PA 15222",
+        phone: "(412) 552-7100",
+        lat: 40.4519,
+        lon: -79.9831,
+        categories: ["work"]
+      },
+      {
+        id: "pgh_acvs",
+        name: "Allegheny County Veterans Services",
+        address: "4141 Fifth Avenue, 2nd Floor, Pittsburgh, PA 15213",
+        phone: "(412) 621-4357",
+        lat: 40.4439,
+        lon: -79.9547,
+        categories: ["financial", "food", "medical"]
+      },
+      {
+        id: "pgh_varbo",
+        name: "Pittsburgh VA Regional Benefit Office",
+        address: "1000 Liberty Avenue, Room 1700, Pittsburgh, PA 15222",
+        phone: "(800) 827-1000",
+        lat: 40.4432,
+        lon: -79.9949,
+        categories: ["medical", "work", "financial"]
+      },
+      {
+        id: "pgh_vamc_univ",
+        name: "Pittsburgh VA Medical Center — University Drive",
+        address: "University Drive C, Pittsburgh, PA 15240",
+        phone: "(866) 482-7488",
+        lat: 40.4457,
+        lon: -79.9602,
+        categories: ["medical"]
+      },
+      {
+        id: "pgh_vet_center",
+        name: "Pittsburgh Vet Center",
+        address: "2500 Baldwick Road, Suite 15, Pittsburgh, PA 15205",
+        phone: "(412) 920-1765",
+        lat: 40.4278,
+        lon: -80.0681,
+        categories: ["medical", "work"]
+      },
+      {
+        id: "pgh_salvation_ssvf",
+        name: "The Salvation Army Western PA — Veteran Family Program",
+        address: "700 North Bell Avenue, Carnegie / Pittsburgh, PA 15106",
+        phone: "(412) 446-1500",
+        lat: 40.4089,
+        lon: -80.0835,
+        categories: ["financial", "food"]
+      },
+      {
+        id: "pgh_wwp",
+        name: "Wounded Warrior Project — Pittsburgh Service Office",
+        address: "600 River Avenue, Suite 400, Pittsburgh, PA 15212",
+        phone: "(412) 471-0935",
+        lat: 40.4539,
+        lon: -79.9922,
+        categories: ["work", "medical", "financial"]
+      },
+      {
+        id: "pgh_food_bank",
+        name: "Greater Pittsburgh Community Food Bank",
+        address: "1 North Linden Street, Duquesne / Pittsburgh Metro, PA 15110",
+        phone: "(412) 460-3663",
+        lat: 40.3792,
+        lon: -79.8471,
+        categories: ["food"]
+      },
+      {
+        id: "pgh_hj_heinz_va",
+        name: "H.J. Heinz III VA Campus",
+        address: "1010 Delafield Road, Pittsburgh, PA 15215",
+        phone: "(866) 482-7488",
+        lat: 40.4958,
+        lon: -79.8981,
+        categories: ["medical"]
+      },
+
+      {
+        id: "sd_vvsd",
+        name: "Veterans Village of San Diego",
+        address: "4141 Pacific Highway, San Diego, CA 92110",
+        phone: "(619) 393-2000",
+        lat: 32.7481,
+        lon: -117.1965,
+        categories: ["financial", "food", "work", "medical"]
+      },
+      {
+        id: "sd_va_clinic",
+        name: "Jennifer Moreno VA Medical Center / Mission Valley VA Clinic",
+        address: "8810 Rio San Diego Drive, San Diego, CA 92108",
+        phone: "(619) 400-5000",
+        lat: 32.7759,
+        lon: -117.1391,
+        categories: ["medical"]
+      },
+
+      {
+        id: "sa_endeavors",
+        name: "Endeavors — Veteran Supportive Services",
+        address: "6363 De Zavala Road, San Antonio, TX 78249",
+        phone: "(210) 431-6466",
+        lat: 29.5612,
+        lon: -98.6134,
+        categories: ["financial", "food", "medical"]
+      },
+      {
+        id: "sa_bexar_vso",
+        name: "Bexar County Military & Veterans Services Center",
+        address: "1422 E. Grayson Street, Suite 400, San Antonio, TX 78208",
+        phone: "(210) 335-6775",
+        lat: 29.4426,
+        lon: -98.4612,
+        categories: ["work", "financial", "medical"]
       }
     ];
 
+    const NEED_TO_CATEGORIES = {
+      rent: ["financial"],
+      housing: ["financial"],
+      food: ["food"],
+      work: ["work"],
+      medical: ["medical"]
+    };
+
+    const CATEGORY_LABELS = {
+      financial: "Financial / housing",
+      food: "Food",
+      work: "Work / training",
+      medical: "Healthcare"
+    };
+
     const $ = selector => document.querySelector(selector);
-    const $$ = selector => Array.from(document.querySelectorAll(selector));
+
+    const $$ = selector =>
+      Array.from(document.querySelectorAll(selector));
 
     const openingMessage =
       "I’m here to help you work out what support might be useful. " +
@@ -896,8 +1399,13 @@
     let summaryInitialized = false;
     let requestController = null;
 
+    let directorySearchPerformed = false;
+    let mainOrganizationId = null;
+    let backupOrganizationId = null;
+
     function selectedNeeds() {
-      return $$('input[name="need"]:checked').map(input => input.value);
+      return $$('input[name="need"]:checked')
+        .map(input => input.value);
     }
 
     function needsText() {
@@ -913,6 +1421,7 @@
       const strong = document.createElement("strong");
 
       strong.textContent = label + ": ";
+
       paragraph.append(
         strong,
         document.createTextNode(value || "Not provided")
@@ -922,12 +1431,17 @@
     }
 
     function showEntryPanel(panelId) {
-      ["entry-choice", "new-user-welcome", "returning-welcome"]
-        .forEach(id => {
-          document.getElementById(id).hidden = id !== panelId;
-        });
+      [
+        "entry-choice",
+        "new-user-welcome",
+        "returning-welcome"
+      ].forEach(id => {
+        document.getElementById(id).hidden = id !== panelId;
+      });
 
-      const heading = document.querySelector("#" + panelId + " h1");
+      const heading = document.querySelector(
+        "#" + panelId + " h1"
+      );
 
       if (heading) {
         heading.tabIndex = -1;
@@ -979,7 +1493,8 @@
         item.className = "message " + message.role;
 
         const name = document.createElement("strong");
-        name.textContent = message.role === "user" ? "You" : "AI assistant";
+        name.textContent =
+          message.role === "user" ? "You" : "AI assistant";
 
         const content = document.createElement("div");
         content.textContent = message.content;
@@ -1000,7 +1515,8 @@
     }
 
     async function callApi(path, payload) {
-      requestController = new AbortController();
+      const controller = new AbortController();
+      requestController = controller;
 
       try {
         const response = await fetch(path, {
@@ -1009,37 +1525,46 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify(payload),
-          signal: requestController.signal
+          signal: controller.signal
         });
 
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
           throw new Error(
-            data.error || "The service is unavailable. Please try again."
+            data.error ||
+            "The service is unavailable. Please try again."
           );
         }
 
         return data;
       } finally {
-        requestController = null;
+        if (requestController === controller) {
+          requestController = null;
+        }
       }
     }
 
     function beginChat() {
       if (!$("#ai-consent").checked) {
-        $("#chat-status").textContent =
-          "Please select the consent checkbox before starting the AI conversation.";
+        $("#intake-status").textContent =
+          "Please select the consent checkbox before starting " +
+          "the AI conversation.";
+
         return;
       }
 
+      $("#intake-status").textContent = "";
       $("#chat-status").textContent = "";
       $("#manual-area").hidden = true;
       $("#chat-area").hidden = false;
 
       if (!chatStarted) {
         conversation = [
-          { role: "assistant", content: openingMessage }
+          {
+            role: "assistant",
+            content: openingMessage
+          }
         ];
 
         chatStarted = true;
@@ -1050,32 +1575,43 @@
     }
 
     async function sendMessage() {
-      if (chatBusy) return;
+      if (chatBusy) {
+        return;
+      }
 
       if (!$("#ai-consent").checked) {
         $("#chat-status").textContent =
           "Please select the consent checkbox before using AI.";
+
         return;
       }
 
       const text = $("#chat-input").value.trim();
 
       if (!text) {
-        $("#chat-status").textContent = "Please enter a response first.";
-        return;
-      }
-
-      if (conversation.length >= 30) {
         $("#chat-status").textContent =
-          "This demo has reached its conversation limit. You can continue with what you have shared.";
+          "Please enter a response first.";
+
         return;
       }
 
-      const userMessage = { role: "user", content: text };
-      conversation.push(userMessage);
+      if (conversation.length >= 29) {
+        $("#chat-status").textContent =
+          "This demo has reached its conversation limit. " +
+          "You can continue with what you have shared.";
+
+        return;
+      }
+
+      conversation.push({
+        role: "user",
+        content: text
+      });
 
       $("#chat-input").value = "";
-      $("#chat-status").textContent = "The assistant is responding...";
+      $("#chat-status").textContent =
+        "The assistant is responding...";
+
       renderConversation();
       setChatBusy(true);
 
@@ -1092,17 +1628,22 @@
         renderConversation();
         $("#chat-status").textContent = "";
       } catch (error) {
-        if (error.name === "AbortError") {
-          $("#chat-status").textContent = "The request was stopped.";
-        } else {
-          // Remove the unsent turn so the user can retry it.
+        const last = conversation[conversation.length - 1];
+
+        if (
+          last &&
+          last.role === "user" &&
+          last.content === text
+        ) {
           conversation.pop();
           $("#chat-input").value = text;
           renderConversation();
-
-          $("#chat-status").textContent =
-            error.message || "The assistant could not respond.";
         }
+
+        $("#chat-status").textContent =
+          error.name === "AbortError"
+            ? "The request was stopped."
+            : error.message || "The assistant could not respond.";
       } finally {
         setChatBusy(false);
       }
@@ -1132,24 +1673,27 @@
     async function generateSummary() {
       if (!$("#ai-consent").checked) {
         $("#summary-status").textContent =
-          "AI consent is not currently selected. You can edit the summary yourself.";
+          "AI consent is not currently selected. " +
+          "You can edit the summary yourself.";
+
         return;
       }
 
       if (!userConversationText()) {
         $("#summary-status").textContent =
           "There is no conversation to summarize.";
+
         return;
       }
 
-      const existing = $("#summary").value.trim();
-
-      if (existing) {
+      if ($("#summary").value.trim()) {
         const replace = window.confirm(
           "Creating an AI draft will replace the current summary. Continue?"
         );
 
-        if (!replace) return;
+        if (!replace) {
+          return;
+        }
       }
 
       $("#generate-summary").disabled = true;
@@ -1161,6 +1705,7 @@
         });
 
         $("#summary").value = result.summary;
+
         $("#summary-status").textContent =
           "Draft created. Please review and edit it before continuing.";
       } catch (error) {
@@ -1180,68 +1725,227 @@
       addLine(container, "Transportation", $("#transport").value);
     }
 
+    function approximateDistanceMiles(lat1, lon1, lat2, lon2) {
+      const earthRadiusMiles = 3958.8;
+      const radians = degrees => degrees * Math.PI / 180;
+
+      const latitudeDifference = radians(lat2 - lat1);
+      const longitudeDifference = radians(lon2 - lon1);
+
+      const a =
+        Math.sin(latitudeDifference / 2) ** 2 +
+        Math.cos(radians(lat1)) *
+          Math.cos(radians(lat2)) *
+          Math.sin(longitudeDifference / 2) ** 2;
+
+      return earthRadiusMiles * 2 *
+        Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function selectedCategories() {
+      return new Set(
+        selectedNeeds().flatMap(
+          need => NEED_TO_CATEGORIES[need] || []
+        )
+      );
+    }
+
+    function updateOrganizationChoices() {
+      const main = organizations.find(
+        org => org.id === mainOrganizationId
+      );
+
+      const backup = organizations.find(
+        org => org.id === backupOrganizationId
+      );
+
+      $("#main-choice").textContent =
+        "Main option: " + (main ? main.name : "Not selected");
+
+      $("#backup-choice").textContent =
+        "Backup option: " + (backup ? backup.name : "Not selected");
+    }
+
     function renderMatches() {
-      const selected = selectedNeeds();
       const container = $("#matches");
+      const status = $("#directory-status");
+
       container.replaceChildren();
+      updateOrganizationChoices();
 
-      const matches = organizations
-        .map(org => ({
-          ...org,
-          matching: selected.filter(need => org.services.includes(need))
-        }))
-        .filter(org => org.matching.length > 0)
-        .sort((a, b) => b.matching.length - a.matching.length)
-        .slice(0, 2);
+      if (!directorySearchPerformed) {
+        status.textContent =
+          "Enter an included ZIP code and select Find possible options.";
 
-      if (!matches.length) {
-        const message = document.createElement("div");
-        message.className = "panel";
-        message.textContent =
-          "No matching options yet. Go back and select a type of support to see a suggestion.";
-        container.appendChild(message);
         return;
       }
 
-      matches.forEach((org, index) => {
+      const zip = $("#search-zip").value.trim();
+      const area = ZIP_AREAS[zip];
+      const radius = Number($("#search-radius").value);
+      const categories = selectedCategories();
+
+      if (!/^\d{5}$/.test(zip)) {
+        status.textContent =
+          "Please enter a five-digit ZIP code.";
+
+        return;
+      }
+
+      if (!area) {
+        status.textContent =
+          "This prototype does not have coordinates for that ZIP code. " +
+          "Try one of the listed ZIP areas. No substitute location " +
+          "will be assumed.";
+
+        return;
+      }
+
+      if (!categories.size) {
+        status.textContent =
+          "Go back and select at least one type of support " +
+          "before searching.";
+
+        return;
+      }
+
+      const matches = organizations
+        .map(org => {
+          const distance = approximateDistanceMiles(
+            area.lat,
+            area.lon,
+            org.lat,
+            org.lon
+          );
+
+          const matchingCategories = org.categories.filter(
+            category => categories.has(category)
+          );
+
+          return {
+            ...org,
+            distance,
+            matchingCategories
+          };
+        })
+        .filter(org =>
+          org.distance <= radius &&
+          org.matchingCategories.length > 0
+        )
+        .sort((a, b) =>
+          a.distance - b.distance ||
+          a.name.localeCompare(b.name)
+        )
+        .slice(0, 10);
+
+      if (!matches.length) {
+        status.textContent =
+          `No entries in this limited directory matched your selected ` +
+          `categories within approximately ${radius} miles of ` +
+          `${area.city}, ${area.state}.`;
+
+        return;
+      }
+
+      status.textContent =
+        `Showing ${matches.length} possible option` +
+        `${matches.length === 1 ? "" : "s"} within approximately ` +
+        `${radius} miles of ${area.city}, ${area.state}. ` +
+        `Sorted by straight-line distance, not by eligibility or quality.`;
+
+      matches.forEach(org => {
         const article = document.createElement("article");
         article.className = "organization";
 
         const tag = document.createElement("span");
         tag.className = "tag";
-        tag.textContent =
-          index === 0 ? "Suggested first option" : "Backup option";
+        tag.textContent = "Unverified directory entry";
 
-        const title = document.createElement("h3");
-        title.textContent = org.name;
+        const heading = document.createElement("h3");
+        heading.textContent = org.name;
 
-        const description = document.createElement("p");
-        description.textContent = org.description;
+        article.append(tag, heading);
 
-        article.append(tag, title, description);
+        addLine(
+          article,
+          "Approximate distance",
+          `${org.distance.toFixed(1)} miles from the ZIP-area reference point`
+        );
+
+        addLine(article, "Listed address", org.address);
+        addLine(article, "Listed phone", org.phone);
+
+        const categoryText = org.matchingCategories
+          .map(category => CATEGORY_LABELS[category] || category)
+          .join(", ");
 
         addLine(
           article,
           "Why it appears",
-          "It lists help with " +
-            org.matching.map(need => labels[need]).join(", ") +
-            "."
+          `The source directory associates it with: ${categoryText}.`
         );
 
-        addLine(article, "Access", org.access);
+        const warning = document.createElement("p");
+        warning.className = "small";
+        warning.textContent =
+          "Confirm the address, contact details, services, eligibility, " +
+          "and availability directly before relying on this listing.";
 
-        const note = document.createElement("p");
-        note.className = "small";
-        note.textContent =
-          "Fictional sample. Availability has not been verified.";
+        article.appendChild(warning);
 
-        article.appendChild(note);
+        const actions = document.createElement("div");
+        actions.className = "actions no-print";
+
+        const mainButton = document.createElement("button");
+        mainButton.type = "button";
+        mainButton.className = "secondary";
+        mainButton.textContent =
+          org.id === mainOrganizationId
+            ? "Selected as main"
+            : "Choose as main";
+
+        mainButton.addEventListener("click", () => {
+          mainOrganizationId = org.id;
+
+          if (backupOrganizationId === org.id) {
+            backupOrganizationId = null;
+          }
+
+          renderMatches();
+        });
+
+        const backupButton = document.createElement("button");
+        backupButton.type = "button";
+        backupButton.className = "secondary";
+        backupButton.textContent =
+          org.id === backupOrganizationId
+            ? "Selected as backup"
+            : "Choose as backup";
+
+        backupButton.addEventListener("click", () => {
+          if (mainOrganizationId === org.id) {
+            status.textContent =
+              "That organization is already your main choice. " +
+              "Choose a different backup.";
+
+            return;
+          }
+
+          backupOrganizationId =
+            backupOrganizationId === org.id ? null : org.id;
+
+          renderMatches();
+        });
+
+        actions.append(mainButton, backupButton);
+        article.appendChild(actions);
         container.appendChild(article);
       });
     }
 
     function renderPreview() {
       const container = $("#sharing-preview");
+
       const selected = $$('input[name="share"]:checked')
         .map(input => input.value);
 
@@ -1255,7 +1959,11 @@
       }
 
       if (selected.includes("summary")) {
-        addLine(container, "Summary", $("#summary").value.trim());
+        addLine(
+          container,
+          "Summary",
+          $("#summary").value.trim()
+        );
       }
 
       if (selected.includes("needs")) {
@@ -1263,11 +1971,19 @@
       }
 
       if (selected.includes("location")) {
-        addLine(container, "Area", $("#location").value.trim());
+        addLine(
+          container,
+          "Area",
+          $("#location").value.trim()
+        );
       }
 
       if (selected.includes("transport")) {
-        addLine(container, "Transportation", $("#transport").value);
+        addLine(
+          container,
+          "Transportation",
+          $("#transport").value
+        );
       }
     }
 
@@ -1280,27 +1996,45 @@
       chatStarted = false;
       summaryInitialized = false;
 
+      directorySearchPerformed = false;
+      mainOrganizationId = null;
+      backupOrganizationId = null;
+
       $("#story").value = "";
       $("#summary").value = "";
       $("#location").value = "";
       $("#transport").value = "";
       $("#chat-input").value = "";
+      $("#search-zip").value = "";
+      $("#search-radius").value = "15";
 
       $$('input[type="checkbox"]').forEach(input => {
         input.checked = false;
       });
 
       $("#conversation").replaceChildren();
+      $("#matches").replaceChildren();
+
       $("#chat-area").hidden = true;
       $("#manual-area").hidden = true;
       $("#summary-ai-controls").hidden = true;
 
+      $("#intake-status").textContent = "";
       $("#chat-status").textContent = "";
       $("#summary-status").textContent = "";
       $("#save-message").textContent = "";
+      $("#directory-status").textContent = "";
+      $("#copy-status").textContent = "";
+
+      $("#main-choice").textContent =
+        "Main option: Not selected";
+
+      $("#backup-choice").textContent =
+        "Backup option: Not selected";
     }
 
-    // Entry navigation.
+    // Entry navigation
+
     $("#new-user").addEventListener("click", () => {
       showEntryPanel("new-user-welcome");
     });
@@ -1328,7 +2062,8 @@
       openApplication(0);
     });
 
-    // Intake.
+    // Intake
+
     $("#start-chat").addEventListener("click", beginChat);
 
     $("#manual-mode").addEventListener("click", () => {
@@ -1355,19 +2090,28 @@
       $("#ai-consent").checked = false;
       $("#chat-area").hidden = true;
       $("#manual-area").hidden = false;
-
-      $("#chat-status").textContent = "";
       $("#story").focus();
     });
 
-    // Step navigation.
+    // Navigation
+
     $("#to-review").addEventListener("click", () => {
       prepareSummary();
       renderReview();
       showStep(2);
     });
 
-    $("#generate-summary").addEventListener("click", generateSummary);
+    $("#generate-summary").addEventListener(
+      "click",
+      generateSummary
+    );
+
+    $("#find-organizations").addEventListener("click", () => {
+      directorySearchPerformed = true;
+      mainOrganizationId = null;
+      backupOrganizationId = null;
+      renderMatches();
+    });
 
     $("#to-options").addEventListener("click", () => {
       renderMatches();
@@ -1391,12 +2135,39 @@
       input.addEventListener("change", renderPreview);
     });
 
+    $("#copy-preview").addEventListener("click", async () => {
+      const text = $("#sharing-preview").innerText.trim();
+
+      if (!text || text === "Nothing selected.") {
+        $("#copy-status").textContent =
+          "Choose what to include before copying.";
+
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+
+        $("#copy-status").textContent =
+          "Preview copied. Check where you paste it.";
+      } catch (error) {
+        $("#copy-status").textContent =
+          "Could not copy automatically. You can select and copy " +
+          "the preview text yourself.";
+      }
+    });
+
+    $("#print-preview").addEventListener("click", () => {
+      window.print();
+    });
+
     $("#reset").addEventListener("click", () => {
       clearCurrentForm();
       showStep(0);
     });
 
-    // Optional browser-local save.
+    // Optional browser-local save
+
     $("#save-progress").addEventListener("click", () => {
       const progress = {
         story: $("#story").value,
@@ -1407,13 +2178,17 @@
       };
 
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(progress)
+        );
 
         $("#save-message").textContent =
           "Saved in this browser. Delete it from the returning-user screen.";
       } catch (error) {
         $("#save-message").textContent =
-          "Progress could not be saved. Your browser may be blocking local storage.";
+          "Progress could not be saved. Your browser may be " +
+          "blocking local storage.";
       }
     });
 
@@ -1425,7 +2200,9 @@
 
         if (!saved) {
           message.textContent =
-            "No saved progress was found in this browser. You can start fresh.";
+            "No saved progress was found in this browser. " +
+            "You can start fresh.";
+
           return;
         }
 
@@ -1434,16 +2211,24 @@
         clearCurrentForm();
 
         $("#story").value =
-          typeof progress.story === "string" ? progress.story : "";
+          typeof progress.story === "string"
+            ? progress.story
+            : "";
 
         $("#summary").value =
-          typeof progress.summary === "string" ? progress.summary : "";
+          typeof progress.summary === "string"
+            ? progress.summary
+            : "";
 
         $("#location").value =
-          typeof progress.location === "string" ? progress.location : "";
+          typeof progress.location === "string"
+            ? progress.location
+            : "";
 
         $("#transport").value =
-          typeof progress.transport === "string" ? progress.transport : "";
+          typeof progress.transport === "string"
+            ? progress.transport
+            : "";
 
         const savedNeeds = Array.isArray(progress.needs)
           ? progress.needs
@@ -1466,11 +2251,13 @@
 
       try {
         localStorage.removeItem(STORAGE_KEY);
+
         message.textContent =
           "Saved progress was deleted from this browser.";
       } catch (error) {
         message.textContent =
-          "Saved progress could not be deleted. Check your browser’s site-data settings.";
+          "Saved progress could not be deleted. " +
+          "Check your browser’s site-data settings.";
       }
     });
   </script>
