@@ -31,8 +31,10 @@ const ALLOWED_NEEDS = new Set([
   "medical"
 ]);
 
-// Simulated submissions are stored only in server memory.
-// Restarting the server clears them.
+/*
+  Simulated submissions live only in memory.
+  Restarting the server clears them.
+*/
 const demoSubmissions = new Map();
 
 const CHAT_INSTRUCTIONS = `
@@ -101,68 +103,30 @@ const INTAKE_SCHEMA = {
   additionalProperties: false,
 
   properties: {
-    name: {
-      type: "string"
-    },
-
-    summary: {
-      type: "string"
-    },
+    name: { type: "string" },
+    summary: { type: "string" },
 
     needs: {
       type: "array",
-
       items: {
         type: "string",
-
-        enum: [
-          "rent",
-          "food",
-          "housing",
-          "work",
-          "medical"
-        ]
+        enum: ["rent", "food", "housing", "work", "medical"]
       }
     },
 
     housingStatus: {
       type: "string",
-
-      enum: [
-        "",
-        "housed",
-        "at-risk",
-        "seeking",
-        "other"
-      ]
+      enum: ["", "housed", "at-risk", "seeking", "other"]
     },
 
-    deadline: {
-      type: "string"
-    },
-
-    location: {
-      type: "string"
-    },
-
-    zip: {
-      type: "string"
-    },
-
-    amount: {
-      type: "string"
-    },
+    deadline: { type: "string" },
+    location: { type: "string" },
+    zip: { type: "string" },
+    amount: { type: "string" },
 
     transport: {
       type: "string",
-
-      enum: [
-        "",
-        "transit",
-        "car",
-        "phone",
-        "challenge"
-      ]
+      enum: ["", "transit", "car", "phone", "challenge"]
     }
   },
 
@@ -393,7 +357,6 @@ function parseDraftText(text) {
   try {
     return JSON.parse(trimmed);
   } catch {
-    // Limited fallback for models that wrap JSON in a code fence.
     const match = trimmed.match(
       /^```(?:json)?\s*([\s\S]*?)\s*```$/i
     );
@@ -422,10 +385,6 @@ async function createIntakeDraft(messages) {
       }
     );
   } catch (error) {
-    /*
-      Some deployments may reject structured output. Retry once without
-      the schema only for HTTP 400. The returned JSON is still validated.
-    */
     if (error.azureStatus !== 400) {
       throw error;
     }
