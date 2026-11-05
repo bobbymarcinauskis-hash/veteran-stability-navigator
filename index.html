@@ -24,8 +24,8 @@
       --navy: #202e48;
       --navy-dark: #17243a;
       --burgundy: #8a454d;
-      --muted: #626d79;
-      --border: #e2ded9;
+      --muted: #596574;
+      --border: #dcd7d1;
       --light: #f8f6f3;
     }
 
@@ -45,13 +45,13 @@
     }
 
     button {
-      min-height: 48px;
+      min-height: 50px;
       padding: 12px 18px;
       border: 1px solid transparent;
-      border-radius: 3px;
+      border-radius: 4px;
       background: var(--navy);
       color: #fff;
-      font-weight: 650;
+      font-weight: 700;
       cursor: pointer;
     }
 
@@ -65,8 +65,8 @@
     }
 
     button.secondary {
-      border-color: #c8c4c0;
-      background: transparent;
+      border-color: #a9a5a0;
+      background: #fff;
       color: var(--navy);
     }
 
@@ -82,7 +82,7 @@
     }
 
     :focus-visible {
-      outline: 3px solid #c69252;
+      outline: 3px solid #b87928;
       outline-offset: 3px;
     }
 
@@ -91,13 +91,14 @@
     }
 
     a {
-      color: #234d79;
+      color: #174d80;
       overflow-wrap: anywhere;
     }
 
     .entry-screen {
       min-height: 100vh;
       padding: 28px clamp(24px, 6vw, 90px) 70px;
+
       background:
         linear-gradient(
           115deg,
@@ -112,17 +113,17 @@
       align-items: center;
       gap: 12px;
       color: var(--navy);
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 800;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
     }
 
     .entry-mark,
     .logo {
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       flex-shrink: 0;
       font-weight: 800;
     }
@@ -134,16 +135,16 @@
     }
 
     .entry-card {
-      max-width: 800px;
-      margin: clamp(60px, 12vh, 130px) auto 0;
+      max-width: 820px;
+      margin: clamp(55px, 11vh, 120px) auto 0;
     }
 
     .eyebrow {
-      margin: 0 0 20px;
+      margin: 0 0 18px;
       color: var(--burgundy);
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 800;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
@@ -163,22 +164,22 @@
     }
 
     .entry-description {
-      max-width: 620px;
-      margin: 25px 0;
+      max-width: 650px;
+      margin: 24px 0;
       color: var(--muted);
-      font-size: 1.05rem;
+      font-size: 1.08rem;
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 24px;
+      margin-top: 22px;
     }
 
     .small {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .status:not(:empty) {
@@ -216,13 +217,13 @@
     header p {
       margin: 2px 0 0;
       color: #d2d8df;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
     }
 
     main {
       max-width: 950px;
       margin: auto;
-      padding: 45px 24px;
+      padding: 40px 24px;
     }
 
     .intro h2 {
@@ -250,7 +251,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px 18px;
-      margin: 32px 0 20px;
+      margin: 30px 0 20px;
       padding: 0;
       list-style: none;
     }
@@ -259,8 +260,8 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #6d7781;
-      font-size: 0.86rem;
+      color: #626d79;
+      font-size: 0.88rem;
     }
 
     .progress li span {
@@ -314,8 +315,8 @@
       display: block;
       width: 100%;
       padding: 13px 14px;
-      border: 1px solid #bfc5c8;
-      border-radius: 2px;
+      border: 1px solid #aab2b8;
+      border-radius: 3px;
       background: #fff;
       color: #263247;
     }
@@ -342,7 +343,7 @@
       gap: 12px;
       margin: 9px 0;
       padding: 12px 14px;
-      border: 1px solid #e5e2de;
+      border: 1px solid #dedbd6;
       cursor: pointer;
     }
 
@@ -351,8 +352,8 @@
     }
 
     .check-row input {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       margin: 4px 0 0;
       flex-shrink: 0;
       accent-color: var(--burgundy);
@@ -362,7 +363,7 @@
     .organization {
       margin: 16px 0;
       padding: 18px;
-      border: 1px solid #e8e2dd;
+      border: 1px solid #e1dcd6;
       background: var(--light);
       overflow-wrap: anywhere;
     }
@@ -381,15 +382,15 @@
       display: inline-block;
       padding: 5px 10px;
       background: #eee2df;
-      color: #7b3b43;
-      font-size: 0.72rem;
+      color: #74353d;
+      font-size: 0.75rem;
       font-weight: 800;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
     .conversation {
-      max-height: 460px;
+      max-height: 450px;
       overflow-y: auto;
       padding: 4px;
       border: 1px solid var(--border);
@@ -415,7 +416,7 @@
       display: block;
       margin-bottom: 4px;
       color: var(--navy);
-      font-size: 0.85rem;
+      font-size: 0.88rem;
     }
 
     .grid-two {
@@ -427,12 +428,12 @@
     footer {
       padding: 28px 0;
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 650px) {
       main {
-        padding: 32px 18px;
+        padding: 30px 18px;
       }
 
       .message {
@@ -462,8 +463,8 @@
       main,
       .card {
         background: #fff;
-        box-shadow: none;
         border: 0;
+        box-shadow: none;
       }
 
       .card {
@@ -516,7 +517,7 @@
 
       <p class="entry-description">
         You can talk with an optional AI assistant or write in your own
-        words. Every question can be skipped.
+        words. You can skip any question.
       </p>
 
       <div class="actions">
@@ -591,7 +592,7 @@
         <h2>Your story matters. Your next step is yours.</h2>
 
         <p>
-          You can skip any question, take a break, or change what you share.
+          You can skip a question, take a break, or change what you share.
         </p>
 
         <div class="notice">
@@ -607,14 +608,15 @@
 
           Organization details are unverified sample data. This app does
           not submit applications, send referrals, confirm receipt, or
-          determine benefit eligibility. AI messages are sent through
-          this app’s server to the configured Azure service.
+          determine eligibility.
         </div>
       </div>
 
       <nav aria-label="Progress">
         <ol class="progress">
-          <li class="active" aria-current="step"><span>1</span> Your story</li>
+          <li class="active" aria-current="step">
+            <span>1</span> Your story
+          </li>
           <li><span>2</span> Your needs</li>
           <li><span>3</span> Your summary</li>
           <li><span>4</span> Support options</li>
@@ -622,7 +624,7 @@
         </ol>
       </nav>
 
-      <!-- STEP 1: STORY -->
+      <!-- STEP 1 -->
 
       <section class="card" id="step-0" aria-labelledby="heading-0">
         <h2 id="heading-0" tabindex="-1">
@@ -647,16 +649,12 @@
             If you choose AI, your messages and conversation history are
             sent to this app’s server and its configured Azure service.
             Avoid sharing Social Security numbers, account numbers, or
-            other information you do not want processed. Azure data handling
-            and retention rules depend on your organization’s configuration.
+            other information you do not want processed.
           </p>
 
           <label class="check-row">
             <input type="checkbox" id="ai-consent">
-
-            <span>
-              I understand and choose to use the AI conversation.
-            </span>
+            <span>I understand and choose to use the AI conversation.</span>
           </label>
 
           <div class="actions">
@@ -670,6 +668,29 @@
           </div>
 
           <p id="intake-status" class="status" aria-live="polite"></p>
+        </div>
+
+        <div class="panel">
+          <h3>Optional voice input</h3>
+
+          <p class="small">
+            You can type, or you can use your browser’s microphone feature.
+            Depending on your browser, audio may be sent to its speech
+            provider for transcription. This app does not upload audio to
+            its own server. Voice input may not be available on every device.
+          </p>
+
+          <p class="small">
+            Spoken words appear as text first. You can review and edit them
+            before sending or continuing.
+          </p>
+
+          <label class="check-row">
+            <input type="checkbox" id="voice-consent">
+            <span>I understand and want to use voice input.</span>
+          </label>
+
+          <p id="voice-availability" class="small"></p>
         </div>
 
         <div id="chat-area" hidden>
@@ -688,6 +709,16 @@
             aria-live="polite"
           ></div>
 
+          <div class="actions">
+            <button type="button" id="read-response" class="secondary">
+              Read the assistant’s last response aloud
+            </button>
+
+            <button type="button" id="stop-reading" class="text-button">
+              Stop reading aloud
+            </button>
+          </div>
+
           <label class="field-label" for="chat-input">
             Your response
           </label>
@@ -695,8 +726,20 @@
           <textarea
             id="chat-input"
             maxlength="4000"
-            placeholder="Share only what you feel comfortable sharing..."
+            placeholder="Type here, or use Speak my response..."
           ></textarea>
+
+          <div class="actions">
+            <button type="button" id="speak-chat" class="secondary">
+              Speak my response
+            </button>
+
+            <button type="button" id="stop-voice-chat" class="text-button">
+              Stop listening
+            </button>
+          </div>
+
+          <p id="voice-status" class="status" aria-live="polite"></p>
 
           <div class="actions">
             <button type="button" id="send-message">
@@ -708,7 +751,15 @@
               id="use-conversation"
               class="secondary"
             >
-              Continue with what I’ve shared
+              Continue and prepare my draft
+            </button>
+
+            <button
+              type="button"
+              id="continue-without-draft"
+              class="text-button"
+            >
+              Continue without an AI draft
             </button>
 
             <button type="button" id="stop-chat" class="text-button">
@@ -730,6 +781,22 @@
             placeholder="For example: I recently lost my job, and I’m worried about rent..."
           ></textarea>
 
+          <div class="actions">
+            <button type="button" id="speak-story" class="secondary">
+              Speak my story
+            </button>
+
+            <button type="button" id="stop-voice-story" class="text-button">
+              Stop listening
+            </button>
+          </div>
+
+          <p
+            id="manual-voice-status"
+            class="status"
+            aria-live="polite"
+          ></p>
+
           <p class="small">
             The manual path does not send this text to Azure. It stays
             in the browser unless you choose to save it on this device.
@@ -743,7 +810,7 @@
         </div>
       </section>
 
-      <!-- STEP 2: NEEDS -->
+      <!-- STEP 2 -->
 
       <section
         class="card"
@@ -756,9 +823,11 @@
         </h2>
 
         <p>
-          Every question is optional. Your answers help organize the
-          possible options; they do not determine eligibility.
+          If you used the AI conversation, we may have filled in some
+          answers. Please review and correct them. Every question is optional.
         </p>
+
+        <p id="prefill-status" class="status" aria-live="polite"></p>
 
         <fieldset>
           <legend>What would you like help with?</legend>
@@ -796,18 +865,10 @@
 
         <select id="housing-status">
           <option value="">Prefer not to say</option>
-          <option value="housed">
-            I have a place to stay
-          </option>
-          <option value="at-risk">
-            I have a place to stay but may lose it
-          </option>
-          <option value="seeking">
-            I am looking for a place to stay
-          </option>
-          <option value="other">
-            Another situation
-          </option>
+          <option value="housed">I have a place to stay</option>
+          <option value="at-risk">I have a place to stay but may lose it</option>
+          <option value="seeking">I am looking for a place to stay</option>
+          <option value="other">Another situation</option>
         </select>
 
         <div class="grid-two">
@@ -835,6 +896,24 @@
           </div>
         </div>
 
+        <label class="field-label" for="search-zip">
+          ZIP code
+          <span class="small">Optional</span>
+        </label>
+
+        <input
+          type="text"
+          id="search-zip"
+          maxlength="5"
+          inputmode="numeric"
+          placeholder="For example: 07601"
+        >
+
+        <p class="small">
+          A supported ZIP is needed for this prototype’s nearby search.
+          You can leave it blank and continue.
+        </p>
+
         <label class="field-label" for="transport">
           What should we know about transportation or access?
           <span class="small">Optional</span>
@@ -856,15 +935,9 @@
         <select id="goal">
           <option value="">I’m not sure yet</option>
           <option value="speak">I want to speak with someone</option>
-          <option value="qualify">
-            I want to explore whether I might qualify
-          </option>
-          <option value="apply">
-            I want help finding an application
-          </option>
-          <option value="not-ready">
-            I’m not ready to contact anyone yet
-          </option>
+          <option value="qualify">I want to explore whether I might qualify</option>
+          <option value="apply">I want help finding an application</option>
+          <option value="not-ready">I’m not ready to contact anyone yet</option>
         </select>
 
         <div class="actions">
@@ -873,12 +946,12 @@
           </button>
 
           <button type="button" id="to-review">
-            Review my information
+            Review my summary
           </button>
         </div>
       </section>
 
-      <!-- STEP 3: SUMMARY -->
+      <!-- STEP 3 -->
 
       <section
         class="card"
@@ -892,31 +965,10 @@
 
         <p>
           Review it, change it, or leave out anything you don’t want to
-          share. The assistant can make mistakes.
+          share. An AI draft can contain mistakes.
         </p>
 
-        <div id="summary-ai-controls" class="panel" hidden>
-          <h3>Optional AI draft</h3>
-
-          <p class="small">
-            Creating a draft sends the conversation to the configured
-            Azure service again. Review the result carefully.
-          </p>
-
-          <button
-            type="button"
-            id="generate-summary"
-            class="secondary"
-          >
-            Create an AI summary
-          </button>
-
-          <p
-            id="summary-status"
-            class="status"
-            aria-live="polite"
-          ></p>
-        </div>
+        <p id="summary-status" class="status" aria-live="polite"></p>
 
         <label class="field-label" for="summary">
           Your editable summary
@@ -941,7 +993,7 @@
         </div>
       </section>
 
-      <!-- STEP 4: OPTIONS -->
+      <!-- STEP 4 -->
 
       <section
         class="card"
@@ -955,79 +1007,54 @@
 
         <p>
           You decide which options, if any, feel right for you.
-          These records come from the supplied prototype and have not
-          been verified.
+          These records come from the supplied prototype and are unverified.
         </p>
 
         <div class="notice">
           <strong>Please confirm details before relying on a listing.</strong>
 
-          Services, eligibility, contact details, transportation, funding,
-          and availability may have changed or may be incorrect. Distances
-          are approximate straight-line distances—not travel distances.
+          Services, contact details, eligibility, funding, transportation,
+          and availability may be incorrect or out of date. Distances are
+          approximate straight-line distances—not travel distances.
         </div>
 
         <div class="panel">
-          <h3>Search the regional sample directory</h3>
+          <h3>Find possible options</h3>
+
+          <p id="zip-display"></p>
 
           <p class="small">
-            Supported ZIP reference areas: 07601, 07102, 15222, 15213,
-            15205, 92101, and 78205. This prototype does not send your ZIP
-            to an outside lookup service.
+            This prototype supports ZIP reference areas 07601, 07102,
+            15222, 15213, 15205, 92101, and 78205. To change your ZIP,
+            select Back.
           </p>
 
-          <div class="grid-two">
-            <div>
-              <label class="field-label" for="search-zip">
-                Five-digit ZIP code
-              </label>
+          <label class="field-label" for="search-radius">
+            Approximate search radius
+          </label>
 
-              <input
-                type="text"
-                id="search-zip"
-                maxlength="5"
-                inputmode="numeric"
-                placeholder="For example: 07601"
-              >
-            </div>
-
-            <div>
-              <label class="field-label" for="search-radius">
-                Approximate search radius
-              </label>
-
-              <select id="search-radius">
-                <option value="5">Within 5 miles</option>
-                <option value="10">Within 10 miles</option>
-                <option value="15" selected>Within 15 miles</option>
-                <option value="25">Within 25 miles</option>
-                <option value="50">Within 50 miles</option>
-              </select>
-            </div>
-          </div>
+          <select id="search-radius">
+            <option value="5">Within 5 miles</option>
+            <option value="10">Within 10 miles</option>
+            <option value="15" selected>Within 15 miles</option>
+            <option value="25">Within 25 miles</option>
+            <option value="50">Within 50 miles</option>
+          </select>
 
           <div class="actions">
             <button type="button" id="find-organizations">
-              Find possible options
+              Find my possible options
             </button>
           </div>
 
-          <p
-            id="directory-status"
-            class="status"
-            aria-live="polite"
-          ></p>
+          <p id="directory-status" class="status" aria-live="polite"></p>
         </div>
 
         <div class="panel">
           <h3>Your choices</h3>
-
           <p id="main-choice">Main option: Not selected</p>
           <p id="backup-choice">Backup option: Not selected</p>
-
-          <p class="small">
-            Selecting an option does not contact the organization.
-          </p>
+          <p class="small">Selecting an option does not contact it.</p>
         </div>
 
         <div id="matches"></div>
@@ -1038,12 +1065,12 @@
           </button>
 
           <button type="button" id="to-plan">
-            Build my action plan
+            Continue to my action plan
           </button>
         </div>
       </section>
 
-      <!-- STEP 5: ACTION PLAN -->
+      <!-- STEP 5 -->
 
       <section
         class="card"
@@ -1077,8 +1104,7 @@
           </ul>
 
           <p class="small">
-            These are suggested questions—not a statement of program
-            requirements.
+            These are suggested questions—not confirmed program requirements.
           </p>
         </div>
 
@@ -1086,8 +1112,8 @@
           <legend>What would you be comfortable sharing?</legend>
 
           <p class="small">
-            This is a preview only. The summary is free text, so review
-            it for sensitive details even when other choices are unchecked.
+            This is a preview only. Review the summary itself for sensitive
+            details, even when other choices are unchecked.
           </p>
 
           <label class="check-row">
@@ -1113,7 +1139,6 @@
 
         <div class="panel">
           <h3>Sharing preview</h3>
-
           <div id="sharing-preview"></div>
 
           <div class="actions no-print">
@@ -1133,7 +1158,7 @@
           <h3>Keep track at your own pace</h3>
 
           <p class="small">
-            This tracker is updated by you. The app does not verify
+            You update this tracker yourself. The app does not verify
             contact, submission, receipt, or an organization’s response.
           </p>
 
@@ -1169,7 +1194,7 @@
           ></textarea>
 
           <p class="small">
-            This prototype does not send reminders or contact the
+            This prototype does not send reminders or contact an
             organization automatically.
           </p>
         </div>
@@ -1182,22 +1207,14 @@
             organization choices, tracker status, follow-up date, and notes
             will be stored in this browser. Anyone using this browser
             profile may be able to see them. The AI conversation and
-            sharing checkboxes are not saved.
+            sharing choices are not saved.
           </p>
 
-          <button
-            type="button"
-            id="save-progress"
-            class="secondary"
-          >
+          <button type="button" id="save-progress" class="secondary">
             Save progress on this device
           </button>
 
-          <p
-            id="save-message"
-            class="status"
-            aria-live="polite"
-          ></p>
+          <p id="save-message" class="status" aria-live="polite"></p>
         </div>
 
         <div class="actions no-print">
@@ -1224,7 +1241,7 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "veteran-navigator-integrated-v1";
+    const STORAGE_KEY = "veteran-navigator-voice-v1";
 
     const NEED_LABELS = {
       rent: "Rent, utilities, or another urgent bill",
@@ -1284,16 +1301,10 @@
     };
 
     /*
-      Regional directory adapted from the colleague's supplied prototype.
+      Regional records adapted from the supplied prototype.
 
-      These records are NOT verified. Fields are presented as source claims,
-      not confirmed eligibility, availability, transportation, or services.
-
-      Format:
-      {
-        id, name, address, phone, website, lat, lon,
-        categories, sourceAccess, limitation
-      }
+      These records are unverified. The categories and access fields
+      are source claims, not confirmed services or eligibility.
     */
 
     const organizations = [
@@ -1305,8 +1316,8 @@
         website: "https://www.co.bergen.nj.us/veteran-services",
         lat: 40.8788, lon: -74.0422,
         categories: ["financial", "food", "medical", "work"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm which services are offered directly and which are referrals."
+        access: ["transit", "phone"],
+        note: "Confirm which services are offered directly and which are referrals."
       },
       {
         id: "nj_onestop",
@@ -1316,118 +1327,118 @@
         website: "https://www.nj.gov/labor/career-services/",
         lat: 40.8859, lon: -74.0439,
         categories: ["work"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "The source says this option does not provide emergency rent or food grants."
+        access: ["transit", "phone"],
+        note: "The source says this option does not provide emergency rent or food grants."
       },
       {
-        id: "nj_ssvf_ca",
+        id: "nj_ssvf",
         name: "Community Hope — Hope for Veterans",
         address: "175 Washington Ave, Dumont / Hackensack Service Hub, NJ 07601",
         phone: "(855) 483-8466",
         website: "https://www.communityhope-nj.org/what-we-do/veterans-services/",
         lat: 40.8921, lon: -74.0398,
         categories: ["financial", "food"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm the address, service area, current funding, and eligibility."
+        access: ["transit", "phone"],
+        note: "Confirm the address, service area, funding, and eligibility."
       },
       {
-        id: "nj_va_cboc",
+        id: "nj_va",
         name: "Hackensack VA Clinic",
         address: "385 Prospect Avenue, Hackensack, NJ 07601",
         phone: "(201) 342-4536",
         website: "https://www.va.gov/new-jersey-health-care/locations/hackensack-va-clinic/",
         lat: 40.8942, lon: -74.0568,
         categories: ["medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm available services, enrollment requirements, and appointments."
+        access: ["transit", "phone"],
+        note: "Confirm available services, enrollment requirements, and appointments."
       },
       {
-        id: "nj_vet_center",
+        id: "nj_vetcenter",
         name: "Secaucus / Bergen Vet Center",
         address: "110A Meadowlands Parkway, Suite 102, Secaucus, NJ 07094",
         phone: "(201) 223-7787",
         website: "https://www.va.gov/secaucus-vet-center/",
         lat: 40.7931, lon: -74.0683,
         categories: ["medical", "work"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm which counseling and transition services are currently available."
+        access: ["transit", "phone"],
+        note: "Confirm current counseling and transition services."
       },
       {
-        id: "nj_cfa_food",
+        id: "nj_food",
         name: "Center for Food Action",
         address: "192 W. Demarest Avenue, Englewood / Hackensack Hub, NJ 07631",
         phone: "(201) 569-1804",
         website: "https://www.cfanj.org/",
         lat: 40.8995, lon: -73.9821,
         categories: ["food", "financial"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm the address, service area, and available assistance."
+        access: ["transit", "phone"],
+        note: "Confirm the address, service area, and assistance."
       },
       {
-        id: "nj_catholic_charities",
+        id: "nj_catholic",
         name: "Catholic Charities Archdiocese of Newark — Veterans Program",
         address: "590 North 7th Street, Newark, NJ 07107",
         phone: "(855) 768-7932",
         website: "https://www.ccannj.org/veterans-services/",
         lat: 40.7641, lon: -74.1823,
         categories: ["financial", "food"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm eligibility, geographic coverage, and current funding."
+        access: ["transit", "phone"],
+        note: "Confirm eligibility, geographic coverage, and funding."
       },
       {
-        id: "nj_gi_go",
+        id: "nj_gigo",
         name: "GI Go Fund",
         address: "436 Central Avenue, Newark / Northern NJ Hub, NJ 07107",
         phone: "(862) 240-1755",
         website: "https://gigofund.org/",
         lat: 40.7478, lon: -74.1912,
         categories: ["work", "financial", "food"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm which services are available and how to request them."
+        access: ["transit", "phone"],
+        note: "Confirm available services and how to request them."
       },
       {
-        id: "nj_east_orange_vamc",
+        id: "nj_eastorange",
         name: "East Orange VA Medical Center",
         address: "385 Tremont Avenue, East Orange, NJ 07018",
         phone: "(973) 676-1000",
         website: "https://www.va.gov/new-jersey-health-care/locations/east-orange-va-medical-center/",
         lat: 40.7521, lon: -74.2361,
         categories: ["medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm available services, eligibility, and transportation."
+        access: ["transit", "phone"],
+        note: "Confirm services, eligibility, and transportation."
       },
       {
-        id: "nj_varbo_newark",
+        id: "nj_newarkbenefits",
         name: "Newark VA Regional Benefit Office",
         address: "20 Washington Place, Newark, NJ 07102",
         phone: "(800) 827-1000",
         website: "https://www.va.gov/newark-va-regional-benefit-office/",
         lat: 40.7429, lon: -74.1704,
         categories: ["medical", "work", "financial"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm which benefit and employment services are available."
+        access: ["transit", "phone"],
+        note: "Confirm which benefit and employment services are available."
       },
       {
-        id: "nj_bergen_bss",
+        id: "nj_social",
         name: "Bergen County Board of Social Services",
         address: "218 Route 17 North, Rochelle Park, NJ 07662",
         phone: "(201) 368-4200",
         website: "https://bcbss.com/",
         lat: 40.9088, lon: -74.0725,
         categories: ["food", "financial"],
-        sourceAccess: ["phone"],
-        limitation: "The source reports limited direct transit access; confirm current access and processing times."
+        access: ["phone"],
+        note: "The source reports limited direct transit access; confirm current access."
       },
       {
-        id: "nj_lyons_homeless",
+        id: "nj_lyons",
         name: "Lyons VA Medical Center — Domiciliary",
         address: "151 Knollcroft Road, Lyons, NJ 07939",
         phone: "(908) 647-0180",
         website: "https://www.va.gov/new-jersey-health-care/locations/lyons-va-medical-center/",
         lat: 40.6652, lon: -74.5491,
         categories: ["financial", "medical"],
-        sourceAccess: ["phone"],
-        limitation: "The source describes a residential program for currently unhoused veterans, not past-due rent assistance."
+        access: ["phone"],
+        note: "The source describes a residential program for currently unhoused veterans, not past-due rent assistance."
       },
 
       {
@@ -1438,74 +1449,74 @@
         website: "https://www.veteransleadershipprogram.org/",
         lat: 40.4581, lon: -79.9742,
         categories: ["financial", "food", "work"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm current services, eligibility, and funding."
+        access: ["transit", "phone"],
+        note: "Confirm current services, eligibility, and funding."
       },
       {
-        id: "pgh_careerlink",
+        id: "pgh_career",
         name: "PA CareerLink Pittsburgh / Allegheny County",
         address: "2201 Liberty Avenue, Pittsburgh, PA 15222",
         phone: "(412) 552-7100",
         website: "https://www.careerlinkpittsburgh.com/",
         lat: 40.4519, lon: -79.9831,
         categories: ["work"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "The source says this option does not provide emergency rent or food grants."
+        access: ["transit", "phone"],
+        note: "The source says this option does not provide emergency rent or food grants."
       },
       {
-        id: "pgh_acvs",
+        id: "pgh_county",
         name: "Allegheny County Veterans Services",
         address: "4141 Fifth Avenue, 2nd Floor, Pittsburgh, PA 15213",
         phone: "(412) 621-4357",
         website: "https://www.alleghenycounty.us/Services/Veterans-Services",
         lat: 40.4439, lon: -79.9547,
         categories: ["financial", "food", "medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm available assistance and program requirements."
+        access: ["transit", "phone"],
+        note: "Confirm available assistance and program requirements."
       },
       {
-        id: "pgh_varbo",
+        id: "pgh_benefits",
         name: "Pittsburgh VA Regional Benefit Office",
         address: "1000 Liberty Avenue, Room 1700, Pittsburgh, PA 15222",
         phone: "(800) 827-1000",
         website: "https://www.va.gov/pittsburgh-va-regional-benefit-office/",
         lat: 40.4432, lon: -79.9949,
         categories: ["medical", "work", "financial"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm which benefit and employment services are available."
+        access: ["transit", "phone"],
+        note: "Confirm which benefit and employment services are available."
       },
       {
-        id: "pgh_vamc_univ",
+        id: "pgh_vamc",
         name: "Pittsburgh VA Medical Center — University Drive",
         address: "University Drive C, Pittsburgh, PA 15240",
         phone: "(866) 482-7488",
         website: "https://www.va.gov/pittsburgh-health-care/locations/pittsburgh-va-medical-center-university-drive/",
         lat: 40.4457, lon: -79.9602,
         categories: ["medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm appointments, eligibility, and transportation."
+        access: ["transit", "phone"],
+        note: "Confirm appointments, eligibility, and transportation."
       },
       {
-        id: "pgh_vet_center",
+        id: "pgh_vetcenter",
         name: "Pittsburgh Vet Center",
         address: "2500 Baldwick Road, Suite 15, Pittsburgh, PA 15205",
         phone: "(412) 920-1765",
         website: "https://www.va.gov/pittsburgh-vet-center/",
         lat: 40.4278, lon: -80.0681,
         categories: ["medical", "work"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm current services and appointment availability."
+        access: ["transit", "phone"],
+        note: "Confirm services and appointment availability."
       },
       {
-        id: "pgh_salvation_ssvf",
+        id: "pgh_salvation",
         name: "The Salvation Army Western PA — Veteran Family Program",
         address: "700 North Bell Avenue, Carnegie / Pittsburgh, PA 15106",
         phone: "(412) 446-1500",
         website: "https://pa.salvationarmy.org/western-pennsylvania/",
         lat: 40.4089, lon: -80.0835,
         categories: ["financial", "food"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm the address, program availability, and eligibility."
+        access: ["transit", "phone"],
+        note: "Confirm the address, program availability, and eligibility."
       },
       {
         id: "pgh_wwp",
@@ -1515,30 +1526,30 @@
         website: "https://www.woundedwarriorproject.org/",
         lat: 40.4539, lon: -79.9922,
         categories: ["work", "medical", "financial"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "The source describes a program for certain veterans; confirm current eligibility and services."
+        access: ["transit", "phone"],
+        note: "Confirm current eligibility and services."
       },
       {
-        id: "pgh_food_bank",
+        id: "pgh_food",
         name: "Greater Pittsburgh Community Food Bank",
         address: "1 North Linden Street, Duquesne / Pittsburgh Metro, PA 15110",
         phone: "(412) 460-3663",
         website: "https://pittsburghfoodbank.org/",
         lat: 40.3792, lon: -79.8471,
         categories: ["food"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm nearby distribution locations and current access options."
+        access: ["transit", "phone"],
+        note: "Confirm nearby distribution locations and access options."
       },
       {
-        id: "pgh_hj_heinz_va",
+        id: "pgh_heinz",
         name: "H.J. Heinz III VA Campus",
         address: "1010 Delafield Road, Pittsburgh, PA 15215",
         phone: "(866) 482-7488",
         website: "https://www.va.gov/pittsburgh-health-care/locations/h-j-heinz-iii-department-of-veterans-affairs-medical-center/",
         lat: 40.4958, lon: -79.8981,
         categories: ["medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm current services, eligibility, and transportation."
+        access: ["transit", "phone"],
+        note: "Confirm current services, eligibility, and transportation."
       },
 
       {
@@ -1549,19 +1560,19 @@
         website: "https://vvsd.net/",
         lat: 32.7481, lon: -117.1965,
         categories: ["financial", "food", "work", "medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm which services are available and their eligibility requirements."
+        access: ["transit", "phone"],
+        note: "Confirm available services and eligibility requirements."
       },
       {
-        id: "sd_va_clinic",
+        id: "sd_va",
         name: "Jennifer Moreno VA Medical Center / Mission Valley VA Clinic",
         address: "8810 Rio San Diego Drive, San Diego, CA 92108",
         phone: "(619) 400-5000",
         website: "https://www.va.gov/san-diego-health-care/",
         lat: 32.7759, lon: -117.1391,
         categories: ["medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm the facility name, address, services, and appointments."
+        access: ["transit", "phone"],
+        note: "Confirm the facility name, address, services, and appointments."
       },
 
       {
@@ -1572,26 +1583,24 @@
         website: "https://endeavors.org/veteran-supportive-services/",
         lat: 29.5612, lon: -98.6134,
         categories: ["financial", "food", "medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm service area, eligibility, funding, and available programs."
+        access: ["transit", "phone"],
+        note: "Confirm service area, eligibility, funding, and programs."
       },
       {
-        id: "sa_bexar_vso",
+        id: "sa_bexar",
         name: "Bexar County Military & Veterans Services Center",
         address: "1422 E. Grayson Street, Suite 400, San Antonio, TX 78208",
         phone: "(210) 335-6775",
         website: "https://www.bexar.org/509/Military-and-Veterans-Services",
         lat: 29.4426, lon: -98.4612,
         categories: ["work", "financial", "medical"],
-        sourceAccess: ["transit", "phone"],
-        limitation: "Confirm current benefit, employment, and financial assistance services."
+        access: ["transit", "phone"],
+        note: "Confirm current benefit, employment, and financial assistance services."
       }
     ];
 
     const $ = selector => document.querySelector(selector);
-
-    const $$ = selector =>
-      Array.from(document.querySelectorAll(selector));
+    const $$ = selector => Array.from(document.querySelectorAll(selector));
 
     const openingMessage =
       "I’m here to help you work out what support might be useful. " +
@@ -1600,10 +1609,12 @@
 
     let conversation = [];
     let chatStarted = false;
-    let chatBusy = false;
+    let busy = false;
     let summaryInitialized = false;
     let requestController = null;
+    let recognition = null;
 
+    let editedFields = new Set();
     let directorySearchPerformed = false;
     let mainOrganizationId = null;
     let backupOrganizationId = null;
@@ -1641,9 +1652,7 @@
           document.getElementById(id).hidden = id !== panelId;
         });
 
-      const heading = document.querySelector(
-        "#" + panelId + " h1"
-      );
+      const heading = document.querySelector("#" + panelId + " h1");
 
       if (heading) {
         heading.tabIndex = -1;
@@ -1652,6 +1661,8 @@
     }
 
     function showStep(number) {
+      stopVoice();
+
       for (let i = 0; i < 5; i++) {
         $("#step-" + i).hidden = i !== number;
       }
@@ -1673,52 +1684,27 @@
       $("#entry-screen").hidden = true;
       $("#application").hidden = false;
 
-      if (step === 2) {
-        renderReview();
-      }
-
-      if (step === 3) {
-        renderMatches();
-      }
-
-      if (step === 4) {
-        renderPlan();
-      }
+      if (step === 2) renderReview();
+      if (step === 3) renderMatches();
+      if (step === 4) renderPlan();
 
       showStep(step);
       window.scrollTo(0, 0);
     }
 
-    /* AI conversation */
+    function setBusy(value) {
+      busy = value;
 
-    function renderConversation() {
-      const container = $("#conversation");
-      container.replaceChildren();
-
-      conversation.forEach(message => {
-        const item = document.createElement("div");
-        item.className = "message " + message.role;
-
-        const name = document.createElement("strong");
-        name.textContent =
-          message.role === "user" ? "You" : "AI assistant";
-
-        const content = document.createElement("div");
-        content.textContent = message.content;
-
-        item.append(name, content);
-        container.appendChild(item);
+      [
+        "send-message",
+        "use-conversation",
+        "continue-without-draft",
+        "start-chat"
+      ].forEach(id => {
+        document.getElementById(id).disabled = value;
       });
 
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function setChatBusy(busy) {
-      chatBusy = busy;
-      $("#send-message").disabled = busy;
-      $("#use-conversation").disabled = busy;
-      $("#chat-input").disabled = busy;
-      $("#start-chat").disabled = busy;
+      $("#chat-input").disabled = value;
     }
 
     async function callApi(path, payload) {
@@ -1752,11 +1738,162 @@
       }
     }
 
+    /* Voice input */
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      $("#voice-availability").textContent =
+        "Voice input is not available in this browser. You can type instead.";
+
+      $("#speak-chat").disabled = true;
+      $("#speak-story").disabled = true;
+    } else {
+      $("#voice-availability").textContent =
+        "Voice input may be available. Your browser will ask for microphone permission.";
+    }
+
+    function startVoice(targetId, statusId) {
+      const status = document.getElementById(statusId);
+      const target = document.getElementById(targetId);
+
+      if (!SpeechRecognition) {
+        status.textContent =
+          "Voice input is not available in this browser. Please type instead.";
+        return;
+      }
+
+      if (!$("#voice-consent").checked) {
+        status.textContent =
+          "Please select the voice input checkbox above before using the microphone.";
+        return;
+      }
+
+      if (recognition) {
+        status.textContent =
+          "The microphone is already listening. Stop it before starting again.";
+        return;
+      }
+
+      const instance = new SpeechRecognition();
+      recognition = instance;
+
+      instance.lang = "en-US";
+      instance.interimResults = false;
+      instance.continuous = false;
+
+      status.textContent =
+        "Listening. Speak now, then review the words before continuing.";
+
+      instance.onresult = event => {
+        const words = Array.from(event.results)
+          .map(result => result[0].transcript)
+          .join(" ")
+          .trim();
+
+        if (words) {
+          const separator = target.value.trim() ? " " : "";
+          target.value = (target.value + separator + words)
+            .slice(0, target.maxLength > 0 ? target.maxLength : undefined);
+
+          target.dispatchEvent(new Event("input", { bubbles: true }));
+
+          status.textContent =
+            "Voice input added. Please review and edit the words.";
+        }
+      };
+
+      instance.onerror = event => {
+        status.textContent =
+          event.error === "not-allowed"
+            ? "Microphone permission was not granted. You can type instead."
+            : "Voice input could not be completed. You can type instead.";
+      };
+
+      instance.onend = () => {
+        if (recognition === instance) {
+          recognition = null;
+        }
+      };
+
+      try {
+        instance.start();
+      } catch {
+        recognition = null;
+        status.textContent =
+          "The microphone could not start. You can type instead.";
+      }
+    }
+
+    function stopVoice() {
+      if (recognition) {
+        try {
+          recognition.stop();
+        } catch {
+          // Nothing further is needed.
+        }
+
+        recognition = null;
+      }
+
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function readLastResponse() {
+      if (!("speechSynthesis" in window)) {
+        $("#chat-status").textContent =
+          "Read-aloud is not available in this browser.";
+        return;
+      }
+
+      const last = [...conversation]
+        .reverse()
+        .find(message => message.role === "assistant");
+
+      if (!last) {
+        $("#chat-status").textContent =
+          "There is no assistant response to read yet.";
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(last.content);
+      utterance.lang = "en-US";
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /* Conversation */
+
+    function renderConversation() {
+      const container = $("#conversation");
+      container.replaceChildren();
+
+      conversation.forEach(message => {
+        const item = document.createElement("div");
+        item.className = "message " + message.role;
+
+        const name = document.createElement("strong");
+        name.textContent =
+          message.role === "user" ? "You" : "AI assistant";
+
+        const content = document.createElement("div");
+        content.textContent = message.content;
+
+        item.append(name, content);
+        container.appendChild(item);
+      });
+
+      container.scrollTop = container.scrollHeight;
+    }
+
     function beginChat() {
       if (!$("#ai-consent").checked) {
         $("#intake-status").textContent =
-          "Please select the consent checkbox before starting AI.";
-
+          "Please select the AI checkbox before starting the conversation.";
         return;
       }
 
@@ -1767,10 +1904,7 @@
 
       if (!chatStarted) {
         conversation = [
-          {
-            role: "assistant",
-            content: openingMessage
-          }
+          { role: "assistant", content: openingMessage }
         ];
 
         chatStarted = true;
@@ -1781,12 +1915,11 @@
     }
 
     async function sendMessage() {
-      if (chatBusy) return;
+      if (busy) return;
 
       if (!$("#ai-consent").checked) {
         $("#chat-status").textContent =
-          "Please select the consent checkbox before using AI.";
-
+          "Please select the AI checkbox before using the conversation.";
         return;
       }
 
@@ -1794,8 +1927,7 @@
 
       if (!text) {
         $("#chat-status").textContent =
-          "Please enter a response first.";
-
+          "Please type or speak a response first.";
         return;
       }
 
@@ -1803,21 +1935,16 @@
         $("#chat-status").textContent =
           "This demo has reached its conversation limit. " +
           "You can continue with what you have shared.";
-
         return;
       }
 
-      conversation.push({
-        role: "user",
-        content: text
-      });
+      stopVoice();
 
+      conversation.push({ role: "user", content: text });
       $("#chat-input").value = "";
-      $("#chat-status").textContent =
-        "The assistant is responding...";
-
+      $("#chat-status").textContent = "The assistant is responding...";
       renderConversation();
-      setChatBusy(true);
+      setBusy(true);
 
       try {
         const result = await callApi("/api/chat", {
@@ -1847,9 +1974,9 @@
         $("#chat-status").textContent =
           error.name === "AbortError"
             ? "The request was stopped."
-            : error.message || "The assistant could not respond.";
+            : "The assistant could not respond. You can try again or continue without an AI draft.";
       } finally {
-        setChatBusy(false);
+        setBusy(false);
       }
     }
 
@@ -1860,100 +1987,143 @@
         .join("\n\n");
     }
 
-    function prepareSummary() {
-      if (!summaryInitialized) {
-        $("#summary").value =
-          $("#story").value.trim() || userConversationText();
-
-        summaryInitialized = true;
-      }
-
-      $("#summary-ai-controls").hidden =
-        !chatStarted || !userConversationText();
+    function clearRecommendations() {
+      directorySearchPerformed = false;
+      mainOrganizationId = null;
+      backupOrganizationId = null;
+      $("#matches").replaceChildren();
+      updateOrganizationChoices();
     }
 
-    async function generateSummary() {
-      if (!$("#ai-consent").checked) {
-        $("#summary-status").textContent =
-          "AI consent is not currently selected. " +
-          "You can edit the summary yourself.";
+    function applyIntakeDraft(draft) {
+      const prefilled = [];
 
+      if (!editedFields.has("needs") && Array.isArray(draft.needs)) {
+        $$('input[name="need"]').forEach(input => {
+          input.checked = draft.needs.includes(input.value);
+        });
+
+        if (draft.needs.length) prefilled.push("support needs");
+      }
+
+      const fields = [
+        ["housing-status", draft.housingStatus, "housing situation"],
+        ["deadline", draft.deadline, "date"],
+        ["location", draft.location, "area"],
+        ["search-zip", draft.zip, "ZIP code"],
+        ["transport", draft.transport, "transportation preference"],
+        ["goal", draft.goal, "next-step goal"]
+      ];
+
+      fields.forEach(([id, value, label]) => {
+        if (!editedFields.has(id) && typeof value === "string" && value) {
+          document.getElementById(id).value = value;
+
+          if (document.getElementById(id).value) {
+            prefilled.push(label);
+          }
+        }
+      });
+
+      if (
+        !editedFields.has("summary") &&
+        typeof draft.summary === "string"
+      ) {
+        $("#summary").value = draft.summary;
+        summaryInitialized = true;
+        prefilled.push("AI-generated summary");
+
+        $("#summary-status").textContent =
+          "This summary was drafted by AI from the conversation. " +
+          "Please review and correct it.";
+      }
+
+      clearRecommendations();
+
+      $("#prefill-status").textContent = prefilled.length
+        ? "We drafted: " + prefilled.join(", ") +
+          ". Please review and correct these answers."
+        : "No fields were prefilled. You can complete or skip them yourself.";
+    }
+
+    async function prepareConversationDraft() {
+      if (busy) return;
+
+      if (!$("#ai-consent").checked) {
+        $("#chat-status").textContent =
+          "AI consent is not selected. You can continue without an AI draft.";
         return;
       }
 
       if (!userConversationText()) {
-        $("#summary-status").textContent =
-          "There is no conversation to summarize.";
-
+        $("#prefill-status").textContent =
+          "No conversation answers were provided. You can complete or skip the fields.";
+        showStep(1);
         return;
       }
 
-      if ($("#summary").value.trim()) {
-        const replace = window.confirm(
-          "Creating an AI draft will replace the current summary. Continue?"
-        );
-
-        if (!replace) return;
-      }
-
-      $("#generate-summary").disabled = true;
-      $("#summary-status").textContent = "Creating a draft...";
+      stopVoice();
+      setBusy(true);
+      $("#chat-status").textContent =
+        "Preparing your summary and suggested answers...";
 
       try {
-        const result = await callApi("/api/summary", {
+        const result = await callApi("/api/intake-draft", {
           messages: conversation
         });
 
-        $("#summary").value = result.summary;
-
-        $("#summary-status").textContent =
-          "Draft created. Please review and edit it before continuing.";
-      } catch (error) {
-        $("#summary-status").textContent =
-          error.message || "The summary could not be created.";
+        applyIntakeDraft(result.draft);
+        $("#chat-status").textContent = "";
+        showStep(1);
+      } catch {
+        $("#chat-status").textContent =
+          "We couldn’t prepare the AI draft. You can try again or " +
+          "continue without an AI draft.";
       } finally {
-        $("#generate-summary").disabled = false;
+        setBusy(false);
       }
     }
 
-    /* Review */
+    function prepareSummary() {
+      if (!summaryInitialized) {
+        $("#summary").value = $("#story").value.trim();
+        summaryInitialized = true;
+
+        $("#summary-status").textContent = $("#summary").value
+          ? "This is your own writing. You can edit it."
+          : "No summary has been created yet. You can write one here.";
+      }
+    }
 
     function renderReview() {
       const container = $("#review-details");
       container.replaceChildren();
 
       addLine(container, "Support requested", needsText());
-      addLine(
-        container,
-        "Housing situation",
-        HOUSING_LABELS[$("#housing-status").value]
-      );
+      addLine(container, "Housing", HOUSING_LABELS[$("#housing-status").value]);
       addLine(container, "Date to keep in mind", $("#deadline").value);
       addLine(container, "Area", $("#location").value.trim());
-      addLine(
-        container,
-        "Transportation",
-        TRANSPORT_LABELS[$("#transport").value]
-      );
+      addLine(container, "ZIP", $("#search-zip").value.trim());
+      addLine(container, "Transportation", TRANSPORT_LABELS[$("#transport").value]);
       addLine(container, "Next-step goal", GOAL_LABELS[$("#goal").value]);
     }
 
-    /* Directory matching */
+    /* Recommendations */
 
     function approximateDistanceMiles(lat1, lon1, lat2, lon2) {
-      const earthRadiusMiles = 3958.8;
+      const radius = 3958.8;
       const radians = degrees => degrees * Math.PI / 180;
 
-      const latitudeDifference = radians(lat2 - lat1);
-      const longitudeDifference = radians(lon2 - lon1);
+      const dLat = radians(lat2 - lat1);
+      const dLon = radians(lon2 - lon1);
 
       const a =
-        Math.sin(latitudeDifference / 2) ** 2 +
+        Math.sin(dLat / 2) ** 2 +
         Math.cos(radians(lat1)) *
           Math.cos(radians(lat2)) *
-          Math.sin(longitudeDifference / 2) ** 2;
+          Math.sin(dLon / 2) ** 2;
 
-      return earthRadiusMiles * 2 *
+      return radius * 2 *
         Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
 
@@ -1980,29 +2150,11 @@
         "Backup option: " + (backup ? backup.name : "Not selected");
     }
 
-    function sourceAccessText(org) {
-      const access = [];
-
-      if (org.sourceAccess.includes("transit")) {
-        access.push("transit access");
-      }
-
-      if (org.sourceAccess.includes("phone")) {
-        access.push("phone contact or intake");
-      }
-
-      return access.length
-        ? access.join(" and ")
-        : "No access information listed";
-    }
-
     function addWebsite(container, website) {
       try {
         const url = new URL(website);
 
-        if (url.protocol !== "https:") {
-          return;
-        }
+        if (url.protocol !== "https:") return;
 
         const paragraph = document.createElement("p");
         const link = document.createElement("a");
@@ -2015,48 +2167,64 @@
         paragraph.appendChild(link);
         container.appendChild(paragraph);
       } catch {
-        // Do not display invalid links.
+        // Invalid links are not displayed.
       }
+    }
+
+    function accessText(org) {
+      const parts = [];
+
+      if (org.access.includes("transit")) {
+        parts.push("transit access");
+      }
+
+      if (org.access.includes("phone")) {
+        parts.push("phone contact or intake");
+      }
+
+      return parts.length
+        ? parts.join(" and ")
+        : "No access information listed";
     }
 
     function renderMatches() {
       const container = $("#matches");
       const status = $("#directory-status");
+      const zip = $("#search-zip").value.trim();
 
       container.replaceChildren();
       updateOrganizationChoices();
 
+      $("#zip-display").textContent =
+        "Your ZIP: " + (zip || "Not provided");
+
       if (!directorySearchPerformed) {
         status.textContent =
-          "Enter an included ZIP code and select Find possible options.";
-
+          "Select Find my possible options to search.";
         return;
       }
 
-      const zip = $("#search-zip").value.trim();
       const area = ZIP_AREAS[zip];
       const radius = Number($("#search-radius").value);
       const categories = selectedCategories();
       const transport = $("#transport").value;
 
       if (!/^\d{5}$/.test(zip)) {
-        status.textContent = "Please enter a five-digit ZIP code.";
+        status.textContent =
+          "A five-digit ZIP is needed for this search. Select Back to add one.";
         return;
       }
 
       if (!area) {
         status.textContent =
-          "This prototype does not have coordinates for that ZIP code. " +
-          "Try one of the listed ZIP areas. No substitute location " +
-          "will be assumed.";
-
+          "This prototype does not have coordinates for that ZIP. " +
+          "You can continue without searching or use one of the listed sample ZIPs.";
         return;
       }
 
       if (!categories.size) {
         status.textContent =
-          "Go back and select at least one type of support before searching.";
-
+          "Select Back and choose a type of support before searching.";
         return;
       }
 
@@ -2074,26 +2242,31 @@
           );
 
           let accessFit = 0;
+          let accessReason = "";
 
           if (
             transport === "transit" &&
-            org.sourceAccess.includes("transit")
+            org.access.includes("transit")
           ) {
             accessFit = 1;
-          }
-
-          if (
+            accessReason =
+              "The source lists transit access, which may fit your preference.";
+          } else if (
             (transport === "phone" || transport === "challenge") &&
-            org.sourceAccess.includes("phone")
+            org.access.includes("phone")
           ) {
             accessFit = 1;
+            accessReason =
+              "The source lists phone contact or intake, which may help " +
+              "with your access preference.";
           }
 
           return {
             ...org,
             distance,
             matchingCategories,
-            accessFit
+            accessFit,
+            accessReason
           };
         })
         .filter(org =>
@@ -2110,81 +2283,181 @@
 
       if (!matches.length) {
         status.textContent =
-          `No entries in this limited directory matched your selected ` +
-          `categories within approximately ${radius} miles of ` +
-          `${area.city}, ${area.state}.`;
+          `No sample entries matched within approximately ${radius} miles ` +
+          `of ${area.city}, ${area.state}.`;
 
         return;
       }
 
-      status.textContent =
-        `Showing ${matches.length} possible option` +
-        `${matches.length === 1 ? "" : "s"}. ` +
-        `Ordered by listed need categories, then listed access, ` +
-        `then approximate distance. This is not an eligibility decision.`;
+      const suggestedMain = matches[0];
+      const mainCategories = new Set(suggestedMain.matchingCategories);
 
-      matches.forEach((org, index) => {
+      const backupCandidates = matches
+        .slice(1)
+        .map(org => ({
+          ...org,
+          additionalCoverage: org.matchingCategories.filter(
+            category => !mainCategories.has(category)
+          ).length
+        }))
+        .sort((a, b) =>
+          b.additionalCoverage - a.additionalCoverage ||
+          b.matchingCategories.length - a.matchingCategories.length ||
+          b.accessFit - a.accessFit ||
+          a.distance - b.distance ||
+          a.name.localeCompare(b.name)
+        );
+
+      const suggestedBackup = backupCandidates[0] || null;
+
+      status.textContent =
+        `Found ${matches.length} possible option` +
+        `${matches.length === 1 ? "" : "s"}. ` +
+        `These suggestions use source-listed categories, access, and ` +
+        `approximate distance—not verified eligibility or availability.`;
+
+      const panel = document.createElement("div");
+      panel.className = "panel";
+
+      const title = document.createElement("h3");
+      title.textContent = "A suggested place to start";
+      panel.appendChild(title);
+
+      const intro = document.createElement("p");
+      intro.textContent =
+        "You can confirm these suggestions or choose different options below.";
+      panel.appendChild(intro);
+
+      function addSuggestion(label, org, extra) {
+        const section = document.createElement("div");
+        section.className = "organization";
+
+        const heading = document.createElement("h4");
+        heading.textContent = label + ": " + org.name;
+        section.appendChild(heading);
+
+        const categoriesText = org.matchingCategories
+          .map(category => CATEGORY_LABELS[category] || category)
+          .join(", ");
+
+        addLine(
+          section,
+          "Why it appears",
+          "The source associates it with " + categoriesText + "."
+        );
+
+        if (org.accessReason) {
+          addLine(section, "Possible access fit", org.accessReason);
+        }
+
+        addLine(
+          section,
+          "Approximate distance",
+          `${org.distance.toFixed(1)} miles from the ZIP-area reference point`
+        );
+
+        if (extra) {
+          addLine(section, "Backup consideration", extra);
+        }
+
+        addLine(section, "Things to confirm", org.note);
+        panel.appendChild(section);
+      }
+
+      addSuggestion("Suggested main option", suggestedMain, "");
+
+      if (suggestedBackup) {
+        addSuggestion(
+          "Suggested backup",
+          suggestedBackup,
+          suggestedBackup.additionalCoverage > 0
+            ? "It lists another selected category not listed for the main option."
+            : "It is another option associated with your selected needs."
+        );
+      } else {
+        const message = document.createElement("p");
+        message.className = "small";
+        message.textContent = "Only one option matched, so there is no suggested backup.";
+        panel.appendChild(message);
+      }
+
+      const warning = document.createElement("p");
+      warning.className = "small";
+      warning.textContent =
+        "These suggestions rely on unverified data. Confirm services, " +
+        "access, eligibility, funding, and availability.";
+      panel.appendChild(warning);
+
+      const confirm = document.createElement("button");
+      confirm.type = "button";
+
+      const alreadyConfirmed =
+        mainOrganizationId === suggestedMain.id &&
+        backupOrganizationId === (suggestedBackup?.id || null);
+
+      confirm.textContent = alreadyConfirmed
+        ? "Suggested choices confirmed"
+        : suggestedBackup
+          ? "Confirm these as my main and backup"
+          : "Confirm this as my main option";
+
+      confirm.disabled = alreadyConfirmed;
+
+      confirm.addEventListener("click", () => {
+        mainOrganizationId = suggestedMain.id;
+        backupOrganizationId = suggestedBackup?.id || null;
+        renderMatches();
+      });
+
+      panel.appendChild(confirm);
+      container.appendChild(panel);
+
+      const heading = document.createElement("h3");
+      heading.textContent = "Compare all possible options";
+      container.appendChild(heading);
+
+      matches.forEach(org => {
         const article = document.createElement("article");
         article.className = "organization";
 
         const tag = document.createElement("span");
         tag.className = "tag";
+
         tag.textContent =
-          index === 0
-            ? "Possible starting point · unverified"
-            : "Possible option · unverified";
+          org.id === suggestedMain.id
+            ? "Suggested main · unverified"
+            : suggestedBackup && org.id === suggestedBackup.id
+              ? "Suggested backup · unverified"
+              : "Possible option · unverified";
 
-        const heading = document.createElement("h3");
-        heading.textContent = org.name;
+        const title = document.createElement("h3");
+        title.textContent = org.name;
 
-        article.append(tag, heading);
+        article.append(tag, title);
 
-        const matchingText = org.matchingCategories
+        const categoriesText = org.matchingCategories
           .map(category => CATEGORY_LABELS[category] || category)
           .join(", ");
 
-        addLine(
-          article,
-          "Why it appears",
-          `The source associates it with ${matchingText}.`
-        );
-
-        addLine(
-          article,
-          "Approximate distance",
-          `${org.distance.toFixed(1)} miles from the ZIP-area reference point`
-        );
-
-        addLine(
-          article,
-          "Source-listed access",
-          sourceAccessText(org) + "; confirm before relying on it"
-        );
-
+        addLine(article, "Why it appears", "The source lists " + categoriesText + ".");
+        addLine(article, "Approximate distance", org.distance.toFixed(1) + " miles");
+        addLine(article, "Source-listed access", accessText(org) + "; confirm first");
         addLine(article, "Listed address", org.address);
         addLine(article, "Listed phone", org.phone);
-        addLine(article, "Things to confirm", org.limitation);
+        addLine(article, "Things to confirm", org.note);
 
         if (
           selectedNeeds().includes("housing") &&
           org.categories.includes("financial")
         ) {
-          const housingNote = document.createElement("p");
-          housingNote.className = "small";
-          housingNote.textContent =
-            "This option is shown because the source has a broad " +
-            "financial category. Housing placement is not confirmed.";
-
-          article.appendChild(housingNote);
+          const note = document.createElement("p");
+          note.className = "small";
+          note.textContent =
+            "This appears under a broad financial category. " +
+            "Housing placement has not been confirmed.";
+          article.appendChild(note);
         }
 
-        const warning = document.createElement("p");
-        warning.className = "small";
-        warning.textContent =
-          "This entry has not been verified. Confirm services, " +
-          "eligibility, contact details, and availability directly.";
-
-        article.appendChild(warning);
         addWebsite(article, org.website);
 
         const actions = document.createElement("div");
@@ -2221,7 +2494,6 @@
             status.textContent =
               "That organization is already your main choice. " +
               "Choose a different backup.";
-
             return;
           }
 
@@ -2243,24 +2515,20 @@
       const container = $("#plan-organizations");
       container.replaceChildren();
 
-      const main = getOrganization(mainOrganizationId);
-      const backup = getOrganization(backupOrganizationId);
+      const choices = [
+        { label: "Main option", org: getOrganization(mainOrganizationId) },
+        { label: "Backup option", org: getOrganization(backupOrganizationId) }
+      ];
 
-      if (!main && !backup) {
+      if (!choices.some(item => item.org)) {
         const message = document.createElement("p");
-
         message.textContent =
-          "No organization selected yet. You can go back to explore " +
-          "options or continue planning at your own pace.";
-
+          "No organization selected yet. You can go back or continue planning.";
         container.appendChild(message);
         return;
       }
 
-      [
-        { label: "Main option", org: main },
-        { label: "Backup option", org: backup }
-      ].forEach(item => {
+      choices.forEach(item => {
         if (!item.org) return;
 
         const section = document.createElement("div");
@@ -2270,10 +2538,9 @@
         heading.textContent = item.label + ": " + item.org.name;
 
         section.appendChild(heading);
-
         addLine(section, "Listed phone", item.org.phone);
         addLine(section, "Listed address", item.org.address);
-        addLine(section, "Confirm", item.org.limitation);
+        addLine(section, "Confirm", item.org.note);
         addWebsite(section, item.org.website);
 
         container.appendChild(section);
@@ -2324,13 +2591,13 @@
     /* Reset */
 
     function clearCurrentForm() {
-      if (requestController) {
-        requestController.abort();
-      }
+      if (requestController) requestController.abort();
+      stopVoice();
 
       conversation = [];
       chatStarted = false;
       summaryInitialized = false;
+      editedFields = new Set();
 
       directorySearchPerformed = false;
       mainOrganizationId = null;
@@ -2365,11 +2632,13 @@
 
       $("#chat-area").hidden = true;
       $("#manual-area").hidden = true;
-      $("#summary-ai-controls").hidden = true;
 
       [
         "intake-status",
         "chat-status",
+        "voice-status",
+        "manual-voice-status",
+        "prefill-status",
         "summary-status",
         "directory-status",
         "copy-status",
@@ -2381,7 +2650,7 @@
       updateOrganizationChoices();
     }
 
-    /* Entry navigation */
+    /* Events */
 
     $("#new-user").addEventListener("click", () => {
       showEntryPanel("new-welcome");
@@ -2410,11 +2679,10 @@
       openApplication(0);
     });
 
-    /* Intake navigation */
-
     $("#start-chat").addEventListener("click", beginChat);
 
     $("#manual-mode").addEventListener("click", () => {
+      stopVoice();
       $("#chat-area").hidden = true;
       $("#manual-area").hidden = false;
       $("#story").focus();
@@ -2422,7 +2690,16 @@
 
     $("#send-message").addEventListener("click", sendMessage);
 
-    $("#use-conversation").addEventListener("click", () => {
+    $("#use-conversation").addEventListener(
+      "click",
+      prepareConversationDraft
+    );
+
+    $("#continue-without-draft").addEventListener("click", () => {
+      if (busy) return;
+
+      $("#prefill-status").textContent =
+        "No AI draft was created. You can complete or skip the fields.";
       showStep(1);
     });
 
@@ -2431,28 +2708,33 @@
     });
 
     $("#stop-chat").addEventListener("click", () => {
-      if (requestController) {
-        requestController.abort();
-      }
+      if (requestController) requestController.abort();
 
+      stopVoice();
       $("#ai-consent").checked = false;
       $("#chat-area").hidden = true;
       $("#manual-area").hidden = false;
       $("#story").focus();
     });
 
-    /* Main navigation */
+    $("#speak-chat").addEventListener("click", () => {
+      startVoice("chat-input", "voice-status");
+    });
+
+    $("#speak-story").addEventListener("click", () => {
+      startVoice("story", "manual-voice-status");
+    });
+
+    $("#stop-voice-chat").addEventListener("click", stopVoice);
+    $("#stop-voice-story").addEventListener("click", stopVoice);
+    $("#read-response").addEventListener("click", readLastResponse);
+    $("#stop-reading").addEventListener("click", stopVoice);
 
     $("#to-review").addEventListener("click", () => {
       prepareSummary();
       renderReview();
       showStep(2);
     });
-
-    $("#generate-summary").addEventListener(
-      "click",
-      generateSummary
-    );
 
     $("#to-options").addEventListener("click", () => {
       renderMatches();
@@ -2461,11 +2743,8 @@
 
     $("#find-organizations").addEventListener("click", () => {
       directorySearchPerformed = true;
-
-      // New search requires a fresh choice.
       mainOrganizationId = null;
       backupOrganizationId = null;
-
       renderMatches();
     });
 
@@ -2490,25 +2769,54 @@
       input.addEventListener("change", renderPreview);
     });
 
+    $$('input[name="need"]').forEach(input => {
+      input.addEventListener("change", () => {
+        editedFields.add("needs");
+        clearRecommendations();
+      });
+    });
+
+    [
+      "housing-status",
+      "deadline",
+      "location",
+      "search-zip",
+      "transport",
+      "goal",
+      "summary"
+    ].forEach(id => {
+      const element = document.getElementById(id);
+
+      const mark = () => {
+        editedFields.add(id);
+
+        if (id === "search-zip" || id === "transport") {
+          clearRecommendations();
+        }
+      };
+
+      element.addEventListener("input", mark);
+      element.addEventListener("change", mark);
+    });
+
+    $("#search-radius").addEventListener("change", clearRecommendations);
+
     $("#copy-preview").addEventListener("click", async () => {
       const text = $("#sharing-preview").innerText.trim();
 
       if (!text || text === "Nothing selected.") {
         $("#copy-status").textContent =
           "Choose what to include before copying.";
-
         return;
       }
 
       try {
         await navigator.clipboard.writeText(text);
-
         $("#copy-status").textContent =
           "Preview copied. Check where you paste it.";
       } catch {
         $("#copy-status").textContent =
-          "Could not copy automatically. You can select and copy " +
-          "the preview text yourself.";
+          "Could not copy automatically. Select and copy the preview text yourself.";
       }
     });
 
@@ -2521,7 +2829,7 @@
       showStep(0);
     });
 
-    /* Optional local save */
+    /* Local save */
 
     $("#save-progress").addEventListener("click", () => {
       const progress = {
@@ -2531,10 +2839,10 @@
         housingStatus: $("#housing-status").value,
         deadline: $("#deadline").value,
         location: $("#location").value,
+        zip: $("#search-zip").value,
         transport: $("#transport").value,
         goal: $("#goal").value,
-        searchZip: $("#search-zip").value,
-        searchRadius: $("#search-radius").value,
+        radius: $("#search-radius").value,
         mainOrganizationId,
         backupOrganizationId,
         trackerStatus: $("#tracker-status").value,
@@ -2543,18 +2851,12 @@
       };
 
       try {
-        localStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify(progress)
-        );
-
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
         $("#save-message").textContent =
-          "Saved in this browser. You can delete the saved copy " +
-          "from the returning-user screen.";
+          "Saved in this browser. You can delete it from the returning-user screen.";
       } catch {
         $("#save-message").textContent =
-          "Progress could not be saved. Your browser may be " +
-          "blocking local storage.";
+          "Progress could not be saved. Your browser may be blocking local storage.";
       }
     });
 
@@ -2565,9 +2867,7 @@
         const saved = localStorage.getItem(STORAGE_KEY);
 
         if (!saved) {
-          message.textContent =
-            "No saved progress was found in this browser.";
-
+          message.textContent = "No saved progress was found in this browser.";
           return;
         }
 
@@ -2579,22 +2879,20 @@
           summary: "summary",
           location: "location",
           deadline: "deadline",
-          searchZip: "search-zip",
+          zip: "search-zip",
           followUpDate: "follow-up-date",
           trackerNotes: "tracker-notes"
         };
 
         Object.entries(textFields).forEach(([key, id]) => {
           document.getElementById(id).value =
-            typeof progress[key] === "string"
-              ? progress[key]
-              : "";
+            typeof progress[key] === "string" ? progress[key] : "";
         });
 
         $("#housing-status").value = progress.housingStatus || "";
         $("#transport").value = progress.transport || "";
         $("#goal").value = progress.goal || "";
-        $("#search-radius").value = progress.searchRadius || "15";
+        $("#search-radius").value = progress.radius || "15";
         $("#tracker-status").value = progress.trackerStatus || "Planning";
 
         const savedNeeds = Array.isArray(progress.needs)
@@ -2617,7 +2915,18 @@
 
         summaryInitialized = true;
 
-        // Raw conversation and sharing choices are not restored.
+        // Treat restored information as user-controlled.
+        editedFields = new Set([
+          "needs",
+          "housing-status",
+          "deadline",
+          "location",
+          "search-zip",
+          "transport",
+          "goal",
+          "summary"
+        ]);
+
         openApplication(4);
       } catch {
         message.textContent =
@@ -2630,13 +2939,11 @@
 
       try {
         localStorage.removeItem(STORAGE_KEY);
-
         message.textContent =
           "Saved progress was deleted from this browser.";
       } catch {
         message.textContent =
-          "Saved progress could not be deleted. " +
-          "Check your browser’s site-data settings.";
+          "Saved progress could not be deleted. Check your browser’s site-data settings.";
       }
     });
   </script>
