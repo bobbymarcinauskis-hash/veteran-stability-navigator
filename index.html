@@ -15,9 +15,9 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+      line-height: 1.6;
       color: #263247;
       background: #f6f4f0;
-      line-height: 1.6;
 
       --navy: #202e48;
       --navy-dark: #17243a;
@@ -308,6 +308,7 @@
     textarea,
     input[type="text"],
     input[type="date"],
+    input[type="number"],
     select {
       display: block;
       width: 100%;
@@ -497,13 +498,7 @@
         <button type="button" id="load-alex" class="secondary">
           Load the Alex test case
         </button>
-
-        <button type="button" id="restore-progress" class="text-button">
-          Restore saved progress
-        </button>
       </div>
-
-      <p id="entry-status" class="status" aria-live="polite"></p>
     </section>
   </div>
 
@@ -542,17 +537,19 @@
         <div class="notice">
           <strong>Test environment</strong>
 
-          Organizations, applications, emails, and status updates in the
-          Alex scenario are fictional. No real referral is sent.
+          The organizations and applications in this version are fictional.
+          No real referral, application, or email is sent.
         </div>
       </div>
 
       <nav aria-label="Progress">
         <ol class="progress">
-          <li class="active" aria-current="step"><span>1</span> Conversation</li>
+          <li class="active" aria-current="step">
+            <span>1</span> Conversation
+          </li>
           <li><span>2</span> Review information</li>
           <li><span>3</span> Support options</li>
-          <li><span>4</span> Review application</li>
+          <li><span>4</span> Sample application</li>
           <li><span>5</span> Action plan</li>
         </ol>
       </nav>
@@ -565,8 +562,8 @@
         </h2>
 
         <p>
-          Start wherever you feel comfortable. You can skip any question.
-          You do not need to describe trauma or military experiences.
+          Start wherever you feel comfortable. You can take your time,
+          skip a question, or say when you are ready to continue.
         </p>
 
         <div class="panel">
@@ -575,17 +572,17 @@
           <p class="small">
             The assistant is not a human counselor and may make mistakes.
             Conversation text is sent through this app’s server to the
-            configured Azure service to identify answers and draft a summary.
+            configured Azure service.
           </p>
 
           <p class="small">
-            Do not enter Social Security numbers, account numbers, real
-            contact information, or other sensitive information in this demo.
+            Use fictional information in this demo. Do not enter Social
+            Security numbers, account numbers, or real contact information.
           </p>
 
           <label class="check-row">
             <input type="checkbox" id="ai-consent">
-            <span>I understand and choose to use the AI intake assistant.</span>
+            <span>I understand and choose to use the AI assistant.</span>
           </label>
 
           <label class="check-row">
@@ -603,11 +600,9 @@
           id="conversation"
           class="conversation"
           role="log"
-          aria-label="Intake conversation"
+          aria-label="Conversation"
           aria-live="polite"
         ></div>
-
-        <p id="question-status" class="status" aria-live="polite"></p>
 
         <label class="field-label" for="chat-input">
           Your response
@@ -633,30 +628,17 @@
           </button>
 
           <button type="button" id="read-question" class="text-button">
-            Read the question aloud
+            Read the last response aloud
           </button>
         </div>
 
         <div class="actions">
-          <button type="button" id="skip-question" class="secondary">
-            Skip this question
-          </button>
-
-          <button type="button" id="continue-intake" class="secondary">
-            Continue with what I’ve shared
+          <button type="button" id="ready-to-review" class="secondary">
+            I’m ready to review my information
           </button>
         </div>
 
         <p id="chat-status" class="status" aria-live="polite"></p>
-
-        <button
-          type="button"
-          id="retry-extraction"
-          class="secondary"
-          hidden
-        >
-          Try processing my last answer again
-        </button>
       </section>
 
       <!-- STEP 2: REVIEW -->
@@ -672,8 +654,8 @@
         </h2>
 
         <p>
-          These answers were gathered from the conversation or the Alex
-          test case. Please correct anything that is wrong.
+          The app suggests answers from the discussion. Please correct
+          anything that is wrong. You can leave an answer blank.
         </p>
 
         <p id="review-status" class="status" aria-live="polite"></p>
@@ -685,13 +667,20 @@
         <textarea
           id="review-summary"
           maxlength="12000"
-          placeholder="No AI summary is available yet. You can write one here."
+          placeholder="Write or edit your summary here..."
         ></textarea>
 
         <p class="small">
           An AI-generated summary can contain mistakes. Review it and
-          remove anything you do not want included.
+          remove anything you do not want shared.
         </p>
+
+        <label class="field-label" for="review-name">
+          Name you would like to use
+          <span class="small">Optional; fictional in this demo</span>
+        </label>
+
+        <input type="text" id="review-name" maxlength="200">
 
         <fieldset>
           <legend>What would you like help with?</legend>
@@ -751,27 +740,39 @@
               <span class="small">Optional</span>
             </label>
 
-            <input
-              type="text"
-              id="review-location"
-              maxlength="200"
-              placeholder="City or neighborhood"
-            >
+            <input type="text" id="review-location" maxlength="200">
           </div>
         </div>
 
-        <label class="field-label" for="review-zip">
-          ZIP code
-          <span class="small">Optional</span>
-        </label>
+        <div class="grid-two">
+          <div>
+            <label class="field-label" for="review-zip">
+              ZIP code
+              <span class="small">Optional</span>
+            </label>
 
-        <input
-          type="text"
-          id="review-zip"
-          maxlength="5"
-          inputmode="numeric"
-          placeholder="For example: 07601"
-        >
+            <input
+              type="text"
+              id="review-zip"
+              maxlength="5"
+              inputmode="numeric"
+            >
+          </div>
+
+          <div>
+            <label class="field-label" for="review-amount">
+              Bill amount
+              <span class="small">Optional</span>
+            </label>
+
+            <input
+              type="number"
+              id="review-amount"
+              min="0"
+              step="0.01"
+            >
+          </div>
+        </div>
 
         <label class="field-label" for="review-transport">
           Transportation or access
@@ -797,7 +798,7 @@
         </div>
       </section>
 
-      <!-- STEP 3: OPTIONS -->
+      <!-- STEP 3: SUPPORT OPTIONS -->
 
       <section
         class="card"
@@ -810,45 +811,14 @@
         </h2>
 
         <p>
-          You decide which options feel right for you. A recommendation
-          is not an eligibility decision.
+          These are fictional organizations from the starter-kit demo.
+          You decide which options feel right for you.
         </p>
 
         <div class="notice">
-          <strong>Demo information only</strong>
-          The Alex organizations are fictional. Other directory records
-          are unverified and may be incorrect or out of date.
-        </div>
-
-        <div class="panel">
-          <h3>Your search</h3>
-
-          <p id="search-description"></p>
-
-          <label class="field-label" for="radius">
-            Approximate search radius
-          </label>
-
-          <select id="radius">
-            <option value="5">Within 5 miles</option>
-            <option value="10">Within 10 miles</option>
-            <option value="15" selected>Within 15 miles</option>
-            <option value="25">Within 25 miles</option>
-            <option value="50">Within 50 miles</option>
-          </select>
-
-          <p class="small">
-            In the Alex test case, the organizations are fictional and
-            distances are not calculated.
-          </p>
-
-          <div class="actions">
-            <button type="button" id="find-options">
-              Find my possible options
-            </button>
-          </div>
-
-          <p id="options-status" class="status" aria-live="polite"></p>
+          <strong>Demo organizations</strong>
+          Names, services, locations, and access details on this screen
+          are fictional. Recommendations are not eligibility decisions.
         </div>
 
         <div id="recommendations"></div>
@@ -858,6 +828,8 @@
           <p id="selected-main">Main option: Not selected</p>
           <p id="selected-backup">Backup option: Not selected</p>
         </div>
+
+        <p id="options-status" class="status" aria-live="polite"></p>
 
         <div class="actions">
           <button type="button" id="options-back" class="secondary">
@@ -870,7 +842,7 @@
         </div>
       </section>
 
-      <!-- STEP 4: APPLICATION -->
+      <!-- STEP 4: SAMPLE APPLICATION -->
 
       <section
         class="card"
@@ -879,82 +851,220 @@
         hidden
       >
         <h2 id="heading-3" tabindex="-1">
-          Review your sample application
+          Housing &amp; Food Support Request
         </h2>
 
         <p>
-          We used information you already shared. Review the form and
-          message before approving the simulated submission.
+          We used information from your discussion to prepare this sample
+          form. Review and edit it before approving the simulation.
         </p>
 
         <div class="notice">
-          <strong>No real submission</strong>
-          This sample form is not the organization’s actual application.
-          No real email will be sent.
+          <strong>Sample form only</strong>
+          This is not an organization’s actual application. No real email
+          or application will be sent.
         </div>
 
-        <div id="application-details" class="panel"></div>
+        <div class="panel" id="application-destination"></div>
 
-        <label class="field-label" for="application-type">
-          Type of help requested
-        </label>
+        <div class="panel">
+          <h3>1. Your information</h3>
 
-        <select id="application-type">
-          <option value="">Choose a type of support</option>
-          <option value="rent">Rent or bills assistance</option>
-          <option value="food">Food assistance</option>
-          <option value="housing">Housing assistance</option>
-          <option value="work">Employment or training</option>
-          <option value="medical">Healthcare support</option>
-        </select>
+          <label class="field-label" for="form-name">
+            Name or name you’d like us to use
+          </label>
 
-        <label class="check-row">
-          <input type="checkbox" id="include-summary">
-          <span>
-            Include my edited summary in the sample message.
-          </span>
-        </label>
+          <input type="text" id="form-name" maxlength="200">
 
-        <p class="small">
-          Review the summary for sensitive details. The app cannot
-          automatically guarantee that free text contains no private information.
-        </p>
+          <label class="field-label" for="form-location">
+            City or area
+          </label>
 
-        <label class="field-label" for="application-message">
-          Editable sample message
-        </label>
+          <input type="text" id="form-location" maxlength="200">
 
-        <textarea
-          id="application-message"
-          maxlength="8000"
-          placeholder="The sample message will appear here."
-        ></textarea>
+          <label class="field-label" for="form-zip">
+            ZIP code
+          </label>
 
-        <div class="actions">
-          <button type="button" id="refresh-message" class="secondary">
-            Update message from my choices
-          </button>
+          <input
+            type="text"
+            id="form-zip"
+            maxlength="5"
+            inputmode="numeric"
+          >
 
-          <button type="button" id="ask-missing" class="secondary">
-            Ask the assistant for missing answers
-          </button>
+          <label class="field-label" for="form-contact-method">
+            Preferred contact method
+          </label>
+
+          <select id="form-contact-method">
+            <option value="">Not provided</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+          </select>
+
+          <label class="field-label" for="form-contact-value">
+            Fictional test contact information
+          </label>
+
+          <input
+            type="text"
+            id="form-contact-value"
+            maxlength="200"
+            placeholder="alex@example.invalid or a fictional 555 number"
+          >
+
+          <p class="small">
+            For this test, use an email ending in <strong>.invalid</strong>
+            or a fictional phone number containing <strong>555</strong>.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>2. Support requested</h3>
+
+          <fieldset>
+            <legend>Choose anything that applies</legend>
+
+            <label class="check-row">
+              <input type="checkbox" name="form-need" value="rent">
+              Rent, utilities, or another urgent bill
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" name="form-need" value="food">
+              Food or food benefits
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" name="form-need" value="housing">
+              A place to stay or permanent housing
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" name="form-need" value="work">
+              Work or job training
+            </label>
+
+            <label class="check-row">
+              <input type="checkbox" name="form-need" value="medical">
+              Healthcare or medical support
+            </label>
+          </fieldset>
+
+          <label class="field-label" for="form-housing">
+            Housing situation
+          </label>
+
+          <select id="form-housing">
+            <option value="">Not provided</option>
+            <option value="housed">I have a place to stay</option>
+            <option value="at-risk">I have a place to stay but may lose it</option>
+            <option value="seeking">I am looking for a place to stay</option>
+            <option value="other">Another situation</option>
+          </select>
+
+          <div class="grid-two">
+            <div>
+              <label class="field-label" for="form-deadline">
+                Date to keep in mind
+              </label>
+
+              <input type="date" id="form-deadline">
+            </div>
+
+            <div>
+              <label class="field-label" for="form-amount">
+                Bill amount, if shared
+              </label>
+
+              <input
+                type="number"
+                id="form-amount"
+                min="0"
+                step="0.01"
+              >
+            </div>
+          </div>
+
+          <label class="field-label" for="form-transport">
+            Transportation or access
+          </label>
+
+          <select id="form-transport">
+            <option value="">Not provided</option>
+            <option value="transit">I use public transportation</option>
+            <option value="car">I have access to a car</option>
+            <option value="phone">I prefer phone or online support</option>
+            <option value="challenge">Transportation is a challenge</option>
+          </select>
+        </div>
+
+        <div class="panel">
+          <h3>3. Your summary and message</h3>
+
+          <label class="field-label" for="form-summary">
+            Your editable summary
+          </label>
+
+          <textarea id="form-summary" maxlength="12000"></textarea>
+
+          <label class="check-row">
+            <input type="checkbox" id="include-summary">
+            <span>Include my summary in the sample email.</span>
+          </label>
+
+          <p class="small">
+            Review the summary for sensitive details. The app cannot
+            automatically guarantee that free text contains no private information.
+          </p>
+
+          <label class="field-label" for="form-message">
+            Editable sample email
+          </label>
+
+          <textarea id="form-message" maxlength="8000"></textarea>
+
+          <div class="actions">
+            <button type="button" id="refresh-message" class="secondary">
+              Update email from my choices
+            </button>
+          </div>
         </div>
 
         <p id="application-status" class="status" aria-live="polite"></p>
-
-        <div class="panel">
-          <h3>Review before approval</h3>
-          <div id="application-preview"></div>
-        </div>
 
         <div class="actions">
           <button type="button" id="application-back" class="secondary">
             Back
           </button>
 
-          <button type="button" id="approve-simulation">
-            Approve simulated submission
+          <button type="button" id="review-application">
+            Review the completed sample
           </button>
+        </div>
+
+        <div id="approval-area" class="panel" hidden>
+          <h3>Review before approval</h3>
+
+          <p class="small">
+            This is exactly what the test service will record. No real
+            organization will receive it.
+          </p>
+
+          <div id="application-preview"></div>
+
+          <div class="actions">
+            <button type="button" id="approve-simulation">
+              Approve simulated submission
+            </button>
+
+            <button type="button" id="edit-application" class="secondary">
+              Make changes
+            </button>
+          </div>
+
+          <p id="submit-status" class="status" aria-live="polite"></p>
         </div>
       </section>
 
@@ -979,8 +1089,8 @@
 
         <div class="notice">
           <strong>Simulated status</strong>
-          “Sent,” “received,” and “follow-up due” below are test events,
-          not confirmations from an organization.
+          “Sent,” “received,” and “follow-up due” are test events—not
+          confirmations from an organization.
         </div>
 
         <div class="actions">
@@ -993,22 +1103,18 @@
             Review my prepared backup application
           </button>
 
-          <button type="button" id="save-progress" class="secondary">
-            Save progress on this device
-          </button>
-
           <button type="button" id="print-plan" class="secondary">
             Print this page
           </button>
+
+          <button type="button" id="start-over" class="text-button">
+            Start over
+          </button>
         </div>
 
-        <p id="save-status" class="status" aria-live="polite"></p>
-
         <p class="small">
-          Saving is optional. The intake and conversation will be stored
-          in this browser and may be visible to anyone using this browser
-          profile. Simulated submission status remains on the test server
-          only until it is restarted.
+          This test status is kept in server memory. Restarting the
+          server clears it.
         </p>
       </section>
 
@@ -1020,8 +1126,6 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "veteran-navigator-integrated-demo-v1";
-
     const NEED_LABELS = {
       rent: "Rent or bills",
       food: "Food",
@@ -1046,32 +1150,19 @@
       challenge: "Transportation is a challenge"
     };
 
-    const ZIP_AREAS = {
-      "07601": { city: "Hackensack", state: "NJ", lat: 40.8868, lon: -74.0435 },
-      "07102": { city: "Newark", state: "NJ", lat: 40.7357, lon: -74.1724 },
-      "15222": { city: "Pittsburgh", state: "PA", lat: 40.4485, lon: -79.9904 },
-      "15213": { city: "Pittsburgh", state: "PA", lat: 40.4406, lon: -79.9559 },
-      "15205": { city: "Pittsburgh", state: "PA", lat: 40.4312, lon: -80.0685 },
-      "92101": { city: "San Diego", state: "CA", lat: 32.7157, lon: -117.1611 },
-      "78205": { city: "San Antonio", state: "TX", lat: 29.4241, lon: -98.4936 }
-    };
-
     /*
-      Fictional organizations from the starter-kit scenario.
-      These are used only when the Alex test case is loaded.
+      Fictional organizations from the starter-kit demo.
     */
-    const ALEX_ORGANIZATIONS = [
+    const organizations = [
       {
         id: "demo_riverbend",
         name: "Riverbend Veterans Resource Center",
         categories: ["rent", "food", "work"],
         access: ["transit", "phone"],
         address: "Fictional downtown Riverbend location",
-        phone: "Fictional contact",
         note:
-          "The starter kit lists emergency assistance, food referrals, " +
-          "and job-search help. Sample availability must not be treated as real.",
-        fictional: true
+          "The demo lists emergency assistance, food referrals, " +
+          "and job-search help."
       },
       {
         id: "demo_eastfield",
@@ -1079,11 +1170,9 @@
         categories: ["rent", "food"],
         access: ["phone"],
         address: "Fictional Eastfield location",
-        phone: "Fictional contact",
         note:
-          "The starter kit says this option is not on a bus line and " +
-          "phone intake may have a wait. These are demo details.",
-        fictional: true
+          "The demo says this option is not on a bus line and phone " +
+          "intake may have a wait."
       },
       {
         id: "demo_northside",
@@ -1091,11 +1180,9 @@
         categories: ["housing"],
         access: ["transit"],
         address: "Fictional North Riverbend location",
-        phone: "Fictional contact",
         note:
-          "The starter kit describes help for veterans currently without " +
-          "housing, not past-due rent while still housed.",
-        fictional: true
+          "The demo describes help for veterans currently without housing, " +
+          "not past-due rent while still housed."
       },
       {
         id: "demo_workforce",
@@ -1103,49 +1190,9 @@
         categories: ["work"],
         access: ["transit"],
         address: "Fictional downtown Riverbend location",
-        phone: "Fictional contact",
         note:
-          "The starter kit lists job-search help, résumé reviews, and training.",
-        fictional: true
+          "The demo lists job-search help, résumé reviews, and training."
       }
-    ];
-
-    /*
-      Regional sample records adapted from the teammate's prototype.
-
-      They are unverified. The categories are broad source labels and
-      are not proof of eligibility or current availability.
-    */
-    const REGIONAL_ORGANIZATIONS = [
-      { id:"nj_bcvso", name:"Bergen County Division of Veteran Services & NJ DMAVA VSO", address:"One Bergen County Plaza, 2nd Floor, Hackensack, NJ 07601", phone:"(201) 336-6325", lat:40.8788, lon:-74.0422, categories:["rent","food","medical","work"], access:["transit","phone"], note:"Confirm services and eligibility." },
-      { id:"nj_onestop", name:"Bergen County One-Stop Career Center", address:"60 State Street, 2nd Floor, Hackensack, NJ 07601", phone:"(201) 329-9600", lat:40.8859, lon:-74.0439, categories:["work"], access:["transit","phone"], note:"The source does not list emergency rent or food grants." },
-      { id:"nj_ssvf", name:"Community Hope — Hope for Veterans", address:"175 Washington Ave, Dumont / Hackensack Service Hub, NJ 07601", phone:"(855) 483-8466", lat:40.8921, lon:-74.0398, categories:["rent","food"], access:["transit","phone"], note:"Confirm address, funding, and eligibility." },
-      { id:"nj_va", name:"Hackensack VA Clinic", address:"385 Prospect Avenue, Hackensack, NJ 07601", phone:"(201) 342-4536", lat:40.8942, lon:-74.0568, categories:["medical"], access:["transit","phone"], note:"Confirm services and appointments." },
-      { id:"nj_vetcenter", name:"Secaucus / Bergen Vet Center", address:"110A Meadowlands Parkway, Suite 102, Secaucus, NJ 07094", phone:"(201) 223-7787", lat:40.7931, lon:-74.0683, categories:["medical","work"], access:["transit","phone"], note:"Confirm services and access." },
-      { id:"nj_food", name:"Center for Food Action", address:"192 W. Demarest Avenue, Englewood / Hackensack Hub, NJ 07631", phone:"(201) 569-1804", lat:40.8995, lon:-73.9821, categories:["food","rent"], access:["transit","phone"], note:"Confirm address and assistance." },
-      { id:"nj_catholic", name:"Catholic Charities Archdiocese of Newark — Veterans Program", address:"590 North 7th Street, Newark, NJ 07107", phone:"(855) 768-7932", lat:40.7641, lon:-74.1823, categories:["rent","food"], access:["transit","phone"], note:"Confirm eligibility and coverage." },
-      { id:"nj_gigo", name:"GI Go Fund", address:"436 Central Avenue, Newark / Northern NJ Hub, NJ 07107", phone:"(862) 240-1755", lat:40.7478, lon:-74.1912, categories:["work","rent","food"], access:["transit","phone"], note:"Confirm current services." },
-      { id:"nj_eastorange", name:"East Orange VA Medical Center", address:"385 Tremont Avenue, East Orange, NJ 07018", phone:"(973) 676-1000", lat:40.7521, lon:-74.2361, categories:["medical"], access:["transit","phone"], note:"Confirm services and transportation." },
-      { id:"nj_newarkbenefits", name:"Newark VA Regional Benefit Office", address:"20 Washington Place, Newark, NJ 07102", phone:"(800) 827-1000", lat:40.7429, lon:-74.1704, categories:["medical","work","rent"], access:["transit","phone"], note:"Confirm which benefit services are available." },
-      { id:"nj_social", name:"Bergen County Board of Social Services", address:"218 Route 17 North, Rochelle Park, NJ 07662", phone:"(201) 368-4200", lat:40.9088, lon:-74.0725, categories:["food","rent"], access:["phone"], note:"The source reports limited direct transit access." },
-      { id:"nj_lyons", name:"Lyons VA Medical Center — Domiciliary", address:"151 Knollcroft Road, Lyons, NJ 07939", phone:"(908) 647-0180", lat:40.6652, lon:-74.5491, categories:["housing","medical"], access:["phone"], note:"The source describes a residential program; confirm eligibility." },
-
-      { id:"pgh_vlp", name:"Veterans Leadership Program of Western PA", address:"2934 Smallman Street, Pittsburgh, PA 15201", phone:"(412) 481-8200", lat:40.4581, lon:-79.9742, categories:["rent","food","work"], access:["transit","phone"], note:"Confirm services and funding." },
-      { id:"pgh_career", name:"PA CareerLink Pittsburgh / Allegheny County", address:"2201 Liberty Avenue, Pittsburgh, PA 15222", phone:"(412) 552-7100", lat:40.4519, lon:-79.9831, categories:["work"], access:["transit","phone"], note:"The source does not list emergency rent or food grants." },
-      { id:"pgh_county", name:"Allegheny County Veterans Services", address:"4141 Fifth Avenue, 2nd Floor, Pittsburgh, PA 15213", phone:"(412) 621-4357", lat:40.4439, lon:-79.9547, categories:["rent","food","medical"], access:["transit","phone"], note:"Confirm current programs." },
-      { id:"pgh_benefits", name:"Pittsburgh VA Regional Benefit Office", address:"1000 Liberty Avenue, Room 1700, Pittsburgh, PA 15222", phone:"(800) 827-1000", lat:40.4432, lon:-79.9949, categories:["medical","work","rent"], access:["transit","phone"], note:"Confirm available benefits services." },
-      { id:"pgh_vamc", name:"Pittsburgh VA Medical Center — University Drive", address:"University Drive C, Pittsburgh, PA 15240", phone:"(866) 482-7488", lat:40.4457, lon:-79.9602, categories:["medical"], access:["transit","phone"], note:"Confirm appointments and eligibility." },
-      { id:"pgh_vetcenter", name:"Pittsburgh Vet Center", address:"2500 Baldwick Road, Suite 15, Pittsburgh, PA 15205", phone:"(412) 920-1765", lat:40.4278, lon:-80.0681, categories:["medical","work"], access:["transit","phone"], note:"Confirm current services." },
-      { id:"pgh_salvation", name:"The Salvation Army Western PA — Veteran Family Program", address:"700 North Bell Avenue, Carnegie / Pittsburgh, PA 15106", phone:"(412) 446-1500", lat:40.4089, lon:-80.0835, categories:["rent","food"], access:["transit","phone"], note:"Confirm address and eligibility." },
-      { id:"pgh_wwp", name:"Wounded Warrior Project — Pittsburgh Service Office", address:"600 River Avenue, Suite 400, Pittsburgh, PA 15212", phone:"(412) 471-0935", lat:40.4539, lon:-79.9922, categories:["work","medical","rent"], access:["transit","phone"], note:"Confirm eligibility and services." },
-      { id:"pgh_food", name:"Greater Pittsburgh Community Food Bank", address:"1 North Linden Street, Duquesne / Pittsburgh Metro, PA 15110", phone:"(412) 460-3663", lat:40.3792, lon:-79.8471, categories:["food"], access:["transit","phone"], note:"Confirm nearby distribution locations." },
-      { id:"pgh_heinz", name:"H.J. Heinz III VA Campus", address:"1010 Delafield Road, Pittsburgh, PA 15215", phone:"(866) 482-7488", lat:40.4958, lon:-79.8981, categories:["medical"], access:["transit","phone"], note:"Confirm services and transportation." },
-
-      { id:"sd_vvsd", name:"Veterans Village of San Diego", address:"4141 Pacific Highway, San Diego, CA 92110", phone:"(619) 393-2000", lat:32.7481, lon:-117.1965, categories:["rent","food","work","medical"], access:["transit","phone"], note:"Confirm available services and eligibility." },
-      { id:"sd_va", name:"Jennifer Moreno VA Medical Center / Mission Valley VA Clinic", address:"8810 Rio San Diego Drive, San Diego, CA 92108", phone:"(619) 400-5000", lat:32.7759, lon:-117.1391, categories:["medical"], access:["transit","phone"], note:"Confirm facility name, address, and services." },
-
-      { id:"sa_endeavors", name:"Endeavors — Veteran Supportive Services", address:"6363 De Zavala Road, San Antonio, TX 78249", phone:"(210) 431-6466", lat:29.5612, lon:-98.6134, categories:["rent","food","medical"], access:["transit","phone"], note:"Confirm service area and eligibility." },
-      { id:"sa_bexar", name:"Bexar County Military & Veterans Services Center", address:"1422 E. Grayson Street, Suite 400, San Antonio, TX 78208", phone:"(210) 335-6775", lat:29.4426, lon:-98.4612, categories:["work","rent","medical"], access:["transit","phone"], note:"Confirm current services." }
     ];
 
     const $ = selector => document.querySelector(selector);
@@ -1153,12 +1200,14 @@
 
     function emptyIntake() {
       return {
+        name: "",
         summary: "",
         needs: [],
         housingStatus: "",
         deadline: "",
         location: "",
         zip: "",
+        amount: "",
         transport: "",
         contactMethod: "",
         contactValue: ""
@@ -1167,19 +1216,17 @@
 
     let intake = emptyIntake();
     let messages = [];
-    let skipped = new Set();
-    let currentQuestion = "story";
-    let phase = "intake";
-    let demoMode = false;
-    let summaryEdited = false;
+    let conversationMode = "discussion";
     let mainId = null;
     let backupId = null;
-    let currentApplicationRole = "main";
     let currentApplicationId = null;
+    let currentApplicationRole = "main";
+    let approvedSnapshot = null;
     let submissionId = null;
     let pollTimer = null;
     let recognition = null;
     let busy = false;
+    let testCaseLoaded = false;
 
     function addLine(container, label, value) {
       const paragraph = document.createElement("p");
@@ -1222,21 +1269,6 @@
       window.scrollTo(0, 0);
     }
 
-    function setBusy(value) {
-      busy = value;
-
-      [
-        "send-answer",
-        "skip-question",
-        "continue-intake",
-        "retry-extraction"
-      ].forEach(id => {
-        document.getElementById(id).disabled = value;
-      });
-
-      $("#chat-input").disabled = value;
-    }
-
     async function api(path, payload) {
       const response = await fetch(path, {
         method: "POST",
@@ -1256,6 +1288,21 @@
 
       return data;
     }
+
+    function setBusy(value) {
+      busy = value;
+
+      [
+        "send-answer",
+        "ready-to-review"
+      ].forEach(id => {
+        document.getElementById(id).disabled = value;
+      });
+
+      $("#chat-input").disabled = value;
+    }
+
+    /* Conversation */
 
     function addMessage(role, content) {
       messages.push({ role, content });
@@ -1291,27 +1338,27 @@
         {
           role: "assistant",
           content:
-            "I’m here to help you explore support. You can skip anything. " +
-            "What feels most important to address right now?"
+            "I’m here to listen and help you explore support. " +
+            "You can share as much or as little as you want. " +
+            "What has been going on for you?"
         }
       ];
 
-      currentQuestion = "story";
       renderConversation();
       openApplication();
     }
 
     function loadAlexCase() {
       resetSession();
-      demoMode = true;
+      testCaseLoaded = true;
 
       /*
         Fictional starter-kit scenario.
 
-        The ZIP and contact details below are explicitly fictional test
-        values. They are not represented as real details for Alex.
+        Contact information is a clearly fictional test value.
       */
       intake = {
+        name: "Alex Morgan",
         summary:
           "I recently lost my job and am behind on rent. " +
           "I would like help with housing costs, food, and finding work. " +
@@ -1321,10 +1368,11 @@
         housingStatus: "at-risk",
         deadline: "2026-11-15",
         location: "Fictional Riverbend, New Jersey",
-        zip: "07601",
+        zip: "",
+        amount: "1500",
         transport: "transit",
-        contactMethod: "",
-        contactValue: ""
+        contactMethod: "email",
+        contactValue: "alex@example.invalid"
       };
 
       messages = [
@@ -1341,206 +1389,20 @@
         {
           role: "assistant",
           content:
-            "I’ve organized the sample information. Please review it before " +
-            "choosing a support option."
+            "I’ve organized the sample information. Please review it " +
+            "before choosing a support option."
         }
       ];
 
-      currentQuestion = null;
       renderConversation();
       openApplication();
       populateReview();
 
       $("#review-status").textContent =
-        "Fictional Alex test case loaded. The ZIP is a sample value for this demo.";
+        "Fictional Alex test case loaded. The summary is a sample draft, " +
+        "not an AI-generated summary.";
 
       showStep(1);
-    }
-
-    /*
-      Determine the next missing question from structured intake state.
-      A skipped answer is not asked again automatically.
-    */
-    function nextQuestion() {
-      if (phase === "contact") {
-        if (!intake.contactMethod && !skipped.has("contactMethod")) {
-          return {
-            key: "contactMethod",
-            text:
-              "For this demo application, would you prefer a response " +
-              "by email or phone?"
-          };
-        }
-
-        if (
-          intake.contactMethod &&
-          !intake.contactValue &&
-          !skipped.has("contactValue")
-        ) {
-          return {
-            key: "contactValue",
-            text:
-              intake.contactMethod === "email"
-                ? "What fictional test email should the sample form use? " +
-                  "Please use an address ending in .invalid."
-                : "What fictional test phone number should the sample form use? " +
-                  "Please use a 555 number."
-          };
-        }
-
-        return null;
-      }
-
-      if (!intake.needs.length && !skipped.has("needs")) {
-        return {
-          key: "needs",
-          text:
-            "What kind of support would help most—such as rent, food, " +
-            "housing, healthcare, or work?"
-        };
-      }
-
-      if (
-        (intake.needs.includes("rent") || intake.needs.includes("housing")) &&
-        !intake.housingStatus &&
-        !skipped.has("housingStatus")
-      ) {
-        return {
-          key: "housingStatus",
-          text:
-            "Do you currently have a place to stay, or are you looking " +
-            "for a place to stay?"
-        };
-      }
-
-      if (
-        intake.needs.includes("rent") &&
-        !intake.deadline &&
-        !skipped.has("deadline")
-      ) {
-        return {
-          key: "deadline",
-          text:
-            "Is there a date or deadline you would like us to keep in mind? " +
-            "You can say there isn’t one or skip."
-        };
-      }
-
-      if (!intake.zip && !skipped.has("zip")) {
-        return {
-          key: "zip",
-          text:
-            "If you’re comfortable sharing it, what is the five-digit ZIP " +
-            "code where you would like help? You can skip this."
-        };
-      }
-
-      if (!intake.transport && !skipped.has("transport")) {
-        return {
-          key: "transport",
-          text:
-            "Should we consider public transportation, access to a car, " +
-            "or a preference for phone or online support?"
-        };
-      }
-
-      return null;
-    }
-
-    function askNextQuestion() {
-      const next = nextQuestion();
-
-      if (!next) {
-        currentQuestion = null;
-
-        if (phase === "contact") {
-          addMessage(
-            "assistant",
-            "Thank you. I’ll use those test details to prepare the sample " +
-            "application for your review."
-          );
-
-          prepareApplication(currentApplicationRole);
-          return;
-        }
-
-        addMessage(
-          "assistant",
-          "Thank you. I’ve gathered a starting point. Please review the " +
-          "information and correct anything I misunderstood."
-        );
-
-        populateReview();
-        showStep(1);
-        return;
-      }
-
-      currentQuestion = next.key;
-      addMessage("assistant", next.text);
-      $("#question-status").textContent =
-        "You can answer, skip, or continue with what you have shared.";
-    }
-
-    function mergeDraft(draft) {
-      if (!summaryEdited && typeof draft.summary === "string") {
-        intake.summary = draft.summary;
-      }
-
-      if (Array.isArray(draft.needs) && draft.needs.length) {
-        intake.needs = [...new Set([...intake.needs, ...draft.needs])];
-      }
-
-      [
-        "housingStatus",
-        "deadline",
-        "location",
-        "zip",
-        "transport",
-        "contactMethod",
-        "contactValue"
-      ].forEach(key => {
-        if (
-          typeof draft[key] === "string" &&
-          draft[key] &&
-          !skipped.has(key)
-        ) {
-          intake[key] = draft[key];
-        }
-      });
-    }
-
-    async function processConversation() {
-      if (busy) return;
-
-      if (!$("#ai-consent").checked) {
-        $("#chat-status").textContent =
-          "Please select the AI consent checkbox before sending.";
-        return;
-      }
-
-      busy = true;
-      $("#send-answer").disabled = true;
-      $("#retry-extraction").hidden = true;
-      $("#chat-status").textContent = "Understanding your answer...";
-
-      try {
-        const result = await api("/api/intake", {
-          messages
-        });
-
-        mergeDraft(result.draft);
-        $("#chat-status").textContent = "";
-        askNextQuestion();
-      } catch {
-        $("#chat-status").textContent =
-          "We couldn’t process that answer. You can try again or continue " +
-          "and fill in the information yourself.";
-
-        $("#retry-extraction").hidden = false;
-      } finally {
-        busy = false;
-        $("#send-answer").disabled = false;
-      }
     }
 
     async function sendAnswer() {
@@ -1554,34 +1416,212 @@
         return;
       }
 
+      if (conversationMode === "contact") {
+        $("#chat-input").value = "";
+        addMessage("user", text);
+        processDemoContact(text);
+        return;
+      }
+
       if (!$("#ai-consent").checked) {
         $("#chat-status").textContent =
           "Please select the AI consent checkbox before sending.";
         return;
       }
 
-      if (/^(skip|prefer not to say|pass)$/i.test(text)) {
-        $("#chat-input").value = "";
-        skipCurrentQuestion();
+      stopVoice();
+
+      const userMessage = {
+        role: "user",
+        content: text
+      };
+
+      messages.push(userMessage);
+      $("#chat-input").value = "";
+      renderConversation();
+
+      $("#chat-status").textContent =
+        "The assistant is responding...";
+
+      setBusy(true);
+
+      try {
+        const result = await api("/api/chat", { messages });
+
+        addMessage("assistant", result.reply);
+        $("#chat-status").textContent = "";
+      } catch (error) {
+        const last = messages[messages.length - 1];
+
+        if (
+          last &&
+          last.role === "user" &&
+          last.content === text
+        ) {
+          messages.pop();
+          $("#chat-input").value = text;
+          renderConversation();
+        }
+
+        $("#chat-status").textContent =
+          error.message ||
+          "The assistant could not respond. Please try again.";
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    async function prepareReview() {
+      if (busy) return;
+
+      if (!$("#ai-consent").checked) {
+        $("#chat-status").textContent =
+          "Please select the AI consent checkbox before preparing a draft.";
         return;
       }
 
-      stopVoice();
-      addMessage("user", text);
-      $("#chat-input").value = "";
+      const hasUserMessage = messages.some(
+        message => message.role === "user"
+      );
 
-      await processConversation();
-    }
-
-    function skipCurrentQuestion() {
-      if (busy) return;
-
-      if (currentQuestion) {
-        skipped.add(currentQuestion);
+      if (!hasUserMessage) {
+        $("#chat-status").textContent =
+          "Share something first, or use the Alex test case.";
+        return;
       }
 
-      addMessage("user", "I’d like to skip this question.");
-      askNextQuestion();
+      $("#chat-status").textContent =
+        "Preparing your summary and suggested answers...";
+
+      setBusy(true);
+
+      try {
+        const result = await api("/api/intake", { messages });
+
+        intake = {
+          ...emptyIntake(),
+          ...result.draft
+        };
+
+        populateReview();
+
+        $("#review-status").textContent =
+          "This draft was generated by AI from the conversation. " +
+          "Please review and correct it.";
+
+        $("#chat-status").textContent = "";
+        showStep(1);
+      } catch (error) {
+        $("#chat-status").textContent =
+          error.message ||
+          "The AI draft could not be prepared. Please try again.";
+      } finally {
+        setBusy(false);
+      }
+    }
+
+    /*
+      Missing fictional contact details are handled directly by the
+      assistant screen. These values are not sent to Azure.
+    */
+    function askForDemoContact() {
+      conversationMode = "contact";
+
+      addMessage(
+        "assistant",
+        "The sample application needs a fictional way to contact you. " +
+        "For this demo, would you prefer email or phone?"
+      );
+
+      $("#chat-status").textContent =
+        "Use fictional information only. You can type “skip” to return " +
+        "to the form without completing this field.";
+
+      showStep(0);
+    }
+
+    function processDemoContact(text) {
+      if (/^(skip|prefer not to say|pass)$/i.test(text.trim())) {
+        conversationMode = "discussion";
+
+        addMessage(
+          "assistant",
+          "That’s fine. I’ll leave the contact information blank. " +
+          "The sample form will need it before the simulated submission."
+        );
+
+        prepareApplication(currentApplicationRole, false);
+        return;
+      }
+
+      const value = text.trim();
+
+      if (!intake.contactMethod) {
+        if (/\bemail\b/i.test(value)) {
+          intake.contactMethod = "email";
+        } else if (/\b(phone|call|telephone)\b/i.test(value)) {
+          intake.contactMethod = "phone";
+        }
+
+        if (!intake.contactMethod) {
+          addMessage(
+            "assistant",
+            "Would you prefer email or phone for the fictional demo?"
+          );
+          return;
+        }
+
+        addMessage(
+          "assistant",
+          intake.contactMethod === "email"
+            ? "What fictional test email should the form use? " +
+              "Please use an address ending in .invalid."
+            : "What fictional test phone number should the form use? " +
+              "Please use a number containing 555."
+        );
+
+        return;
+      }
+
+      if (intake.contactMethod === "email") {
+        const match = value.match(
+          /[^\s@]+@[^\s@]+\.invalid\b/i
+        );
+
+        if (!match) {
+          addMessage(
+            "assistant",
+            "For the test, please use a fictional email ending in " +
+            ".invalid, such as alex@example.invalid."
+          );
+          return;
+        }
+
+        intake.contactValue = match[0];
+      } else {
+        const digits = value.replace(/\D/g, "");
+
+        if (!digits.includes("555") || digits.length < 7) {
+          addMessage(
+            "assistant",
+            "For the test, please use a fictional phone number " +
+            "containing 555."
+          );
+          return;
+        }
+
+        intake.contactValue = value;
+      }
+
+      conversationMode = "discussion";
+
+      addMessage(
+        "assistant",
+        "Thank you. I’ll add that fictional contact information to the " +
+        "sample form for your review."
+      );
+
+      prepareApplication(currentApplicationRole, false);
     }
 
     /* Voice */
@@ -1629,7 +1669,7 @@
             ($("#chat-input").value.trim() + " " + text).trim();
 
           $("#chat-status").textContent =
-            "Voice input added. Review and edit it before sending.";
+            "Voice input added. Review it before sending.";
         }
       };
 
@@ -1639,9 +1679,7 @@
       };
 
       instance.onend = () => {
-        if (recognition === instance) {
-          recognition = null;
-        }
+        if (recognition === instance) recognition = null;
       };
 
       try {
@@ -1669,7 +1707,7 @@
       }
     }
 
-    function readQuestion() {
+    function readLastResponse() {
       if (!("speechSynthesis" in window)) {
         $("#chat-status").textContent =
           "Read-aloud is not available in this browser.";
@@ -1692,10 +1730,12 @@
 
     function populateReview() {
       $("#review-summary").value = intake.summary;
+      $("#review-name").value = intake.name;
       $("#review-housing").value = intake.housingStatus;
       $("#review-deadline").value = intake.deadline;
       $("#review-location").value = intake.location;
       $("#review-zip").value = intake.zip;
+      $("#review-amount").value = intake.amount;
       $("#review-transport").value = intake.transport;
 
       $$('input[name="need"]').forEach(input => {
@@ -1705,15 +1745,14 @@
 
     function saveReviewToIntake() {
       intake.summary = $("#review-summary").value.trim();
-      summaryEdited = true;
-
+      intake.name = $("#review-name").value.trim();
       intake.needs = $$('input[name="need"]:checked')
         .map(input => input.value);
-
       intake.housingStatus = $("#review-housing").value;
       intake.deadline = $("#review-deadline").value;
       intake.location = $("#review-location").value.trim();
       intake.zip = $("#review-zip").value.trim();
+      intake.amount = $("#review-amount").value;
       intake.transport = $("#review-transport").value;
 
       mainId = null;
@@ -1722,31 +1761,8 @@
 
     /* Recommendations */
 
-    function distanceMiles(lat1, lon1, lat2, lon2) {
-      const radius = 3958.8;
-      const radians = degrees => degrees * Math.PI / 180;
-
-      const dLat = radians(lat2 - lat1);
-      const dLon = radians(lon2 - lon1);
-
-      const a =
-        Math.sin(dLat / 2) ** 2 +
-        Math.cos(radians(lat1)) *
-          Math.cos(radians(lat2)) *
-          Math.sin(dLon / 2) ** 2;
-
-      return radius * 2 *
-        Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-
-    function activeOrganizations() {
-      return demoMode
-        ? ALEX_ORGANIZATIONS
-        : REGIONAL_ORGANIZATIONS;
-    }
-
     function getOrganization(id) {
-      return activeOrganizations().find(org => org.id === id) || null;
+      return organizations.find(org => org.id === id) || null;
     }
 
     function updateSelectedLabels() {
@@ -1760,12 +1776,9 @@
         "Backup option: " + (backup ? backup.name : "Not selected");
     }
 
-    function findOptions() {
+    function renderRecommendations() {
       const container = $("#recommendations");
       container.replaceChildren();
-
-      const radius = Number($("#radius").value);
-      const area = ZIP_AREAS[intake.zip];
 
       if (!intake.needs.length) {
         $("#options-status").textContent =
@@ -1773,22 +1786,11 @@
         return;
       }
 
-      if (!demoMode && !area) {
-        $("#options-status").textContent =
-          "This prototype needs one of its supported ZIP codes for the " +
-          "regional search. You can go back and change it.";
-        return;
-      }
-
-      const matches = activeOrganizations()
+      const matches = organizations
         .map(org => {
           const matching = org.categories.filter(
             category => intake.needs.includes(category)
           );
-
-          const distance = demoMode
-            ? null
-            : distanceMiles(area.lat, area.lon, org.lat, org.lon);
 
           let accessFit = 0;
 
@@ -1810,24 +1812,19 @@
           return {
             ...org,
             matching,
-            distance,
             accessFit
           };
         })
-        .filter(org =>
-          org.matching.length > 0 &&
-          (demoMode || org.distance <= radius)
-        )
+        .filter(org => org.matching.length > 0)
         .sort((a, b) =>
           b.matching.length - a.matching.length ||
           b.accessFit - a.accessFit ||
-          (a.distance ?? 0) - (b.distance ?? 0)
-        )
-        .slice(0, 10);
+          a.name.localeCompare(b.name)
+        );
 
       if (!matches.length) {
         $("#options-status").textContent =
-          "No sample options matched this search.";
+          "No fictional sample options matched the selected needs.";
         return;
       }
 
@@ -1846,14 +1843,14 @@
           b.additional - a.additional ||
           b.matching.length - a.matching.length ||
           b.accessFit - a.accessFit ||
-          (a.distance ?? 0) - (b.distance ?? 0)
+          a.name.localeCompare(b.name)
         );
 
       const suggestedBackup = backups[0] || null;
 
       $("#options-status").textContent =
-        "Suggestions are based on listed support categories, " +
-        "listed access, and—outside the Alex case—approximate distance.";
+        "Suggestions are based on the fictional services and access " +
+        "information in this demo.";
 
       const panel = document.createElement("div");
       panel.className = "panel";
@@ -1873,26 +1870,14 @@
         addLine(
           section,
           "Why it appears",
-          "The source lists " +
+          "The demo lists " +
             org.matching.map(value => NEED_LABELS[value]).join(", ") +
             "."
         );
 
-        addLine(
-          section,
-          "Access",
-          org.access.join(", ") + " — confirm before relying on it"
-        );
+        addLine(section, "Demo access", org.access.join(", "));
+        addLine(section, "Things to consider", org.note);
 
-        if (org.distance !== null) {
-          addLine(
-            section,
-            "Approximate distance",
-            org.distance.toFixed(1) + " straight-line miles"
-          );
-        }
-
-        addLine(section, "Things to confirm", org.note);
         panel.appendChild(section);
       }
 
@@ -1929,40 +1914,9 @@
         title.textContent = org.name;
         article.appendChild(title);
 
-        addLine(article, "Listed address", org.address);
-        addLine(article, "Listed phone", org.phone);
-        addLine(article, "Access", org.access.join(", "));
-        addLine(article, "Things to confirm", org.note);
-
-        if (org.distance !== null) {
-          addLine(
-            article,
-            "Approximate distance",
-            org.distance.toFixed(1) + " straight-line miles"
-          );
-
-          const link = document.createElement("a");
-          const destination = encodeURIComponent(org.address);
-          const origin = encodeURIComponent(intake.zip);
-
-          link.href =
-            "https://www.google.com/maps/dir/?api=1&origin=" +
-            origin +
-            "&destination=" +
-            destination;
-
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = "Open directions in Google Maps";
-
-          const disclosure = document.createElement("p");
-          disclosure.className = "small";
-          disclosure.textContent =
-            "Opening directions shares the ZIP and listed destination " +
-            "with Google Maps.";
-
-          article.append(link, disclosure);
-        }
+        addLine(article, "Demo location", org.address);
+        addLine(article, "Demo access", org.access.join(", "));
+        addLine(article, "Things to consider", org.note);
 
         const actions = document.createElement("div");
         actions.className = "actions";
@@ -1975,7 +1929,10 @@
         mainButton.addEventListener("click", () => {
           mainId = org.id;
 
-          if (backupId === org.id) backupId = null;
+          if (backupId === org.id) {
+            backupId = null;
+          }
+
           updateSelectedLabels();
         });
 
@@ -2005,23 +1962,65 @@
 
     /* Sample application */
 
-    function preferredApplicationType(org) {
-      return intake.needs.find(need => org.categories.includes(need)) || "";
-    }
+    function validDemoContact(method, value) {
+      const trimmed = value.trim();
 
-    function validDemoContact() {
-      if (intake.contactMethod === "email") {
-        return /^[^\s@]+@[^\s@]+\.invalid$/i.test(intake.contactValue);
+      if (method === "email") {
+        return /^[^\s@]+@[^\s@]+\.invalid$/i.test(trimmed);
       }
 
-      if (intake.contactMethod === "phone") {
-        return intake.contactValue.replace(/\D/g, "").includes("555");
+      if (method === "phone") {
+        const digits = trimmed.replace(/\D/g, "");
+        return digits.length >= 7 && digits.includes("555");
       }
 
       return false;
     }
 
-    function prepareApplication(role) {
+    function populateApplication() {
+      const org = getOrganization(currentApplicationId);
+
+      if (!org) return;
+
+      const destination = $("#application-destination");
+      destination.replaceChildren();
+
+      addLine(destination, "Organization", org.name);
+      addLine(
+        destination,
+        "Simulated recipient",
+        org.id + "@example.invalid"
+      );
+      addLine(destination, "Demo location", org.address);
+      addLine(destination, "Demo access", org.access.join(", "));
+      addLine(destination, "Things to consider", org.note);
+
+      $("#form-name").value = intake.name;
+      $("#form-location").value = intake.location;
+      $("#form-zip").value = intake.zip;
+      $("#form-contact-method").value = intake.contactMethod;
+      $("#form-contact-value").value = intake.contactValue;
+      $("#form-housing").value = intake.housingStatus;
+      $("#form-deadline").value = intake.deadline;
+      $("#form-amount").value = intake.amount;
+      $("#form-transport").value = intake.transport;
+      $("#form-summary").value = intake.summary;
+      $("#include-summary").checked = false;
+
+      $$('input[name="form-need"]').forEach(input => {
+        input.checked = intake.needs.includes(input.value);
+      });
+
+      updateEmail();
+      invalidateApproval();
+
+      $("#application-status").textContent =
+        validDemoContact(intake.contactMethod, intake.contactValue)
+          ? "Review the prefilled sample form."
+          : "The sample form needs fictional contact information.";
+    }
+
+    function prepareApplication(role, askMissing = true) {
       currentApplicationRole = role;
       currentApplicationId = role === "backup" ? backupId : mainId;
 
@@ -2034,160 +2033,173 @@
         return;
       }
 
-      const details = $("#application-details");
-      details.replaceChildren();
+      if (
+        askMissing &&
+        !validDemoContact(intake.contactMethod, intake.contactValue)
+      ) {
+        intake.contactMethod = "";
+        intake.contactValue = "";
+        askForDemoContact();
+        return;
+      }
 
-      addLine(details, "Organization", org.name);
-      addLine(
-        details,
-        "Simulated recipient",
-        org.id + "@example.invalid"
-      );
-      addLine(
-        details,
-        "Contact method",
-        intake.contactMethod || "Not provided"
-      );
-      addLine(
-        details,
-        "Fictional contact",
-        intake.contactValue || "Not provided"
-      );
-      addLine(details, "Listed address", org.address);
-      addLine(details, "Listed phone", org.phone);
-      addLine(details, "Access", org.access.join(", "));
-
-      $("#application-type").value = preferredApplicationType(org);
-      $("#include-summary").checked = false;
-      $("#application-message").value = "";
-      $("#application-status").textContent =
-        validDemoContact()
-          ? "Review the form and choose what to include."
-          : "The sample form needs a fictional contact method and contact value.";
-
-      updateApplicationMessage();
+      populateApplication();
       showStep(3);
     }
 
-    function updateApplicationMessage() {
-      const type = $("#application-type").value;
-      const org = getOrganization(currentApplicationId);
-
-      const opening = org && type
-        ? `Hello,\n\nI would like to ask about ${NEED_LABELS[type].toLowerCase()} support.`
-        : "Hello,\n\nI would like to ask about available support.";
-
-      const summary = $("#include-summary").checked && intake.summary
-        ? "\n\n" + intake.summary
-        : "";
-
-      $("#application-message").value =
-        opening + summary +
-        "\n\nPlease let me know the next steps for this demonstration request.";
-
-      renderApplicationPreview();
+    function selectedFormNeeds() {
+      return $$('input[name="form-need"]:checked')
+        .map(input => input.value);
     }
 
-    function renderApplicationPreview() {
+    function updateEmail() {
+      const needs = selectedFormNeeds();
+
+      const opening = needs.length
+        ? "Hello,\n\nI would like to ask about support with " +
+          needs.map(value => NEED_LABELS[value].toLowerCase()).join(", ") +
+          "."
+        : "Hello,\n\nI would like to ask about available support.";
+
+      const summary =
+        $("#include-summary").checked &&
+        $("#form-summary").value.trim()
+          ? "\n\n" + $("#form-summary").value.trim()
+          : "";
+
+      $("#form-message").value =
+        opening +
+        summary +
+        "\n\nPlease let me know the next steps for this demonstration request.";
+
+      invalidateApproval();
+    }
+
+    function currentApplication() {
+      return {
+        organizationId: currentApplicationId,
+        role: currentApplicationRole,
+        name: $("#form-name").value.trim(),
+        location: $("#form-location").value.trim(),
+        zip: $("#form-zip").value.trim(),
+        contactMethod: $("#form-contact-method").value,
+        contactValue: $("#form-contact-value").value.trim(),
+        needs: selectedFormNeeds(),
+        housingStatus: $("#form-housing").value,
+        deadline: $("#form-deadline").value,
+        amount: $("#form-amount").value,
+        transport: $("#form-transport").value,
+        summary: $("#include-summary").checked
+          ? $("#form-summary").value.trim()
+          : "",
+        message: $("#form-message").value.trim()
+      };
+    }
+
+    function validateApplication(form) {
+      if (!getOrganization(form.organizationId)) {
+        return "Choose an organization first.";
+      }
+
+      if (!form.needs.length) {
+        return "Choose at least one type of support.";
+      }
+
+      if (!validDemoContact(form.contactMethod, form.contactValue)) {
+        return "Add fictional contact information: an email ending in " +
+          ".invalid or a phone number containing 555.";
+      }
+
+      if (form.zip && !/^\d{5}$/.test(form.zip)) {
+        return "ZIP code must be five digits or left blank.";
+      }
+
+      if (!form.message) {
+        return "Add a sample email message.";
+      }
+
+      return "";
+    }
+
+    function invalidateApproval() {
+      approvedSnapshot = null;
+      $("#approval-area").hidden = true;
+      $("#submit-status").textContent = "";
+    }
+
+    function reviewApplication() {
+      const form = currentApplication();
+      const error = validateApplication(form);
+
+      if (error) {
+        $("#application-status").textContent = error;
+        return;
+      }
+
+      approvedSnapshot = JSON.stringify(form);
+
+      const org = getOrganization(form.organizationId);
       const container = $("#application-preview");
       container.replaceChildren();
 
-      const org = getOrganization(currentApplicationId);
-
-      addLine(container, "Organization", org?.name);
+      addLine(container, "Organization", org.name);
       addLine(
         container,
         "Simulated recipient",
-        org ? org.id + "@example.invalid" : ""
+        org.id + "@example.invalid"
       );
+      addLine(container, "Name", form.name);
+      addLine(container, "Area", form.location);
+      addLine(container, "ZIP", form.zip);
+      addLine(container, "Contact method", form.contactMethod);
+      addLine(container, "Fictional contact", form.contactValue);
       addLine(
         container,
-        "Support requested",
-        NEED_LABELS[$("#application-type").value]
+        "Support",
+        form.needs.map(value => NEED_LABELS[value]).join(", ")
       );
-      addLine(container, "Contact method", intake.contactMethod);
-      addLine(container, "Fictional contact", intake.contactValue);
-      addLine(
-        container,
-        "Message",
-        $("#application-message").value.trim()
-      );
-    }
+      addLine(container, "Housing", HOUSING_LABELS[form.housingStatus]);
+      addLine(container, "Date", form.deadline);
+      addLine(container, "Amount", form.amount);
+      addLine(container, "Transportation", TRANSPORT_LABELS[form.transport]);
+      addLine(container, "Included summary", form.summary);
+      addLine(container, "Sample email", form.message);
 
-    function askForMissingContact() {
-      phase = "contact";
-
-      if (!validDemoContact()) {
-        if (intake.contactMethod && intake.contactValue) {
-          intake.contactValue = "";
-        }
-
-        skipped.delete("contactMethod");
-        skipped.delete("contactValue");
-      }
-
-      showStep(0);
-      askNextQuestion();
+      $("#application-status").textContent = "";
+      $("#approval-area").hidden = false;
+      $("#approve-simulation").focus();
     }
 
     async function submitSimulation() {
-      const org = getOrganization(currentApplicationId);
-      const applicationType = $("#application-type").value;
-      const message = $("#application-message").value.trim();
+      const form = currentApplication();
 
-      if (!org) {
-        $("#application-status").textContent =
-          "Choose an organization first.";
+      if (!approvedSnapshot) {
+        $("#submit-status").textContent =
+          "Review the application before approving.";
         return;
       }
 
-      if (!applicationType) {
-        $("#application-status").textContent =
-          "Choose the type of help requested.";
+      if (JSON.stringify(form) !== approvedSnapshot) {
+        $("#submit-status").textContent =
+          "The form changed. Please review it again.";
         return;
       }
-
-      if (!validDemoContact()) {
-        $("#application-status").textContent =
-          "The sample form needs fictional contact information. " +
-          "Choose Ask the assistant for missing answers.";
-        return;
-      }
-
-      if (!message) {
-        $("#application-status").textContent =
-          "Please add a sample message.";
-        return;
-      }
-
-      const approved = window.confirm(
-        "This will record a simulated submission only. " +
-        "No real email or application will be sent. Continue?"
-      );
-
-      if (!approved) return;
 
       $("#approve-simulation").disabled = true;
-      $("#application-status").textContent =
+      $("#submit-status").textContent =
         "Recording the simulated submission...";
 
       try {
-        const result = await api("/api/demo/submit", {
-          organizationId: org.id,
-          role: currentApplicationRole,
-          applicationType,
-          contactMethod: intake.contactMethod,
-          contactValue: intake.contactValue,
-          message
-        });
+        const result = await api("/api/demo/submit", form);
 
         submissionId = result.id;
         renderTracking(result);
         showStep(4);
         startPolling();
       } catch (error) {
-        $("#application-status").textContent =
-          error.message || "The simulated submission could not be recorded.";
+        $("#submit-status").textContent =
+          error.message ||
+          "The simulated submission could not be recorded.";
       } finally {
         $("#approve-simulation").disabled = false;
       }
@@ -2257,30 +2269,29 @@
 
       intake = emptyIntake();
       messages = [];
-      skipped = new Set();
-      currentQuestion = "story";
-      phase = "intake";
-      demoMode = false;
-      summaryEdited = false;
+      conversationMode = "discussion";
       mainId = null;
       backupId = null;
-      currentApplicationRole = "main";
       currentApplicationId = null;
+      currentApplicationRole = "main";
+      approvedSnapshot = null;
       submissionId = null;
+      testCaseLoaded = false;
 
       $("#ai-consent").checked = false;
       $("#voice-consent").checked = false;
       $("#chat-input").value = "";
       $("#chat-status").textContent = "";
-      $("#question-status").textContent = "";
       $("#review-status").textContent = "";
       $("#options-status").textContent = "";
       $("#application-status").textContent = "";
-      $("#save-status").textContent = "";
-      $("#retry-extraction").hidden = true;
+      $("#submit-status").textContent = "";
+      $("#approval-area").hidden = true;
+      $("#prepare-backup").hidden = true;
       $("#recommendations").replaceChildren();
       $("#tracking-panel").replaceChildren();
-      $("#prepare-backup").hidden = true;
+
+      updateSelectedLabels();
     }
 
     /* Events */
@@ -2289,41 +2300,22 @@
     $("#load-alex").addEventListener("click", loadAlexCase);
 
     $("#send-answer").addEventListener("click", sendAnswer);
-    $("#skip-question").addEventListener("click", skipCurrentQuestion);
-    $("#retry-extraction").addEventListener("click", processConversation);
-
-    $("#continue-intake").addEventListener("click", () => {
-      if (phase === "contact") {
-        prepareApplication(currentApplicationRole);
-      } else {
-        populateReview();
-        showStep(1);
-      }
-    });
+    $("#ready-to-review").addEventListener("click", prepareReview);
 
     $("#speak-answer").addEventListener("click", startVoice);
     $("#stop-voice").addEventListener("click", stopVoice);
-    $("#read-question").addEventListener("click", readQuestion);
+    $("#read-question").addEventListener("click", readLastResponse);
 
     $("#back-to-chat").addEventListener("click", () => {
-      phase = "intake";
+      conversationMode = "discussion";
       showStep(0);
     });
 
     $("#review-to-options").addEventListener("click", () => {
       saveReviewToIntake();
-
-      $("#search-description").textContent = demoMode
-        ? "Alex test case: fictional Riverbend organizations."
-        : "ZIP for search: " + (intake.zip || "Not provided");
-
-      $("#recommendations").replaceChildren();
-      $("#options-status").textContent = "";
-      updateSelectedLabels();
+      renderRecommendations();
       showStep(2);
     });
-
-    $("#find-options").addEventListener("click", findOptions);
 
     $("#options-back").addEventListener("click", () => {
       populateReview();
@@ -2337,42 +2329,47 @@
         return;
       }
 
-      currentApplicationRole = "main";
-
-      if (!validDemoContact()) {
-        askForMissingContact();
-      } else {
-        prepareApplication("main");
-      }
+      prepareApplication("main", true);
     });
-
-    $("#ask-missing").addEventListener(
-      "click",
-      askForMissingContact
-    );
-
-    $("#refresh-message").addEventListener(
-      "click",
-      updateApplicationMessage
-    );
-
-    $("#include-summary").addEventListener(
-      "change",
-      updateApplicationMessage
-    );
-
-    $("#application-type").addEventListener(
-      "change",
-      updateApplicationMessage
-    );
-
-    $("#application-message").addEventListener(
-      "input",
-      renderApplicationPreview
-    );
 
     $("#application-back").addEventListener("click", () => {
       showStep(2);
+    });
+
+    $("#refresh-message").addEventListener("click", updateEmail);
+    $("#include-summary").addEventListener("change", updateEmail);
+
+    $$('input[name="form-need"]').forEach(input => {
+      input.addEventListener("change", updateEmail);
+    });
+
+    [
+      "form-name",
+      "form-location",
+      "form-zip",
+      "form-contact-method",
+      "form-contact-value",
+      "form-housing",
+      "form-deadline",
+      "form-amount",
+      "form-transport",
+      "form-summary",
+      "form-message"
+    ].forEach(id => {
+      const element = document.getElementById(id);
+
+      element.addEventListener("input", invalidateApproval);
+      element.addEventListener("change", invalidateApproval);
+    });
+
+    $("#review-application").addEventListener(
+      "click",
+      reviewApplication
+    );
+
+    $("#edit-application").addEventListener("click", () => {
+      invalidateApproval();
+      $("#form-message").focus();
     });
 
     $("#approve-simulation").addEventListener(
@@ -2381,85 +2378,21 @@
     );
 
     $("#prepare-backup").addEventListener("click", () => {
-      currentApplicationRole = "backup";
-      prepareApplication("backup");
+      /*
+        A new recipient requires a new review and approval.
+      */
+      prepareApplication("backup", true);
     });
 
     $("#print-plan").addEventListener("click", () => {
       window.print();
     });
 
-    $("#save-progress").addEventListener("click", () => {
-      const progress = {
-        intake,
-        messages,
-        skipped: [...skipped],
-        demoMode,
-        summaryEdited,
-        mainId,
-        backupId
-      };
-
-      try {
-        localStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify(progress)
-        );
-
-        $("#save-status").textContent =
-          "Saved in this browser on this device.";
-      } catch {
-        $("#save-status").textContent =
-          "Progress could not be saved in this browser.";
-      }
-    });
-
-    $("#restore-progress").addEventListener("click", () => {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-
-        if (!saved) {
-          $("#entry-status").textContent =
-            "No saved progress was found in this browser.";
-          return;
-        }
-
-        const progress = JSON.parse(saved);
-
-        resetSession();
-
-        intake = {
-          ...emptyIntake(),
-          ...(progress.intake || {})
-        };
-
-        messages = Array.isArray(progress.messages)
-          ? progress.messages
-          : [];
-
-        skipped = new Set(
-          Array.isArray(progress.skipped)
-            ? progress.skipped
-            : []
-        );
-
-        demoMode = Boolean(progress.demoMode);
-        summaryEdited = Boolean(progress.summaryEdited);
-        mainId = progress.mainId || null;
-        backupId = progress.backupId || null;
-
-        renderConversation();
-        openApplication();
-        populateReview();
-
-        $("#review-status").textContent =
-          "Saved progress restored. Simulated submission status was not restored.";
-
-        showStep(1);
-      } catch {
-        $("#entry-status").textContent =
-          "Saved progress could not be opened.";
-      }
+    $("#start-over").addEventListener("click", () => {
+      resetSession();
+      $("#application").hidden = true;
+      $("#entry-screen").hidden = false;
+      window.scrollTo(0, 0);
     });
   </script>
 </body>
