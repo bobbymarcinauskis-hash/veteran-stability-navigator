@@ -1,6 +1,6 @@
 import http from "node:http";
 import { readFile } from "node:fs/promises";
-import { randomUUID } from "node:crypto";
+import { randomUUID, createHash } from "node:crypto";
 
 const HOST = "127.0.0.1";
 const PORT = 3000;
@@ -31,10 +31,7 @@ const ALLOWED_NEEDS = new Set([
   "medical"
 ]);
 
-/*
-  Simulated submissions live only in memory.
-  Restarting the server clears them.
-*/
+// Simulated submissions are kept only in memory.
 const demoSubmissions = new Map();
 
 const CHAT_INSTRUCTIONS = `
@@ -52,13 +49,12 @@ Conversation approach:
 - Listen to the user's priorities and reflect back important details.
 - Give the person room to explain their situation.
 - Ask thoughtful practical questions based on what the person actually says.
-- After listening to the person's initial situation, naturally ask about
-  practical needs early in the conversation when they are relevant.
-- Prioritize what needs attention first, whether there is an important date,
-  the area or ZIP where help is wanted, and transportation or access.
+- After listening to the initial situation, naturally ask about practical
+  needs early when relevant.
+- Prioritize what needs attention first, an important date, the area or ZIP
+  where help is wanted, and transportation or access.
 - Ask one question at a time. Do not make the conversation feel like a form.
-- Do not ask for information already provided or press for an answer that
-  the person skips.
+- Do not ask for information already provided or press for an answer skipped.
 - The person can move on at any time, even if information is missing.
 - Acknowledge service naturally when appropriate, without making assumptions.
 - Do not ask for traumatic or graphic details, Social Security numbers,
@@ -146,6 +142,224 @@ const INTAKE_SCHEMA = {
     "transport"
   ]
 };
+
+/*
+  Synthetic directory loader.
+
+  The source table's sample ZIPs, street addresses, and website fields
+  are not used for actual routing or contact.
+*/
+
+function normalizePlace(value) {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,']/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function categoriesFromDescription(description) {
+  const text = description.toLowerCase();
+  const categories = [];
+
+  if (
+    /rent|financial|hardship|utility|eviction|voucher|grant/.test(text)
+  ) {
+    categories.push("rent");
+  }
+
+  if (/food|grocery|pantry/.test(text)) {
+    categories.push("food");
+  }
+
+  if (/housing|rehousing|lodging|shelter|moving/.test(text)) {
+    categories.push("housing");
+  }
+
+  if (/job|employment|career|training/.test(text)) {
+    categories.push("work");
+  }
+
+  if (/medical|healthcare|health care/.test(text)) {
+    categories.push("medical");
+  }
+
+  return [...new Set(categories)];
+}
+
+async function loadDemoDirectory() {
+  let text;
+
+  try {
+    text = await readFile(
+      new URL("./resources.tsv", import.meta.url),
+      "utf8"
+    );
+  } catch {
+    console.log(
+      "resources.tsv was not found. ZIP-based demo data is unavailable."
+    );
+
+    return [];
+  }
+
+  if (Buffer.byteLength(text, "utf8") > 5_000_000) {
+    console.error(
+      "resources.tsv is too large. The demo limit is 5 MB."
+    );
+
+    return [];
+  }
+
+  const records = [];
+  const seenIds = new Set();
+
+  for (const rawLine of text.split(/\r?\n/)) {
+    const line = rawLine.replace(/^\uFEFF/, "");
+
+    if (!line.trim()) {
+      continue;
+    }
+
+    const columns = line
+      .split("\t")
+      .map(value => value.trim());
+
+    /*
+      Expected columns:
+      state, metro, name, type, assistance,
+      street address, city, sample ZIP, website
+    */
+    if (columns.length < 9) {
+      continue;
+    }
+
+    const [
+      state,
+      metro,
+      name,
+      type,
+      assistance,
+      sampleStreet,
+      city,
+      sampleZip,
+      sampleWebsite
+    ] = columns;
+
+    if (state.toLowerCase() === "state") {
+      continue;
+    }
+
+    if (
+      !/^[A-Z]{2}$/.test(state) ||
+      !metro ||
+      !name ||
+      !city
+    ) {
+      continue;
+    }
+
+    const categories = categoriesFromDescription(assistance);
+
+    if (!categories.length) {
+      continue;
+    }
+
+    const digest = createHash("sha256")
+      .update(
+        [
+          state,
+          metro,
+          name,
+          type,
+          assistance,
+          city,
+          sampleZip
+        ].join("\0")
+      )
+      .digest("hex")
+      .slice(0, 20);
+
+    const id = "demo_import_" + digest;
+
+    if (seenIds.has(id)) {
+      continue;
+    }
+
+    seenIds.add(id);
+
+    records.push({
+      id,
+      state,
+      metro,
+      city,
+
+      name: "Demo: " + name,
+
+      categories,
+
+      // The sample table does not establish transit or phone access.
+      access: [],
+
+      // Do not expose the synthetic street address as a real destination.
+      address:
+        `Demo record associated with ${city}, ${state}; ` +
+        `no verified street address`,
+
+      note:
+        "Synthetic sample entry. The source table describes: " +
+        assistance +
+        " Do not contact or travel to this entry as a real service."
+    });
+  }
+
+  console.log(
+    `Loaded ${records.length} synthetic demo resource records.`
+  );
+
+  return records;
+}
+
+function recordMatchesPlace(record, place) {
+  if (
+    record.state !==
+    String(place["state abbreviation"] || "").toUpperCase()
+  ) {
+    return false;
+  }
+
+  const placeName = normalizePlace(place["place name"]);
+  const recordCity = normalizePlace(record.city);
+
+  if (!placeName) {
+    return false;
+  }
+
+  if (recordCity === placeName) {
+    return true;
+  }
+
+  /*
+    Basic matching against named metro components, for example:
+    "Birmingham-Hoover" can match Birmingham or Hoover.
+
+    This is not a complete ZIP-to-metro crosswalk.
+  */
+  const metroParts = record.metro
+    .split(/[-/]+/)
+    .map(normalizePlace)
+    .filter(Boolean);
+
+  return metroParts.includes(placeName);
+}
+
+const importedDemoOrganizations = await loadDemoDirectory();
+
+for (const organization of importedDemoOrganizations) {
+  ALLOWED_ORGANIZATIONS.add(organization.id);
+}
 
 function sendJson(res, statusCode, body) {
   res.writeHead(statusCode, {
@@ -699,6 +913,7 @@ const server = http.createServer(async (req, res) => {
     const postRoutes = new Set([
       "/api/chat",
       "/api/intake",
+      "/api/demo/lookup",
       "/api/demo/submit",
       "/api/demo/status"
     ]);
@@ -730,6 +945,120 @@ const server = http.createServer(async (req, res) => {
       }
 
       const body = await readJsonBody(req);
+
+      if (url.pathname === "/api/demo/lookup") {
+        const zip =
+          typeof body?.zip === "string"
+            ? body.zip.trim()
+            : "";
+
+        if (!/^\d{5}$/.test(zip)) {
+          sendJson(res, 400, {
+            error: "Please enter a five-digit ZIP code."
+          });
+
+          return;
+        }
+
+        if (!importedDemoOrganizations.length) {
+          sendJson(res, 503, {
+            error:
+              "No demo directory was loaded. Check resources.tsv " +
+              "and restart the server."
+          });
+
+          return;
+        }
+
+        let lookupResponse;
+
+        try {
+          /*
+            Only the ZIP is sent to the ZIP lookup provider.
+            The conversation and application are not included.
+          */
+          lookupResponse = await fetch(
+            `https://api.zippopotam.us/us/${zip}`,
+            {
+              signal: AbortSignal.timeout(8000)
+            }
+          );
+        } catch {
+          sendJson(res, 503, {
+            error:
+              "ZIP lookup is unavailable. Please try again later."
+          });
+
+          return;
+        }
+
+        if (lookupResponse.status === 404) {
+          sendJson(res, 404, {
+            error: "That ZIP code was not found by the lookup service."
+          });
+
+          return;
+        }
+
+        if (!lookupResponse.ok) {
+          sendJson(res, 503, {
+            error:
+              "The ZIP lookup service could not complete the request."
+          });
+
+          return;
+        }
+
+        let lookupData;
+
+        try {
+          lookupData = await lookupResponse.json();
+        } catch {
+          sendJson(res, 502, {
+            error:
+              "The ZIP lookup service returned an invalid response."
+          });
+
+          return;
+        }
+
+        const places = Array.isArray(lookupData.places)
+          ? lookupData.places.filter(place =>
+              place &&
+              typeof place["place name"] === "string" &&
+              typeof place["state abbreviation"] === "string"
+            )
+          : [];
+
+        if (!places.length) {
+          sendJson(res, 404, {
+            error: "No city and state were returned for that ZIP."
+          });
+
+          return;
+        }
+
+        const matches = importedDemoOrganizations.filter(record =>
+          places.some(place => recordMatchesPlace(record, place))
+        );
+
+        sendJson(res, 200, {
+          zip,
+
+          places: places.map(place => ({
+            city: place["place name"],
+            state: place["state abbreviation"]
+          })),
+
+          organizations: matches,
+
+          notice:
+            "These are fictional sample records matched by city or metro " +
+            "name. They are not verified services or distance-based results."
+        });
+
+        return;
+      }
 
       if (url.pathname === "/api/chat") {
         let messages;
