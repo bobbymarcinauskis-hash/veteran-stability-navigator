@@ -1066,8 +1066,8 @@
         </h2>
 
         <p>
-          The test system updates this plan automatically. No real
-          organization is contacted.
+          Review the action you approved and the current test status.
+          No real organization is contacted.
         </p>
 
         <div id="tracking-panel" class="panel"></div>
@@ -1208,10 +1208,17 @@
     let currentApplicationId = null;
     let currentApplicationRole = "main";
     let approvedSnapshot = null;
+    let lastApprovedSubmission = null;
     let submissionId = null;
     let pollTimer = null;
     let recognition = null;
     let busy = false;
+
+    // Voice-session controls.
+    let wantsListening = false;
+    let voiceGeneration = 0;
+    let voiceRestartTimer = null;
+    let voiceDeadlineTimer = null;
 
     function addLine(container, label, value) {
       const paragraph = document.createElement("p");
@@ -1504,7 +1511,11 @@
     }
 
     function startVoice() {
-      if (!SpeechRecognition) return;
+      if (!SpeechRecognition) {
+        $("#chat-status").textContent =
+          "Voice input is not available in this browser. You can type instead.";
+        return;
+      }
 
       if (!$("#voice-consent").checked) {
         $("#chat-status").textContent =
@@ -1512,60 +1523,169 @@
         return;
       }
 
-      if (recognition) return;
+      if (wantsListening || recognition) {
+        return;
+      }
 
-      const instance = new SpeechRecognition();
-      recognition = instance;
+      wantsListening = true;
+      voiceGeneration += 1;
 
-      instance.lang = "en-US";
-      instance.interimResults = false;
-      instance.continuous = false;
+      const thisSession = voiceGeneration;
+      let restarts = 0;
+      const maximumRestarts = 3;
 
       $("#chat-status").textContent =
-        "Listening. Review the words before sending.";
+        "Listening. You can pause while speaking. Select Stop listening " +
+        "when finished, then review the words before sending.";
 
-      instance.onresult = event => {
-        const text = Array.from(event.results)
-          .map(result => result[0].transcript)
-          .join(" ")
-          .trim();
-
-        if (text) {
-          $("#chat-input").value =
-            ($("#chat-input").value.trim() + " " + text).trim();
+      voiceDeadlineTimer = setTimeout(() => {
+        if (
+          wantsListening &&
+          voiceGeneration === thisSession
+        ) {
+          stopVoice();
 
           $("#chat-status").textContent =
-            "Voice input added. Review it before sending.";
+            "Listening stopped after three minutes. You can review the text " +
+            "or select Speak my response to continue.";
         }
-      };
+      }, 180000);
 
-      instance.onerror = () => {
-        $("#chat-status").textContent =
-          "Voice input could not be completed. You can type instead.";
-      };
+      function beginRecognition() {
+        if (
+          !wantsListening ||
+          voiceGeneration !== thisSession
+        ) {
+          return;
+        }
 
-      instance.onend = () => {
-        if (recognition === instance) {
+        const instance = new SpeechRecognition();
+        recognition = instance;
+
+        instance.lang = "en-US";
+        instance.interimResults = false;
+        instance.continuous = true;
+
+        instance.onresult = event => {
+          const newParts = [];
+
+          for (
+            let i = event.resultIndex;
+            i < event.results.length;
+            i++
+          ) {
+            if (event.results[i].isFinal) {
+              newParts.push(event.results[i][0].transcript);
+            }
+          }
+
+          const words = newParts.join(" ").trim();
+
+          if (!words) return;
+
+          const current = $("#chat-input").value.trim();
+
+          const combined = current
+            ? current + " " + words
+            : words;
+
+          $("#chat-input").value = combined.slice(0, 4000);
+
+          $("#chat-status").textContent =
+            "Listening. You can pause, or select Stop listening when finished.";
+        };
+
+        instance.onerror = event => {
+          if (event.error === "no-speech") {
+            return;
+          }
+
+          wantsListening = false;
+
+          if (voiceDeadlineTimer) {
+            clearTimeout(voiceDeadlineTimer);
+            voiceDeadlineTimer = null;
+          }
+
+          $("#chat-status").textContent =
+            event.error === "not-allowed"
+              ? "Microphone permission was not granted. You can type instead."
+              : "Voice input stopped. You can start it again or type instead.";
+        };
+
+        instance.onend = () => {
+          if (recognition === instance) {
+            recognition = null;
+          }
+
+          if (
+            !wantsListening ||
+            voiceGeneration !== thisSession
+          ) {
+            return;
+          }
+
+          if (restarts >= maximumRestarts) {
+            wantsListening = false;
+
+            if (voiceDeadlineTimer) {
+              clearTimeout(voiceDeadlineTimer);
+              voiceDeadlineTimer = null;
+            }
+
+            $("#chat-status").textContent =
+              "The browser stopped voice input. Select Speak my response " +
+              "to continue, or type instead.";
+
+            return;
+          }
+
+          restarts += 1;
+
+          voiceRestartTimer = setTimeout(() => {
+            voiceRestartTimer = null;
+            beginRecognition();
+          }, 400);
+        };
+
+        try {
+          instance.start();
+        } catch {
           recognition = null;
+          wantsListening = false;
+
+          if (voiceDeadlineTimer) {
+            clearTimeout(voiceDeadlineTimer);
+            voiceDeadlineTimer = null;
+          }
+
+          $("#chat-status").textContent =
+            "The microphone could not start. You can type instead.";
         }
-      };
-
-      try {
-        instance.start();
-      } catch {
-        recognition = null;
-
-        $("#chat-status").textContent =
-          "The microphone could not start. You can type instead.";
       }
+
+      beginRecognition();
     }
 
     function stopVoice() {
+      wantsListening = false;
+      voiceGeneration += 1;
+
+      if (voiceRestartTimer) {
+        clearTimeout(voiceRestartTimer);
+        voiceRestartTimer = null;
+      }
+
+      if (voiceDeadlineTimer) {
+        clearTimeout(voiceDeadlineTimer);
+        voiceDeadlineTimer = null;
+      }
+
       if (recognition) {
         try {
           recognition.stop();
         } catch {
-          // No further action needed.
+          // The browser may already have stopped recognition.
         }
 
         recognition = null;
@@ -1894,10 +2014,6 @@
           : "Enter fictional contact information directly on this form.";
     }
 
-    /*
-      Contact information is entered directly on the form.
-      There is no conversation loop for email or phone.
-    */
     function prepareApplication(role) {
       currentApplicationRole = role;
       currentApplicationId = role === "backup" ? backupId : mainId;
@@ -2063,28 +2179,38 @@
         return;
       }
 
+      /*
+        Capture the exact reviewed form before the request starts.
+      */
+      const reviewedForm = JSON.parse(approvedSnapshot);
+
       $("#approve-simulation").disabled = true;
 
       $("#submit-status").textContent =
         "Recording the simulated submission...";
 
       try {
-        const result = await api("/api/demo/submit", form);
+        /*
+          Send the exact reviewed snapshot.
+        */
+        const result = await api("/api/demo/submit", reviewedForm);
+
+        lastApprovedSubmission = reviewedForm;
 
         /*
           Reuse manually entered information for the backup form.
           This does not submit anything to the backup.
         */
-        intake.name = form.name;
-        intake.location = form.location;
-        intake.zip = form.zip;
-        intake.contactMethod = form.contactMethod;
-        intake.contactValue = form.contactValue;
-        intake.needs = form.needs;
-        intake.housingStatus = form.housingStatus;
-        intake.deadline = form.deadline;
-        intake.amount = form.amount;
-        intake.transport = form.transport;
+        intake.name = reviewedForm.name;
+        intake.location = reviewedForm.location;
+        intake.zip = reviewedForm.zip;
+        intake.contactMethod = reviewedForm.contactMethod;
+        intake.contactValue = reviewedForm.contactValue;
+        intake.needs = reviewedForm.needs;
+        intake.housingStatus = reviewedForm.housingStatus;
+        intake.deadline = reviewedForm.deadline;
+        intake.amount = reviewedForm.amount;
+        intake.transport = reviewedForm.transport;
         intake.summary = $("#form-summary").value.trim();
 
         submissionId = result.id;
@@ -2106,9 +2232,91 @@
       const container = $("#tracking-panel");
       container.replaceChildren();
 
+      const statusHeading = document.createElement("h3");
+      statusHeading.textContent = "Current status";
+      container.appendChild(statusHeading);
+
       addLine(container, "Demo reference", result.id);
       addLine(container, "Status", result.label);
       addLine(container, "What this means", result.explanation);
+
+      const statusNote = document.createElement("p");
+      statusNote.className = "small";
+      statusNote.textContent =
+        "The test server advances these statuses automatically. " +
+        "They are not real organization events.";
+
+      container.appendChild(statusNote);
+
+      if (lastApprovedSubmission) {
+        const form = lastApprovedSubmission;
+        const org = getOrganization(form.organizationId);
+
+        const actionHeading = document.createElement("h3");
+        actionHeading.textContent = "Review of the action taken";
+        container.appendChild(actionHeading);
+
+        addLine(
+          container,
+          "Action",
+          "You approved a simulated submission."
+        );
+
+        addLine(
+          container,
+          "Organization",
+          org ? org.name : "Selected demo organization"
+        );
+
+        addLine(
+          container,
+          "Simulated recipient",
+          form.organizationId + "@example.invalid"
+        );
+
+        addLine(
+          container,
+          "Support requested",
+          form.needs
+            .map(value => NEED_LABELS[value] || value)
+            .join(", ")
+        );
+
+        addLine(container, "Name", form.name);
+        addLine(container, "Area", form.location);
+        addLine(container, "ZIP", form.zip);
+        addLine(container, "Contact method", form.contactMethod);
+        addLine(container, "Fictional contact", form.contactValue);
+        addLine(container, "Housing", HOUSING_LABELS[form.housingStatus]);
+        addLine(container, "Date", form.deadline);
+        addLine(container, "Amount", form.amount);
+
+        addLine(
+          container,
+          "Transportation",
+          TRANSPORT_LABELS[form.transport]
+        );
+
+        addLine(
+          container,
+          "Summary included",
+          form.summary || "No summary included"
+        );
+
+        addLine(
+          container,
+          "Approved sample email",
+          form.message
+        );
+
+        const reminder = document.createElement("p");
+        reminder.className = "small";
+        reminder.textContent =
+          "No real email or application was sent. The information above " +
+          "is the sample you approved for this test.";
+
+        container.appendChild(reminder);
+      }
 
       const canPrepareBackup =
         result.status === "follow_up_due" &&
@@ -2169,6 +2377,7 @@
       currentApplicationId = null;
       currentApplicationRole = "main";
       approvedSnapshot = null;
+      lastApprovedSubmission = null;
       submissionId = null;
 
       $("#ai-consent").checked = false;
@@ -2196,7 +2405,14 @@
     $("#ready-to-review").addEventListener("click", prepareReview);
 
     $("#speak-answer").addEventListener("click", startVoice);
-    $("#stop-voice").addEventListener("click", stopVoice);
+
+    $("#stop-voice").addEventListener("click", () => {
+      stopVoice();
+
+      $("#chat-status").textContent =
+        "Listening stopped. Review the text before sending.";
+    });
+
     $("#read-question").addEventListener("click", readLastResponse);
 
     $("#back-to-chat").addEventListener("click", () => {
@@ -2270,9 +2486,6 @@
     );
 
     $("#prepare-backup").addEventListener("click", () => {
-      /*
-        A new recipient requires a new review and approval.
-      */
       prepareApplication("backup");
     });
 
