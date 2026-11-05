@@ -31,10 +31,8 @@ const ALLOWED_NEEDS = new Set([
   "medical"
 ]);
 
-/*
-  Simulated submissions live only in server memory.
-  Restarting the server clears them.
-*/
+// Simulated submissions are stored only in server memory.
+// Restarting the server clears them.
 const demoSubmissions = new Map();
 
 const CHAT_INSTRUCTIONS = `
@@ -103,30 +101,68 @@ const INTAKE_SCHEMA = {
   additionalProperties: false,
 
   properties: {
-    name: { type: "string" },
-    summary: { type: "string" },
+    name: {
+      type: "string"
+    },
+
+    summary: {
+      type: "string"
+    },
 
     needs: {
       type: "array",
+
       items: {
         type: "string",
-        enum: ["rent", "food", "housing", "work", "medical"]
+
+        enum: [
+          "rent",
+          "food",
+          "housing",
+          "work",
+          "medical"
+        ]
       }
     },
 
     housingStatus: {
       type: "string",
-      enum: ["", "housed", "at-risk", "seeking", "other"]
+
+      enum: [
+        "",
+        "housed",
+        "at-risk",
+        "seeking",
+        "other"
+      ]
     },
 
-    deadline: { type: "string" },
-    location: { type: "string" },
-    zip: { type: "string" },
-    amount: { type: "string" },
+    deadline: {
+      type: "string"
+    },
+
+    location: {
+      type: "string"
+    },
+
+    zip: {
+      type: "string"
+    },
+
+    amount: {
+      type: "string"
+    },
 
     transport: {
       type: "string",
-      enum: ["", "transit", "car", "phone", "challenge"]
+
+      enum: [
+        "",
+        "transit",
+        "car",
+        "phone",
+        "challenge"
+      ]
     }
   },
 
@@ -142,12 +178,6 @@ const INTAKE_SCHEMA = {
     "transport"
   ]
 };
-
-/*
-  Demo submissions live only in memory.
-  Restarting the server clears them.
-*/
-const demoSubmissions = new Map();
 
 function sendJson(res, statusCode, body) {
   res.writeHead(statusCode, {
@@ -176,9 +206,8 @@ async function readJsonBody(req) {
   }
 
   try {
-    return JSON.parse(
-      Buffer.concat(chunks).toString("utf8")
-    );
+    const text = Buffer.concat(chunks).toString("utf8");
+    return JSON.parse(text);
   } catch {
     const error = new Error("Invalid JSON.");
     error.statusCode = 400;
@@ -187,7 +216,7 @@ async function readJsonBody(req) {
 }
 
 function validateMessages(messages) {
-  if (!Array.isArray(messages) || !messages.length) {
+  if (!Array.isArray(messages) || messages.length === 0) {
     throw new Error("A conversation is required.");
   }
 
@@ -209,7 +238,9 @@ function validateMessages(messages) {
     const content = message.content.trim();
 
     if (!content || content.length > MAX_MESSAGE_CHARS) {
-      throw new Error("A conversation message is empty or too long.");
+      throw new Error(
+        "A conversation message is empty or too long."
+      );
     }
 
     totalChars += content.length;
@@ -235,7 +266,9 @@ function extractOutputText(data) {
   const parts = [];
 
   for (const item of data.output || []) {
-    if (item.type !== "message") continue;
+    if (item.type !== "message") {
+      continue;
+    }
 
     for (const content of item.content || []) {
       if (
@@ -251,10 +284,11 @@ function extractOutputText(data) {
 }
 
 function safeCode(value) {
-  return typeof value === "string" &&
-    /^[a-zA-Z0-9_.-]{1,100}$/.test(value)
-    ? value
-    : "not provided";
+  const valid =
+    typeof value === "string" &&
+    /^[a-zA-Z0-9_.-]{1,100}$/.test(value);
+
+  return valid ? value : "not provided";
 }
 
 async function callAzure(
@@ -264,9 +298,14 @@ async function callAzure(
   structuredFormat = null
 ) {
   if (!API_KEY || !MODEL) {
-    throw new Error(
+    const error = new Error(
       "Azure is not configured. Check the Azure key and deployment name."
     );
+
+    error.publicMessage =
+      "Azure is not configured. Check the Azure key and deployment name.";
+
+    throw error;
   }
 
   const response = await fetch(AZURE_ENDPOINT, {
@@ -283,11 +322,15 @@ async function callAzure(
       input: messages,
       max_output_tokens: maxOutputTokens,
 
-      // This does not guarantee zero provider-side retention.
+      // This is not a guarantee of zero provider-side retention.
       store: false,
 
       ...(structuredFormat
-        ? { text: { format: structuredFormat } }
+        ? {
+            text: {
+              format: structuredFormat
+            }
+          }
         : {})
     }),
 
@@ -311,8 +354,16 @@ async function callAzure(
       `Azure error code: ${safeCode(details.error?.code)}`
     );
 
+    console.error(
+      `Azure error type: ${safeCode(details.error?.type)}`
+    );
+
     const error = new Error("Azure AI request failed.");
+
     error.azureStatus = response.status;
+    error.publicMessage =
+      "The Azure AI request failed. Check PowerShell for the HTTP status.";
+
     throw error;
   }
 
@@ -321,10 +372,16 @@ async function callAzure(
 
   if (!text) {
     console.error(
-      `Azure response contained no output text. Status: ${safeCode(data.status)}`
+      "Azure response contained no output text. " +
+      `Status: ${safeCode(data.status)}`
     );
 
-    throw new Error("Azure returned no output text.");
+    const error = new Error("Azure returned no output text.");
+
+    error.publicMessage =
+      "The AI service returned no text. Please try again.";
+
+    throw error;
   }
 
   return text;
@@ -336,6 +393,7 @@ function parseDraftText(text) {
   try {
     return JSON.parse(trimmed);
   } catch {
+    // Limited fallback for models that wrap JSON in a code fence.
     const match = trimmed.match(
       /^```(?:json)?\s*([\s\S]*?)\s*```$/i
     );
@@ -366,7 +424,7 @@ async function createIntakeDraft(messages) {
   } catch (error) {
     /*
       Some deployments may reject structured output. Retry once without
-      the schema only for an HTTP 400. The result is still validated.
+      the schema only for HTTP 400. The returned JSON is still validated.
     */
     if (error.azureStatus !== 400) {
       throw error;
@@ -376,12 +434,15 @@ async function createIntakeDraft(messages) {
       "Structured output was rejected. Trying a JSON-text fallback."
     );
 
-    text = await callAzure(
+    const fallbackInstructions =
       EXTRACTION_INSTRUCTIONS +
-        "\nReturn only a JSON object with exactly these keys: " +
-        "name, summary, needs, housingStatus, deadline, location, " +
-        "zip, amount, transport. Use empty strings or an empty array " +
-        "when unknown.",
+      "\nReturn only a JSON object with exactly these keys: " +
+      "name, summary, needs, housingStatus, deadline, location, " +
+      "zip, amount, transport. Use empty strings or an empty array " +
+      "when unknown.";
+
+    text = await callAzure(
+      fallbackInstructions,
       messages,
       2000
     );
@@ -435,7 +496,8 @@ function validateDraft(draft) {
       : "";
 
   const amount =
-    !draft.amount || /^\d+(\.\d{1,2})?$/.test(draft.amount)
+    !draft.amount ||
+    /^\d+(\.\d{1,2})?$/.test(draft.amount)
       ? draft.amount
       : "";
 
@@ -467,7 +529,7 @@ function validateDemoSubmission(body) {
 
   if (
     !Array.isArray(body.needs) ||
-    !body.needs.length ||
+    body.needs.length === 0 ||
     !body.needs.every(need => ALLOWED_NEEDS.has(need))
   ) {
     throw new Error("Choose at least one type of support.");
@@ -496,11 +558,13 @@ function validateDemoSubmission(body) {
     );
   }
 
+  const phoneDigits = contactValue.replace(/\D/g, "");
+
   if (
     body.contactMethod === "phone" &&
     (
-      contactValue.replace(/\D/g, "").length < 7 ||
-      !contactValue.replace(/\D/g, "").includes("555")
+      phoneDigits.length < 7 ||
+      !phoneDigits.includes("555")
     )
   ) {
     throw new Error(
@@ -596,7 +660,7 @@ function demoStatus(submission) {
     - After 3 seconds: simulated receipt.
     - After 10 seconds: simulated follow-up due.
 
-    These are test-system events, not real organization events.
+    These are test events, not real organization events.
   */
 
   if (elapsed >= 10_000) {
@@ -650,7 +714,10 @@ const server = http.createServer(async (req, res) => {
       `http://${HOST}:${PORT}`
     );
 
-    if (req.method === "GET" && url.pathname === "/") {
+    if (
+      req.method === "GET" &&
+      url.pathname === "/"
+    ) {
       const html = await readFile(
         new URL("./index.html", import.meta.url)
       );
@@ -677,7 +744,8 @@ const server = http.createServer(async (req, res) => {
       req.method === "POST" &&
       postRoutes.has(url.pathname)
     ) {
-      const contentType = req.headers["content-type"] || "";
+      const contentType =
+        req.headers["content-type"] || "";
 
       if (
         !contentType.toLowerCase()
@@ -770,8 +838,11 @@ const server = http.createServer(async (req, res) => {
         const record = {
           id,
           ...submission,
+
+          // Deliberately non-deliverable test address.
           recipient:
             `${submission.organizationId}@example.invalid`,
+
           createdAt: Date.now()
         };
 
@@ -782,7 +853,10 @@ const server = http.createServer(async (req, res) => {
       }
 
       if (url.pathname === "/api/demo/status") {
-        if (!body || typeof body.id !== "string") {
+        if (
+          !body ||
+          typeof body.id !== "string"
+        ) {
           sendJson(res, 400, {
             error: "A demo reference is required."
           });
@@ -817,13 +891,12 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    /*
-      Do not log request bodies, API keys, or conversation text.
-    */
+    // Do not log request bodies, API keys, or conversation text.
     console.error("Request failed:", error.name);
 
     sendJson(res, 500, {
       error:
+        error.publicMessage ||
         "The request could not be completed. Check the server output " +
         "for the Azure status or try again."
     });
