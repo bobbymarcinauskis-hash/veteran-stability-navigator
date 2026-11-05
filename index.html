@@ -9,14 +9,12 @@
   <style>
     :root {
       color-scheme: light;
-
       font-family:
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-
       color: #263247;
       background: #f6f4f0;
       line-height: 1.6;
@@ -25,7 +23,7 @@
       --navy-dark: #17243a;
       --burgundy: #8a454d;
       --muted: #596574;
-      --border: #dcd7d1;
+      --border: #ded9d3;
       --light: #f8f6f3;
     }
 
@@ -65,13 +63,13 @@
     }
 
     button.secondary {
-      border-color: #a9a5a0;
+      border-color: #aaa6a1;
       background: #fff;
       color: var(--navy);
     }
 
     button.secondary:hover {
-      background: #eeebe6;
+      background: #efede9;
     }
 
     button.text-button {
@@ -98,7 +96,6 @@
     .entry-screen {
       min-height: 100vh;
       padding: 28px clamp(24px, 6vw, 90px) 70px;
-
       background:
         linear-gradient(
           115deg,
@@ -135,7 +132,7 @@
     }
 
     .entry-card {
-      max-width: 820px;
+      max-width: 850px;
       margin: clamp(55px, 11vh, 120px) auto 0;
     }
 
@@ -322,7 +319,7 @@
     }
 
     textarea {
-      min-height: 140px;
+      min-height: 135px;
       resize: vertical;
     }
 
@@ -347,10 +344,6 @@
       cursor: pointer;
     }
 
-    .check-row:hover {
-      background: #f8f5f2;
-    }
-
     .check-row input {
       width: 20px;
       height: 20px;
@@ -372,10 +365,6 @@
     .organization h3 {
       margin: 8px 0;
       color: var(--navy);
-    }
-
-    .organization p {
-      margin: 9px 0;
     }
 
     .tag {
@@ -483,7 +472,7 @@
       <span>VETERAN STABILITY NAVIGATOR</span>
     </div>
 
-    <section id="entry-choice" class="entry-card">
+    <section class="entry-card">
       <p class="eyebrow">Welcome</p>
 
       <h1>
@@ -495,79 +484,26 @@
         what matters to you and explore possible next steps together.
       </p>
 
-      <div class="actions">
-        <button type="button" id="new-user">
-          I’m new here
-        </button>
-
-        <button type="button" id="returning-user" class="secondary">
-          I’m returning
-        </button>
+      <div class="notice">
+        <strong>Test environment</strong>
+        Use fictional information only. No real application or email is sent.
       </div>
 
-      <p class="small">
-        No account is required. You decide what to share.
-      </p>
-    </section>
-
-    <section id="new-welcome" class="entry-card" hidden>
-      <p class="eyebrow">We’re glad you’re here</p>
-
-      <h1>Your experience is your own. Start wherever you feel comfortable.</h1>
-
-      <p class="entry-description">
-        You can talk with an optional AI assistant or write in your own
-        words. You can skip any question.
-      </p>
-
       <div class="actions">
-        <button type="button" id="begin">
-          Let’s begin
+        <button type="button" id="start-new">
+          Start a conversation
         </button>
 
-        <button type="button" id="back-new" class="secondary">
-          Back
+        <button type="button" id="load-alex" class="secondary">
+          Load the Alex test case
         </button>
-      </div>
-    </section>
 
-    <section id="returning-welcome" class="entry-card" hidden>
-      <p class="eyebrow">Welcome back</p>
-
-      <h1>Let’s pick up where you left off.</h1>
-
-      <p class="entry-description">
-        If you saved progress in this browser on this device, you can
-        restore it below.
-      </p>
-
-      <p
-        id="returning-message"
-        class="status"
-        aria-live="polite"
-      ></p>
-
-      <div class="actions">
-        <button type="button" id="restore-progress">
+        <button type="button" id="restore-progress" class="text-button">
           Restore saved progress
         </button>
-
-        <button type="button" id="start-fresh" class="secondary">
-          Start fresh
-        </button>
-
-        <button type="button" id="delete-saved" class="text-button">
-          Delete saved progress
-        </button>
-
-        <button type="button" id="back-returning" class="text-button">
-          Back
-        </button>
       </div>
 
-      <p class="small">
-        Starting fresh does not delete an earlier saved copy.
-      </p>
+      <p id="entry-status" class="status" aria-live="polite"></p>
     </section>
   </div>
 
@@ -598,33 +534,30 @@
         <div class="notice">
           <strong>If you need immediate help</strong>
 
-          This prototype is not an emergency service. In the U.S.,
-          if you or someone else is in immediate danger, call 911.
-          For the Veterans Crisis Line, call 988 and press 1.
+          This prototype is not an emergency service. In the U.S., if you
+          or someone else is in immediate danger, call 911. For the Veterans
+          Crisis Line, call 988 and press 1.
         </div>
 
         <div class="notice">
-          <strong>About this prototype</strong>
+          <strong>Test environment</strong>
 
-          Organization details are unverified sample data. This app does
-          not submit applications, send referrals, confirm receipt, or
-          determine eligibility.
+          Organizations, applications, emails, and status updates in the
+          Alex scenario are fictional. No real referral is sent.
         </div>
       </div>
 
       <nav aria-label="Progress">
         <ol class="progress">
-          <li class="active" aria-current="step">
-            <span>1</span> Your story
-          </li>
-          <li><span>2</span> Your needs</li>
-          <li><span>3</span> Your summary</li>
-          <li><span>4</span> Support options</li>
+          <li class="active" aria-current="step"><span>1</span> Conversation</li>
+          <li><span>2</span> Review information</li>
+          <li><span>3</span> Support options</li>
+          <li><span>4</span> Review application</li>
           <li><span>5</span> Action plan</li>
         </ol>
       </nav>
 
-      <!-- STEP 1 -->
+      <!-- STEP 1: CONVERSATION -->
 
       <section class="card" id="step-0" aria-labelledby="heading-0">
         <h2 id="heading-0" tabindex="-1">
@@ -632,185 +565,101 @@
         </h2>
 
         <p>
-          Start wherever you feel comfortable. You do not need to describe
-          trauma, military experiences, or anything you would rather
-          keep private.
+          Start wherever you feel comfortable. You can skip any question.
+          You do not need to describe trauma or military experiences.
         </p>
 
         <div class="panel">
-          <h3>Choose how you’d like to begin</h3>
+          <h3>About the assistant</h3>
 
           <p class="small">
-            The AI assistant can ask one question at a time. It is not a
-            human counselor and may make mistakes. You can stop at any time.
+            The assistant is not a human counselor and may make mistakes.
+            Conversation text is sent through this app’s server to the
+            configured Azure service to identify answers and draft a summary.
           </p>
 
           <p class="small">
-            If you choose AI, your messages and conversation history are
-            sent to this app’s server and its configured Azure service.
-            Avoid sharing Social Security numbers, account numbers, or
-            other information you do not want processed.
+            Do not enter Social Security numbers, account numbers, real
+            contact information, or other sensitive information in this demo.
           </p>
 
           <label class="check-row">
             <input type="checkbox" id="ai-consent">
-            <span>I understand and choose to use the AI conversation.</span>
+            <span>I understand and choose to use the AI intake assistant.</span>
           </label>
-
-          <div class="actions">
-            <button type="button" id="start-chat">
-              Start AI conversation
-            </button>
-
-            <button type="button" id="manual-mode" class="secondary">
-              Write my own story instead
-            </button>
-          </div>
-
-          <p id="intake-status" class="status" aria-live="polite"></p>
-        </div>
-
-        <div class="panel">
-          <h3>Optional voice input</h3>
-
-          <p class="small">
-            You can type, or you can use your browser’s microphone feature.
-            Depending on your browser, audio may be sent to its speech
-            provider for transcription. This app does not upload audio to
-            its own server. Voice input may not be available on every device.
-          </p>
-
-          <p class="small">
-            Spoken words appear as text first. You can review and edit them
-            before sending or continuing.
-          </p>
 
           <label class="check-row">
             <input type="checkbox" id="voice-consent">
-            <span>I understand and want to use voice input.</span>
+            <span>
+              I understand that my browser’s speech provider may process
+              audio, and I want to use optional voice input.
+            </span>
           </label>
 
           <p id="voice-availability" class="small"></p>
         </div>
 
-        <div id="chat-area" hidden>
-          <h3>Conversation</h3>
+        <div
+          id="conversation"
+          class="conversation"
+          role="log"
+          aria-label="Intake conversation"
+          aria-live="polite"
+        ></div>
 
-          <p class="small">
-            You can answer briefly, say “skip,” or continue whenever
-            you’re ready.
-          </p>
+        <p id="question-status" class="status" aria-live="polite"></p>
 
-          <div
-            id="conversation"
-            class="conversation"
-            role="log"
-            aria-label="Intake conversation"
-            aria-live="polite"
-          ></div>
+        <label class="field-label" for="chat-input">
+          Your response
+        </label>
 
-          <div class="actions">
-            <button type="button" id="read-response" class="secondary">
-              Read the assistant’s last response aloud
-            </button>
+        <textarea
+          id="chat-input"
+          maxlength="4000"
+          placeholder="Type here, or choose Speak my response..."
+        ></textarea>
 
-            <button type="button" id="stop-reading" class="text-button">
-              Stop reading aloud
-            </button>
-          </div>
+        <div class="actions">
+          <button type="button" id="send-answer">
+            Send my answer
+          </button>
 
-          <label class="field-label" for="chat-input">
-            Your response
-          </label>
+          <button type="button" id="speak-answer" class="secondary">
+            Speak my response
+          </button>
 
-          <textarea
-            id="chat-input"
-            maxlength="4000"
-            placeholder="Type here, or use Speak my response..."
-          ></textarea>
+          <button type="button" id="stop-voice" class="text-button">
+            Stop listening
+          </button>
 
-          <div class="actions">
-            <button type="button" id="speak-chat" class="secondary">
-              Speak my response
-            </button>
-
-            <button type="button" id="stop-voice-chat" class="text-button">
-              Stop listening
-            </button>
-          </div>
-
-          <p id="voice-status" class="status" aria-live="polite"></p>
-
-          <div class="actions">
-            <button type="button" id="send-message">
-              Send response
-            </button>
-
-            <button
-              type="button"
-              id="use-conversation"
-              class="secondary"
-            >
-              Continue and prepare my draft
-            </button>
-
-            <button
-              type="button"
-              id="continue-without-draft"
-              class="text-button"
-            >
-              Continue without an AI draft
-            </button>
-
-            <button type="button" id="stop-chat" class="text-button">
-              Stop using AI
-            </button>
-          </div>
-
-          <p id="chat-status" class="status" aria-live="polite"></p>
+          <button type="button" id="read-question" class="text-button">
+            Read the question aloud
+          </button>
         </div>
 
-        <div id="manual-area" hidden>
-          <label class="field-label" for="story">
-            Your story, in your own words
-          </label>
+        <div class="actions">
+          <button type="button" id="skip-question" class="secondary">
+            Skip this question
+          </button>
 
-          <textarea
-            id="story"
-            maxlength="12000"
-            placeholder="For example: I recently lost my job, and I’m worried about rent..."
-          ></textarea>
-
-          <div class="actions">
-            <button type="button" id="speak-story" class="secondary">
-              Speak my story
-            </button>
-
-            <button type="button" id="stop-voice-story" class="text-button">
-              Stop listening
-            </button>
-          </div>
-
-          <p
-            id="manual-voice-status"
-            class="status"
-            aria-live="polite"
-          ></p>
-
-          <p class="small">
-            The manual path does not send this text to Azure. It stays
-            in the browser unless you choose to save it on this device.
-          </p>
-
-          <div class="actions">
-            <button type="button" id="manual-continue">
-              Continue
-            </button>
-          </div>
+          <button type="button" id="continue-intake" class="secondary">
+            Continue with what I’ve shared
+          </button>
         </div>
+
+        <p id="chat-status" class="status" aria-live="polite"></p>
+
+        <button
+          type="button"
+          id="retry-extraction"
+          class="secondary"
+          hidden
+        >
+          Try processing my last answer again
+        </button>
       </section>
 
-      <!-- STEP 2 -->
+      <!-- STEP 2: REVIEW -->
 
       <section
         class="card"
@@ -819,15 +668,30 @@
         hidden
       >
         <h2 id="heading-1" tabindex="-1">
-          What would make the biggest difference right now?
+          Let’s make sure we understood
         </h2>
 
         <p>
-          If you used the AI conversation, we may have filled in some
-          answers. Please review and correct them. Every question is optional.
+          These answers were gathered from the conversation or the Alex
+          test case. Please correct anything that is wrong.
         </p>
 
-        <p id="prefill-status" class="status" aria-live="polite"></p>
+        <p id="review-status" class="status" aria-live="polite"></p>
+
+        <label class="field-label" for="review-summary">
+          Your editable summary
+        </label>
+
+        <textarea
+          id="review-summary"
+          maxlength="12000"
+          placeholder="No AI summary is available yet. You can write one here."
+        ></textarea>
+
+        <p class="small">
+          An AI-generated summary can contain mistakes. Review it and
+          remove anything you do not want included.
+        </p>
 
         <fieldset>
           <legend>What would you like help with?</legend>
@@ -858,13 +722,13 @@
           </label>
         </fieldset>
 
-        <label class="field-label" for="housing-status">
-          Which best describes your housing situation?
+        <label class="field-label" for="review-housing">
+          Housing situation
           <span class="small">Optional</span>
         </label>
 
-        <select id="housing-status">
-          <option value="">Prefer not to say</option>
+        <select id="review-housing">
+          <option value="">Not provided</option>
           <option value="housed">I have a place to stay</option>
           <option value="at-risk">I have a place to stay but may lose it</option>
           <option value="seeking">I am looking for a place to stay</option>
@@ -873,85 +737,67 @@
 
         <div class="grid-two">
           <div>
-            <label class="field-label" for="deadline">
-              Is there a date to keep in mind?
+            <label class="field-label" for="review-deadline">
+              Date to keep in mind
               <span class="small">Optional</span>
             </label>
 
-            <input type="date" id="deadline">
+            <input type="date" id="review-deadline">
           </div>
 
           <div>
-            <label class="field-label" for="location">
+            <label class="field-label" for="review-location">
               City or area
               <span class="small">Optional</span>
             </label>
 
             <input
               type="text"
-              id="location"
+              id="review-location"
               maxlength="200"
               placeholder="City or neighborhood"
             >
           </div>
         </div>
 
-        <label class="field-label" for="search-zip">
+        <label class="field-label" for="review-zip">
           ZIP code
           <span class="small">Optional</span>
         </label>
 
         <input
           type="text"
-          id="search-zip"
+          id="review-zip"
           maxlength="5"
           inputmode="numeric"
           placeholder="For example: 07601"
         >
 
-        <p class="small">
-          A supported ZIP is needed for this prototype’s nearby search.
-          You can leave it blank and continue.
-        </p>
-
-        <label class="field-label" for="transport">
-          What should we know about transportation or access?
+        <label class="field-label" for="review-transport">
+          Transportation or access
           <span class="small">Optional</span>
         </label>
 
-        <select id="transport">
-          <option value="">Prefer not to say</option>
+        <select id="review-transport">
+          <option value="">Not provided</option>
           <option value="transit">I use public transportation</option>
           <option value="car">I have access to a car</option>
           <option value="phone">I prefer phone or online support</option>
           <option value="challenge">Transportation is a challenge</option>
         </select>
 
-        <label class="field-label" for="goal">
-          What would you like your next step to be?
-          <span class="small">Optional</span>
-        </label>
-
-        <select id="goal">
-          <option value="">I’m not sure yet</option>
-          <option value="speak">I want to speak with someone</option>
-          <option value="qualify">I want to explore whether I might qualify</option>
-          <option value="apply">I want help finding an application</option>
-          <option value="not-ready">I’m not ready to contact anyone yet</option>
-        </select>
-
         <div class="actions">
-          <button type="button" class="secondary" data-go="0">
-            Back
+          <button type="button" id="back-to-chat" class="secondary">
+            Back to conversation
           </button>
 
-          <button type="button" id="to-review">
-            Review my summary
+          <button type="button" id="review-to-options">
+            Find possible support
           </button>
         </div>
       </section>
 
-      <!-- STEP 3 -->
+      <!-- STEP 3: OPTIONS -->
 
       <section
         class="card"
@@ -960,40 +806,71 @@
         hidden
       >
         <h2 id="heading-2" tabindex="-1">
-          This is your story
+          Here are some possible places to start
         </h2>
 
         <p>
-          Review it, change it, or leave out anything you don’t want to
-          share. An AI draft can contain mistakes.
+          You decide which options feel right for you. A recommendation
+          is not an eligibility decision.
         </p>
 
-        <p id="summary-status" class="status" aria-live="polite"></p>
+        <div class="notice">
+          <strong>Demo information only</strong>
+          The Alex organizations are fictional. Other directory records
+          are unverified and may be incorrect or out of date.
+        </div>
 
-        <label class="field-label" for="summary">
-          Your editable summary
-        </label>
+        <div class="panel">
+          <h3>Your search</h3>
 
-        <textarea
-          id="summary"
-          maxlength="12000"
-          placeholder="Write or edit your summary here..."
-        ></textarea>
+          <p id="search-description"></p>
 
-        <div class="panel" id="review-details"></div>
+          <label class="field-label" for="radius">
+            Approximate search radius
+          </label>
+
+          <select id="radius">
+            <option value="5">Within 5 miles</option>
+            <option value="10">Within 10 miles</option>
+            <option value="15" selected>Within 15 miles</option>
+            <option value="25">Within 25 miles</option>
+            <option value="50">Within 50 miles</option>
+          </select>
+
+          <p class="small">
+            In the Alex test case, the organizations are fictional and
+            distances are not calculated.
+          </p>
+
+          <div class="actions">
+            <button type="button" id="find-options">
+              Find my possible options
+            </button>
+          </div>
+
+          <p id="options-status" class="status" aria-live="polite"></p>
+        </div>
+
+        <div id="recommendations"></div>
+
+        <div class="panel">
+          <h3>Your choices</h3>
+          <p id="selected-main">Main option: Not selected</p>
+          <p id="selected-backup">Backup option: Not selected</p>
+        </div>
 
         <div class="actions">
-          <button type="button" class="secondary" data-go="1">
+          <button type="button" id="options-back" class="secondary">
             Back
           </button>
 
-          <button type="button" id="to-options">
-            Explore support options
+          <button type="button" id="prepare-main">
+            Prepare my main application
           </button>
         </div>
       </section>
 
-      <!-- STEP 4 -->
+      <!-- STEP 4: APPLICATION -->
 
       <section
         class="card"
@@ -1002,75 +879,86 @@
         hidden
       >
         <h2 id="heading-3" tabindex="-1">
-          Here are some possible places to start
+          Review your sample application
         </h2>
 
         <p>
-          You decide which options, if any, feel right for you.
-          These records come from the supplied prototype and are unverified.
+          We used information you already shared. Review the form and
+          message before approving the simulated submission.
         </p>
 
         <div class="notice">
-          <strong>Please confirm details before relying on a listing.</strong>
-
-          Services, contact details, eligibility, funding, transportation,
-          and availability may be incorrect or out of date. Distances are
-          approximate straight-line distances—not travel distances.
+          <strong>No real submission</strong>
+          This sample form is not the organization’s actual application.
+          No real email will be sent.
         </div>
 
-        <div class="panel">
-          <h3>Find possible options</h3>
+        <div id="application-details" class="panel"></div>
 
-          <p id="zip-display"></p>
+        <label class="field-label" for="application-type">
+          Type of help requested
+        </label>
 
-          <p class="small">
-            This prototype supports ZIP reference areas 07601, 07102,
-            15222, 15213, 15205, 92101, and 78205. To change your ZIP,
-            select Back.
-          </p>
+        <select id="application-type">
+          <option value="">Choose a type of support</option>
+          <option value="rent">Rent or bills assistance</option>
+          <option value="food">Food assistance</option>
+          <option value="housing">Housing assistance</option>
+          <option value="work">Employment or training</option>
+          <option value="medical">Healthcare support</option>
+        </select>
 
-          <label class="field-label" for="search-radius">
-            Approximate search radius
-          </label>
+        <label class="check-row">
+          <input type="checkbox" id="include-summary">
+          <span>
+            Include my edited summary in the sample message.
+          </span>
+        </label>
 
-          <select id="search-radius">
-            <option value="5">Within 5 miles</option>
-            <option value="10">Within 10 miles</option>
-            <option value="15" selected>Within 15 miles</option>
-            <option value="25">Within 25 miles</option>
-            <option value="50">Within 50 miles</option>
-          </select>
+        <p class="small">
+          Review the summary for sensitive details. The app cannot
+          automatically guarantee that free text contains no private information.
+        </p>
 
-          <div class="actions">
-            <button type="button" id="find-organizations">
-              Find my possible options
-            </button>
-          </div>
+        <label class="field-label" for="application-message">
+          Editable sample message
+        </label>
 
-          <p id="directory-status" class="status" aria-live="polite"></p>
-        </div>
-
-        <div class="panel">
-          <h3>Your choices</h3>
-          <p id="main-choice">Main option: Not selected</p>
-          <p id="backup-choice">Backup option: Not selected</p>
-          <p class="small">Selecting an option does not contact it.</p>
-        </div>
-
-        <div id="matches"></div>
+        <textarea
+          id="application-message"
+          maxlength="8000"
+          placeholder="The sample message will appear here."
+        ></textarea>
 
         <div class="actions">
-          <button type="button" class="secondary" data-go="2">
+          <button type="button" id="refresh-message" class="secondary">
+            Update message from my choices
+          </button>
+
+          <button type="button" id="ask-missing" class="secondary">
+            Ask the assistant for missing answers
+          </button>
+        </div>
+
+        <p id="application-status" class="status" aria-live="polite"></p>
+
+        <div class="panel">
+          <h3>Review before approval</h3>
+          <div id="application-preview"></div>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="application-back" class="secondary">
             Back
           </button>
 
-          <button type="button" id="to-plan">
-            Continue to my action plan
+          <button type="button" id="approve-simulation">
+            Approve simulated submission
           </button>
         </div>
       </section>
 
-      <!-- STEP 5 -->
+      <!-- STEP 5: ACTION PLAN -->
 
       <section
         class="card"
@@ -1079,157 +967,48 @@
         hidden
       >
         <h2 id="heading-4" tabindex="-1">
-          Let’s make your next step easier
+          Your action plan
         </h2>
 
         <p>
-          You can prepare to connect without telling your story all over
-          again. Nothing is sent by this app.
+          The test system updates this plan automatically. No real
+          organization is contacted.
         </p>
 
-        <div class="panel">
-          <h3>Your selected organizations</h3>
-          <div id="plan-organizations"></div>
+        <div id="tracking-panel" class="panel"></div>
+
+        <div class="notice">
+          <strong>Simulated status</strong>
+          “Sent,” “received,” and “follow-up due” below are test events,
+          not confirmations from an organization.
         </div>
 
-        <div class="panel">
-          <h3>Questions you may want to ask</h3>
-
-          <ul>
-            <li>Are you accepting new requests?</li>
-            <li>What type of support do you currently offer?</li>
-            <li>What information or documents would I need?</li>
-            <li>Is phone or online intake available?</li>
-            <li>What should I do if my need is urgent?</li>
-          </ul>
-
-          <p class="small">
-            These are suggested questions—not confirmed program requirements.
-          </p>
-        </div>
-
-        <fieldset class="no-print">
-          <legend>What would you be comfortable sharing?</legend>
-
-          <p class="small">
-            This is a preview only. Review the summary itself for sensitive
-            details, even when other choices are unchecked.
-          </p>
-
-          <label class="check-row">
-            <input type="checkbox" name="share" value="summary">
-            My edited summary
-          </label>
-
-          <label class="check-row">
-            <input type="checkbox" name="share" value="needs">
-            The support I selected
-          </label>
-
-          <label class="check-row">
-            <input type="checkbox" name="share" value="location">
-            My area
-          </label>
-
-          <label class="check-row">
-            <input type="checkbox" name="share" value="transport">
-            My transportation or access preference
-          </label>
-        </fieldset>
-
-        <div class="panel">
-          <h3>Sharing preview</h3>
-          <div id="sharing-preview"></div>
-
-          <div class="actions no-print">
-            <button type="button" id="copy-preview" class="secondary">
-              Copy preview
-            </button>
-
-            <button type="button" id="print-plan" class="secondary">
-              Print this page
-            </button>
-          </div>
-
-          <p id="copy-status" class="status no-print" aria-live="polite"></p>
-        </div>
-
-        <div class="panel no-print">
-          <h3>Keep track at your own pace</h3>
-
-          <p class="small">
-            You update this tracker yourself. The app does not verify
-            contact, submission, receipt, or an organization’s response.
-          </p>
-
-          <label class="field-label" for="tracker-status">
-            My current status
-          </label>
-
-          <select id="tracker-status">
-            <option value="Planning">Planning</option>
-            <option value="Ready to contact">Ready to contact</option>
-            <option value="Contacted">I contacted an organization</option>
-            <option value="Waiting">I’m waiting for a response</option>
-            <option value="Follow-up planned">Follow-up planned</option>
-            <option value="Closed or changed">Closed or changed</option>
-          </select>
-
-          <label class="field-label" for="follow-up-date">
-            Follow-up date
-            <span class="small">Optional</span>
-          </label>
-
-          <input type="date" id="follow-up-date">
-
-          <label class="field-label" for="tracker-notes">
-            My notes
-            <span class="small">Optional</span>
-          </label>
-
-          <textarea
-            id="tracker-notes"
-            maxlength="4000"
-            placeholder="For example: I called and was asked to follow up next week."
-          ></textarea>
-
-          <p class="small">
-            This prototype does not send reminders or contact an
-            organization automatically.
-          </p>
-        </div>
-
-        <div class="panel no-print">
-          <h3>Save your progress on this device</h3>
-
-          <p class="small">
-            Saving is optional. Your written story, summary, answers,
-            organization choices, tracker status, follow-up date, and notes
-            will be stored in this browser. Anyone using this browser
-            profile may be able to see them. The AI conversation and
-            sharing choices are not saved.
-          </p>
+        <div class="actions">
+          <button
+            type="button"
+            id="prepare-backup"
+            class="secondary"
+            hidden
+          >
+            Review my prepared backup application
+          </button>
 
           <button type="button" id="save-progress" class="secondary">
             Save progress on this device
           </button>
 
-          <p id="save-message" class="status" aria-live="polite"></p>
-        </div>
-
-        <div class="actions no-print">
-          <button type="button" class="secondary" data-go="3">
-            Back
-          </button>
-
-          <button type="button" id="reset" class="secondary">
-            Start over
+          <button type="button" id="print-plan" class="secondary">
+            Print this page
           </button>
         </div>
 
-        <p class="small no-print">
-          Start over clears the current session but does not delete an
-          earlier saved copy.
+        <p id="save-status" class="status" aria-live="polite"></p>
+
+        <p class="small">
+          Saving is optional. The intake and conversation will be stored
+          in this browser and may be visible to anyone using this browser
+          profile. Simulated submission status remains on the test server
+          only until it is restarted.
         </p>
       </section>
 
@@ -1241,28 +1020,13 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "veteran-navigator-voice-v1";
+    const STORAGE_KEY = "veteran-navigator-integrated-demo-v1";
 
     const NEED_LABELS = {
-      rent: "Rent, utilities, or another urgent bill",
-      food: "Food or food benefits",
-      housing: "A place to stay or permanent housing",
-      work: "Work or job training",
-      medical: "Healthcare or medical support"
-    };
-
-    const NEED_TO_CATEGORIES = {
-      rent: ["financial"],
-      food: ["food"],
-      housing: ["financial"],
-      work: ["work"],
-      medical: ["medical"]
-    };
-
-    const CATEGORY_LABELS = {
-      financial: "Financial / housing-related support",
+      rent: "Rent or bills",
       food: "Food",
-      work: "Work / training",
+      housing: "Housing",
+      work: "Work or training",
       medical: "Healthcare"
     };
 
@@ -1282,14 +1046,6 @@
       challenge: "Transportation is a challenge"
     };
 
-    const GOAL_LABELS = {
-      "": "Not sure yet",
-      speak: "Wants to speak with someone",
-      qualify: "Wants to explore possible eligibility",
-      apply: "Wants help finding an application",
-      "not-ready": "Not ready to contact anyone yet"
-    };
-
     const ZIP_AREAS = {
       "07601": { city: "Hackensack", state: "NJ", lat: 40.8868, lon: -74.0435 },
       "07102": { city: "Newark", state: "NJ", lat: 40.7357, lon: -74.1724 },
@@ -1301,336 +1057,129 @@
     };
 
     /*
-      Regional records adapted from the supplied prototype.
-
-      These records are unverified. The categories and access fields
-      are source claims, not confirmed services or eligibility.
+      Fictional organizations from the starter-kit scenario.
+      These are used only when the Alex test case is loaded.
     */
-
-    const organizations = [
+    const ALEX_ORGANIZATIONS = [
       {
-        id: "nj_bcvso",
-        name: "Bergen County Division of Veteran Services & NJ DMAVA VSO",
-        address: "One Bergen County Plaza, 2nd Floor, Hackensack, NJ 07601",
-        phone: "(201) 336-6325",
-        website: "https://www.co.bergen.nj.us/veteran-services",
-        lat: 40.8788, lon: -74.0422,
-        categories: ["financial", "food", "medical", "work"],
+        id: "demo_riverbend",
+        name: "Riverbend Veterans Resource Center",
+        categories: ["rent", "food", "work"],
         access: ["transit", "phone"],
-        note: "Confirm which services are offered directly and which are referrals."
+        address: "Fictional downtown Riverbend location",
+        phone: "Fictional contact",
+        note:
+          "The starter kit lists emergency assistance, food referrals, " +
+          "and job-search help. Sample availability must not be treated as real.",
+        fictional: true
       },
       {
-        id: "nj_onestop",
-        name: "Bergen County One-Stop Career Center",
-        address: "60 State Street, 2nd Floor, Hackensack, NJ 07601",
-        phone: "(201) 329-9600",
-        website: "https://www.nj.gov/labor/career-services/",
-        lat: 40.8859, lon: -74.0439,
-        categories: ["work"],
-        access: ["transit", "phone"],
-        note: "The source says this option does not provide emergency rent or food grants."
-      },
-      {
-        id: "nj_ssvf",
-        name: "Community Hope — Hope for Veterans",
-        address: "175 Washington Ave, Dumont / Hackensack Service Hub, NJ 07601",
-        phone: "(855) 483-8466",
-        website: "https://www.communityhope-nj.org/what-we-do/veterans-services/",
-        lat: 40.8921, lon: -74.0398,
-        categories: ["financial", "food"],
-        access: ["transit", "phone"],
-        note: "Confirm the address, service area, funding, and eligibility."
-      },
-      {
-        id: "nj_va",
-        name: "Hackensack VA Clinic",
-        address: "385 Prospect Avenue, Hackensack, NJ 07601",
-        phone: "(201) 342-4536",
-        website: "https://www.va.gov/new-jersey-health-care/locations/hackensack-va-clinic/",
-        lat: 40.8942, lon: -74.0568,
-        categories: ["medical"],
-        access: ["transit", "phone"],
-        note: "Confirm available services, enrollment requirements, and appointments."
-      },
-      {
-        id: "nj_vetcenter",
-        name: "Secaucus / Bergen Vet Center",
-        address: "110A Meadowlands Parkway, Suite 102, Secaucus, NJ 07094",
-        phone: "(201) 223-7787",
-        website: "https://www.va.gov/secaucus-vet-center/",
-        lat: 40.7931, lon: -74.0683,
-        categories: ["medical", "work"],
-        access: ["transit", "phone"],
-        note: "Confirm current counseling and transition services."
-      },
-      {
-        id: "nj_food",
-        name: "Center for Food Action",
-        address: "192 W. Demarest Avenue, Englewood / Hackensack Hub, NJ 07631",
-        phone: "(201) 569-1804",
-        website: "https://www.cfanj.org/",
-        lat: 40.8995, lon: -73.9821,
-        categories: ["food", "financial"],
-        access: ["transit", "phone"],
-        note: "Confirm the address, service area, and assistance."
-      },
-      {
-        id: "nj_catholic",
-        name: "Catholic Charities Archdiocese of Newark — Veterans Program",
-        address: "590 North 7th Street, Newark, NJ 07107",
-        phone: "(855) 768-7932",
-        website: "https://www.ccannj.org/veterans-services/",
-        lat: 40.7641, lon: -74.1823,
-        categories: ["financial", "food"],
-        access: ["transit", "phone"],
-        note: "Confirm eligibility, geographic coverage, and funding."
-      },
-      {
-        id: "nj_gigo",
-        name: "GI Go Fund",
-        address: "436 Central Avenue, Newark / Northern NJ Hub, NJ 07107",
-        phone: "(862) 240-1755",
-        website: "https://gigofund.org/",
-        lat: 40.7478, lon: -74.1912,
-        categories: ["work", "financial", "food"],
-        access: ["transit", "phone"],
-        note: "Confirm available services and how to request them."
-      },
-      {
-        id: "nj_eastorange",
-        name: "East Orange VA Medical Center",
-        address: "385 Tremont Avenue, East Orange, NJ 07018",
-        phone: "(973) 676-1000",
-        website: "https://www.va.gov/new-jersey-health-care/locations/east-orange-va-medical-center/",
-        lat: 40.7521, lon: -74.2361,
-        categories: ["medical"],
-        access: ["transit", "phone"],
-        note: "Confirm services, eligibility, and transportation."
-      },
-      {
-        id: "nj_newarkbenefits",
-        name: "Newark VA Regional Benefit Office",
-        address: "20 Washington Place, Newark, NJ 07102",
-        phone: "(800) 827-1000",
-        website: "https://www.va.gov/newark-va-regional-benefit-office/",
-        lat: 40.7429, lon: -74.1704,
-        categories: ["medical", "work", "financial"],
-        access: ["transit", "phone"],
-        note: "Confirm which benefit and employment services are available."
-      },
-      {
-        id: "nj_social",
-        name: "Bergen County Board of Social Services",
-        address: "218 Route 17 North, Rochelle Park, NJ 07662",
-        phone: "(201) 368-4200",
-        website: "https://bcbss.com/",
-        lat: 40.9088, lon: -74.0725,
-        categories: ["food", "financial"],
+        id: "demo_eastfield",
+        name: "Eastfield Family Services",
+        categories: ["rent", "food"],
         access: ["phone"],
-        note: "The source reports limited direct transit access; confirm current access."
+        address: "Fictional Eastfield location",
+        phone: "Fictional contact",
+        note:
+          "The starter kit says this option is not on a bus line and " +
+          "phone intake may have a wait. These are demo details.",
+        fictional: true
       },
       {
-        id: "nj_lyons",
-        name: "Lyons VA Medical Center — Domiciliary",
-        address: "151 Knollcroft Road, Lyons, NJ 07939",
-        phone: "(908) 647-0180",
-        website: "https://www.va.gov/new-jersey-health-care/locations/lyons-va-medical-center/",
-        lat: 40.6652, lon: -74.5491,
-        categories: ["financial", "medical"],
-        access: ["phone"],
-        note: "The source describes a residential program for currently unhoused veterans, not past-due rent assistance."
-      },
-
-      {
-        id: "pgh_vlp",
-        name: "Veterans Leadership Program of Western PA",
-        address: "2934 Smallman Street, Pittsburgh, PA 15201",
-        phone: "(412) 481-8200",
-        website: "https://www.veteransleadershipprogram.org/",
-        lat: 40.4581, lon: -79.9742,
-        categories: ["financial", "food", "work"],
-        access: ["transit", "phone"],
-        note: "Confirm current services, eligibility, and funding."
+        id: "demo_northside",
+        name: "Northside Veterans Housing Collaborative",
+        categories: ["housing"],
+        access: ["transit"],
+        address: "Fictional North Riverbend location",
+        phone: "Fictional contact",
+        note:
+          "The starter kit describes help for veterans currently without " +
+          "housing, not past-due rent while still housed.",
+        fictional: true
       },
       {
-        id: "pgh_career",
-        name: "PA CareerLink Pittsburgh / Allegheny County",
-        address: "2201 Liberty Avenue, Pittsburgh, PA 15222",
-        phone: "(412) 552-7100",
-        website: "https://www.careerlinkpittsburgh.com/",
-        lat: 40.4519, lon: -79.9831,
+        id: "demo_workforce",
+        name: "Riverbend Workforce Center",
         categories: ["work"],
-        access: ["transit", "phone"],
-        note: "The source says this option does not provide emergency rent or food grants."
-      },
-      {
-        id: "pgh_county",
-        name: "Allegheny County Veterans Services",
-        address: "4141 Fifth Avenue, 2nd Floor, Pittsburgh, PA 15213",
-        phone: "(412) 621-4357",
-        website: "https://www.alleghenycounty.us/Services/Veterans-Services",
-        lat: 40.4439, lon: -79.9547,
-        categories: ["financial", "food", "medical"],
-        access: ["transit", "phone"],
-        note: "Confirm available assistance and program requirements."
-      },
-      {
-        id: "pgh_benefits",
-        name: "Pittsburgh VA Regional Benefit Office",
-        address: "1000 Liberty Avenue, Room 1700, Pittsburgh, PA 15222",
-        phone: "(800) 827-1000",
-        website: "https://www.va.gov/pittsburgh-va-regional-benefit-office/",
-        lat: 40.4432, lon: -79.9949,
-        categories: ["medical", "work", "financial"],
-        access: ["transit", "phone"],
-        note: "Confirm which benefit and employment services are available."
-      },
-      {
-        id: "pgh_vamc",
-        name: "Pittsburgh VA Medical Center — University Drive",
-        address: "University Drive C, Pittsburgh, PA 15240",
-        phone: "(866) 482-7488",
-        website: "https://www.va.gov/pittsburgh-health-care/locations/pittsburgh-va-medical-center-university-drive/",
-        lat: 40.4457, lon: -79.9602,
-        categories: ["medical"],
-        access: ["transit", "phone"],
-        note: "Confirm appointments, eligibility, and transportation."
-      },
-      {
-        id: "pgh_vetcenter",
-        name: "Pittsburgh Vet Center",
-        address: "2500 Baldwick Road, Suite 15, Pittsburgh, PA 15205",
-        phone: "(412) 920-1765",
-        website: "https://www.va.gov/pittsburgh-vet-center/",
-        lat: 40.4278, lon: -80.0681,
-        categories: ["medical", "work"],
-        access: ["transit", "phone"],
-        note: "Confirm services and appointment availability."
-      },
-      {
-        id: "pgh_salvation",
-        name: "The Salvation Army Western PA — Veteran Family Program",
-        address: "700 North Bell Avenue, Carnegie / Pittsburgh, PA 15106",
-        phone: "(412) 446-1500",
-        website: "https://pa.salvationarmy.org/western-pennsylvania/",
-        lat: 40.4089, lon: -80.0835,
-        categories: ["financial", "food"],
-        access: ["transit", "phone"],
-        note: "Confirm the address, program availability, and eligibility."
-      },
-      {
-        id: "pgh_wwp",
-        name: "Wounded Warrior Project — Pittsburgh Service Office",
-        address: "600 River Avenue, Suite 400, Pittsburgh, PA 15212",
-        phone: "(412) 471-0935",
-        website: "https://www.woundedwarriorproject.org/",
-        lat: 40.4539, lon: -79.9922,
-        categories: ["work", "medical", "financial"],
-        access: ["transit", "phone"],
-        note: "Confirm current eligibility and services."
-      },
-      {
-        id: "pgh_food",
-        name: "Greater Pittsburgh Community Food Bank",
-        address: "1 North Linden Street, Duquesne / Pittsburgh Metro, PA 15110",
-        phone: "(412) 460-3663",
-        website: "https://pittsburghfoodbank.org/",
-        lat: 40.3792, lon: -79.8471,
-        categories: ["food"],
-        access: ["transit", "phone"],
-        note: "Confirm nearby distribution locations and access options."
-      },
-      {
-        id: "pgh_heinz",
-        name: "H.J. Heinz III VA Campus",
-        address: "1010 Delafield Road, Pittsburgh, PA 15215",
-        phone: "(866) 482-7488",
-        website: "https://www.va.gov/pittsburgh-health-care/locations/h-j-heinz-iii-department-of-veterans-affairs-medical-center/",
-        lat: 40.4958, lon: -79.8981,
-        categories: ["medical"],
-        access: ["transit", "phone"],
-        note: "Confirm current services, eligibility, and transportation."
-      },
-
-      {
-        id: "sd_vvsd",
-        name: "Veterans Village of San Diego",
-        address: "4141 Pacific Highway, San Diego, CA 92110",
-        phone: "(619) 393-2000",
-        website: "https://vvsd.net/",
-        lat: 32.7481, lon: -117.1965,
-        categories: ["financial", "food", "work", "medical"],
-        access: ["transit", "phone"],
-        note: "Confirm available services and eligibility requirements."
-      },
-      {
-        id: "sd_va",
-        name: "Jennifer Moreno VA Medical Center / Mission Valley VA Clinic",
-        address: "8810 Rio San Diego Drive, San Diego, CA 92108",
-        phone: "(619) 400-5000",
-        website: "https://www.va.gov/san-diego-health-care/",
-        lat: 32.7759, lon: -117.1391,
-        categories: ["medical"],
-        access: ["transit", "phone"],
-        note: "Confirm the facility name, address, services, and appointments."
-      },
-
-      {
-        id: "sa_endeavors",
-        name: "Endeavors — Veteran Supportive Services",
-        address: "6363 De Zavala Road, San Antonio, TX 78249",
-        phone: "(210) 431-6466",
-        website: "https://endeavors.org/veteran-supportive-services/",
-        lat: 29.5612, lon: -98.6134,
-        categories: ["financial", "food", "medical"],
-        access: ["transit", "phone"],
-        note: "Confirm service area, eligibility, funding, and programs."
-      },
-      {
-        id: "sa_bexar",
-        name: "Bexar County Military & Veterans Services Center",
-        address: "1422 E. Grayson Street, Suite 400, San Antonio, TX 78208",
-        phone: "(210) 335-6775",
-        website: "https://www.bexar.org/509/Military-and-Veterans-Services",
-        lat: 29.4426, lon: -98.4612,
-        categories: ["work", "financial", "medical"],
-        access: ["transit", "phone"],
-        note: "Confirm current benefit, employment, and financial assistance services."
+        access: ["transit"],
+        address: "Fictional downtown Riverbend location",
+        phone: "Fictional contact",
+        note:
+          "The starter kit lists job-search help, résumé reviews, and training.",
+        fictional: true
       }
+    ];
+
+    /*
+      Regional sample records adapted from the teammate's prototype.
+
+      They are unverified. The categories are broad source labels and
+      are not proof of eligibility or current availability.
+    */
+    const REGIONAL_ORGANIZATIONS = [
+      { id:"nj_bcvso", name:"Bergen County Division of Veteran Services & NJ DMAVA VSO", address:"One Bergen County Plaza, 2nd Floor, Hackensack, NJ 07601", phone:"(201) 336-6325", lat:40.8788, lon:-74.0422, categories:["rent","food","medical","work"], access:["transit","phone"], note:"Confirm services and eligibility." },
+      { id:"nj_onestop", name:"Bergen County One-Stop Career Center", address:"60 State Street, 2nd Floor, Hackensack, NJ 07601", phone:"(201) 329-9600", lat:40.8859, lon:-74.0439, categories:["work"], access:["transit","phone"], note:"The source does not list emergency rent or food grants." },
+      { id:"nj_ssvf", name:"Community Hope — Hope for Veterans", address:"175 Washington Ave, Dumont / Hackensack Service Hub, NJ 07601", phone:"(855) 483-8466", lat:40.8921, lon:-74.0398, categories:["rent","food"], access:["transit","phone"], note:"Confirm address, funding, and eligibility." },
+      { id:"nj_va", name:"Hackensack VA Clinic", address:"385 Prospect Avenue, Hackensack, NJ 07601", phone:"(201) 342-4536", lat:40.8942, lon:-74.0568, categories:["medical"], access:["transit","phone"], note:"Confirm services and appointments." },
+      { id:"nj_vetcenter", name:"Secaucus / Bergen Vet Center", address:"110A Meadowlands Parkway, Suite 102, Secaucus, NJ 07094", phone:"(201) 223-7787", lat:40.7931, lon:-74.0683, categories:["medical","work"], access:["transit","phone"], note:"Confirm services and access." },
+      { id:"nj_food", name:"Center for Food Action", address:"192 W. Demarest Avenue, Englewood / Hackensack Hub, NJ 07631", phone:"(201) 569-1804", lat:40.8995, lon:-73.9821, categories:["food","rent"], access:["transit","phone"], note:"Confirm address and assistance." },
+      { id:"nj_catholic", name:"Catholic Charities Archdiocese of Newark — Veterans Program", address:"590 North 7th Street, Newark, NJ 07107", phone:"(855) 768-7932", lat:40.7641, lon:-74.1823, categories:["rent","food"], access:["transit","phone"], note:"Confirm eligibility and coverage." },
+      { id:"nj_gigo", name:"GI Go Fund", address:"436 Central Avenue, Newark / Northern NJ Hub, NJ 07107", phone:"(862) 240-1755", lat:40.7478, lon:-74.1912, categories:["work","rent","food"], access:["transit","phone"], note:"Confirm current services." },
+      { id:"nj_eastorange", name:"East Orange VA Medical Center", address:"385 Tremont Avenue, East Orange, NJ 07018", phone:"(973) 676-1000", lat:40.7521, lon:-74.2361, categories:["medical"], access:["transit","phone"], note:"Confirm services and transportation." },
+      { id:"nj_newarkbenefits", name:"Newark VA Regional Benefit Office", address:"20 Washington Place, Newark, NJ 07102", phone:"(800) 827-1000", lat:40.7429, lon:-74.1704, categories:["medical","work","rent"], access:["transit","phone"], note:"Confirm which benefit services are available." },
+      { id:"nj_social", name:"Bergen County Board of Social Services", address:"218 Route 17 North, Rochelle Park, NJ 07662", phone:"(201) 368-4200", lat:40.9088, lon:-74.0725, categories:["food","rent"], access:["phone"], note:"The source reports limited direct transit access." },
+      { id:"nj_lyons", name:"Lyons VA Medical Center — Domiciliary", address:"151 Knollcroft Road, Lyons, NJ 07939", phone:"(908) 647-0180", lat:40.6652, lon:-74.5491, categories:["housing","medical"], access:["phone"], note:"The source describes a residential program; confirm eligibility." },
+
+      { id:"pgh_vlp", name:"Veterans Leadership Program of Western PA", address:"2934 Smallman Street, Pittsburgh, PA 15201", phone:"(412) 481-8200", lat:40.4581, lon:-79.9742, categories:["rent","food","work"], access:["transit","phone"], note:"Confirm services and funding." },
+      { id:"pgh_career", name:"PA CareerLink Pittsburgh / Allegheny County", address:"2201 Liberty Avenue, Pittsburgh, PA 15222", phone:"(412) 552-7100", lat:40.4519, lon:-79.9831, categories:["work"], access:["transit","phone"], note:"The source does not list emergency rent or food grants." },
+      { id:"pgh_county", name:"Allegheny County Veterans Services", address:"4141 Fifth Avenue, 2nd Floor, Pittsburgh, PA 15213", phone:"(412) 621-4357", lat:40.4439, lon:-79.9547, categories:["rent","food","medical"], access:["transit","phone"], note:"Confirm current programs." },
+      { id:"pgh_benefits", name:"Pittsburgh VA Regional Benefit Office", address:"1000 Liberty Avenue, Room 1700, Pittsburgh, PA 15222", phone:"(800) 827-1000", lat:40.4432, lon:-79.9949, categories:["medical","work","rent"], access:["transit","phone"], note:"Confirm available benefits services." },
+      { id:"pgh_vamc", name:"Pittsburgh VA Medical Center — University Drive", address:"University Drive C, Pittsburgh, PA 15240", phone:"(866) 482-7488", lat:40.4457, lon:-79.9602, categories:["medical"], access:["transit","phone"], note:"Confirm appointments and eligibility." },
+      { id:"pgh_vetcenter", name:"Pittsburgh Vet Center", address:"2500 Baldwick Road, Suite 15, Pittsburgh, PA 15205", phone:"(412) 920-1765", lat:40.4278, lon:-80.0681, categories:["medical","work"], access:["transit","phone"], note:"Confirm current services." },
+      { id:"pgh_salvation", name:"The Salvation Army Western PA — Veteran Family Program", address:"700 North Bell Avenue, Carnegie / Pittsburgh, PA 15106", phone:"(412) 446-1500", lat:40.4089, lon:-80.0835, categories:["rent","food"], access:["transit","phone"], note:"Confirm address and eligibility." },
+      { id:"pgh_wwp", name:"Wounded Warrior Project — Pittsburgh Service Office", address:"600 River Avenue, Suite 400, Pittsburgh, PA 15212", phone:"(412) 471-0935", lat:40.4539, lon:-79.9922, categories:["work","medical","rent"], access:["transit","phone"], note:"Confirm eligibility and services." },
+      { id:"pgh_food", name:"Greater Pittsburgh Community Food Bank", address:"1 North Linden Street, Duquesne / Pittsburgh Metro, PA 15110", phone:"(412) 460-3663", lat:40.3792, lon:-79.8471, categories:["food"], access:["transit","phone"], note:"Confirm nearby distribution locations." },
+      { id:"pgh_heinz", name:"H.J. Heinz III VA Campus", address:"1010 Delafield Road, Pittsburgh, PA 15215", phone:"(866) 482-7488", lat:40.4958, lon:-79.8981, categories:["medical"], access:["transit","phone"], note:"Confirm services and transportation." },
+
+      { id:"sd_vvsd", name:"Veterans Village of San Diego", address:"4141 Pacific Highway, San Diego, CA 92110", phone:"(619) 393-2000", lat:32.7481, lon:-117.1965, categories:["rent","food","work","medical"], access:["transit","phone"], note:"Confirm available services and eligibility." },
+      { id:"sd_va", name:"Jennifer Moreno VA Medical Center / Mission Valley VA Clinic", address:"8810 Rio San Diego Drive, San Diego, CA 92108", phone:"(619) 400-5000", lat:32.7759, lon:-117.1391, categories:["medical"], access:["transit","phone"], note:"Confirm facility name, address, and services." },
+
+      { id:"sa_endeavors", name:"Endeavors — Veteran Supportive Services", address:"6363 De Zavala Road, San Antonio, TX 78249", phone:"(210) 431-6466", lat:29.5612, lon:-98.6134, categories:["rent","food","medical"], access:["transit","phone"], note:"Confirm service area and eligibility." },
+      { id:"sa_bexar", name:"Bexar County Military & Veterans Services Center", address:"1422 E. Grayson Street, Suite 400, San Antonio, TX 78208", phone:"(210) 335-6775", lat:29.4426, lon:-98.4612, categories:["work","rent","medical"], access:["transit","phone"], note:"Confirm current services." }
     ];
 
     const $ = selector => document.querySelector(selector);
     const $$ = selector => Array.from(document.querySelectorAll(selector));
 
-    const openingMessage =
-      "I’m here to help you work out what support might be useful. " +
-      "You can skip anything or stop whenever you like. " +
-      "What feels most important to address right now?";
+    function emptyIntake() {
+      return {
+        summary: "",
+        needs: [],
+        housingStatus: "",
+        deadline: "",
+        location: "",
+        zip: "",
+        transport: "",
+        contactMethod: "",
+        contactValue: ""
+      };
+    }
 
-    let conversation = [];
-    let chatStarted = false;
-    let busy = false;
-    let summaryInitialized = false;
-    let requestController = null;
+    let intake = emptyIntake();
+    let messages = [];
+    let skipped = new Set();
+    let currentQuestion = "story";
+    let phase = "intake";
+    let demoMode = false;
+    let summaryEdited = false;
+    let mainId = null;
+    let backupId = null;
+    let currentApplicationRole = "main";
+    let currentApplicationId = null;
+    let submissionId = null;
+    let pollTimer = null;
     let recognition = null;
-
-    let editedFields = new Set();
-    let directorySearchPerformed = false;
-    let mainOrganizationId = null;
-    let backupOrganizationId = null;
-
-    function selectedNeeds() {
-      return $$('input[name="need"]:checked')
-        .map(input => input.value);
-    }
-
-    function needsText() {
-      const selected = selectedNeeds();
-
-      return selected.length
-        ? selected.map(value => NEED_LABELS[value]).join(", ")
-        : "None selected";
-    }
+    let busy = false;
 
     function addLine(container, label, value) {
       const paragraph = document.createElement("p");
@@ -1644,20 +1193,6 @@
       );
 
       container.appendChild(paragraph);
-    }
-
-    function showEntryPanel(panelId) {
-      ["entry-choice", "new-welcome", "returning-welcome"]
-        .forEach(id => {
-          document.getElementById(id).hidden = id !== panelId;
-        });
-
-      const heading = document.querySelector("#" + panelId + " h1");
-
-      if (heading) {
-        heading.tabIndex = -1;
-        heading.focus();
-      }
     }
 
     function showStep(number) {
@@ -1680,15 +1215,10 @@
       $("#heading-" + number).focus();
     }
 
-    function openApplication(step = 0) {
+    function openApplication() {
       $("#entry-screen").hidden = true;
       $("#application").hidden = false;
-
-      if (step === 2) renderReview();
-      if (step === 3) renderMatches();
-      if (step === 4) renderPlan();
-
-      showStep(step);
+      showStep(0);
       window.scrollTo(0, 0);
     }
 
@@ -1696,10 +1226,10 @@
       busy = value;
 
       [
-        "send-message",
-        "use-conversation",
-        "continue-without-draft",
-        "start-chat"
+        "send-answer",
+        "skip-question",
+        "continue-intake",
+        "retry-extraction"
       ].forEach(id => {
         document.getElementById(id).disabled = value;
       });
@@ -1707,74 +1237,376 @@
       $("#chat-input").disabled = value;
     }
 
-    async function callApi(path, payload) {
-      const controller = new AbortController();
-      requestController = controller;
+    async function api(path, payload) {
+      const response = await fetch(path, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || "The service could not complete the request."
+        );
+      }
+
+      return data;
+    }
+
+    function addMessage(role, content) {
+      messages.push({ role, content });
+      renderConversation();
+    }
+
+    function renderConversation() {
+      const container = $("#conversation");
+      container.replaceChildren();
+
+      messages.forEach(message => {
+        const item = document.createElement("div");
+        item.className = "message " + message.role;
+
+        const name = document.createElement("strong");
+        name.textContent =
+          message.role === "user" ? "You" : "Assistant";
+
+        const content = document.createElement("div");
+        content.textContent = message.content;
+
+        item.append(name, content);
+        container.appendChild(item);
+      });
+
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function startConversation() {
+      resetSession();
+
+      messages = [
+        {
+          role: "assistant",
+          content:
+            "I’m here to help you explore support. You can skip anything. " +
+            "What feels most important to address right now?"
+        }
+      ];
+
+      currentQuestion = "story";
+      renderConversation();
+      openApplication();
+    }
+
+    function loadAlexCase() {
+      resetSession();
+      demoMode = true;
+
+      /*
+        Fictional starter-kit scenario.
+
+        The ZIP and contact details below are explicitly fictional test
+        values. They are not represented as real details for Alex.
+      */
+      intake = {
+        summary:
+          "I recently lost my job and am behind on rent. " +
+          "I would like help with housing costs, food, and finding work. " +
+          "I use the bus during the week and would prefer not to repeat " +
+          "my story to multiple organizations.",
+        needs: ["rent", "food", "work"],
+        housingStatus: "at-risk",
+        deadline: "2026-11-15",
+        location: "Fictional Riverbend, New Jersey",
+        zip: "07601",
+        transport: "transit",
+        contactMethod: "",
+        contactValue: ""
+      };
+
+      messages = [
+        {
+          role: "assistant",
+          content: "The fictional Alex test case has been loaded."
+        },
+        {
+          role: "user",
+          content:
+            "I lost my job, I’m behind on rent, I need food and work help, " +
+            "and I use the bus during the week."
+        },
+        {
+          role: "assistant",
+          content:
+            "I’ve organized the sample information. Please review it before " +
+            "choosing a support option."
+        }
+      ];
+
+      currentQuestion = null;
+      renderConversation();
+      openApplication();
+      populateReview();
+
+      $("#review-status").textContent =
+        "Fictional Alex test case loaded. The ZIP is a sample value for this demo.";
+
+      showStep(1);
+    }
+
+    /*
+      Determine the next missing question from structured intake state.
+      A skipped answer is not asked again automatically.
+    */
+    function nextQuestion() {
+      if (phase === "contact") {
+        if (!intake.contactMethod && !skipped.has("contactMethod")) {
+          return {
+            key: "contactMethod",
+            text:
+              "For this demo application, would you prefer a response " +
+              "by email or phone?"
+          };
+        }
+
+        if (
+          intake.contactMethod &&
+          !intake.contactValue &&
+          !skipped.has("contactValue")
+        ) {
+          return {
+            key: "contactValue",
+            text:
+              intake.contactMethod === "email"
+                ? "What fictional test email should the sample form use? " +
+                  "Please use an address ending in .invalid."
+                : "What fictional test phone number should the sample form use? " +
+                  "Please use a 555 number."
+          };
+        }
+
+        return null;
+      }
+
+      if (!intake.needs.length && !skipped.has("needs")) {
+        return {
+          key: "needs",
+          text:
+            "What kind of support would help most—such as rent, food, " +
+            "housing, healthcare, or work?"
+        };
+      }
+
+      if (
+        (intake.needs.includes("rent") || intake.needs.includes("housing")) &&
+        !intake.housingStatus &&
+        !skipped.has("housingStatus")
+      ) {
+        return {
+          key: "housingStatus",
+          text:
+            "Do you currently have a place to stay, or are you looking " +
+            "for a place to stay?"
+        };
+      }
+
+      if (
+        intake.needs.includes("rent") &&
+        !intake.deadline &&
+        !skipped.has("deadline")
+      ) {
+        return {
+          key: "deadline",
+          text:
+            "Is there a date or deadline you would like us to keep in mind? " +
+            "You can say there isn’t one or skip."
+        };
+      }
+
+      if (!intake.zip && !skipped.has("zip")) {
+        return {
+          key: "zip",
+          text:
+            "If you’re comfortable sharing it, what is the five-digit ZIP " +
+            "code where you would like help? You can skip this."
+        };
+      }
+
+      if (!intake.transport && !skipped.has("transport")) {
+        return {
+          key: "transport",
+          text:
+            "Should we consider public transportation, access to a car, " +
+            "or a preference for phone or online support?"
+        };
+      }
+
+      return null;
+    }
+
+    function askNextQuestion() {
+      const next = nextQuestion();
+
+      if (!next) {
+        currentQuestion = null;
+
+        if (phase === "contact") {
+          addMessage(
+            "assistant",
+            "Thank you. I’ll use those test details to prepare the sample " +
+            "application for your review."
+          );
+
+          prepareApplication(currentApplicationRole);
+          return;
+        }
+
+        addMessage(
+          "assistant",
+          "Thank you. I’ve gathered a starting point. Please review the " +
+          "information and correct anything I misunderstood."
+        );
+
+        populateReview();
+        showStep(1);
+        return;
+      }
+
+      currentQuestion = next.key;
+      addMessage("assistant", next.text);
+      $("#question-status").textContent =
+        "You can answer, skip, or continue with what you have shared.";
+    }
+
+    function mergeDraft(draft) {
+      if (!summaryEdited && typeof draft.summary === "string") {
+        intake.summary = draft.summary;
+      }
+
+      if (Array.isArray(draft.needs) && draft.needs.length) {
+        intake.needs = [...new Set([...intake.needs, ...draft.needs])];
+      }
+
+      [
+        "housingStatus",
+        "deadline",
+        "location",
+        "zip",
+        "transport",
+        "contactMethod",
+        "contactValue"
+      ].forEach(key => {
+        if (
+          typeof draft[key] === "string" &&
+          draft[key] &&
+          !skipped.has(key)
+        ) {
+          intake[key] = draft[key];
+        }
+      });
+    }
+
+    async function processConversation() {
+      if (busy) return;
+
+      if (!$("#ai-consent").checked) {
+        $("#chat-status").textContent =
+          "Please select the AI consent checkbox before sending.";
+        return;
+      }
+
+      busy = true;
+      $("#send-answer").disabled = true;
+      $("#retry-extraction").hidden = true;
+      $("#chat-status").textContent = "Understanding your answer...";
 
       try {
-        const response = await fetch(path, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload),
-          signal: controller.signal
+        const result = await api("/api/intake", {
+          messages
         });
 
-        const data = await response.json().catch(() => ({}));
+        mergeDraft(result.draft);
+        $("#chat-status").textContent = "";
+        askNextQuestion();
+      } catch {
+        $("#chat-status").textContent =
+          "We couldn’t process that answer. You can try again or continue " +
+          "and fill in the information yourself.";
 
-        if (!response.ok) {
-          throw new Error(
-            data.error ||
-            "The service is unavailable. Please try again."
-          );
-        }
-
-        return data;
+        $("#retry-extraction").hidden = false;
       } finally {
-        if (requestController === controller) {
-          requestController = null;
-        }
+        busy = false;
+        $("#send-answer").disabled = false;
       }
     }
 
-    /* Voice input */
+    async function sendAnswer() {
+      if (busy) return;
+
+      const text = $("#chat-input").value.trim();
+
+      if (!text) {
+        $("#chat-status").textContent =
+          "Please type or speak an answer first.";
+        return;
+      }
+
+      if (!$("#ai-consent").checked) {
+        $("#chat-status").textContent =
+          "Please select the AI consent checkbox before sending.";
+        return;
+      }
+
+      if (/^(skip|prefer not to say|pass)$/i.test(text)) {
+        $("#chat-input").value = "";
+        skipCurrentQuestion();
+        return;
+      }
+
+      stopVoice();
+      addMessage("user", text);
+      $("#chat-input").value = "";
+
+      await processConversation();
+    }
+
+    function skipCurrentQuestion() {
+      if (busy) return;
+
+      if (currentQuestion) {
+        skipped.add(currentQuestion);
+      }
+
+      addMessage("user", "I’d like to skip this question.");
+      askNextQuestion();
+    }
+
+    /* Voice */
 
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    if (!SpeechRecognition) {
-      $("#voice-availability").textContent =
-        "Voice input is not available in this browser. You can type instead.";
+    $("#voice-availability").textContent = SpeechRecognition
+      ? "Voice input may be available after microphone permission."
+      : "Voice input is not available in this browser. You can type instead.";
 
-      $("#speak-chat").disabled = true;
-      $("#speak-story").disabled = true;
-    } else {
-      $("#voice-availability").textContent =
-        "Voice input may be available. Your browser will ask for microphone permission.";
+    if (!SpeechRecognition) {
+      $("#speak-answer").disabled = true;
     }
 
-    function startVoice(targetId, statusId) {
-      const status = document.getElementById(statusId);
-      const target = document.getElementById(targetId);
-
-      if (!SpeechRecognition) {
-        status.textContent =
-          "Voice input is not available in this browser. Please type instead.";
-        return;
-      }
+    function startVoice() {
+      if (!SpeechRecognition) return;
 
       if (!$("#voice-consent").checked) {
-        status.textContent =
-          "Please select the voice input checkbox above before using the microphone.";
+        $("#chat-status").textContent =
+          "Please select the voice input checkbox before using the microphone.";
         return;
       }
 
-      if (recognition) {
-        status.textContent =
-          "The microphone is already listening. Stop it before starting again.";
-        return;
-      }
+      if (recognition) return;
 
       const instance = new SpeechRecognition();
       recognition = instance;
@@ -1783,32 +1615,27 @@
       instance.interimResults = false;
       instance.continuous = false;
 
-      status.textContent =
-        "Listening. Speak now, then review the words before continuing.";
+      $("#chat-status").textContent =
+        "Listening. Review the words before sending.";
 
       instance.onresult = event => {
-        const words = Array.from(event.results)
+        const text = Array.from(event.results)
           .map(result => result[0].transcript)
           .join(" ")
           .trim();
 
-        if (words) {
-          const separator = target.value.trim() ? " " : "";
-          target.value = (target.value + separator + words)
-            .slice(0, target.maxLength > 0 ? target.maxLength : undefined);
+        if (text) {
+          $("#chat-input").value =
+            ($("#chat-input").value.trim() + " " + text).trim();
 
-          target.dispatchEvent(new Event("input", { bubbles: true }));
-
-          status.textContent =
-            "Voice input added. Please review and edit the words.";
+          $("#chat-status").textContent =
+            "Voice input added. Review and edit it before sending.";
         }
       };
 
-      instance.onerror = event => {
-        status.textContent =
-          event.error === "not-allowed"
-            ? "Microphone permission was not granted. You can type instead."
-            : "Voice input could not be completed. You can type instead.";
+      instance.onerror = () => {
+        $("#chat-status").textContent =
+          "Voice input could not be completed. You can type instead.";
       };
 
       instance.onend = () => {
@@ -1821,7 +1648,7 @@
         instance.start();
       } catch {
         recognition = null;
-        status.textContent =
+        $("#chat-status").textContent =
           "The microphone could not start. You can type instead.";
       }
     }
@@ -1831,7 +1658,7 @@
         try {
           recognition.stop();
         } catch {
-          // Nothing further is needed.
+          // No further action needed.
         }
 
         recognition = null;
@@ -1842,275 +1669,60 @@
       }
     }
 
-    function readLastResponse() {
+    function readQuestion() {
       if (!("speechSynthesis" in window)) {
         $("#chat-status").textContent =
           "Read-aloud is not available in this browser.";
         return;
       }
 
-      const last = [...conversation]
+      const last = [...messages]
         .reverse()
         .find(message => message.role === "assistant");
 
-      if (!last) {
-        $("#chat-status").textContent =
-          "There is no assistant response to read yet.";
-        return;
-      }
+      if (!last) return;
 
       window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(last.content);
-      utterance.lang = "en-US";
-      window.speechSynthesis.speak(utterance);
+      window.speechSynthesis.speak(
+        new SpeechSynthesisUtterance(last.content)
+      );
     }
 
-    /* Conversation */
+    /* Review */
 
-    function renderConversation() {
-      const container = $("#conversation");
-      container.replaceChildren();
+    function populateReview() {
+      $("#review-summary").value = intake.summary;
+      $("#review-housing").value = intake.housingStatus;
+      $("#review-deadline").value = intake.deadline;
+      $("#review-location").value = intake.location;
+      $("#review-zip").value = intake.zip;
+      $("#review-transport").value = intake.transport;
 
-      conversation.forEach(message => {
-        const item = document.createElement("div");
-        item.className = "message " + message.role;
-
-        const name = document.createElement("strong");
-        name.textContent =
-          message.role === "user" ? "You" : "AI assistant";
-
-        const content = document.createElement("div");
-        content.textContent = message.content;
-
-        item.append(name, content);
-        container.appendChild(item);
+      $$('input[name="need"]').forEach(input => {
+        input.checked = intake.needs.includes(input.value);
       });
-
-      container.scrollTop = container.scrollHeight;
     }
 
-    function beginChat() {
-      if (!$("#ai-consent").checked) {
-        $("#intake-status").textContent =
-          "Please select the AI checkbox before starting the conversation.";
-        return;
-      }
+    function saveReviewToIntake() {
+      intake.summary = $("#review-summary").value.trim();
+      summaryEdited = true;
 
-      $("#intake-status").textContent = "";
-      $("#chat-status").textContent = "";
-      $("#manual-area").hidden = true;
-      $("#chat-area").hidden = false;
+      intake.needs = $$('input[name="need"]:checked')
+        .map(input => input.value);
 
-      if (!chatStarted) {
-        conversation = [
-          { role: "assistant", content: openingMessage }
-        ];
+      intake.housingStatus = $("#review-housing").value;
+      intake.deadline = $("#review-deadline").value;
+      intake.location = $("#review-location").value.trim();
+      intake.zip = $("#review-zip").value.trim();
+      intake.transport = $("#review-transport").value;
 
-        chatStarted = true;
-        renderConversation();
-      }
-
-      $("#chat-input").focus();
-    }
-
-    async function sendMessage() {
-      if (busy) return;
-
-      if (!$("#ai-consent").checked) {
-        $("#chat-status").textContent =
-          "Please select the AI checkbox before using the conversation.";
-        return;
-      }
-
-      const text = $("#chat-input").value.trim();
-
-      if (!text) {
-        $("#chat-status").textContent =
-          "Please type or speak a response first.";
-        return;
-      }
-
-      if (conversation.length >= 29) {
-        $("#chat-status").textContent =
-          "This demo has reached its conversation limit. " +
-          "You can continue with what you have shared.";
-        return;
-      }
-
-      stopVoice();
-
-      conversation.push({ role: "user", content: text });
-      $("#chat-input").value = "";
-      $("#chat-status").textContent = "The assistant is responding...";
-      renderConversation();
-      setBusy(true);
-
-      try {
-        const result = await callApi("/api/chat", {
-          messages: conversation
-        });
-
-        conversation.push({
-          role: "assistant",
-          content: result.reply
-        });
-
-        renderConversation();
-        $("#chat-status").textContent = "";
-      } catch (error) {
-        const last = conversation[conversation.length - 1];
-
-        if (
-          last &&
-          last.role === "user" &&
-          last.content === text
-        ) {
-          conversation.pop();
-          $("#chat-input").value = text;
-          renderConversation();
-        }
-
-        $("#chat-status").textContent =
-          error.name === "AbortError"
-            ? "The request was stopped."
-            : "The assistant could not respond. You can try again or continue without an AI draft.";
-      } finally {
-        setBusy(false);
-      }
-    }
-
-    function userConversationText() {
-      return conversation
-        .filter(message => message.role === "user")
-        .map(message => message.content)
-        .join("\n\n");
-    }
-
-    function clearRecommendations() {
-      directorySearchPerformed = false;
-      mainOrganizationId = null;
-      backupOrganizationId = null;
-      $("#matches").replaceChildren();
-      updateOrganizationChoices();
-    }
-
-    function applyIntakeDraft(draft) {
-      const prefilled = [];
-
-      if (!editedFields.has("needs") && Array.isArray(draft.needs)) {
-        $$('input[name="need"]').forEach(input => {
-          input.checked = draft.needs.includes(input.value);
-        });
-
-        if (draft.needs.length) prefilled.push("support needs");
-      }
-
-      const fields = [
-        ["housing-status", draft.housingStatus, "housing situation"],
-        ["deadline", draft.deadline, "date"],
-        ["location", draft.location, "area"],
-        ["search-zip", draft.zip, "ZIP code"],
-        ["transport", draft.transport, "transportation preference"],
-        ["goal", draft.goal, "next-step goal"]
-      ];
-
-      fields.forEach(([id, value, label]) => {
-        if (!editedFields.has(id) && typeof value === "string" && value) {
-          document.getElementById(id).value = value;
-
-          if (document.getElementById(id).value) {
-            prefilled.push(label);
-          }
-        }
-      });
-
-      if (
-        !editedFields.has("summary") &&
-        typeof draft.summary === "string"
-      ) {
-        $("#summary").value = draft.summary;
-        summaryInitialized = true;
-        prefilled.push("AI-generated summary");
-
-        $("#summary-status").textContent =
-          "This summary was drafted by AI from the conversation. " +
-          "Please review and correct it.";
-      }
-
-      clearRecommendations();
-
-      $("#prefill-status").textContent = prefilled.length
-        ? "We drafted: " + prefilled.join(", ") +
-          ". Please review and correct these answers."
-        : "No fields were prefilled. You can complete or skip them yourself.";
-    }
-
-    async function prepareConversationDraft() {
-      if (busy) return;
-
-      if (!$("#ai-consent").checked) {
-        $("#chat-status").textContent =
-          "AI consent is not selected. You can continue without an AI draft.";
-        return;
-      }
-
-      if (!userConversationText()) {
-        $("#prefill-status").textContent =
-          "No conversation answers were provided. You can complete or skip the fields.";
-        showStep(1);
-        return;
-      }
-
-      stopVoice();
-      setBusy(true);
-      $("#chat-status").textContent =
-        "Preparing your summary and suggested answers...";
-
-      try {
-        const result = await callApi("/api/intake-draft", {
-          messages: conversation
-        });
-
-        applyIntakeDraft(result.draft);
-        $("#chat-status").textContent = "";
-        showStep(1);
-      } catch {
-        $("#chat-status").textContent =
-          "We couldn’t prepare the AI draft. You can try again or " +
-          "continue without an AI draft.";
-      } finally {
-        setBusy(false);
-      }
-    }
-
-    function prepareSummary() {
-      if (!summaryInitialized) {
-        $("#summary").value = $("#story").value.trim();
-        summaryInitialized = true;
-
-        $("#summary-status").textContent = $("#summary").value
-          ? "This is your own writing. You can edit it."
-          : "No summary has been created yet. You can write one here.";
-      }
-    }
-
-    function renderReview() {
-      const container = $("#review-details");
-      container.replaceChildren();
-
-      addLine(container, "Support requested", needsText());
-      addLine(container, "Housing", HOUSING_LABELS[$("#housing-status").value]);
-      addLine(container, "Date to keep in mind", $("#deadline").value);
-      addLine(container, "Area", $("#location").value.trim());
-      addLine(container, "ZIP", $("#search-zip").value.trim());
-      addLine(container, "Transportation", TRANSPORT_LABELS[$("#transport").value]);
-      addLine(container, "Next-step goal", GOAL_LABELS[$("#goal").value]);
+      mainId = null;
+      backupId = null;
     }
 
     /* Recommendations */
 
-    function approximateDistanceMiles(lat1, lon1, lat2, lon2) {
+    function distanceMiles(lat1, lon1, lat2, lon2) {
       const radius = 3958.8;
       const radians = degrees => degrees * Math.PI / 180;
 
@@ -2127,338 +1739,230 @@
         Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
 
-    function selectedCategories() {
-      return new Set(
-        selectedNeeds().flatMap(
-          need => NEED_TO_CATEGORIES[need] || []
-        )
-      );
+    function activeOrganizations() {
+      return demoMode
+        ? ALEX_ORGANIZATIONS
+        : REGIONAL_ORGANIZATIONS;
     }
 
     function getOrganization(id) {
-      return organizations.find(org => org.id === id) || null;
+      return activeOrganizations().find(org => org.id === id) || null;
     }
 
-    function updateOrganizationChoices() {
-      const main = getOrganization(mainOrganizationId);
-      const backup = getOrganization(backupOrganizationId);
+    function updateSelectedLabels() {
+      const main = getOrganization(mainId);
+      const backup = getOrganization(backupId);
 
-      $("#main-choice").textContent =
+      $("#selected-main").textContent =
         "Main option: " + (main ? main.name : "Not selected");
 
-      $("#backup-choice").textContent =
+      $("#selected-backup").textContent =
         "Backup option: " + (backup ? backup.name : "Not selected");
     }
 
-    function addWebsite(container, website) {
-      try {
-        const url = new URL(website);
-
-        if (url.protocol !== "https:") return;
-
-        const paragraph = document.createElement("p");
-        const link = document.createElement("a");
-
-        link.href = url.href;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = "Visit listed website";
-
-        paragraph.appendChild(link);
-        container.appendChild(paragraph);
-      } catch {
-        // Invalid links are not displayed.
-      }
-    }
-
-    function accessText(org) {
-      const parts = [];
-
-      if (org.access.includes("transit")) {
-        parts.push("transit access");
-      }
-
-      if (org.access.includes("phone")) {
-        parts.push("phone contact or intake");
-      }
-
-      return parts.length
-        ? parts.join(" and ")
-        : "No access information listed";
-    }
-
-    function renderMatches() {
-      const container = $("#matches");
-      const status = $("#directory-status");
-      const zip = $("#search-zip").value.trim();
-
+    function findOptions() {
+      const container = $("#recommendations");
       container.replaceChildren();
-      updateOrganizationChoices();
 
-      $("#zip-display").textContent =
-        "Your ZIP: " + (zip || "Not provided");
+      const radius = Number($("#radius").value);
+      const area = ZIP_AREAS[intake.zip];
 
-      if (!directorySearchPerformed) {
-        status.textContent =
-          "Select Find my possible options to search.";
+      if (!intake.needs.length) {
+        $("#options-status").textContent =
+          "Go back and select at least one type of support.";
         return;
       }
 
-      const area = ZIP_AREAS[zip];
-      const radius = Number($("#search-radius").value);
-      const categories = selectedCategories();
-      const transport = $("#transport").value;
-
-      if (!/^\d{5}$/.test(zip)) {
-        status.textContent =
-          "A five-digit ZIP is needed for this search. Select Back to add one.";
+      if (!demoMode && !area) {
+        $("#options-status").textContent =
+          "This prototype needs one of its supported ZIP codes for the " +
+          "regional search. You can go back and change it.";
         return;
       }
 
-      if (!area) {
-        status.textContent =
-          "This prototype does not have coordinates for that ZIP. " +
-          "You can continue without searching or use one of the listed sample ZIPs.";
-        return;
-      }
-
-      if (!categories.size) {
-        status.textContent =
-          "Select Back and choose a type of support before searching.";
-        return;
-      }
-
-      const matches = organizations
+      const matches = activeOrganizations()
         .map(org => {
-          const distance = approximateDistanceMiles(
-            area.lat,
-            area.lon,
-            org.lat,
-            org.lon
+          const matching = org.categories.filter(
+            category => intake.needs.includes(category)
           );
 
-          const matchingCategories = org.categories.filter(
-            category => categories.has(category)
-          );
+          const distance = demoMode
+            ? null
+            : distanceMiles(area.lat, area.lon, org.lat, org.lon);
 
           let accessFit = 0;
-          let accessReason = "";
 
           if (
-            transport === "transit" &&
+            intake.transport === "transit" &&
             org.access.includes("transit")
           ) {
             accessFit = 1;
-            accessReason =
-              "The source lists transit access, which may fit your preference.";
-          } else if (
-            (transport === "phone" || transport === "challenge") &&
+          }
+
+          if (
+            (intake.transport === "phone" ||
+              intake.transport === "challenge") &&
             org.access.includes("phone")
           ) {
             accessFit = 1;
-            accessReason =
-              "The source lists phone contact or intake, which may help " +
-              "with your access preference.";
           }
 
           return {
             ...org,
+            matching,
             distance,
-            matchingCategories,
-            accessFit,
-            accessReason
+            accessFit
           };
         })
         .filter(org =>
-          org.distance <= radius &&
-          org.matchingCategories.length > 0
+          org.matching.length > 0 &&
+          (demoMode || org.distance <= radius)
         )
         .sort((a, b) =>
-          b.matchingCategories.length - a.matchingCategories.length ||
+          b.matching.length - a.matching.length ||
           b.accessFit - a.accessFit ||
-          a.distance - b.distance ||
-          a.name.localeCompare(b.name)
+          (a.distance ?? 0) - (b.distance ?? 0)
         )
         .slice(0, 10);
 
       if (!matches.length) {
-        status.textContent =
-          `No sample entries matched within approximately ${radius} miles ` +
-          `of ${area.city}, ${area.state}.`;
-
+        $("#options-status").textContent =
+          "No sample options matched this search.";
         return;
       }
 
       const suggestedMain = matches[0];
-      const mainCategories = new Set(suggestedMain.matchingCategories);
+      const mainCategories = new Set(suggestedMain.matching);
 
-      const backupCandidates = matches
+      const backups = matches
         .slice(1)
         .map(org => ({
           ...org,
-          additionalCoverage: org.matchingCategories.filter(
+          additional: org.matching.filter(
             category => !mainCategories.has(category)
           ).length
         }))
         .sort((a, b) =>
-          b.additionalCoverage - a.additionalCoverage ||
-          b.matchingCategories.length - a.matchingCategories.length ||
+          b.additional - a.additional ||
+          b.matching.length - a.matching.length ||
           b.accessFit - a.accessFit ||
-          a.distance - b.distance ||
-          a.name.localeCompare(b.name)
+          (a.distance ?? 0) - (b.distance ?? 0)
         );
 
-      const suggestedBackup = backupCandidates[0] || null;
+      const suggestedBackup = backups[0] || null;
 
-      status.textContent =
-        `Found ${matches.length} possible option` +
-        `${matches.length === 1 ? "" : "s"}. ` +
-        `These suggestions use source-listed categories, access, and ` +
-        `approximate distance—not verified eligibility or availability.`;
+      $("#options-status").textContent =
+        "Suggestions are based on listed support categories, " +
+        "listed access, and—outside the Alex case—approximate distance.";
 
       const panel = document.createElement("div");
       panel.className = "panel";
 
-      const title = document.createElement("h3");
-      title.textContent = "A suggested place to start";
-      panel.appendChild(title);
+      const heading = document.createElement("h3");
+      heading.textContent = "Suggested main and backup";
+      panel.appendChild(heading);
 
-      const intro = document.createElement("p");
-      intro.textContent =
-        "You can confirm these suggestions or choose different options below.";
-      panel.appendChild(intro);
-
-      function addSuggestion(label, org, extra) {
+      function suggestion(label, org) {
         const section = document.createElement("div");
         section.className = "organization";
 
-        const heading = document.createElement("h4");
-        heading.textContent = label + ": " + org.name;
-        section.appendChild(heading);
-
-        const categoriesText = org.matchingCategories
-          .map(category => CATEGORY_LABELS[category] || category)
-          .join(", ");
+        const title = document.createElement("h4");
+        title.textContent = label + ": " + org.name;
+        section.appendChild(title);
 
         addLine(
           section,
           "Why it appears",
-          "The source associates it with " + categoriesText + "."
+          "The source lists " +
+            org.matching.map(value => NEED_LABELS[value]).join(", ") +
+            "."
         );
-
-        if (org.accessReason) {
-          addLine(section, "Possible access fit", org.accessReason);
-        }
 
         addLine(
           section,
-          "Approximate distance",
-          `${org.distance.toFixed(1)} miles from the ZIP-area reference point`
+          "Access",
+          org.access.join(", ") + " — confirm before relying on it"
         );
 
-        if (extra) {
-          addLine(section, "Backup consideration", extra);
+        if (org.distance !== null) {
+          addLine(
+            section,
+            "Approximate distance",
+            org.distance.toFixed(1) + " straight-line miles"
+          );
         }
 
         addLine(section, "Things to confirm", org.note);
         panel.appendChild(section);
       }
 
-      addSuggestion("Suggested main option", suggestedMain, "");
+      suggestion("Suggested main", suggestedMain);
 
       if (suggestedBackup) {
-        addSuggestion(
-          "Suggested backup",
-          suggestedBackup,
-          suggestedBackup.additionalCoverage > 0
-            ? "It lists another selected category not listed for the main option."
-            : "It is another option associated with your selected needs."
-        );
-      } else {
-        const message = document.createElement("p");
-        message.className = "small";
-        message.textContent = "Only one option matched, so there is no suggested backup.";
-        panel.appendChild(message);
+        suggestion("Suggested backup", suggestedBackup);
       }
-
-      const warning = document.createElement("p");
-      warning.className = "small";
-      warning.textContent =
-        "These suggestions rely on unverified data. Confirm services, " +
-        "access, eligibility, funding, and availability.";
-      panel.appendChild(warning);
 
       const confirm = document.createElement("button");
       confirm.type = "button";
-
-      const alreadyConfirmed =
-        mainOrganizationId === suggestedMain.id &&
-        backupOrganizationId === (suggestedBackup?.id || null);
-
-      confirm.textContent = alreadyConfirmed
-        ? "Suggested choices confirmed"
-        : suggestedBackup
-          ? "Confirm these as my main and backup"
-          : "Confirm this as my main option";
-
-      confirm.disabled = alreadyConfirmed;
+      confirm.textContent = suggestedBackup
+        ? "Confirm these as my main and backup"
+        : "Confirm this as my main option";
 
       confirm.addEventListener("click", () => {
-        mainOrganizationId = suggestedMain.id;
-        backupOrganizationId = suggestedBackup?.id || null;
-        renderMatches();
+        mainId = suggestedMain.id;
+        backupId = suggestedBackup?.id || null;
+        updateSelectedLabels();
       });
 
       panel.appendChild(confirm);
       container.appendChild(panel);
 
-      const heading = document.createElement("h3");
-      heading.textContent = "Compare all possible options";
-      container.appendChild(heading);
+      const allHeading = document.createElement("h3");
+      allHeading.textContent = "Compare other options";
+      container.appendChild(allHeading);
 
       matches.forEach(org => {
         const article = document.createElement("article");
         article.className = "organization";
 
-        const tag = document.createElement("span");
-        tag.className = "tag";
-
-        tag.textContent =
-          org.id === suggestedMain.id
-            ? "Suggested main · unverified"
-            : suggestedBackup && org.id === suggestedBackup.id
-              ? "Suggested backup · unverified"
-              : "Possible option · unverified";
-
         const title = document.createElement("h3");
         title.textContent = org.name;
+        article.appendChild(title);
 
-        article.append(tag, title);
-
-        const categoriesText = org.matchingCategories
-          .map(category => CATEGORY_LABELS[category] || category)
-          .join(", ");
-
-        addLine(article, "Why it appears", "The source lists " + categoriesText + ".");
-        addLine(article, "Approximate distance", org.distance.toFixed(1) + " miles");
-        addLine(article, "Source-listed access", accessText(org) + "; confirm first");
         addLine(article, "Listed address", org.address);
         addLine(article, "Listed phone", org.phone);
+        addLine(article, "Access", org.access.join(", "));
         addLine(article, "Things to confirm", org.note);
 
-        if (
-          selectedNeeds().includes("housing") &&
-          org.categories.includes("financial")
-        ) {
-          const note = document.createElement("p");
-          note.className = "small";
-          note.textContent =
-            "This appears under a broad financial category. " +
-            "Housing placement has not been confirmed.";
-          article.appendChild(note);
-        }
+        if (org.distance !== null) {
+          addLine(
+            article,
+            "Approximate distance",
+            org.distance.toFixed(1) + " straight-line miles"
+          );
 
-        addWebsite(article, org.website);
+          const link = document.createElement("a");
+          const destination = encodeURIComponent(org.address);
+          const origin = encodeURIComponent(intake.zip);
+
+          link.href =
+            "https://www.google.com/maps/dir/?api=1&origin=" +
+            origin +
+            "&destination=" +
+            destination;
+
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Open directions in Google Maps";
+
+          const disclosure = document.createElement("p");
+          disclosure.className = "small";
+          disclosure.textContent =
+            "Opening directions shares the ZIP and listed destination " +
+            "with Google Maps.";
+
+          article.append(link, disclosure);
+        }
 
         const actions = document.createElement("div");
         actions.className = "actions";
@@ -2466,488 +1970,497 @@
         const mainButton = document.createElement("button");
         mainButton.type = "button";
         mainButton.className = "secondary";
-        mainButton.textContent =
-          org.id === mainOrganizationId
-            ? "Selected as main"
-            : "Choose as main";
+        mainButton.textContent = "Choose as main";
 
         mainButton.addEventListener("click", () => {
-          mainOrganizationId = org.id;
+          mainId = org.id;
 
-          if (backupOrganizationId === org.id) {
-            backupOrganizationId = null;
-          }
-
-          renderMatches();
+          if (backupId === org.id) backupId = null;
+          updateSelectedLabels();
         });
 
         const backupButton = document.createElement("button");
         backupButton.type = "button";
         backupButton.className = "secondary";
-        backupButton.textContent =
-          org.id === backupOrganizationId
-            ? "Selected as backup"
-            : "Choose as backup";
+        backupButton.textContent = "Choose as backup";
 
         backupButton.addEventListener("click", () => {
-          if (mainOrganizationId === org.id) {
-            status.textContent =
-              "That organization is already your main choice. " +
-              "Choose a different backup.";
+          if (mainId === org.id) {
+            $("#options-status").textContent =
+              "Choose a different organization for the backup.";
             return;
           }
 
-          backupOrganizationId =
-            backupOrganizationId === org.id ? null : org.id;
-
-          renderMatches();
+          backupId = org.id;
+          updateSelectedLabels();
         });
 
         actions.append(mainButton, backupButton);
         article.appendChild(actions);
         container.appendChild(article);
       });
+
+      updateSelectedLabels();
     }
 
-    /* Action plan */
+    /* Sample application */
 
-    function renderPlanOrganizations() {
-      const container = $("#plan-organizations");
+    function preferredApplicationType(org) {
+      return intake.needs.find(need => org.categories.includes(need)) || "";
+    }
+
+    function validDemoContact() {
+      if (intake.contactMethod === "email") {
+        return /^[^\s@]+@[^\s@]+\.invalid$/i.test(intake.contactValue);
+      }
+
+      if (intake.contactMethod === "phone") {
+        return intake.contactValue.replace(/\D/g, "").includes("555");
+      }
+
+      return false;
+    }
+
+    function prepareApplication(role) {
+      currentApplicationRole = role;
+      currentApplicationId = role === "backup" ? backupId : mainId;
+
+      const org = getOrganization(currentApplicationId);
+
+      if (!org) {
+        $("#options-status").textContent =
+          "Please choose an organization first.";
+        showStep(2);
+        return;
+      }
+
+      const details = $("#application-details");
+      details.replaceChildren();
+
+      addLine(details, "Organization", org.name);
+      addLine(
+        details,
+        "Simulated recipient",
+        org.id + "@example.invalid"
+      );
+      addLine(
+        details,
+        "Contact method",
+        intake.contactMethod || "Not provided"
+      );
+      addLine(
+        details,
+        "Fictional contact",
+        intake.contactValue || "Not provided"
+      );
+      addLine(details, "Listed address", org.address);
+      addLine(details, "Listed phone", org.phone);
+      addLine(details, "Access", org.access.join(", "));
+
+      $("#application-type").value = preferredApplicationType(org);
+      $("#include-summary").checked = false;
+      $("#application-message").value = "";
+      $("#application-status").textContent =
+        validDemoContact()
+          ? "Review the form and choose what to include."
+          : "The sample form needs a fictional contact method and contact value.";
+
+      updateApplicationMessage();
+      showStep(3);
+    }
+
+    function updateApplicationMessage() {
+      const type = $("#application-type").value;
+      const org = getOrganization(currentApplicationId);
+
+      const opening = org && type
+        ? `Hello,\n\nI would like to ask about ${NEED_LABELS[type].toLowerCase()} support.`
+        : "Hello,\n\nI would like to ask about available support.";
+
+      const summary = $("#include-summary").checked && intake.summary
+        ? "\n\n" + intake.summary
+        : "";
+
+      $("#application-message").value =
+        opening + summary +
+        "\n\nPlease let me know the next steps for this demonstration request.";
+
+      renderApplicationPreview();
+    }
+
+    function renderApplicationPreview() {
+      const container = $("#application-preview");
       container.replaceChildren();
 
-      const choices = [
-        { label: "Main option", org: getOrganization(mainOrganizationId) },
-        { label: "Backup option", org: getOrganization(backupOrganizationId) }
-      ];
+      const org = getOrganization(currentApplicationId);
 
-      if (!choices.some(item => item.org)) {
+      addLine(container, "Organization", org?.name);
+      addLine(
+        container,
+        "Simulated recipient",
+        org ? org.id + "@example.invalid" : ""
+      );
+      addLine(
+        container,
+        "Support requested",
+        NEED_LABELS[$("#application-type").value]
+      );
+      addLine(container, "Contact method", intake.contactMethod);
+      addLine(container, "Fictional contact", intake.contactValue);
+      addLine(
+        container,
+        "Message",
+        $("#application-message").value.trim()
+      );
+    }
+
+    function askForMissingContact() {
+      phase = "contact";
+
+      if (!validDemoContact()) {
+        if (intake.contactMethod && intake.contactValue) {
+          intake.contactValue = "";
+        }
+
+        skipped.delete("contactMethod");
+        skipped.delete("contactValue");
+      }
+
+      showStep(0);
+      askNextQuestion();
+    }
+
+    async function submitSimulation() {
+      const org = getOrganization(currentApplicationId);
+      const applicationType = $("#application-type").value;
+      const message = $("#application-message").value.trim();
+
+      if (!org) {
+        $("#application-status").textContent =
+          "Choose an organization first.";
+        return;
+      }
+
+      if (!applicationType) {
+        $("#application-status").textContent =
+          "Choose the type of help requested.";
+        return;
+      }
+
+      if (!validDemoContact()) {
+        $("#application-status").textContent =
+          "The sample form needs fictional contact information. " +
+          "Choose Ask the assistant for missing answers.";
+        return;
+      }
+
+      if (!message) {
+        $("#application-status").textContent =
+          "Please add a sample message.";
+        return;
+      }
+
+      const approved = window.confirm(
+        "This will record a simulated submission only. " +
+        "No real email or application will be sent. Continue?"
+      );
+
+      if (!approved) return;
+
+      $("#approve-simulation").disabled = true;
+      $("#application-status").textContent =
+        "Recording the simulated submission...";
+
+      try {
+        const result = await api("/api/demo/submit", {
+          organizationId: org.id,
+          role: currentApplicationRole,
+          applicationType,
+          contactMethod: intake.contactMethod,
+          contactValue: intake.contactValue,
+          message
+        });
+
+        submissionId = result.id;
+        renderTracking(result);
+        showStep(4);
+        startPolling();
+      } catch (error) {
+        $("#application-status").textContent =
+          error.message || "The simulated submission could not be recorded.";
+      } finally {
+        $("#approve-simulation").disabled = false;
+      }
+    }
+
+    /* Simulated tracking */
+
+    function renderTracking(result) {
+      const container = $("#tracking-panel");
+      container.replaceChildren();
+
+      addLine(container, "Demo reference", result.id);
+      addLine(container, "Status", result.label);
+      addLine(container, "What this means", result.explanation);
+
+      const canPrepareBackup =
+        result.status === "follow_up_due" &&
+        currentApplicationRole === "main" &&
+        Boolean(backupId);
+
+      $("#prepare-backup").hidden = !canPrepareBackup;
+    }
+
+    async function refreshTracking() {
+      if (!submissionId) return;
+
+      try {
+        const result = await api("/api/demo/status", {
+          id: submissionId
+        });
+
+        renderTracking(result);
+
+        if (result.status === "follow_up_due") {
+          stopPolling();
+        }
+      } catch {
+        stopPolling();
+
+        const container = $("#tracking-panel");
+        container.replaceChildren();
+
         const message = document.createElement("p");
         message.textContent =
-          "No organization selected yet. You can go back or continue planning.";
+          "The demo status could not be retrieved. The test server may " +
+          "have restarted. No real referral was sent.";
+
         container.appendChild(message);
-        return;
-      }
-
-      choices.forEach(item => {
-        if (!item.org) return;
-
-        const section = document.createElement("div");
-        section.className = "organization";
-
-        const heading = document.createElement("h4");
-        heading.textContent = item.label + ": " + item.org.name;
-
-        section.appendChild(heading);
-        addLine(section, "Listed phone", item.org.phone);
-        addLine(section, "Listed address", item.org.address);
-        addLine(section, "Confirm", item.org.note);
-        addWebsite(section, item.org.website);
-
-        container.appendChild(section);
-      });
-    }
-
-    function renderPreview() {
-      const container = $("#sharing-preview");
-
-      const selected = $$('input[name="share"]:checked')
-        .map(input => input.value);
-
-      container.replaceChildren();
-
-      if (!selected.length) {
-        const paragraph = document.createElement("p");
-        paragraph.textContent = "Nothing selected.";
-        container.appendChild(paragraph);
-        return;
-      }
-
-      if (selected.includes("summary")) {
-        addLine(container, "Summary", $("#summary").value.trim());
-      }
-
-      if (selected.includes("needs")) {
-        addLine(container, "Support", needsText());
-      }
-
-      if (selected.includes("location")) {
-        addLine(container, "Area", $("#location").value.trim());
-      }
-
-      if (selected.includes("transport")) {
-        addLine(
-          container,
-          "Transportation",
-          TRANSPORT_LABELS[$("#transport").value]
-        );
       }
     }
 
-    function renderPlan() {
-      renderPlanOrganizations();
-      renderPreview();
+    function startPolling() {
+      stopPolling();
+      pollTimer = setInterval(refreshTracking, 2000);
     }
 
-    /* Reset */
+    function stopPolling() {
+      if (pollTimer) {
+        clearInterval(pollTimer);
+        pollTimer = null;
+      }
+    }
 
-    function clearCurrentForm() {
-      if (requestController) requestController.abort();
+    function resetSession() {
       stopVoice();
+      stopPolling();
 
-      conversation = [];
-      chatStarted = false;
-      summaryInitialized = false;
-      editedFields = new Set();
+      intake = emptyIntake();
+      messages = [];
+      skipped = new Set();
+      currentQuestion = "story";
+      phase = "intake";
+      demoMode = false;
+      summaryEdited = false;
+      mainId = null;
+      backupId = null;
+      currentApplicationRole = "main";
+      currentApplicationId = null;
+      submissionId = null;
 
-      directorySearchPerformed = false;
-      mainOrganizationId = null;
-      backupOrganizationId = null;
-
-      [
-        "story",
-        "summary",
-        "location",
-        "deadline",
-        "chat-input",
-        "search-zip",
-        "follow-up-date",
-        "tracker-notes"
-      ].forEach(id => {
-        document.getElementById(id).value = "";
-      });
-
-      $("#housing-status").value = "";
-      $("#transport").value = "";
-      $("#goal").value = "";
-      $("#search-radius").value = "15";
-      $("#tracker-status").value = "Planning";
-
-      $$('input[type="checkbox"]').forEach(input => {
-        input.checked = false;
-      });
-
-      $("#conversation").replaceChildren();
-      $("#matches").replaceChildren();
-      $("#plan-organizations").replaceChildren();
-
-      $("#chat-area").hidden = true;
-      $("#manual-area").hidden = true;
-
-      [
-        "intake-status",
-        "chat-status",
-        "voice-status",
-        "manual-voice-status",
-        "prefill-status",
-        "summary-status",
-        "directory-status",
-        "copy-status",
-        "save-message"
-      ].forEach(id => {
-        document.getElementById(id).textContent = "";
-      });
-
-      updateOrganizationChoices();
+      $("#ai-consent").checked = false;
+      $("#voice-consent").checked = false;
+      $("#chat-input").value = "";
+      $("#chat-status").textContent = "";
+      $("#question-status").textContent = "";
+      $("#review-status").textContent = "";
+      $("#options-status").textContent = "";
+      $("#application-status").textContent = "";
+      $("#save-status").textContent = "";
+      $("#retry-extraction").hidden = true;
+      $("#recommendations").replaceChildren();
+      $("#tracking-panel").replaceChildren();
+      $("#prepare-backup").hidden = true;
     }
 
     /* Events */
 
-    $("#new-user").addEventListener("click", () => {
-      showEntryPanel("new-welcome");
+    $("#start-new").addEventListener("click", startConversation);
+    $("#load-alex").addEventListener("click", loadAlexCase);
+
+    $("#send-answer").addEventListener("click", sendAnswer);
+    $("#skip-question").addEventListener("click", skipCurrentQuestion);
+    $("#retry-extraction").addEventListener("click", processConversation);
+
+    $("#continue-intake").addEventListener("click", () => {
+      if (phase === "contact") {
+        prepareApplication(currentApplicationRole);
+      } else {
+        populateReview();
+        showStep(1);
+      }
     });
 
-    $("#returning-user").addEventListener("click", () => {
-      $("#returning-message").textContent = "";
-      showEntryPanel("returning-welcome");
+    $("#speak-answer").addEventListener("click", startVoice);
+    $("#stop-voice").addEventListener("click", stopVoice);
+    $("#read-question").addEventListener("click", readQuestion);
+
+    $("#back-to-chat").addEventListener("click", () => {
+      phase = "intake";
+      showStep(0);
     });
 
-    $("#back-new").addEventListener("click", () => {
-      showEntryPanel("entry-choice");
-    });
+    $("#review-to-options").addEventListener("click", () => {
+      saveReviewToIntake();
 
-    $("#back-returning").addEventListener("click", () => {
-      showEntryPanel("entry-choice");
-    });
+      $("#search-description").textContent = demoMode
+        ? "Alex test case: fictional Riverbend organizations."
+        : "ZIP for search: " + (intake.zip || "Not provided");
 
-    $("#begin").addEventListener("click", () => {
-      clearCurrentForm();
-      openApplication(0);
-    });
-
-    $("#start-fresh").addEventListener("click", () => {
-      clearCurrentForm();
-      openApplication(0);
-    });
-
-    $("#start-chat").addEventListener("click", beginChat);
-
-    $("#manual-mode").addEventListener("click", () => {
-      stopVoice();
-      $("#chat-area").hidden = true;
-      $("#manual-area").hidden = false;
-      $("#story").focus();
-    });
-
-    $("#send-message").addEventListener("click", sendMessage);
-
-    $("#use-conversation").addEventListener(
-      "click",
-      prepareConversationDraft
-    );
-
-    $("#continue-without-draft").addEventListener("click", () => {
-      if (busy) return;
-
-      $("#prefill-status").textContent =
-        "No AI draft was created. You can complete or skip the fields.";
-      showStep(1);
-    });
-
-    $("#manual-continue").addEventListener("click", () => {
-      showStep(1);
-    });
-
-    $("#stop-chat").addEventListener("click", () => {
-      if (requestController) requestController.abort();
-
-      stopVoice();
-      $("#ai-consent").checked = false;
-      $("#chat-area").hidden = true;
-      $("#manual-area").hidden = false;
-      $("#story").focus();
-    });
-
-    $("#speak-chat").addEventListener("click", () => {
-      startVoice("chat-input", "voice-status");
-    });
-
-    $("#speak-story").addEventListener("click", () => {
-      startVoice("story", "manual-voice-status");
-    });
-
-    $("#stop-voice-chat").addEventListener("click", stopVoice);
-    $("#stop-voice-story").addEventListener("click", stopVoice);
-    $("#read-response").addEventListener("click", readLastResponse);
-    $("#stop-reading").addEventListener("click", stopVoice);
-
-    $("#to-review").addEventListener("click", () => {
-      prepareSummary();
-      renderReview();
+      $("#recommendations").replaceChildren();
+      $("#options-status").textContent = "";
+      updateSelectedLabels();
       showStep(2);
     });
 
-    $("#to-options").addEventListener("click", () => {
-      renderMatches();
-      showStep(3);
+    $("#find-options").addEventListener("click", findOptions);
+
+    $("#options-back").addEventListener("click", () => {
+      populateReview();
+      showStep(1);
     });
 
-    $("#find-organizations").addEventListener("click", () => {
-      directorySearchPerformed = true;
-      mainOrganizationId = null;
-      backupOrganizationId = null;
-      renderMatches();
-    });
-
-    $("#to-plan").addEventListener("click", () => {
-      renderPlan();
-      showStep(4);
-    });
-
-    $$("[data-go]").forEach(button => {
-      button.addEventListener("click", () => {
-        const step = Number(button.dataset.go);
-
-        if (step === 2) renderReview();
-        if (step === 3) renderMatches();
-        if (step === 4) renderPlan();
-
-        showStep(step);
-      });
-    });
-
-    $$('input[name="share"]').forEach(input => {
-      input.addEventListener("change", renderPreview);
-    });
-
-    $$('input[name="need"]').forEach(input => {
-      input.addEventListener("change", () => {
-        editedFields.add("needs");
-        clearRecommendations();
-      });
-    });
-
-    [
-      "housing-status",
-      "deadline",
-      "location",
-      "search-zip",
-      "transport",
-      "goal",
-      "summary"
-    ].forEach(id => {
-      const element = document.getElementById(id);
-
-      const mark = () => {
-        editedFields.add(id);
-
-        if (id === "search-zip" || id === "transport") {
-          clearRecommendations();
-        }
-      };
-
-      element.addEventListener("input", mark);
-      element.addEventListener("change", mark);
-    });
-
-    $("#search-radius").addEventListener("change", clearRecommendations);
-
-    $("#copy-preview").addEventListener("click", async () => {
-      const text = $("#sharing-preview").innerText.trim();
-
-      if (!text || text === "Nothing selected.") {
-        $("#copy-status").textContent =
-          "Choose what to include before copying.";
+    $("#prepare-main").addEventListener("click", () => {
+      if (!mainId) {
+        $("#options-status").textContent =
+          "Please confirm or choose a main option first.";
         return;
       }
 
-      try {
-        await navigator.clipboard.writeText(text);
-        $("#copy-status").textContent =
-          "Preview copied. Check where you paste it.";
-      } catch {
-        $("#copy-status").textContent =
-          "Could not copy automatically. Select and copy the preview text yourself.";
+      currentApplicationRole = "main";
+
+      if (!validDemoContact()) {
+        askForMissingContact();
+      } else {
+        prepareApplication("main");
       }
+    });
+
+    $("#ask-missing").addEventListener(
+      "click",
+      askForMissingContact
+    );
+
+    $("#refresh-message").addEventListener(
+      "click",
+      updateApplicationMessage
+    );
+
+    $("#include-summary").addEventListener(
+      "change",
+      updateApplicationMessage
+    );
+
+    $("#application-type").addEventListener(
+      "change",
+      updateApplicationMessage
+    );
+
+    $("#application-message").addEventListener(
+      "input",
+      renderApplicationPreview
+    );
+
+    $("#application-back").addEventListener("click", () => {
+      showStep(2);
+    });
+
+    $("#approve-simulation").addEventListener(
+      "click",
+      submitSimulation
+    );
+
+    $("#prepare-backup").addEventListener("click", () => {
+      currentApplicationRole = "backup";
+      prepareApplication("backup");
     });
 
     $("#print-plan").addEventListener("click", () => {
       window.print();
     });
 
-    $("#reset").addEventListener("click", () => {
-      clearCurrentForm();
-      showStep(0);
-    });
-
-    /* Local save */
-
     $("#save-progress").addEventListener("click", () => {
       const progress = {
-        story: $("#story").value,
-        summary: $("#summary").value,
-        needs: selectedNeeds(),
-        housingStatus: $("#housing-status").value,
-        deadline: $("#deadline").value,
-        location: $("#location").value,
-        zip: $("#search-zip").value,
-        transport: $("#transport").value,
-        goal: $("#goal").value,
-        radius: $("#search-radius").value,
-        mainOrganizationId,
-        backupOrganizationId,
-        trackerStatus: $("#tracker-status").value,
-        followUpDate: $("#follow-up-date").value,
-        trackerNotes: $("#tracker-notes").value
+        intake,
+        messages,
+        skipped: [...skipped],
+        demoMode,
+        summaryEdited,
+        mainId,
+        backupId
       };
 
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-        $("#save-message").textContent =
-          "Saved in this browser. You can delete it from the returning-user screen.";
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(progress)
+        );
+
+        $("#save-status").textContent =
+          "Saved in this browser on this device.";
       } catch {
-        $("#save-message").textContent =
-          "Progress could not be saved. Your browser may be blocking local storage.";
+        $("#save-status").textContent =
+          "Progress could not be saved in this browser.";
       }
     });
 
     $("#restore-progress").addEventListener("click", () => {
-      const message = $("#returning-message");
-
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
 
         if (!saved) {
-          message.textContent = "No saved progress was found in this browser.";
+          $("#entry-status").textContent =
+            "No saved progress was found in this browser.";
           return;
         }
 
         const progress = JSON.parse(saved);
-        clearCurrentForm();
 
-        const textFields = {
-          story: "story",
-          summary: "summary",
-          location: "location",
-          deadline: "deadline",
-          zip: "search-zip",
-          followUpDate: "follow-up-date",
-          trackerNotes: "tracker-notes"
+        resetSession();
+
+        intake = {
+          ...emptyIntake(),
+          ...(progress.intake || {})
         };
 
-        Object.entries(textFields).forEach(([key, id]) => {
-          document.getElementById(id).value =
-            typeof progress[key] === "string" ? progress[key] : "";
-        });
-
-        $("#housing-status").value = progress.housingStatus || "";
-        $("#transport").value = progress.transport || "";
-        $("#goal").value = progress.goal || "";
-        $("#search-radius").value = progress.radius || "15";
-        $("#tracker-status").value = progress.trackerStatus || "Planning";
-
-        const savedNeeds = Array.isArray(progress.needs)
-          ? progress.needs
+        messages = Array.isArray(progress.messages)
+          ? progress.messages
           : [];
 
-        $$('input[name="need"]').forEach(input => {
-          input.checked = savedNeeds.includes(input.value);
-        });
+        skipped = new Set(
+          Array.isArray(progress.skipped)
+            ? progress.skipped
+            : []
+        );
 
-        mainOrganizationId =
-          getOrganization(progress.mainOrganizationId)
-            ? progress.mainOrganizationId
-            : null;
+        demoMode = Boolean(progress.demoMode);
+        summaryEdited = Boolean(progress.summaryEdited);
+        mainId = progress.mainId || null;
+        backupId = progress.backupId || null;
 
-        backupOrganizationId =
-          getOrganization(progress.backupOrganizationId)
-            ? progress.backupOrganizationId
-            : null;
+        renderConversation();
+        openApplication();
+        populateReview();
 
-        summaryInitialized = true;
+        $("#review-status").textContent =
+          "Saved progress restored. Simulated submission status was not restored.";
 
-        // Treat restored information as user-controlled.
-        editedFields = new Set([
-          "needs",
-          "housing-status",
-          "deadline",
-          "location",
-          "search-zip",
-          "transport",
-          "goal",
-          "summary"
-        ]);
-
-        openApplication(4);
+        showStep(1);
       } catch {
-        message.textContent =
-          "Saved progress could not be opened. You can start fresh.";
+        $("#entry-status").textContent =
+          "Saved progress could not be opened.";
       }
     });
-
-    $("#delete-saved").addEventListener("click", () => {
-      const message = $("#returning-message");
-
-      try {
-        localStorage.removeItem(STORAGE_KEY);
-        message.textContent =
-          "Saved progress was deleted from this browser.";
-      } catch {
-        message.textContent =
-          "Saved progress could not be deleted. Check your browser’s site-data settings.";
-      }
-    });
-    </script>
-
-  <script src="/demo-workflow.js"></script>
+  </script>
 </body>
 </html>
