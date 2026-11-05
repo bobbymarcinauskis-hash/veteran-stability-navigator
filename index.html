@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Veteran Stability Navigator</title>
+
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: #20323d;
+      background: #f5f8f8;
+      line-height: 1.55;
+      --navy: #142e3e;
+      --teal: #147c78;
+      --muted: #587078;
+      --border: #d8e4e4;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button, textarea, input, select { font: inherit; }
+
+    header {
+      background: #102735;
+      color: white;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: auto;
+      padding: 17px 24px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #bce6dc;
+      color: #102735;
+      font-weight: 800;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    header p {
+      margin: 0;
+      color: #c1d5d4;
+      font-size: .82rem;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 85% 25%, #4a827b 0, transparent 27%),
+        linear-gradient(120deg, #142e3e, #245354);
+      color: white;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: auto;
+      padding: 70px 24px 74px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .eyebrow {
+      color: #a6e1d5;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+    }
+
+    .hero h2 {
+      margin: 14px 0;
+      max-width: 650px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -.04em;
+    }
+
+    .hero p {
+      max-width: 590px;
+      color: #dcecea;
+      font-size: 1.05rem;
+    }
+
+    .promises {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 23px;
+    }
+
+    .promises span {
+      border: 1px solid #ffffff45;
+      border-radius: 30px;
+      padding: 7px 11px;
+      font-size: .8rem;
+      color: #e9f7f4;
+    }
+
+    .hero-art {
+      max-width: 380px;
+      width: 100%;
+      justify-self: end;
+      border: 1px solid #ffffff35;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #dcece6;
+      box-shadow: 0 22px 50px #061b2240;
+    }
+
+    .hero-art svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    main {
+      max-width: 920px;
+      margin: auto;
+      padding: 52px 24px;
+    }
+
+    .section-label {
+      color: #116b68;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+    }
+
+    .intro h2 {
+      margin: 8px 0;
+      color: var(--navy);
+      font-size: 2rem;
+      letter-spacing: -.03em;
+    }
+
+    .intro > p { color: var(--muted); }
+
+    .notice {
+      margin-top: 23px;
+      padding: 15px 18px;
+      background: #e5f4ef;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 10px 10px 0;
+      color: #305b58;
+      font-size: .92rem;
+    }
+
+    .notice strong { display: block; }
+
+    .progress {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin: 32px 0 20px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .progress li {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #6a7e83;
+      font-size: .88rem;
+    }
+
+    .progress li span {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: #e3ebeb;
+      font-weight: 700;
+    }
+
+    .progress li.active {
+      color: #116b68;
+      font-weight: 700;
+    }
+
+    .progress li.active span {
+      background: var(--teal);
+      color: white;
+    }
+
+    .card {
+      padding: clamp(22px, 4vw, 40px);
+      border: 1px solid #e0eaea;
+      border-radius: 18px;
+      background: white;
+      box-shadow: 0 15px 45px #1b3b4610;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1.55rem;
+    }
+
+    .card > p { color: var(--muted); }
+
+    label.field-label, legend {
+      display: block;
+      margin: 22px 0 8px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    textarea, input[type="text"], select {
+      display: block;
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #b7c9cc;
+      border-radius: 9px;
+      background: white;
+      color: #20323d;
+    }
+
+    textarea {
+      min-height: 170px;
+      resize: vertical;
+    }
+
+    fieldset {
+      min-width: 0;
+      margin: 20px 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .check-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin: 9px 0;
+      padding: 12px 14px;
+      border: 1px solid #dfe9e9;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .check-row:hover { background: #f3faf8; }
+
+    .check-row input {
+      width: 18px;
+      height: 18px;
+      margin: 3px 0 0;
+      accent-color: var(--teal);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    button {
+      min-height: 48px;
+      padding: 11px 19px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--teal);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover { background: #0e625f; }
+
+    button.secondary {
+      background: #eaf0f1;
+      color: var(--navy);
+    }
+
+    button.secondary:hover { background: #dce8e9; }
+
+    :focus-visible {
+      outline: 3px solid #d99526;
+      outline-offset: 3px;
+    }
+
+    .panel, .organization {
+      margin: 16px 0;
+      padding: 18px;
+      border: 1px solid #e0e9e9;
+      border-radius: 12px;
+      background: #f7faf9;
+      overflow-wrap: anywhere;
+    }
+
+    .organization h3, .panel h3 {
+      margin: 8px 0;
+      color: var(--navy);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 30px;
+      background: #dcefeb;
+      color: #116563;
+      font-size: .75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .small { color: var(--muted); font-size: .88rem; }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 700px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 45px 22px;
+      }
+      .hero-art {
+        max-width: 340px;
+        justify-self: start;
+      }
+      main { padding: 38px 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo" aria-hidden="true">VN</div>
+      <div>
+        <h1>Veteran Stability Navigator</h1>
+        <p>Tell your story once, not five times.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">SUPPORT THAT STARTS WITH YOU</span>
+        <h2 id="hero-title">Your story matters.<br>Your next step is yours.</h2>
+        <p>
+          Whether you’re navigating a difficult moment or looking for a
+          fresh start, explore support at your own pace.
+        </p>
+        <div class="promises">
+          <span>✓ Share what feels comfortable</span>
+          <span>✓ Skip any question</span>
+          <span>✓ Choose what gets shared</span>
+        </div>
+      </div>
+
+      <!-- Decorative community illustration. Replace with a licensed
+           veteran-centered photograph if desired. -->
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#dcece6"/>
+          <circle cx="320" cy="65" r="35" fill="#f4d69b"/>
+          <path d="M0 215 Q100 135 195 205 T400 185 V300 H0Z"
+                fill="#92b9aa"/>
+          <path d="M0 250 Q125 180 245 245 T400 225 V300 H0Z"
+                fill="#5d9185"/>
+          <circle cx="142" cy="137" r="25" fill="#a86d4b"/>
+          <path d="M115 137 Q117 100 145 105 Q169 108 168 135
+                   Q157 120 140 120 Q126 120 115 137Z"
+                fill="#243d43"/>
+          <path d="M92 255 Q95 171 142 168 Q188 171 191 255Z"
+                fill="#284b59"/>
+          <circle cx="251" cy="139" r="25" fill="#d5a17c"/>
+          <path d="M225 140 Q220 107 250 107 Q282 107 278 140
+                   Q269 121 250 121 Q235 121 225 140Z"
+                fill="#52635c"/>
+          <path d="M201 255 Q204 174 251 170 Q296 173 300 255Z"
+                fill="#d49268"/>
+          <path d="M160 218 Q190 201 220 218"
+                fill="none" stroke="#f5e8d8" stroke-width="7"
+                stroke-linecap="round"/>
+          <path d="M75 255 H320" stroke="#325e58" stroke-width="9"
+                stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="intro">
+      <span class="section-label">LET’S GET STARTED</span>
+      <h2>We’re glad you’re here.</h2>
+      <p>
+        You don’t have to explain everything at once. Start wherever you
+        feel comfortable, and work through the next steps at your own pace.
+      </p>
+      <div class="notice">
+        <strong>Your story is yours.</strong>
+        In this demo, information stays on this page while it’s open.
+        Nothing is saved or sent. The organizations shown are fictional.
+      </div>
+    </div>
+
+    <nav aria-label="Progress">
+      <ol class="progress">
+        <li class="active" aria-current="step"><span>1</span> Your story</li>
+        <li><span>2</span> Your needs</li>
+        <li><span>3</span> Review</li>
+        <li><span>4</span> Options</li>
+      </ol>
+    </nav>
+
+    <section class="card" id="step-0" aria-labelledby="heading-0">
+      <h2 id="heading-0" tabindex="-1">What would you like us to know?</h2>
+      <p>
+        You can tell your story in your own words. There’s no right way
+        to start, and you don’t need to include anything you aren’t ready
+        to share.
+      </p>
+      <label class="field-label" for="story">Your story</label>
+      <textarea id="story" placeholder="For example: I recently lost my job, and I’m worried about rent..."></textarea>
+      <div class="actions">
+        <button type="button" id="to-needs">Continue</button>
+      </div>
+    </section>
+
+    <section class="card" id="step-1" aria-labelledby="heading-1" hidden>
+      <h2 id="heading-1" tabindex="-1">Let’s find the right kind of support</h2>
+      <p>Every question is optional. Select anything that applies.</p>
+
+      <fieldset>
+        <legend>What would you like help with?</legend>
+        <label class="check-row"><input type="checkbox" name="need" value="rent"> Rent or an urgent bill</label>
+        <label class="check-row"><input type="checkbox" name="need" value="food"> Food</label>
+        <label class="check-row"><input type="checkbox" name="need" value="housing"> A place to stay or permanent housing</label>
+        <label class="check-row"><input type="checkbox" name="need" value="work"> Work or job training</label>
+      </fieldset>
+
+      <label class="field-label" for="location">What city or area would you like help in? <span class="small">Optional</span></label>
+      <input type="text" id="location" placeholder="City or neighborhood">
+
+      <label class="field-label" for="transport">Is transportation something we should consider? <span class="small">Optional</span></label>
+      <select id="transport">
+        <option value="">Prefer not to say</option>
+        <option>I use public transportation</option>
+        <option>I have access to a car</option>
+        <option>I prefer phone or online support</option>
+        <option>Transportation is a challenge</option>
+      </select>
+
+      <div class="actions">
+        <button type="button" class="secondary" data-go="0">Back</button>
+        <button type="button" id="to-review">Review my information</button>
+      </div>
+    </section>
+
+    <section class="card" id="step-2" aria-labelledby="heading-2" hidden>
+      <h2 id="heading-2" tabindex="-1">Review your summary</h2>
+      <p>
+        Your story is copied below as a starting point. You can shorten it,
+        change it, or leave it blank.
+      </p>
+      <label class="field-label" for="summary">Your editable summary</label>
+      <textarea id="summary" placeholder="Write or edit your summary here..."></textarea>
+      <div class="panel" id="review-details"></div>
+      <div class="actions">
+        <button type="button" class="secondary" data-go="1">Back</button>
+        <button type="button" id="to-options">See support options</button>
+      </div>
+    </section>
+
+    <section class="card" id="step-3" aria-labelledby="heading-3" hidden>
+      <h2 id="heading-3" tabindex="-1">Your possible next steps</h2>
+      <p>
+        These fictional suggestions are based only on the needs you
+        selected—not your location, transportation, eligibility, or current
+        availability. Check those details before choosing an organization.
+      </p>
+
+      <div id="matches"></div>
+
+      <fieldset>
+        <legend>What would you be comfortable sharing?</legend>
+        <p class="small">These choices are for preview only. Nothing will be sent.</p>
+        <label class="check-row"><input type="checkbox" name="share" value="summary"> My edited summary</label>
+        <label class="check-row"><input type="checkbox" name="share" value="needs"> The support I selected</label>
+        <label class="check-row"><input type="checkbox" name="share" value="location"> My area</label>
+        <label class="check-row"><input type="checkbox" name="share" value="transport"> My transportation needs</label>
+      </fieldset>
+
+      <div class="panel">
+        <h3>Sharing preview</h3>
+        <div id="sharing-preview"></div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="secondary" data-go="2">Back</button>
+        <button type="button" class="secondary" id="reset">Start over</button>
+      </div>
+    </section>
+
+    <footer>
+      You control what you share. This prototype does not provide emergency services.
+    </footer>
+  </main>
+
+  <script>
+    const labels = {
+      rent: "Rent or an urgent bill",
+      food: "Food",
+      housing: "A place to stay or permanent housing",
+      work: "Work or job training"
+    };
+
+    const organizations = [
+      {
+        name: "Riverbend Veterans Resource Center",
+        services: ["rent", "food", "work"],
+        description: "A fictional one-stop center for veterans offering emergency assistance, food referrals, and job-search help.",
+        access: "Downtown Riverbend, near the Route 4 bus stop."
+      },
+      {
+        name: "Eastfield Family Services",
+        services: ["rent", "food"],
+        description: "A fictional provider offering emergency rent help and food assistance.",
+        access: "Eastfield; not on a bus line. Phone appointments may be available."
+      },
+      {
+        name: "Northside Veterans Housing Collaborative",
+        services: ["housing"],
+        description: "A fictional organization helping veterans who are currently homeless find permanent housing.",
+        access: "North Riverbend, on the Route 2 bus line. Does not cover past-due rent for someone who still has housing."
+      },
+      {
+        name: "Riverbend Workforce Center",
+        services: ["work"],
+        description: "A fictional center offering job-search help, résumé reviews, and training.",
+        access: "Downtown Riverbend, on the Route 4 bus line."
+      }
+    ];
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+    let summaryInitialized = false;
+
+    function selectedNeeds() {
+      return $$('input[name="need"]:checked').map(input => input.value);
+    }
+
+    function needsText() {
+      const values = selectedNeeds();
+      return values.length ? values.map(value => labels[value]).join(", ") : "None selected";
+    }
+
+    // Use textContent for user-supplied information, not HTML.
+    function addLine(container, label, value) {
+      const p = document.createElement("p");
+      const strong = document.createElement("strong");
+      strong.textContent = label + ": ";
+      p.append(strong, document.createTextNode(value || "Not provided"));
+      container.appendChild(p);
+    }
+
+    function showStep(number) {
+      for (let i = 0; i < 4; i++) {
+        $("#step-" + i).hidden = i !== number;
+      }
+
+      $$(".progress li").forEach((item, i) => {
+        item.classList.toggle("active", i === number);
+        if (i === number) item.setAttribute("aria-current", "step");
+        else item.removeAttribute("aria-current");
+      });
+
+      $("#heading-" + number).focus();
+    }
+
+    function renderReview() {
+      const container = $("#review-details");
+      container.replaceChildren();
+      addLine(container, "Support requested", needsText());
+      addLine(container, "Area", $("#location").value.trim());
+      addLine(container, "Transportation", $("#transport").value);
+    }
+
+    function renderMatches() {
+      const selected = selectedNeeds();
+      const container = $("#matches");
+      container.replaceChildren();
+
+      const matches = organizations
+        .map(org => ({
+          ...org,
+          matching: selected.filter(need => org.services.includes(need))
+        }))
+        .filter(org => org.matching.length)
+        .sort((a, b) => b.matching.length - a.matching.length)
+        .slice(0, 2);
+
+      if (!matches.length) {
+        const message = document.createElement("div");
+        message.className = "panel";
+        message.textContent = "No matching options yet. Go back and select a type of support to see a suggestion.";
+        container.appendChild(message);
+        return;
+      }
+
+      matches.forEach((org, index) => {
+        const article = document.createElement("article");
+        article.className = "organization";
+
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = index === 0 ? "Suggested first option" : "Backup option";
+
+        const title = document.createElement("h3");
+        title.textContent = org.name;
+
+        const description = document.createElement("p");
+        description.textContent = org.description;
+
+        article.append(tag, title, description);
+        addLine(article, "Why it appears", "It lists help with " + org.matching.map(need => labels[need]).join(", ") + ".");
+        addLine(article, "Access", org.access);
+
+        const note = document.createElement("p");
+        note.className = "small";
+        note.textContent = "Fictional sample. Availability has not been verified.";
+        article.appendChild(note);
+        container.appendChild(article);
+      });
+    }
+
+    function renderPreview() {
+      const container = $("#sharing-preview");
+      const selected = $$('input[name="share"]:checked').map(input => input.value);
+      container.replaceChildren();
+
+      if (!selected.length) {
+        const p = document.createElement("p");
+        p.textContent = "Nothing selected.";
+        container.appendChild(p);
+        return;
+      }
+
+      if (selected.includes("summary")) addLine(container, "Summary", $("#summary").value.trim());
+      if (selected.includes("needs")) addLine(container, "Support", needsText());
+      if (selected.includes("location")) addLine(container, "Area", $("#location").value.trim());
+      if (selected.includes("transport")) addLine(container, "Transportation", $("#transport").value);
+    }
+
+    $("#to-needs").addEventListener("click", () => showStep(1));
+
+    $("#to-review").addEventListener("click", () => {
+      if (!summaryInitialized) {
+        $("#summary").value = $("#story").value.trim();
+        summaryInitialized = true;
+      }
+      renderReview();
+      showStep(2);
+    });
+
+    $("#to-options").addEventListener("click", () => {
+      renderMatches();
+      renderPreview();
+      showStep(3);
+    });
+
+    $$("[data-go]").forEach(button => {
+      button.addEventListener("click", () => {
+        if (button.dataset.go === "2") renderReview();
+        showStep(Number(button.dataset.go));
+      });
+    });
+
+    $$('input[name="share"]').forEach(input => {
+      input.addEventListener("change", renderPreview);
+    });
+
+    $("#reset").addEventListener("click", () => {
+      $("#story").value = "";
+      $("#summary").value = "";
+      $("#location").value = "";
+      $("#transport").value = "";
+      $$('input[type="checkbox"]').forEach(input => { input.checked = false; });
+      summaryInitialized = false;
+      showStep(0);
+    });
+  </script>
+</body>
+</html>
