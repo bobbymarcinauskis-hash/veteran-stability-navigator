@@ -7,33 +7,201 @@
 
   <style>
     :root {
+      color-scheme: light;
       font-family: system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
-      color: #20323d;
-      background: #f5f8f8;
-      line-height: 1.55;
-      --navy: #142e3e;
-      --teal: #147c78;
-      --muted: #587078;
-      --border: #d8e4e4;
+      color: #263247;
+      background: #f6f4f0;
+      line-height: 1.6;
+
+      --navy: #202e48;
+      --navy-dark: #17243a;
+      --burgundy: #8a454d;
+      --ivory: #f6f4f0;
+      --muted: #626d79;
+      --border: #e2ded9;
     }
 
-    * { box-sizing: border-box; }
-    body { margin: 0; }
-    button, textarea, input, select { font: inherit; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      min-height: 50px;
+      padding: 13px 20px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--navy-dark);
+    }
+
+    button.secondary {
+      border-color: #c8c4c0;
+      background: transparent;
+      color: var(--navy);
+    }
+
+    button.secondary:hover {
+      background: #eeebe6;
+    }
+
+    button.text-button {
+      background: transparent;
+      color: var(--burgundy);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    button.text-button:hover {
+      color: var(--navy);
+    }
+
+    :focus-visible {
+      outline: 3px solid #c69252;
+      outline-offset: 3px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    /* New / returning user screens */
+
+    .entry-screen {
+      min-height: 100vh;
+      padding: 28px clamp(24px, 6vw, 90px) 70px;
+      background:
+        linear-gradient(
+          115deg,
+          #f7f5f1 0%,
+          #f7f5f1 66%,
+          #e8e3de 100%
+        );
+    }
+
+    .entry-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .entry-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.9rem;
+      letter-spacing: 0;
+    }
+
+    .entry-card {
+      max-width: 780px;
+      margin: clamp(80px, 15vh, 160px) auto 0;
+    }
+
+    .entry-eyebrow,
+    .eyebrow {
+      margin: 0 0 20px;
+      color: var(--burgundy);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .entry-card h1 {
+      max-width: 800px;
+      margin: 0;
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .entry-description {
+      max-width: 580px;
+      margin: 26px 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .entry-actions,
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .entry-actions button {
+      min-height: 54px;
+    }
+
+    .entry-actions button span {
+      margin-left: 18px;
+    }
+
+    .entry-footnote,
+    .entry-message,
+    .small {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .entry-footnote,
+    .entry-message {
+      max-width: 580px;
+      margin-top: 24px;
+    }
+
+    .entry-message:not(:empty) {
+      padding: 12px 14px;
+      border-left: 3px solid var(--burgundy);
+      background: #eee8e4;
+      color: #543d42;
+    }
+
+    /* Main application */
 
     header {
-      background: #102735;
-      color: white;
+      background: var(--navy-dark);
+      color: #fff;
     }
 
     .header-inner {
-      max-width: 1120px;
-      margin: auto;
-      padding: 17px 24px;
       display: flex;
       align-items: center;
       gap: 13px;
+      max-width: 1120px;
+      margin: auto;
+      padding: 17px 24px;
     }
 
     .logo {
@@ -41,85 +209,82 @@
       place-items: center;
       width: 42px;
       height: 42px;
-      border-radius: 12px;
-      background: #bce6dc;
-      color: #102735;
+      flex-shrink: 0;
+      background: #eee9df;
+      color: var(--navy);
       font-weight: 800;
     }
 
     header h1 {
       margin: 0;
       font-size: 1rem;
+      line-height: 1.3;
     }
 
     header p {
-      margin: 0;
-      color: #c1d5d4;
-      font-size: .82rem;
+      margin: 2px 0 0;
+      color: #d2d8df;
+      font-size: 0.82rem;
     }
 
     .hero {
       background:
-        radial-gradient(circle at 85% 25%, #4a827b 0, transparent 27%),
-        linear-gradient(120deg, #142e3e, #245354);
-      color: white;
+        radial-gradient(circle at 85% 25%, #80565d 0, transparent 30%),
+        linear-gradient(120deg, #202e48, #39475c);
+      color: #fff;
     }
 
     .hero-inner {
-      max-width: 1120px;
-      margin: auto;
-      padding: 70px 24px 74px;
       display: grid;
       grid-template-columns: 1.3fr 1fr;
       align-items: center;
       gap: 40px;
+      max-width: 1120px;
+      margin: auto;
+      padding: 70px 24px;
     }
 
-    .eyebrow {
-      color: #a6e1d5;
-      font-size: .75rem;
-      font-weight: 800;
-      letter-spacing: .14em;
+    .hero .eyebrow {
+      color: #ead5d2;
     }
 
     .hero h2 {
-      margin: 14px 0;
       max-width: 650px;
-      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin: 14px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400;
       line-height: 1.1;
-      letter-spacing: -.04em;
+      letter-spacing: -0.035em;
     }
 
     .hero p {
       max-width: 590px;
-      color: #dcecea;
-      font-size: 1.05rem;
+      color: #e3e6e9;
     }
 
     .promises {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 23px;
+      margin-top: 24px;
     }
 
     .promises span {
-      border: 1px solid #ffffff45;
-      border-radius: 30px;
       padding: 7px 11px;
-      font-size: .8rem;
-      color: #e9f7f4;
+      border: 1px solid #ffffff55;
+      color: #f3f1ef;
+      font-size: 0.8rem;
     }
 
     .hero-art {
-      max-width: 380px;
-      width: 100%;
       justify-self: end;
-      border: 1px solid #ffffff35;
-      border-radius: 24px;
+      width: 100%;
+      max-width: 380px;
       overflow: hidden;
-      background: #dcece6;
-      box-shadow: 0 22px 50px #061b2240;
+      border: 1px solid #ffffff45;
+      background: #e4e0d9;
+      box-shadow: 0 22px 50px #101b2c40;
     }
 
     .hero-art svg {
@@ -134,39 +299,38 @@
       padding: 52px 24px;
     }
 
-    .section-label {
-      color: #116b68;
-      font-size: .75rem;
-      font-weight: 800;
-      letter-spacing: .13em;
-    }
-
     .intro h2 {
       margin: 8px 0;
       color: var(--navy);
-      font-size: 2rem;
-      letter-spacing: -.03em;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      font-weight: 400;
+      line-height: 1.2;
     }
 
-    .intro > p { color: var(--muted); }
+    .intro > p {
+      max-width: 700px;
+      color: var(--muted);
+    }
 
     .notice {
-      margin-top: 23px;
-      padding: 15px 18px;
-      background: #e5f4ef;
-      border-left: 4px solid var(--teal);
-      border-radius: 0 10px 10px 0;
-      color: #305b58;
-      font-size: .92rem;
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--burgundy);
+      background: #f0e9e5;
+      color: #59464a;
+      font-size: 0.93rem;
     }
 
-    .notice strong { display: block; }
+    .notice strong {
+      display: block;
+    }
 
     .progress {
       display: flex;
       flex-wrap: wrap;
       gap: 12px 20px;
-      margin: 32px 0 20px;
+      margin: 34px 0 20px;
       padding: 0;
       list-style: none;
     }
@@ -174,62 +338,69 @@
     .progress li {
       display: flex;
       align-items: center;
-      gap: 7px;
-      color: #6a7e83;
-      font-size: .88rem;
+      gap: 8px;
+      color: #6d7781;
+      font-size: 0.88rem;
     }
 
     .progress li span {
       display: grid;
       place-items: center;
-      width: 29px;
-      height: 29px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: #e3ebeb;
+      background: #e7e5e1;
       font-weight: 700;
     }
 
     .progress li.active {
-      color: #116b68;
+      color: var(--burgundy);
       font-weight: 700;
     }
 
     .progress li.active span {
-      background: var(--teal);
-      color: white;
+      background: var(--burgundy);
+      color: #fff;
     }
 
     .card {
       padding: clamp(22px, 4vw, 40px);
-      border: 1px solid #e0eaea;
-      border-radius: 18px;
-      background: white;
-      box-shadow: 0 15px 45px #1b3b4610;
+      border: 1px solid var(--border);
+      background: #fff;
+      box-shadow: 0 12px 40px #2431490d;
     }
 
     .card h2 {
       margin: 0 0 8px;
       color: var(--navy);
-      font-size: 1.55rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      line-height: 1.2;
     }
 
-    .card > p { color: var(--muted); }
+    .card > p {
+      color: var(--muted);
+    }
 
-    label.field-label, legend {
+    label.field-label,
+    legend {
       display: block;
       margin: 22px 0 8px;
       color: var(--navy);
       font-weight: 700;
     }
 
-    textarea, input[type="text"], select {
+    textarea,
+    input[type="text"],
+    select {
       display: block;
       width: 100%;
       padding: 13px 14px;
-      border: 1px solid #b7c9cc;
-      border-radius: 9px;
-      background: white;
-      color: #20323d;
+      border: 1px solid #bfc5c8;
+      border-radius: 2px;
+      background: #fff;
+      color: #263247;
     }
 
     textarea {
@@ -246,283 +417,501 @@
 
     .check-row {
       display: flex;
-      gap: 12px;
       align-items: flex-start;
+      gap: 12px;
       margin: 9px 0;
       padding: 12px 14px;
-      border: 1px solid #dfe9e9;
-      border-radius: 9px;
+      border: 1px solid #e5e2de;
       cursor: pointer;
     }
 
-    .check-row:hover { background: #f3faf8; }
+    .check-row:hover {
+      background: #f8f5f2;
+    }
 
     .check-row input {
       width: 18px;
       height: 18px;
-      margin: 3px 0 0;
-      accent-color: var(--teal);
+      margin: 4px 0 0;
+      accent-color: var(--burgundy);
     }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 25px;
-    }
-
-    button {
-      min-height: 48px;
-      padding: 11px 19px;
-      border: 0;
-      border-radius: 9px;
-      background: var(--teal);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    button:hover { background: #0e625f; }
-
-    button.secondary {
-      background: #eaf0f1;
-      color: var(--navy);
-    }
-
-    button.secondary:hover { background: #dce8e9; }
-
-    :focus-visible {
-      outline: 3px solid #d99526;
-      outline-offset: 3px;
-    }
-
-    .panel, .organization {
+    .panel,
+    .organization {
       margin: 16px 0;
       padding: 18px;
-      border: 1px solid #e0e9e9;
-      border-radius: 12px;
-      background: #f7faf9;
+      border: 1px solid #e8e2dd;
+      background: #f8f6f3;
       overflow-wrap: anywhere;
     }
 
-    .organization h3, .panel h3 {
+    .panel h3,
+    .organization h3 {
       margin: 8px 0;
       color: var(--navy);
     }
 
     .tag {
       display: inline-block;
-      padding: 4px 10px;
-      border-radius: 30px;
-      background: #dcefeb;
-      color: #116563;
-      font-size: .75rem;
+      padding: 5px 10px;
+      background: #eee2df;
+      color: #7b3b43;
+      font-size: 0.72rem;
       font-weight: 800;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
-
-    .small { color: var(--muted); font-size: .88rem; }
 
     footer {
       padding: 28px 0;
       color: var(--muted);
-      font-size: .88rem;
+      font-size: 0.88rem;
     }
 
-    [hidden] { display: none !important; }
-
     @media (max-width: 700px) {
+      .entry-card {
+        margin-top: 80px;
+      }
+
       .hero-inner {
         grid-template-columns: 1fr;
         padding: 45px 22px;
       }
+
       .hero-art {
-        max-width: 340px;
         justify-self: start;
+        max-width: 340px;
       }
-      main { padding: 38px 18px; }
+
+      main {
+        padding: 38px 18px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .entry-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .entry-actions button {
+        width: 100%;
+        text-align: left;
+      }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="header-inner">
-      <div class="logo" aria-hidden="true">VN</div>
-      <div>
-        <h1>Veteran Stability Navigator</h1>
-        <p>Tell your story once, not five times.</p>
-      </div>
+  <!-- FIRST-VISIT AND RETURNING-USER SCREENS -->
+  <div id="entry-screen" class="entry-screen">
+    <div class="entry-brand">
+      <span class="entry-mark" aria-hidden="true">VN</span>
+      <span>VETERAN STABILITY NAVIGATOR</span>
     </div>
-  </header>
 
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-inner">
-      <div>
-        <span class="eyebrow">SUPPORT THAT STARTS WITH YOU</span>
-        <h2 id="hero-title">Your story matters.<br>Your next step is yours.</h2>
+    <section id="entry-choice" class="entry-card">
+      <p class="entry-eyebrow">Welcome</p>
+
+      <h1>A place to begin,<br>at your own pace.</h1>
+
+      <p class="entry-description">
+        Whether this is your first visit or you’re returning, we’re here
+        to help you explore your next step.
+      </p>
+
+      <div class="entry-actions">
+        <button type="button" id="new-user">
+          I’m new here <span aria-hidden="true">↗</span>
+        </button>
+
+        <button type="button" id="returning-user" class="secondary">
+          I’m returning <span aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <p class="entry-footnote">
+        No account is required. You decide what to share.
+      </p>
+    </section>
+
+    <section id="new-user-welcome" class="entry-card" hidden>
+      <p class="entry-eyebrow">Welcome. We’re glad you’re here.</p>
+
+      <h1>
+        Thank you for your service. Let us help you get the help you deserve.
+      </h1>
+
+      <p class="entry-description">
+        You can share as much or as little as you want. We’ll listen first,
+        then help you explore possible sources of support.
+      </p>
+
+      <div class="entry-actions">
+        <button type="button" id="begin-story">
+          Let’s begin <span aria-hidden="true">→</span>
+        </button>
+
+        <button type="button" id="back-from-welcome" class="secondary">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <section id="returning-welcome" class="entry-card" hidden>
+      <p class="entry-eyebrow">Welcome back</p>
+
+      <h1>Let’s pick up where you left off.</h1>
+
+      <p class="entry-description">
+        If you previously chose to save your progress in this browser on
+        this device, you can restore it below.
+      </p>
+
+      <p id="returning-message" class="entry-message" aria-live="polite"></p>
+
+      <div class="entry-actions">
+        <button type="button" id="restore-progress">
+          Restore saved progress
+        </button>
+
+        <button type="button" id="returning-start-fresh" class="secondary">
+          Start fresh
+        </button>
+
+        <button type="button" id="delete-saved" class="text-button">
+          Delete saved progress
+        </button>
+
+        <button type="button" id="back-from-returning" class="text-button">
+          Back
+        </button>
+      </div>
+
+      <p class="entry-footnote">
+        Saved progress is stored only in this browser. It is not an online account.
+      </p>
+    </section>
+  </div>
+
+  <!-- MAIN APPLICATION -->
+  <div id="application" hidden>
+    <header>
+      <div class="header-inner">
+        <div class="logo" aria-hidden="true">VN</div>
+        <div>
+          <h1>Veteran Stability Navigator</h1>
+          <p>Tell your story once, not five times.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div>
+          <span class="eyebrow">Support that starts with you</span>
+
+          <h2 id="hero-title">
+            Your story matters.<br>Your next step is yours.
+          </h2>
+
+          <p>
+            Whether you’re navigating a difficult moment or looking for a
+            fresh start, explore support at your own pace.
+          </p>
+
+          <div class="promises">
+            <span>✓ Share what feels comfortable</span>
+            <span>✓ Skip any question</span>
+            <span>✓ Choose what gets shared</span>
+          </div>
+        </div>
+
+        <!-- Decorative illustration. You can replace this with a
+             properly licensed veteran-centered photograph later. -->
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="300" fill="#e6e0d8"/>
+            <circle cx="320" cy="65" r="35" fill="#e7c9ad"/>
+            <path
+              d="M0 215 Q100 135 195 205 T400 185 V300 H0Z"
+              fill="#a8aab0"
+            />
+            <path
+              d="M0 250 Q125 180 245 245 T400 225 V300 H0Z"
+              fill="#798596"
+            />
+            <circle cx="142" cy="137" r="25" fill="#a86d4b"/>
+            <path
+              d="M115 137 Q117 100 145 105 Q169 108 168 135
+                 Q157 120 140 120 Q126 120 115 137Z"
+              fill="#2d3644"
+            />
+            <path
+              d="M92 255 Q95 171 142 168 Q188 171 191 255Z"
+              fill="#34445d"
+            />
+            <circle cx="251" cy="139" r="25" fill="#d5a17c"/>
+            <path
+              d="M225 140 Q220 107 250 107 Q282 107 278 140
+                 Q269 121 250 121 Q235 121 225 140Z"
+              fill="#56555a"
+            />
+            <path
+              d="M201 255 Q204 174 251 170 Q296 173 300 255Z"
+              fill="#a76d6d"
+            />
+            <path
+              d="M160 218 Q190 201 220 218"
+              fill="none"
+              stroke="#f5e8d8"
+              stroke-width="7"
+              stroke-linecap="round"
+            />
+            <path
+              d="M75 255 H320"
+              stroke="#4a5363"
+              stroke-width="9"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <div class="intro">
+        <span class="eyebrow">Let’s get started</span>
+
+        <h2>We’re glad you’re here.</h2>
+
         <p>
-          Whether you’re navigating a difficult moment or looking for a
-          fresh start, explore support at your own pace.
+          You don’t have to explain everything at once. Start wherever you
+          feel comfortable, and work through the next steps at your own pace.
         </p>
-        <div class="promises">
-          <span>✓ Share what feels comfortable</span>
-          <span>✓ Skip any question</span>
-          <span>✓ Choose what gets shared</span>
+
+        <div class="notice">
+          <strong>Your story is yours.</strong>
+          This is a demo. Nothing is sent, and the organizations shown are
+          fictional. Progress is saved only if you choose to save it on
+          this device.
         </div>
       </div>
 
-      <!-- Decorative community illustration. Replace with a licensed
-           veteran-centered photograph if desired. -->
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <rect width="400" height="300" fill="#dcece6"/>
-          <circle cx="320" cy="65" r="35" fill="#f4d69b"/>
-          <path d="M0 215 Q100 135 195 205 T400 185 V300 H0Z"
-                fill="#92b9aa"/>
-          <path d="M0 250 Q125 180 245 245 T400 225 V300 H0Z"
-                fill="#5d9185"/>
-          <circle cx="142" cy="137" r="25" fill="#a86d4b"/>
-          <path d="M115 137 Q117 100 145 105 Q169 108 168 135
-                   Q157 120 140 120 Q126 120 115 137Z"
-                fill="#243d43"/>
-          <path d="M92 255 Q95 171 142 168 Q188 171 191 255Z"
-                fill="#284b59"/>
-          <circle cx="251" cy="139" r="25" fill="#d5a17c"/>
-          <path d="M225 140 Q220 107 250 107 Q282 107 278 140
-                   Q269 121 250 121 Q235 121 225 140Z"
-                fill="#52635c"/>
-          <path d="M201 255 Q204 174 251 170 Q296 173 300 255Z"
-                fill="#d49268"/>
-          <path d="M160 218 Q190 201 220 218"
-                fill="none" stroke="#f5e8d8" stroke-width="7"
-                stroke-linecap="round"/>
-          <path d="M75 255 H320" stroke="#325e58" stroke-width="9"
-                stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
-  </section>
+      <nav aria-label="Progress">
+        <ol class="progress">
+          <li class="active" aria-current="step"><span>1</span> Your story</li>
+          <li><span>2</span> Your needs</li>
+          <li><span>3</span> Review</li>
+          <li><span>4</span> Options</li>
+        </ol>
+      </nav>
 
-  <main>
-    <div class="intro">
-      <span class="section-label">LET’S GET STARTED</span>
-      <h2>We’re glad you’re here.</h2>
-      <p>
-        You don’t have to explain everything at once. Start wherever you
-        feel comfortable, and work through the next steps at your own pace.
-      </p>
-      <div class="notice">
-        <strong>Your story is yours.</strong>
-        In this demo, information stays on this page while it’s open.
-        Nothing is saved or sent. The organizations shown are fictional.
-      </div>
-    </div>
+      <!-- STEP 1 -->
+      <section class="card" id="step-0" aria-labelledby="heading-0">
+        <h2 id="heading-0" tabindex="-1">
+          What would you like us to know?
+        </h2>
 
-    <nav aria-label="Progress">
-      <ol class="progress">
-        <li class="active" aria-current="step"><span>1</span> Your story</li>
-        <li><span>2</span> Your needs</li>
-        <li><span>3</span> Review</li>
-        <li><span>4</span> Options</li>
-      </ol>
-    </nav>
+        <p>
+          You can tell your story in your own words. There’s no right way
+          to start, and you don’t need to include anything you aren’t ready
+          to share.
+        </p>
 
-    <section class="card" id="step-0" aria-labelledby="heading-0">
-      <h2 id="heading-0" tabindex="-1">What would you like us to know?</h2>
-      <p>
-        You can tell your story in your own words. There’s no right way
-        to start, and you don’t need to include anything you aren’t ready
-        to share.
-      </p>
-      <label class="field-label" for="story">Your story</label>
-      <textarea id="story" placeholder="For example: I recently lost my job, and I’m worried about rent..."></textarea>
-      <div class="actions">
-        <button type="button" id="to-needs">Continue</button>
-      </div>
-    </section>
+        <label class="field-label" for="story">Your story</label>
 
-    <section class="card" id="step-1" aria-labelledby="heading-1" hidden>
-      <h2 id="heading-1" tabindex="-1">Let’s find the right kind of support</h2>
-      <p>Every question is optional. Select anything that applies.</p>
+        <textarea
+          id="story"
+          placeholder="For example: I recently lost my job, and I’m worried about rent..."
+        ></textarea>
 
-      <fieldset>
-        <legend>What would you like help with?</legend>
-        <label class="check-row"><input type="checkbox" name="need" value="rent"> Rent or an urgent bill</label>
-        <label class="check-row"><input type="checkbox" name="need" value="food"> Food</label>
-        <label class="check-row"><input type="checkbox" name="need" value="housing"> A place to stay or permanent housing</label>
-        <label class="check-row"><input type="checkbox" name="need" value="work"> Work or job training</label>
-      </fieldset>
+        <div class="actions">
+          <button type="button" id="to-needs">Continue</button>
+        </div>
+      </section>
 
-      <label class="field-label" for="location">What city or area would you like help in? <span class="small">Optional</span></label>
-      <input type="text" id="location" placeholder="City or neighborhood">
+      <!-- STEP 2 -->
+      <section
+        class="card"
+        id="step-1"
+        aria-labelledby="heading-1"
+        hidden
+      >
+        <h2 id="heading-1" tabindex="-1">
+          Let’s find the right kind of support
+        </h2>
 
-      <label class="field-label" for="transport">Is transportation something we should consider? <span class="small">Optional</span></label>
-      <select id="transport">
-        <option value="">Prefer not to say</option>
-        <option>I use public transportation</option>
-        <option>I have access to a car</option>
-        <option>I prefer phone or online support</option>
-        <option>Transportation is a challenge</option>
-      </select>
+        <p>Every question is optional. Select anything that applies.</p>
 
-      <div class="actions">
-        <button type="button" class="secondary" data-go="0">Back</button>
-        <button type="button" id="to-review">Review my information</button>
-      </div>
-    </section>
+        <fieldset>
+          <legend>What would you like help with?</legend>
 
-    <section class="card" id="step-2" aria-labelledby="heading-2" hidden>
-      <h2 id="heading-2" tabindex="-1">Review your summary</h2>
-      <p>
-        Your story is copied below as a starting point. You can shorten it,
-        change it, or leave it blank.
-      </p>
-      <label class="field-label" for="summary">Your editable summary</label>
-      <textarea id="summary" placeholder="Write or edit your summary here..."></textarea>
-      <div class="panel" id="review-details"></div>
-      <div class="actions">
-        <button type="button" class="secondary" data-go="1">Back</button>
-        <button type="button" id="to-options">See support options</button>
-      </div>
-    </section>
+          <label class="check-row">
+            <input type="checkbox" name="need" value="rent">
+            Rent or an urgent bill
+          </label>
 
-    <section class="card" id="step-3" aria-labelledby="heading-3" hidden>
-      <h2 id="heading-3" tabindex="-1">Your possible next steps</h2>
-      <p>
-        These fictional suggestions are based only on the needs you
-        selected—not your location, transportation, eligibility, or current
-        availability. Check those details before choosing an organization.
-      </p>
+          <label class="check-row">
+            <input type="checkbox" name="need" value="food">
+            Food
+          </label>
 
-      <div id="matches"></div>
+          <label class="check-row">
+            <input type="checkbox" name="need" value="housing">
+            A place to stay or permanent housing
+          </label>
 
-      <fieldset>
-        <legend>What would you be comfortable sharing?</legend>
-        <p class="small">These choices are for preview only. Nothing will be sent.</p>
-        <label class="check-row"><input type="checkbox" name="share" value="summary"> My edited summary</label>
-        <label class="check-row"><input type="checkbox" name="share" value="needs"> The support I selected</label>
-        <label class="check-row"><input type="checkbox" name="share" value="location"> My area</label>
-        <label class="check-row"><input type="checkbox" name="share" value="transport"> My transportation needs</label>
-      </fieldset>
+          <label class="check-row">
+            <input type="checkbox" name="need" value="work">
+            Work or job training
+          </label>
+        </fieldset>
 
-      <div class="panel">
-        <h3>Sharing preview</h3>
-        <div id="sharing-preview"></div>
-      </div>
+        <label class="field-label" for="location">
+          What city or area would you like help in?
+          <span class="small">Optional</span>
+        </label>
 
-      <div class="actions">
-        <button type="button" class="secondary" data-go="2">Back</button>
-        <button type="button" class="secondary" id="reset">Start over</button>
-      </div>
-    </section>
+        <input
+          type="text"
+          id="location"
+          placeholder="City or neighborhood"
+        >
 
-    <footer>
-      You control what you share. This prototype does not provide emergency services.
-    </footer>
-  </main>
+        <label class="field-label" for="transport">
+          Is transportation something we should consider?
+          <span class="small">Optional</span>
+        </label>
+
+        <select id="transport">
+          <option value="">Prefer not to say</option>
+          <option>I use public transportation</option>
+          <option>I have access to a car</option>
+          <option>I prefer phone or online support</option>
+          <option>Transportation is a challenge</option>
+        </select>
+
+        <div class="actions">
+          <button type="button" class="secondary" data-go="0">Back</button>
+          <button type="button" id="to-review">Review my information</button>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section
+        class="card"
+        id="step-2"
+        aria-labelledby="heading-2"
+        hidden
+      >
+        <h2 id="heading-2" tabindex="-1">Review your summary</h2>
+
+        <p>
+          Your story is copied below as a starting point. You can shorten it,
+          change it, or leave it blank.
+        </p>
+
+        <label class="field-label" for="summary">
+          Your editable summary
+        </label>
+
+        <textarea
+          id="summary"
+          placeholder="Write or edit your summary here..."
+        ></textarea>
+
+        <div class="panel" id="review-details"></div>
+
+        <div class="actions">
+          <button type="button" class="secondary" data-go="1">Back</button>
+          <button type="button" id="to-options">See support options</button>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section
+        class="card"
+        id="step-3"
+        aria-labelledby="heading-3"
+        hidden
+      >
+        <h2 id="heading-3" tabindex="-1">Your possible next steps</h2>
+
+        <p>
+          These fictional suggestions are based only on the needs you
+          selected—not your location, transportation, eligibility, or current
+          availability. Check those details before choosing an organization.
+        </p>
+
+        <div id="matches"></div>
+
+        <fieldset>
+          <legend>What would you be comfortable sharing?</legend>
+
+          <p class="small">
+            These choices are for preview only. Nothing will be sent.
+          </p>
+
+          <label class="check-row">
+            <input type="checkbox" name="share" value="summary">
+            My edited summary
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox" name="share" value="needs">
+            The support I selected
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox" name="share" value="location">
+            My area
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox" name="share" value="transport">
+            My transportation needs
+          </label>
+        </fieldset>
+
+        <div class="panel">
+          <h3>Sharing preview</h3>
+          <div id="sharing-preview"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Save your progress on this device</h3>
+
+          <p class="small">
+            Saving is optional. Your story and answers will be stored in
+            this browser and may be visible to anyone who uses this device
+            or browser profile. Don’t save on a shared device unless
+            you’re comfortable with that.
+          </p>
+
+          <button type="button" class="secondary" id="save-progress">
+            Save progress on this device
+          </button>
+
+          <p id="save-message" class="small" aria-live="polite"></p>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="secondary" data-go="2">Back</button>
+          <button type="button" class="secondary" id="reset">Start over</button>
+        </div>
+      </section>
+
+      <footer>
+        You control what you share. This prototype does not provide
+        emergency services.
+      </footer>
+    </main>
+  </div>
 
   <script>
+    const STORAGE_KEY = "veteran-navigator-progress-v1";
+
     const labels = {
       rent: "Rent or an urgent bill",
       food: "Food",
@@ -530,35 +919,45 @@
       work: "Work or job training"
     };
 
+    // These organizations are fictional demonstration data.
     const organizations = [
       {
         name: "Riverbend Veterans Resource Center",
         services: ["rent", "food", "work"],
-        description: "A fictional one-stop center for veterans offering emergency assistance, food referrals, and job-search help.",
-        access: "Downtown Riverbend, near the Route 4 bus stop."
+        description:
+          "A fictional one-stop center for veterans offering emergency assistance, food referrals, and job-search help.",
+        access:
+          "Downtown Riverbend, near the Route 4 bus stop."
       },
       {
         name: "Eastfield Family Services",
         services: ["rent", "food"],
-        description: "A fictional provider offering emergency rent help and food assistance.",
-        access: "Eastfield; not on a bus line. Phone appointments may be available."
+        description:
+          "A fictional provider offering emergency rent help and food assistance.",
+        access:
+          "Eastfield; not on a bus line. Phone appointments may be available."
       },
       {
         name: "Northside Veterans Housing Collaborative",
         services: ["housing"],
-        description: "A fictional organization helping veterans who are currently homeless find permanent housing.",
-        access: "North Riverbend, on the Route 2 bus line. Does not cover past-due rent for someone who still has housing."
+        description:
+          "A fictional organization helping veterans who are currently homeless find permanent housing.",
+        access:
+          "North Riverbend, on the Route 2 bus line. Does not cover past-due rent for someone who still has housing."
       },
       {
         name: "Riverbend Workforce Center",
         services: ["work"],
-        description: "A fictional center offering job-search help, résumé reviews, and training.",
-        access: "Downtown Riverbend, on the Route 4 bus line."
+        description:
+          "A fictional center offering job-search help, résumé reviews, and training.",
+        access:
+          "Downtown Riverbend, on the Route 4 bus line."
       }
     ];
 
-    const $ = (selector) => document.querySelector(selector);
-    const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+    const $ = selector => document.querySelector(selector);
+    const $$ = selector => Array.from(document.querySelectorAll(selector));
+
     let summaryInitialized = false;
 
     function selectedNeeds() {
@@ -566,17 +965,39 @@
     }
 
     function needsText() {
-      const values = selectedNeeds();
-      return values.length ? values.map(value => labels[value]).join(", ") : "None selected";
+      const selected = selectedNeeds();
+
+      return selected.length
+        ? selected.map(value => labels[value]).join(", ")
+        : "None selected";
     }
 
-    // Use textContent for user-supplied information, not HTML.
+    // User-provided text is inserted as text, not HTML.
     function addLine(container, label, value) {
-      const p = document.createElement("p");
+      const paragraph = document.createElement("p");
       const strong = document.createElement("strong");
+
       strong.textContent = label + ": ";
-      p.append(strong, document.createTextNode(value || "Not provided"));
-      container.appendChild(p);
+      paragraph.append(
+        strong,
+        document.createTextNode(value || "Not provided")
+      );
+
+      container.appendChild(paragraph);
+    }
+
+    function showEntryPanel(panelId) {
+      ["entry-choice", "new-user-welcome", "returning-welcome"]
+        .forEach(id => {
+          document.getElementById(id).hidden = id !== panelId;
+        });
+
+      const heading = document.querySelector("#" + panelId + " h1");
+
+      if (heading) {
+        heading.setAttribute("tabindex", "-1");
+        heading.focus();
+      }
     }
 
     function showStep(number) {
@@ -584,18 +1005,40 @@
         $("#step-" + i).hidden = i !== number;
       }
 
-      $$(".progress li").forEach((item, i) => {
-        item.classList.toggle("active", i === number);
-        if (i === number) item.setAttribute("aria-current", "step");
-        else item.removeAttribute("aria-current");
+      $$(".progress li").forEach((item, index) => {
+        item.classList.toggle("active", index === number);
+
+        if (index === number) {
+          item.setAttribute("aria-current", "step");
+        } else {
+          item.removeAttribute("aria-current");
+        }
       });
 
       $("#heading-" + number).focus();
     }
 
+    function openApplication(step = 0) {
+      $("#entry-screen").hidden = true;
+      $("#application").hidden = false;
+
+      if (step === 2) {
+        renderReview();
+      }
+
+      if (step === 3) {
+        renderMatches();
+        renderPreview();
+      }
+
+      showStep(step);
+      window.scrollTo(0, 0);
+    }
+
     function renderReview() {
       const container = $("#review-details");
       container.replaceChildren();
+
       addLine(container, "Support requested", needsText());
       addLine(container, "Area", $("#location").value.trim());
       addLine(container, "Transportation", $("#transport").value);
@@ -604,6 +1047,7 @@
     function renderMatches() {
       const selected = selectedNeeds();
       const container = $("#matches");
+
       container.replaceChildren();
 
       const matches = organizations
@@ -611,14 +1055,15 @@
           ...org,
           matching: selected.filter(need => org.services.includes(need))
         }))
-        .filter(org => org.matching.length)
+        .filter(org => org.matching.length > 0)
         .sort((a, b) => b.matching.length - a.matching.length)
         .slice(0, 2);
 
       if (!matches.length) {
         const message = document.createElement("div");
         message.className = "panel";
-        message.textContent = "No matching options yet. Go back and select a type of support to see a suggestion.";
+        message.textContent =
+          "No matching options yet. Go back and select a type of support to see a suggestion.";
         container.appendChild(message);
         return;
       }
@@ -629,7 +1074,8 @@
 
         const tag = document.createElement("span");
         tag.className = "tag";
-        tag.textContent = index === 0 ? "Suggested first option" : "Backup option";
+        tag.textContent =
+          index === 0 ? "Suggested first option" : "Backup option";
 
         const title = document.createElement("h3");
         title.textContent = org.name;
@@ -638,12 +1084,22 @@
         description.textContent = org.description;
 
         article.append(tag, title, description);
-        addLine(article, "Why it appears", "It lists help with " + org.matching.map(need => labels[need]).join(", ") + ".");
+
+        addLine(
+          article,
+          "Why it appears",
+          "It lists help with " +
+            org.matching.map(need => labels[need]).join(", ") +
+            "."
+        );
+
         addLine(article, "Access", org.access);
 
         const note = document.createElement("p");
         note.className = "small";
-        note.textContent = "Fictional sample. Availability has not been verified.";
+        note.textContent =
+          "Fictional sample. Availability has not been verified.";
+
         article.appendChild(note);
         container.appendChild(article);
       });
@@ -651,29 +1107,88 @@
 
     function renderPreview() {
       const container = $("#sharing-preview");
-      const selected = $$('input[name="share"]:checked').map(input => input.value);
+      const selected = $$('input[name="share"]:checked')
+        .map(input => input.value);
+
       container.replaceChildren();
 
       if (!selected.length) {
-        const p = document.createElement("p");
-        p.textContent = "Nothing selected.";
-        container.appendChild(p);
+        const paragraph = document.createElement("p");
+        paragraph.textContent = "Nothing selected.";
+        container.appendChild(paragraph);
         return;
       }
 
-      if (selected.includes("summary")) addLine(container, "Summary", $("#summary").value.trim());
-      if (selected.includes("needs")) addLine(container, "Support", needsText());
-      if (selected.includes("location")) addLine(container, "Area", $("#location").value.trim());
-      if (selected.includes("transport")) addLine(container, "Transportation", $("#transport").value);
+      if (selected.includes("summary")) {
+        addLine(container, "Summary", $("#summary").value.trim());
+      }
+
+      if (selected.includes("needs")) {
+        addLine(container, "Support", needsText());
+      }
+
+      if (selected.includes("location")) {
+        addLine(container, "Area", $("#location").value.trim());
+      }
+
+      if (selected.includes("transport")) {
+        addLine(container, "Transportation", $("#transport").value);
+      }
     }
 
-    $("#to-needs").addEventListener("click", () => showStep(1));
+    function clearCurrentForm() {
+      $("#story").value = "";
+      $("#summary").value = "";
+      $("#location").value = "";
+      $("#transport").value = "";
+
+      $$('input[type="checkbox"]').forEach(input => {
+        input.checked = false;
+      });
+
+      $("#save-message").textContent = "";
+      summaryInitialized = false;
+    }
+
+    // Entry screen navigation
+    $("#new-user").addEventListener("click", () => {
+      showEntryPanel("new-user-welcome");
+    });
+
+    $("#returning-user").addEventListener("click", () => {
+      $("#returning-message").textContent = "";
+      showEntryPanel("returning-welcome");
+    });
+
+    $("#back-from-welcome").addEventListener("click", () => {
+      showEntryPanel("entry-choice");
+    });
+
+    $("#back-from-returning").addEventListener("click", () => {
+      showEntryPanel("entry-choice");
+    });
+
+    $("#begin-story").addEventListener("click", () => {
+      clearCurrentForm();
+      openApplication(0);
+    });
+
+    $("#returning-start-fresh").addEventListener("click", () => {
+      clearCurrentForm();
+      openApplication(0);
+    });
+
+    // Main application navigation
+    $("#to-needs").addEventListener("click", () => {
+      showStep(1);
+    });
 
     $("#to-review").addEventListener("click", () => {
       if (!summaryInitialized) {
         $("#summary").value = $("#story").value.trim();
         summaryInitialized = true;
       }
+
       renderReview();
       showStep(2);
     });
@@ -686,8 +1201,13 @@
 
     $$("[data-go]").forEach(button => {
       button.addEventListener("click", () => {
-        if (button.dataset.go === "2") renderReview();
-        showStep(Number(button.dataset.go));
+        const step = Number(button.dataset.go);
+
+        if (step === 2) {
+          renderReview();
+        }
+
+        showStep(step);
       });
     });
 
@@ -696,13 +1216,84 @@
     });
 
     $("#reset").addEventListener("click", () => {
-      $("#story").value = "";
-      $("#summary").value = "";
-      $("#location").value = "";
-      $("#transport").value = "";
-      $$('input[type="checkbox"]').forEach(input => { input.checked = false; });
-      summaryInitialized = false;
+      clearCurrentForm();
       showStep(0);
+    });
+
+    // Optional browser-local save
+    $("#save-progress").addEventListener("click", () => {
+      const progress = {
+        story: $("#story").value,
+        summary: $("#summary").value,
+        location: $("#location").value,
+        transport: $("#transport").value,
+        needs: selectedNeeds()
+      };
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+
+        $("#save-message").textContent =
+          "Saved in this browser on this device. You can delete it from the returning-user screen.";
+      } catch (error) {
+        $("#save-message").textContent =
+          "Progress could not be saved. Your browser may be blocking local storage.";
+      }
+    });
+
+    $("#restore-progress").addEventListener("click", () => {
+      const message = $("#returning-message");
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (!saved) {
+          message.textContent =
+            "No saved progress was found in this browser. You can start fresh.";
+          return;
+        }
+
+        const progress = JSON.parse(saved);
+
+        $("#story").value = progress.story || "";
+        $("#summary").value = progress.summary || "";
+        $("#location").value = progress.location || "";
+        $("#transport").value = progress.transport || "";
+
+        const savedNeeds = Array.isArray(progress.needs)
+          ? progress.needs
+          : [];
+
+        $$('input[name="need"]').forEach(input => {
+          input.checked = savedNeeds.includes(input.value);
+        });
+
+        // Preserve the restored summary rather than replacing it.
+        summaryInitialized = true;
+
+        // Sharing selections are not saved or restored.
+        $$('input[name="share"]').forEach(input => {
+          input.checked = false;
+        });
+
+        openApplication(2);
+      } catch (error) {
+        message.textContent =
+          "Saved progress could not be opened. You can start fresh.";
+      }
+    });
+
+    $("#delete-saved").addEventListener("click", () => {
+      const message = $("#returning-message");
+
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+        message.textContent =
+          "Saved progress was deleted from this browser.";
+      } catch (error) {
+        message.textContent =
+          "Saved progress could not be deleted through the app. Check your browser’s site-data settings.";
+      }
     });
   </script>
 </body>
