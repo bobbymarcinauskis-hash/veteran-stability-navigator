@@ -88,11 +88,6 @@
       display: none !important;
     }
 
-    a {
-      color: #174d80;
-      overflow-wrap: anywhere;
-    }
-
     .entry-screen {
       min-height: 100vh;
       padding: 28px clamp(24px, 6vw, 90px) 70px;
@@ -368,17 +363,6 @@
       color: var(--navy);
     }
 
-    .tag {
-      display: inline-block;
-      padding: 5px 10px;
-      background: #eee2df;
-      color: #74353d;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
     .conversation {
       max-height: 450px;
       overflow-y: auto;
@@ -537,8 +521,8 @@
         <div class="notice">
           <strong>Test environment</strong>
 
-          The organizations and applications in this version are fictional.
-          No real referral, application, or email is sent.
+          Organizations, applications, emails, and status updates in this
+          version are fictional. No real referral is sent.
         </div>
       </div>
 
@@ -856,7 +840,7 @@
 
         <p>
           We used information from your discussion to prepare this sample
-          form. Review and edit it before approving the simulation.
+          form. Enter your fictional contact information directly below.
         </p>
 
         <div class="notice">
@@ -898,7 +882,7 @@
           </label>
 
           <select id="form-contact-method">
-            <option value="">Not provided</option>
+            <option value="">Choose email or phone</option>
             <option value="email">Email</option>
             <option value="phone">Phone</option>
           </select>
@@ -917,6 +901,7 @@
           <p class="small">
             For this test, use an email ending in <strong>.invalid</strong>
             or a fictional phone number containing <strong>555</strong>.
+            You do not need to return to the assistant to enter it.
           </p>
         </div>
 
@@ -1196,7 +1181,9 @@
     ];
 
     const $ = selector => document.querySelector(selector);
-    const $$ = selector => Array.from(document.querySelectorAll(selector));
+
+    const $$ = selector =>
+      Array.from(document.querySelectorAll(selector));
 
     function emptyIntake() {
       return {
@@ -1216,7 +1203,6 @@
 
     let intake = emptyIntake();
     let messages = [];
-    let conversationMode = "discussion";
     let mainId = null;
     let backupId = null;
     let currentApplicationId = null;
@@ -1226,7 +1212,6 @@
     let pollTimer = null;
     let recognition = null;
     let busy = false;
-    let testCaseLoaded = false;
 
     function addLine(container, label, value) {
       const paragraph = document.createElement("p");
@@ -1292,13 +1277,8 @@
     function setBusy(value) {
       busy = value;
 
-      [
-        "send-answer",
-        "ready-to-review"
-      ].forEach(id => {
-        document.getElementById(id).disabled = value;
-      });
-
+      $("#send-answer").disabled = value;
+      $("#ready-to-review").disabled = value;
       $("#chat-input").disabled = value;
     }
 
@@ -1350,13 +1330,7 @@
 
     function loadAlexCase() {
       resetSession();
-      testCaseLoaded = true;
 
-      /*
-        Fictional starter-kit scenario.
-
-        Contact information is a clearly fictional test value.
-      */
       intake = {
         name: "Alex Morgan",
         summary:
@@ -1416,13 +1390,6 @@
         return;
       }
 
-      if (conversationMode === "contact") {
-        $("#chat-input").value = "";
-        addMessage("user", text);
-        processDemoContact(text);
-        return;
-      }
-
       if (!$("#ai-consent").checked) {
         $("#chat-status").textContent =
           "Please select the AI consent checkbox before sending.";
@@ -1431,12 +1398,11 @@
 
       stopVoice();
 
-      const userMessage = {
+      messages.push({
         role: "user",
         content: text
-      };
+      });
 
-      messages.push(userMessage);
       $("#chat-input").value = "";
       renderConversation();
 
@@ -1446,7 +1412,9 @@
       setBusy(true);
 
       try {
-        const result = await api("/api/chat", { messages });
+        const result = await api("/api/chat", {
+          messages
+        });
 
         addMessage("assistant", result.reply);
         $("#chat-status").textContent = "";
@@ -1496,7 +1464,9 @@
       setBusy(true);
 
       try {
-        const result = await api("/api/intake", { messages });
+        const result = await api("/api/intake", {
+          messages
+        });
 
         intake = {
           ...emptyIntake(),
@@ -1518,110 +1488,6 @@
       } finally {
         setBusy(false);
       }
-    }
-
-    /*
-      Missing fictional contact details are handled directly by the
-      assistant screen. These values are not sent to Azure.
-    */
-    function askForDemoContact() {
-      conversationMode = "contact";
-
-      addMessage(
-        "assistant",
-        "The sample application needs a fictional way to contact you. " +
-        "For this demo, would you prefer email or phone?"
-      );
-
-      $("#chat-status").textContent =
-        "Use fictional information only. You can type “skip” to return " +
-        "to the form without completing this field.";
-
-      showStep(0);
-    }
-
-    function processDemoContact(text) {
-      if (/^(skip|prefer not to say|pass)$/i.test(text.trim())) {
-        conversationMode = "discussion";
-
-        addMessage(
-          "assistant",
-          "That’s fine. I’ll leave the contact information blank. " +
-          "The sample form will need it before the simulated submission."
-        );
-
-        prepareApplication(currentApplicationRole, false);
-        return;
-      }
-
-      const value = text.trim();
-
-      if (!intake.contactMethod) {
-        if (/\bemail\b/i.test(value)) {
-          intake.contactMethod = "email";
-        } else if (/\b(phone|call|telephone)\b/i.test(value)) {
-          intake.contactMethod = "phone";
-        }
-
-        if (!intake.contactMethod) {
-          addMessage(
-            "assistant",
-            "Would you prefer email or phone for the fictional demo?"
-          );
-          return;
-        }
-
-        addMessage(
-          "assistant",
-          intake.contactMethod === "email"
-            ? "What fictional test email should the form use? " +
-              "Please use an address ending in .invalid."
-            : "What fictional test phone number should the form use? " +
-              "Please use a number containing 555."
-        );
-
-        return;
-      }
-
-      if (intake.contactMethod === "email") {
-        const match = value.match(
-          /[^\s@]+@[^\s@]+\.invalid\b/i
-        );
-
-        if (!match) {
-          addMessage(
-            "assistant",
-            "For the test, please use a fictional email ending in " +
-            ".invalid, such as alex@example.invalid."
-          );
-          return;
-        }
-
-        intake.contactValue = match[0];
-      } else {
-        const digits = value.replace(/\D/g, "");
-
-        if (!digits.includes("555") || digits.length < 7) {
-          addMessage(
-            "assistant",
-            "For the test, please use a fictional phone number " +
-            "containing 555."
-          );
-          return;
-        }
-
-        intake.contactValue = value;
-      }
-
-      conversationMode = "discussion";
-
-      addMessage(
-        "assistant",
-        "Thank you. I’ll add that fictional contact information to the " +
-        "sample form for your review."
-      );
-
-      prepareApplication(currentApplicationRole, false);
     }
 
     /* Voice */
@@ -1679,13 +1545,16 @@
       };
 
       instance.onend = () => {
-        if (recognition === instance) recognition = null;
+        if (recognition === instance) {
+          recognition = null;
+        }
       };
 
       try {
         instance.start();
       } catch {
         recognition = null;
+
         $("#chat-status").textContent =
           "The microphone could not start. You can type instead.";
       }
@@ -1721,6 +1590,7 @@
       if (!last) return;
 
       window.speechSynthesis.cancel();
+
       window.speechSynthesis.speak(
         new SpeechSynthesisUtterance(last.content)
       );
@@ -1746,8 +1616,10 @@
     function saveReviewToIntake() {
       intake.summary = $("#review-summary").value.trim();
       intake.name = $("#review-name").value.trim();
+
       intake.needs = $$('input[name="need"]:checked')
         .map(input => input.value);
+
       intake.housingStatus = $("#review-housing").value;
       intake.deadline = $("#review-deadline").value;
       intake.location = $("#review-location").value.trim();
@@ -1986,11 +1858,13 @@
       destination.replaceChildren();
 
       addLine(destination, "Organization", org.name);
+
       addLine(
         destination,
         "Simulated recipient",
         org.id + "@example.invalid"
       );
+
       addLine(destination, "Demo location", org.address);
       addLine(destination, "Demo access", org.access.join(", "));
       addLine(destination, "Things to consider", org.note);
@@ -2017,10 +1891,14 @@
       $("#application-status").textContent =
         validDemoContact(intake.contactMethod, intake.contactValue)
           ? "Review the prefilled sample form."
-          : "The sample form needs fictional contact information.";
+          : "Enter fictional contact information directly on this form.";
     }
 
-    function prepareApplication(role, askMissing = true) {
+    /*
+      Contact information is entered directly on the form.
+      There is no conversation loop for email or phone.
+    */
+    function prepareApplication(role) {
       currentApplicationRole = role;
       currentApplicationId = role === "backup" ? backupId : mainId;
 
@@ -2030,16 +1908,6 @@
         $("#options-status").textContent =
           "Please choose an organization first.";
         showStep(2);
-        return;
-      }
-
-      if (
-        askMissing &&
-        !validDemoContact(intake.contactMethod, intake.contactValue)
-      ) {
-        intake.contactMethod = "";
-        intake.contactValue = "";
-        askForDemoContact();
         return;
       }
 
@@ -2106,7 +1974,7 @@
       }
 
       if (!validDemoContact(form.contactMethod, form.contactValue)) {
-        return "Add fictional contact information: an email ending in " +
+        return "Enter fictional contact information: an email ending in " +
           ".invalid or a phone number containing 555.";
       }
 
@@ -2143,25 +2011,35 @@
       container.replaceChildren();
 
       addLine(container, "Organization", org.name);
+
       addLine(
         container,
         "Simulated recipient",
         org.id + "@example.invalid"
       );
+
       addLine(container, "Name", form.name);
       addLine(container, "Area", form.location);
       addLine(container, "ZIP", form.zip);
       addLine(container, "Contact method", form.contactMethod);
       addLine(container, "Fictional contact", form.contactValue);
+
       addLine(
         container,
         "Support",
         form.needs.map(value => NEED_LABELS[value]).join(", ")
       );
+
       addLine(container, "Housing", HOUSING_LABELS[form.housingStatus]);
       addLine(container, "Date", form.deadline);
       addLine(container, "Amount", form.amount);
-      addLine(container, "Transportation", TRANSPORT_LABELS[form.transport]);
+
+      addLine(
+        container,
+        "Transportation",
+        TRANSPORT_LABELS[form.transport]
+      );
+
       addLine(container, "Included summary", form.summary);
       addLine(container, "Sample email", form.message);
 
@@ -2186,11 +2064,28 @@
       }
 
       $("#approve-simulation").disabled = true;
+
       $("#submit-status").textContent =
         "Recording the simulated submission...";
 
       try {
         const result = await api("/api/demo/submit", form);
+
+        /*
+          Reuse manually entered information for the backup form.
+          This does not submit anything to the backup.
+        */
+        intake.name = form.name;
+        intake.location = form.location;
+        intake.zip = form.zip;
+        intake.contactMethod = form.contactMethod;
+        intake.contactValue = form.contactValue;
+        intake.needs = form.needs;
+        intake.housingStatus = form.housingStatus;
+        intake.deadline = form.deadline;
+        intake.amount = form.amount;
+        intake.transport = form.transport;
+        intake.summary = $("#form-summary").value.trim();
 
         submissionId = result.id;
         renderTracking(result);
@@ -2269,14 +2164,12 @@
 
       intake = emptyIntake();
       messages = [];
-      conversationMode = "discussion";
       mainId = null;
       backupId = null;
       currentApplicationId = null;
       currentApplicationRole = "main";
       approvedSnapshot = null;
       submissionId = null;
-      testCaseLoaded = false;
 
       $("#ai-consent").checked = false;
       $("#voice-consent").checked = false;
@@ -2307,7 +2200,6 @@
     $("#read-question").addEventListener("click", readLastResponse);
 
     $("#back-to-chat").addEventListener("click", () => {
-      conversationMode = "discussion";
       showStep(0);
     });
 
@@ -2329,7 +2221,7 @@
         return;
       }
 
-      prepareApplication("main", true);
+      prepareApplication("main");
     });
 
     $("#application-back").addEventListener("click", () => {
@@ -2381,7 +2273,7 @@
       /*
         A new recipient requires a new review and approval.
       */
-      prepareApplication("backup", true);
+      prepareApplication("backup");
     });
 
     $("#print-plan").addEventListener("click", () => {
