@@ -9,12 +9,14 @@
   <style>
     :root {
       color-scheme: light;
+
       font-family:
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+
       color: #263247;
       background: #f6f4f0;
       line-height: 1.6;
@@ -24,6 +26,7 @@
       --burgundy: #8a454d;
       --muted: #626d79;
       --border: #e2ded9;
+      --light: #f8f6f3;
     }
 
     * {
@@ -87,6 +90,11 @@
       display: none !important;
     }
 
+    a {
+      color: #234d79;
+      overflow-wrap: anywhere;
+    }
+
     .entry-screen {
       min-height: 100vh;
       padding: 28px clamp(24px, 6vw, 90px) 70px;
@@ -122,12 +130,11 @@
     .entry-mark {
       background: var(--navy);
       color: #fff;
-      font-size: 0.9rem;
       letter-spacing: 0;
     }
 
     .entry-card {
-      max-width: 780px;
+      max-width: 800px;
       margin: clamp(60px, 12vh, 130px) auto 0;
     }
 
@@ -151,7 +158,7 @@
 
     .entry-card h1 {
       margin: 0;
-      font-size: clamp(2.5rem, 6vw, 4.8rem);
+      font-size: clamp(2.4rem, 5.7vw, 4.8rem);
       letter-spacing: -0.04em;
     }
 
@@ -190,7 +197,7 @@
       display: flex;
       align-items: center;
       gap: 13px;
-      max-width: 1000px;
+      max-width: 1050px;
       margin: auto;
       padding: 17px 24px;
     }
@@ -213,7 +220,7 @@
     }
 
     main {
-      max-width: 920px;
+      max-width: 950px;
       margin: auto;
       padding: 45px 24px;
     }
@@ -242,7 +249,7 @@
     .progress {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 20px;
+      gap: 12px 18px;
       margin: 32px 0 20px;
       padding: 0;
       list-style: none;
@@ -253,7 +260,7 @@
       align-items: center;
       gap: 8px;
       color: #6d7781;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
 
     .progress li span {
@@ -302,6 +309,7 @@
 
     textarea,
     input[type="text"],
+    input[type="date"],
     select {
       display: block;
       width: 100%;
@@ -313,7 +321,7 @@
     }
 
     textarea {
-      min-height: 150px;
+      min-height: 140px;
       resize: vertical;
     }
 
@@ -355,7 +363,7 @@
       margin: 16px 0;
       padding: 18px;
       border: 1px solid #e8e2dd;
-      background: #f8f6f3;
+      background: var(--light);
       overflow-wrap: anywhere;
     }
 
@@ -363,6 +371,10 @@
     .organization h3 {
       margin: 8px 0;
       color: var(--navy);
+    }
+
+    .organization p {
+      margin: 9px 0;
     }
 
     .tag {
@@ -377,7 +389,7 @@
     }
 
     .conversation {
-      max-height: 480px;
+      max-height: 460px;
       overflow-y: auto;
       padding: 4px;
       border: 1px solid var(--border);
@@ -406,19 +418,30 @@
       font-size: 0.85rem;
     }
 
+    .grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
     footer {
       padding: 28px 0;
       color: var(--muted);
       font-size: 0.88rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       main {
         padding: 32px 18px;
       }
 
       .message {
         max-width: 100%;
+      }
+
+      .grid-two {
+        grid-template-columns: 1fr;
+        gap: 0;
       }
 
       .actions button {
@@ -451,7 +474,7 @@
 </head>
 
 <body>
-  <!-- Welcome screens -->
+  <!-- WELCOME -->
 
   <div id="entry-screen" class="entry-screen">
     <div class="entry-brand">
@@ -462,11 +485,13 @@
     <section id="entry-choice" class="entry-card">
       <p class="eyebrow">Welcome</p>
 
-      <h1>A place to begin, at your own pace.</h1>
+      <h1>
+        Thank you for your service. Let’s get you the help you deserve.
+      </h1>
 
       <p class="entry-description">
-        Whether this is your first visit or you’re returning, you can
-        explore your next step without creating an account.
+        You can share as much or as little as you want. We’ll start with
+        what matters to you and explore possible next steps together.
       </p>
 
       <div class="actions">
@@ -478,16 +503,20 @@
           I’m returning
         </button>
       </div>
+
+      <p class="small">
+        No account is required. You decide what to share.
+      </p>
     </section>
 
-    <section id="new-user-welcome" class="entry-card" hidden>
-      <p class="eyebrow">Welcome</p>
+    <section id="new-welcome" class="entry-card" hidden>
+      <p class="eyebrow">We’re glad you’re here</p>
 
-      <h1>Let’s begin with what matters to you.</h1>
+      <h1>Your experience is your own. Start wherever you feel comfortable.</h1>
 
       <p class="entry-description">
-        You can share as much or as little as you want. You can use an
-        optional AI conversation or write your story yourself.
+        You can talk with an optional AI assistant or write in your own
+        words. Every question can be skipped.
       </p>
 
       <div class="actions">
@@ -504,11 +533,11 @@
     <section id="returning-welcome" class="entry-card" hidden>
       <p class="eyebrow">Welcome back</p>
 
-      <h1>Pick up where you left off.</h1>
+      <h1>Let’s pick up where you left off.</h1>
 
       <p class="entry-description">
-        If you chose to save progress in this browser on this device,
-        you can restore it below.
+        If you saved progress in this browser on this device, you can
+        restore it below.
       </p>
 
       <p
@@ -541,7 +570,7 @@
     </section>
   </div>
 
-  <!-- Main application -->
+  <!-- APPLICATION -->
 
   <div id="application" hidden>
     <header>
@@ -576,70 +605,57 @@
         <div class="notice">
           <strong>About this prototype</strong>
 
-          The directory entries are unverified sample data from the
-          prototype. No referral is sent to an organization.
-          If you use the optional AI conversation or AI summary, the
-          relevant conversation is sent through this app’s server to
-          OpenAI for processing.
+          Organization details are unverified sample data. This app does
+          not submit applications, send referrals, confirm receipt, or
+          determine benefit eligibility. AI messages are sent through
+          this app’s server to the configured Azure service.
         </div>
       </div>
 
       <nav aria-label="Progress">
         <ol class="progress">
-          <li class="active" aria-current="step">
-            <span>1</span> Your story
-          </li>
-
-          <li>
-            <span>2</span> Your needs
-          </li>
-
-          <li>
-            <span>3</span> Review
-          </li>
-
-          <li>
-            <span>4</span> Options
-          </li>
+          <li class="active" aria-current="step"><span>1</span> Your story</li>
+          <li><span>2</span> Your needs</li>
+          <li><span>3</span> Your summary</li>
+          <li><span>4</span> Support options</li>
+          <li><span>5</span> Action plan</li>
         </ol>
       </nav>
 
-      <!-- STEP 1 -->
+      <!-- STEP 1: STORY -->
 
       <section class="card" id="step-0" aria-labelledby="heading-0">
         <h2 id="heading-0" tabindex="-1">
-          Let’s start where you are
+          Your experience is your own
         </h2>
 
         <p>
-          You do not need to describe trauma, military experiences,
-          or anything else you would rather keep private.
+          Start wherever you feel comfortable. You do not need to describe
+          trauma, military experiences, or anything you would rather
+          keep private.
         </p>
 
         <div class="panel">
           <h3>Choose how you’d like to begin</h3>
 
           <p class="small">
-            The AI assistant can ask one question at a time to help
-            clarify your needs. It is not a human counselor and may
-            make mistakes. You can stop using it at any time.
+            The AI assistant can ask one question at a time. It is not a
+            human counselor and may make mistakes. You can stop at any time.
           </p>
 
           <p class="small">
-            If you choose AI, your messages and conversation history
-            are sent to this app’s server and OpenAI. Avoid sharing
-            Social Security numbers, account numbers, or other details
-            you do not want processed. The prototype server does not
-            intentionally save conversation content, but API-provider
-            data handling and retention may still apply.
+            If you choose AI, your messages and conversation history are
+            sent to this app’s server and its configured Azure service.
+            Avoid sharing Social Security numbers, account numbers, or
+            other information you do not want processed. Azure data handling
+            and retention rules depend on your organization’s configuration.
           </p>
 
           <label class="check-row">
             <input type="checkbox" id="ai-consent">
 
             <span>
-              I understand the information above and choose to use
-              the AI conversation.
+              I understand and choose to use the AI conversation.
             </span>
           </label>
 
@@ -715,8 +731,8 @@
           ></textarea>
 
           <p class="small">
-            This text stays in the browser unless you choose to save
-            it on this device. The manual path does not send it to OpenAI.
+            The manual path does not send this text to Azure. It stays
+            in the browser unless you choose to save it on this device.
           </p>
 
           <div class="actions">
@@ -727,7 +743,7 @@
         </div>
       </section>
 
-      <!-- STEP 2 -->
+      <!-- STEP 2: NEEDS -->
 
       <section
         class="card"
@@ -736,11 +752,12 @@
         hidden
       >
         <h2 id="heading-1" tabindex="-1">
-          What kind of support would help?
+          What would make the biggest difference right now?
         </h2>
 
         <p>
-          Every question is optional. Select anything that applies.
+          Every question is optional. Your answers help organize the
+          possible options; they do not determine eligibility.
         </p>
 
         <fieldset>
@@ -772,36 +789,83 @@
           </label>
         </fieldset>
 
-        <label class="field-label" for="location">
-          What city or area would you like help in?
+        <label class="field-label" for="housing-status">
+          Which best describes your housing situation?
           <span class="small">Optional</span>
         </label>
 
-        <input
-          type="text"
-          id="location"
-          maxlength="200"
-          placeholder="City or neighborhood"
-        >
+        <select id="housing-status">
+          <option value="">Prefer not to say</option>
+          <option value="housed">
+            I have a place to stay
+          </option>
+          <option value="at-risk">
+            I have a place to stay but may lose it
+          </option>
+          <option value="seeking">
+            I am looking for a place to stay
+          </option>
+          <option value="other">
+            Another situation
+          </option>
+        </select>
+
+        <div class="grid-two">
+          <div>
+            <label class="field-label" for="deadline">
+              Is there a date to keep in mind?
+              <span class="small">Optional</span>
+            </label>
+
+            <input type="date" id="deadline">
+          </div>
+
+          <div>
+            <label class="field-label" for="location">
+              City or area
+              <span class="small">Optional</span>
+            </label>
+
+            <input
+              type="text"
+              id="location"
+              maxlength="200"
+              placeholder="City or neighborhood"
+            >
+          </div>
+        </div>
 
         <label class="field-label" for="transport">
-          Is transportation something we should consider?
+          What should we know about transportation or access?
           <span class="small">Optional</span>
         </label>
 
         <select id="transport">
           <option value="">Prefer not to say</option>
-          <option>I use public transportation</option>
-          <option>I have access to a car</option>
-          <option>I prefer phone or online support</option>
-          <option>Transportation is a challenge</option>
+          <option value="transit">I use public transportation</option>
+          <option value="car">I have access to a car</option>
+          <option value="phone">I prefer phone or online support</option>
+          <option value="challenge">Transportation is a challenge</option>
         </select>
 
-        <p class="small">
-          Your transportation answer appears in your review. This
-          prototype does not verify transit access or use it to rank
-          organizations.
-        </p>
+        <label class="field-label" for="goal">
+          What would you like your next step to be?
+          <span class="small">Optional</span>
+        </label>
+
+        <select id="goal">
+          <option value="">I’m not sure yet</option>
+          <option value="speak">I want to speak with someone</option>
+          <option value="qualify">
+            I want to explore whether I might qualify
+          </option>
+          <option value="apply">
+            I want help finding an application
+          </option>
+          <option value="not-ready">
+            I’m not ready to contact anyone yet
+          </option>
+        </select>
 
         <div class="actions">
           <button type="button" class="secondary" data-go="0">
@@ -814,7 +878,7 @@
         </div>
       </section>
 
-      <!-- STEP 3 -->
+      <!-- STEP 3: SUMMARY -->
 
       <section
         class="card"
@@ -823,21 +887,20 @@
         hidden
       >
         <h2 id="heading-2" tabindex="-1">
-          Review your summary
+          This is your story
         </h2>
 
         <p>
-          Check the summary carefully. You can edit it, leave it blank,
-          or remove anything you do not want included.
+          Review it, change it, or leave out anything you don’t want to
+          share. The assistant can make mistakes.
         </p>
 
         <div id="summary-ai-controls" class="panel" hidden>
           <h3>Optional AI draft</h3>
 
           <p class="small">
-            If you select this button, the conversation will be sent
-            to OpenAI again to create a draft. Check it for mistakes
-            and remove anything you do not want included.
+            Creating a draft sends the conversation to the configured
+            Azure service again. Review the result carefully.
           </p>
 
           <button
@@ -873,12 +936,12 @@
           </button>
 
           <button type="button" id="to-options">
-            See support options
+            Explore support options
           </button>
         </div>
       </section>
 
-      <!-- STEP 4 -->
+      <!-- STEP 4: OPTIONS -->
 
       <section
         class="card"
@@ -887,56 +950,61 @@
         hidden
       >
         <h2 id="heading-3" tabindex="-1">
-          Your possible next steps
+          Here are some possible places to start
         </h2>
 
         <p>
-          These entries come from the regional directory in your
-          teammate’s prototype. They have not been verified. Inclusion
-          does not guarantee that an organization can help.
+          You decide which options, if any, feel right for you.
+          These records come from the supplied prototype and have not
+          been verified.
         </p>
 
         <div class="notice">
-          <strong>Please confirm details before traveling or calling.</strong>
+          <strong>Please confirm details before relying on a listing.</strong>
 
-          Distances are approximate straight-line distances from a ZIP-area
-          reference point—not travel distances. This prototype does not
-          determine eligibility, availability, transit access, or whether
-          a particular service is currently offered.
+          Services, eligibility, contact details, transportation, funding,
+          and availability may have changed or may be incorrect. Distances
+          are approximate straight-line distances—not travel distances.
         </div>
 
-        <div class="panel no-print">
-          <h3>Find options near an included ZIP area</h3>
+        <div class="panel">
+          <h3>Search the regional sample directory</h3>
 
           <p class="small">
-            This version supports these preloaded ZIP areas: 07601,
-            07102, 15222, 15213, 15205, 92101, and 78205. It does not
-            send your ZIP to an outside lookup service.
+            Supported ZIP reference areas: 07601, 07102, 15222, 15213,
+            15205, 92101, and 78205. This prototype does not send your ZIP
+            to an outside lookup service.
           </p>
 
-          <label class="field-label" for="search-zip">
-            Five-digit ZIP code
-          </label>
+          <div class="grid-two">
+            <div>
+              <label class="field-label" for="search-zip">
+                Five-digit ZIP code
+              </label>
 
-          <input
-            type="text"
-            id="search-zip"
-            inputmode="numeric"
-            maxlength="5"
-            placeholder="For example: 07601"
-          >
+              <input
+                type="text"
+                id="search-zip"
+                maxlength="5"
+                inputmode="numeric"
+                placeholder="For example: 07601"
+              >
+            </div>
 
-          <label class="field-label" for="search-radius">
-            Approximate search radius
-          </label>
+            <div>
+              <label class="field-label" for="search-radius">
+                Approximate search radius
+              </label>
 
-          <select id="search-radius">
-            <option value="5">Within 5 miles</option>
-            <option value="10">Within 10 miles</option>
-            <option value="15" selected>Within 15 miles</option>
-            <option value="25">Within 25 miles</option>
-            <option value="50">Within 50 miles</option>
-          </select>
+              <select id="search-radius">
+                <option value="5">Within 5 miles</option>
+                <option value="10">Within 10 miles</option>
+                <option value="15" selected>Within 15 miles</option>
+                <option value="25">Within 25 miles</option>
+                <option value="50">Within 50 miles</option>
+              </select>
+            </div>
+          </div>
 
           <div class="actions">
             <button type="button" id="find-organizations">
@@ -958,22 +1026,68 @@
           <p id="backup-choice">Backup option: Not selected</p>
 
           <p class="small">
-            Choices are kept only for this session. They are not sent
-            or included in saved progress.
+            Selecting an option does not contact the organization.
           </p>
         </div>
 
         <div id="matches"></div>
 
-        <fieldset class="no-print">
-          <legend>
-            What would you be comfortable sharing?
-          </legend>
+        <div class="actions">
+          <button type="button" class="secondary" data-go="2">
+            Back
+          </button>
+
+          <button type="button" id="to-plan">
+            Build my action plan
+          </button>
+        </div>
+      </section>
+
+      <!-- STEP 5: ACTION PLAN -->
+
+      <section
+        class="card"
+        id="step-4"
+        aria-labelledby="heading-4"
+        hidden
+      >
+        <h2 id="heading-4" tabindex="-1">
+          Let’s make your next step easier
+        </h2>
+
+        <p>
+          You can prepare to connect without telling your story all over
+          again. Nothing is sent by this app.
+        </p>
+
+        <div class="panel">
+          <h3>Your selected organizations</h3>
+          <div id="plan-organizations"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Questions you may want to ask</h3>
+
+          <ul>
+            <li>Are you accepting new requests?</li>
+            <li>What type of support do you currently offer?</li>
+            <li>What information or documents would I need?</li>
+            <li>Is phone or online intake available?</li>
+            <li>What should I do if my need is urgent?</li>
+          </ul>
 
           <p class="small">
-            This is a preview only. Nothing is sent to an organization.
-            The summary is free text, so review it for sensitive details
-            even if another checkbox is unchecked.
+            These are suggested questions—not a statement of program
+            requirements.
+          </p>
+        </div>
+
+        <fieldset class="no-print">
+          <legend>What would you be comfortable sharing?</legend>
+
+          <p class="small">
+            This is a preview only. The summary is free text, so review
+            it for sensitive details even when other choices are unchecked.
           </p>
 
           <label class="check-row">
@@ -993,7 +1107,7 @@
 
           <label class="check-row">
             <input type="checkbox" name="share" value="transport">
-            My transportation needs
+            My transportation or access preference
           </label>
         </fieldset>
 
@@ -1007,7 +1121,7 @@
               Copy preview
             </button>
 
-            <button type="button" id="print-preview" class="secondary">
+            <button type="button" id="print-plan" class="secondary">
               Print this page
             </button>
           </div>
@@ -1016,14 +1130,59 @@
         </div>
 
         <div class="panel no-print">
+          <h3>Keep track at your own pace</h3>
+
+          <p class="small">
+            This tracker is updated by you. The app does not verify
+            contact, submission, receipt, or an organization’s response.
+          </p>
+
+          <label class="field-label" for="tracker-status">
+            My current status
+          </label>
+
+          <select id="tracker-status">
+            <option value="Planning">Planning</option>
+            <option value="Ready to contact">Ready to contact</option>
+            <option value="Contacted">I contacted an organization</option>
+            <option value="Waiting">I’m waiting for a response</option>
+            <option value="Follow-up planned">Follow-up planned</option>
+            <option value="Closed or changed">Closed or changed</option>
+          </select>
+
+          <label class="field-label" for="follow-up-date">
+            Follow-up date
+            <span class="small">Optional</span>
+          </label>
+
+          <input type="date" id="follow-up-date">
+
+          <label class="field-label" for="tracker-notes">
+            My notes
+            <span class="small">Optional</span>
+          </label>
+
+          <textarea
+            id="tracker-notes"
+            maxlength="4000"
+            placeholder="For example: I called and was asked to follow up next week."
+          ></textarea>
+
+          <p class="small">
+            This prototype does not send reminders or contact the
+            organization automatically.
+          </p>
+        </div>
+
+        <div class="panel no-print">
           <h3>Save your progress on this device</h3>
 
           <p class="small">
-            Saving is optional. Your written story, edited summary,
-            and answers will be stored in this browser and may be visible
-            to anyone using this browser profile. The AI conversation,
-            directory search, organization choices, and sharing selections
-            are not saved.
+            Saving is optional. Your written story, summary, answers,
+            organization choices, tracker status, follow-up date, and notes
+            will be stored in this browser. Anyone using this browser
+            profile may be able to see them. The AI conversation and
+            sharing checkboxes are not saved.
           </p>
 
           <button
@@ -1042,7 +1201,7 @@
         </div>
 
         <div class="actions no-print">
-          <button type="button" class="secondary" data-go="2">
+          <button type="button" class="secondary" data-go="3">
             Back
           </button>
 
@@ -1052,8 +1211,8 @@
         </div>
 
         <p class="small no-print">
-          Start over clears the current form and conversation, but does
-          not delete any previously saved copy.
+          Start over clears the current session but does not delete an
+          earlier saved copy.
         </p>
       </section>
 
@@ -1065,9 +1224,9 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "veteran-navigator-progress-v2";
+    const STORAGE_KEY = "veteran-navigator-integrated-v1";
 
-    const labels = {
+    const NEED_LABELS = {
       rent: "Rent, utilities, or another urgent bill",
       food: "Food or food benefits",
       housing: "A place to stay or permanent housing",
@@ -1075,57 +1234,66 @@
       medical: "Healthcare or medical support"
     };
 
+    const NEED_TO_CATEGORIES = {
+      rent: ["financial"],
+      food: ["food"],
+      housing: ["financial"],
+      work: ["work"],
+      medical: ["medical"]
+    };
+
+    const CATEGORY_LABELS = {
+      financial: "Financial / housing-related support",
+      food: "Food",
+      work: "Work / training",
+      medical: "Healthcare"
+    };
+
+    const HOUSING_LABELS = {
+      "": "Not provided",
+      housed: "Has a place to stay",
+      "at-risk": "Has a place to stay but may lose it",
+      seeking: "Looking for a place to stay",
+      other: "Another situation"
+    };
+
+    const TRANSPORT_LABELS = {
+      "": "Not provided",
+      transit: "Uses public transportation",
+      car: "Has access to a car",
+      phone: "Prefers phone or online support",
+      challenge: "Transportation is a challenge"
+    };
+
+    const GOAL_LABELS = {
+      "": "Not sure yet",
+      speak: "Wants to speak with someone",
+      qualify: "Wants to explore possible eligibility",
+      apply: "Wants help finding an application",
+      "not-ready": "Not ready to contact anyone yet"
+    };
+
     const ZIP_AREAS = {
-      "07601": {
-        city: "Hackensack",
-        state: "NJ",
-        lat: 40.8868,
-        lon: -74.0435
-      },
-      "07102": {
-        city: "Newark",
-        state: "NJ",
-        lat: 40.7357,
-        lon: -74.1724
-      },
-      "15222": {
-        city: "Pittsburgh",
-        state: "PA",
-        lat: 40.4485,
-        lon: -79.9904
-      },
-      "15213": {
-        city: "Pittsburgh",
-        state: "PA",
-        lat: 40.4406,
-        lon: -79.9559
-      },
-      "15205": {
-        city: "Pittsburgh",
-        state: "PA",
-        lat: 40.4312,
-        lon: -80.0685
-      },
-      "92101": {
-        city: "San Diego",
-        state: "CA",
-        lat: 32.7157,
-        lon: -117.1611
-      },
-      "78205": {
-        city: "San Antonio",
-        state: "TX",
-        lat: 29.4241,
-        lon: -98.4936
-      }
+      "07601": { city: "Hackensack", state: "NJ", lat: 40.8868, lon: -74.0435 },
+      "07102": { city: "Newark", state: "NJ", lat: 40.7357, lon: -74.1724 },
+      "15222": { city: "Pittsburgh", state: "PA", lat: 40.4485, lon: -79.9904 },
+      "15213": { city: "Pittsburgh", state: "PA", lat: 40.4406, lon: -79.9559 },
+      "15205": { city: "Pittsburgh", state: "PA", lat: 40.4312, lon: -80.0685 },
+      "92101": { city: "San Diego", state: "CA", lat: 32.7157, lon: -117.1611 },
+      "78205": { city: "San Antonio", state: "TX", lat: 29.4241, lon: -98.4936 }
     };
 
     /*
-      Directory records adapted from the teammate's supplied prototype.
+      Regional directory adapted from the colleague's supplied prototype.
 
-      IMPORTANT:
-      These records are unverified. Their names, categories, addresses,
-      phone numbers, and coordinates may be incorrect or out of date.
+      These records are NOT verified. Fields are presented as source claims,
+      not confirmed eligibility, availability, transportation, or services.
+
+      Format:
+      {
+        id, name, address, phone, website, lat, lon,
+        categories, sourceAccess, limitation
+      }
     */
 
     const organizations = [
@@ -1134,108 +1302,132 @@
         name: "Bergen County Division of Veteran Services & NJ DMAVA VSO",
         address: "One Bergen County Plaza, 2nd Floor, Hackensack, NJ 07601",
         phone: "(201) 336-6325",
-        lat: 40.8788,
-        lon: -74.0422,
-        categories: ["financial", "food", "medical", "work"]
+        website: "https://www.co.bergen.nj.us/veteran-services",
+        lat: 40.8788, lon: -74.0422,
+        categories: ["financial", "food", "medical", "work"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm which services are offered directly and which are referrals."
       },
       {
         id: "nj_onestop",
         name: "Bergen County One-Stop Career Center",
         address: "60 State Street, 2nd Floor, Hackensack, NJ 07601",
         phone: "(201) 329-9600",
-        lat: 40.8859,
-        lon: -74.0439,
-        categories: ["work"]
+        website: "https://www.nj.gov/labor/career-services/",
+        lat: 40.8859, lon: -74.0439,
+        categories: ["work"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "The source says this option does not provide emergency rent or food grants."
       },
       {
         id: "nj_ssvf_ca",
         name: "Community Hope — Hope for Veterans",
         address: "175 Washington Ave, Dumont / Hackensack Service Hub, NJ 07601",
         phone: "(855) 483-8466",
-        lat: 40.8921,
-        lon: -74.0398,
-        categories: ["financial", "food"]
+        website: "https://www.communityhope-nj.org/what-we-do/veterans-services/",
+        lat: 40.8921, lon: -74.0398,
+        categories: ["financial", "food"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm the address, service area, current funding, and eligibility."
       },
       {
         id: "nj_va_cboc",
         name: "Hackensack VA Clinic",
         address: "385 Prospect Avenue, Hackensack, NJ 07601",
         phone: "(201) 342-4536",
-        lat: 40.8942,
-        lon: -74.0568,
-        categories: ["medical"]
+        website: "https://www.va.gov/new-jersey-health-care/locations/hackensack-va-clinic/",
+        lat: 40.8942, lon: -74.0568,
+        categories: ["medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm available services, enrollment requirements, and appointments."
       },
       {
         id: "nj_vet_center",
         name: "Secaucus / Bergen Vet Center",
         address: "110A Meadowlands Parkway, Suite 102, Secaucus, NJ 07094",
         phone: "(201) 223-7787",
-        lat: 40.7931,
-        lon: -74.0683,
-        categories: ["medical", "work"]
+        website: "https://www.va.gov/secaucus-vet-center/",
+        lat: 40.7931, lon: -74.0683,
+        categories: ["medical", "work"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm which counseling and transition services are currently available."
       },
       {
         id: "nj_cfa_food",
         name: "Center for Food Action",
         address: "192 W. Demarest Avenue, Englewood / Hackensack Hub, NJ 07631",
         phone: "(201) 569-1804",
-        lat: 40.8995,
-        lon: -73.9821,
-        categories: ["food", "financial"]
+        website: "https://www.cfanj.org/",
+        lat: 40.8995, lon: -73.9821,
+        categories: ["food", "financial"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm the address, service area, and available assistance."
       },
       {
         id: "nj_catholic_charities",
         name: "Catholic Charities Archdiocese of Newark — Veterans Program",
         address: "590 North 7th Street, Newark, NJ 07107",
         phone: "(855) 768-7932",
-        lat: 40.7641,
-        lon: -74.1823,
-        categories: ["financial", "food"]
+        website: "https://www.ccannj.org/veterans-services/",
+        lat: 40.7641, lon: -74.1823,
+        categories: ["financial", "food"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm eligibility, geographic coverage, and current funding."
       },
       {
         id: "nj_gi_go",
         name: "GI Go Fund",
         address: "436 Central Avenue, Newark / Northern NJ Hub, NJ 07107",
         phone: "(862) 240-1755",
-        lat: 40.7478,
-        lon: -74.1912,
-        categories: ["work", "financial", "food"]
+        website: "https://gigofund.org/",
+        lat: 40.7478, lon: -74.1912,
+        categories: ["work", "financial", "food"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm which services are available and how to request them."
       },
       {
         id: "nj_east_orange_vamc",
         name: "East Orange VA Medical Center",
         address: "385 Tremont Avenue, East Orange, NJ 07018",
         phone: "(973) 676-1000",
-        lat: 40.7521,
-        lon: -74.2361,
-        categories: ["medical"]
+        website: "https://www.va.gov/new-jersey-health-care/locations/east-orange-va-medical-center/",
+        lat: 40.7521, lon: -74.2361,
+        categories: ["medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm available services, eligibility, and transportation."
       },
       {
         id: "nj_varbo_newark",
         name: "Newark VA Regional Benefit Office",
         address: "20 Washington Place, Newark, NJ 07102",
         phone: "(800) 827-1000",
-        lat: 40.7429,
-        lon: -74.1704,
-        categories: ["medical", "work", "financial"]
+        website: "https://www.va.gov/newark-va-regional-benefit-office/",
+        lat: 40.7429, lon: -74.1704,
+        categories: ["medical", "work", "financial"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm which benefit and employment services are available."
       },
       {
         id: "nj_bergen_bss",
         name: "Bergen County Board of Social Services",
         address: "218 Route 17 North, Rochelle Park, NJ 07662",
         phone: "(201) 368-4200",
-        lat: 40.9088,
-        lon: -74.0725,
-        categories: ["food", "financial"]
+        website: "https://bcbss.com/",
+        lat: 40.9088, lon: -74.0725,
+        categories: ["food", "financial"],
+        sourceAccess: ["phone"],
+        limitation: "The source reports limited direct transit access; confirm current access and processing times."
       },
       {
         id: "nj_lyons_homeless",
         name: "Lyons VA Medical Center — Domiciliary",
         address: "151 Knollcroft Road, Lyons, NJ 07939",
         phone: "(908) 647-0180",
-        lat: 40.6652,
-        lon: -74.5491,
-        categories: ["financial", "medical"]
+        website: "https://www.va.gov/new-jersey-health-care/locations/lyons-va-medical-center/",
+        lat: 40.6652, lon: -74.5491,
+        categories: ["financial", "medical"],
+        sourceAccess: ["phone"],
+        limitation: "The source describes a residential program for currently unhoused veterans, not past-due rent assistance."
       },
 
       {
@@ -1243,90 +1435,110 @@
         name: "Veterans Leadership Program of Western PA",
         address: "2934 Smallman Street, Pittsburgh, PA 15201",
         phone: "(412) 481-8200",
-        lat: 40.4581,
-        lon: -79.9742,
-        categories: ["financial", "food", "work"]
+        website: "https://www.veteransleadershipprogram.org/",
+        lat: 40.4581, lon: -79.9742,
+        categories: ["financial", "food", "work"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm current services, eligibility, and funding."
       },
       {
         id: "pgh_careerlink",
         name: "PA CareerLink Pittsburgh / Allegheny County",
         address: "2201 Liberty Avenue, Pittsburgh, PA 15222",
         phone: "(412) 552-7100",
-        lat: 40.4519,
-        lon: -79.9831,
-        categories: ["work"]
+        website: "https://www.careerlinkpittsburgh.com/",
+        lat: 40.4519, lon: -79.9831,
+        categories: ["work"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "The source says this option does not provide emergency rent or food grants."
       },
       {
         id: "pgh_acvs",
         name: "Allegheny County Veterans Services",
         address: "4141 Fifth Avenue, 2nd Floor, Pittsburgh, PA 15213",
         phone: "(412) 621-4357",
-        lat: 40.4439,
-        lon: -79.9547,
-        categories: ["financial", "food", "medical"]
+        website: "https://www.alleghenycounty.us/Services/Veterans-Services",
+        lat: 40.4439, lon: -79.9547,
+        categories: ["financial", "food", "medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm available assistance and program requirements."
       },
       {
         id: "pgh_varbo",
         name: "Pittsburgh VA Regional Benefit Office",
         address: "1000 Liberty Avenue, Room 1700, Pittsburgh, PA 15222",
         phone: "(800) 827-1000",
-        lat: 40.4432,
-        lon: -79.9949,
-        categories: ["medical", "work", "financial"]
+        website: "https://www.va.gov/pittsburgh-va-regional-benefit-office/",
+        lat: 40.4432, lon: -79.9949,
+        categories: ["medical", "work", "financial"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm which benefit and employment services are available."
       },
       {
         id: "pgh_vamc_univ",
         name: "Pittsburgh VA Medical Center — University Drive",
         address: "University Drive C, Pittsburgh, PA 15240",
         phone: "(866) 482-7488",
-        lat: 40.4457,
-        lon: -79.9602,
-        categories: ["medical"]
+        website: "https://www.va.gov/pittsburgh-health-care/locations/pittsburgh-va-medical-center-university-drive/",
+        lat: 40.4457, lon: -79.9602,
+        categories: ["medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm appointments, eligibility, and transportation."
       },
       {
         id: "pgh_vet_center",
         name: "Pittsburgh Vet Center",
         address: "2500 Baldwick Road, Suite 15, Pittsburgh, PA 15205",
         phone: "(412) 920-1765",
-        lat: 40.4278,
-        lon: -80.0681,
-        categories: ["medical", "work"]
+        website: "https://www.va.gov/pittsburgh-vet-center/",
+        lat: 40.4278, lon: -80.0681,
+        categories: ["medical", "work"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm current services and appointment availability."
       },
       {
         id: "pgh_salvation_ssvf",
         name: "The Salvation Army Western PA — Veteran Family Program",
         address: "700 North Bell Avenue, Carnegie / Pittsburgh, PA 15106",
         phone: "(412) 446-1500",
-        lat: 40.4089,
-        lon: -80.0835,
-        categories: ["financial", "food"]
+        website: "https://pa.salvationarmy.org/western-pennsylvania/",
+        lat: 40.4089, lon: -80.0835,
+        categories: ["financial", "food"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm the address, program availability, and eligibility."
       },
       {
         id: "pgh_wwp",
         name: "Wounded Warrior Project — Pittsburgh Service Office",
         address: "600 River Avenue, Suite 400, Pittsburgh, PA 15212",
         phone: "(412) 471-0935",
-        lat: 40.4539,
-        lon: -79.9922,
-        categories: ["work", "medical", "financial"]
+        website: "https://www.woundedwarriorproject.org/",
+        lat: 40.4539, lon: -79.9922,
+        categories: ["work", "medical", "financial"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "The source describes a program for certain veterans; confirm current eligibility and services."
       },
       {
         id: "pgh_food_bank",
         name: "Greater Pittsburgh Community Food Bank",
         address: "1 North Linden Street, Duquesne / Pittsburgh Metro, PA 15110",
         phone: "(412) 460-3663",
-        lat: 40.3792,
-        lon: -79.8471,
-        categories: ["food"]
+        website: "https://pittsburghfoodbank.org/",
+        lat: 40.3792, lon: -79.8471,
+        categories: ["food"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm nearby distribution locations and current access options."
       },
       {
         id: "pgh_hj_heinz_va",
         name: "H.J. Heinz III VA Campus",
         address: "1010 Delafield Road, Pittsburgh, PA 15215",
         phone: "(866) 482-7488",
-        lat: 40.4958,
-        lon: -79.8981,
-        categories: ["medical"]
+        website: "https://www.va.gov/pittsburgh-health-care/locations/h-j-heinz-iii-department-of-veterans-affairs-medical-center/",
+        lat: 40.4958, lon: -79.8981,
+        categories: ["medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm current services, eligibility, and transportation."
       },
 
       {
@@ -1334,18 +1546,22 @@
         name: "Veterans Village of San Diego",
         address: "4141 Pacific Highway, San Diego, CA 92110",
         phone: "(619) 393-2000",
-        lat: 32.7481,
-        lon: -117.1965,
-        categories: ["financial", "food", "work", "medical"]
+        website: "https://vvsd.net/",
+        lat: 32.7481, lon: -117.1965,
+        categories: ["financial", "food", "work", "medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm which services are available and their eligibility requirements."
       },
       {
         id: "sd_va_clinic",
         name: "Jennifer Moreno VA Medical Center / Mission Valley VA Clinic",
         address: "8810 Rio San Diego Drive, San Diego, CA 92108",
         phone: "(619) 400-5000",
-        lat: 32.7759,
-        lon: -117.1391,
-        categories: ["medical"]
+        website: "https://www.va.gov/san-diego-health-care/",
+        lat: 32.7759, lon: -117.1391,
+        categories: ["medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm the facility name, address, services, and appointments."
       },
 
       {
@@ -1353,35 +1569,24 @@
         name: "Endeavors — Veteran Supportive Services",
         address: "6363 De Zavala Road, San Antonio, TX 78249",
         phone: "(210) 431-6466",
-        lat: 29.5612,
-        lon: -98.6134,
-        categories: ["financial", "food", "medical"]
+        website: "https://endeavors.org/veteran-supportive-services/",
+        lat: 29.5612, lon: -98.6134,
+        categories: ["financial", "food", "medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm service area, eligibility, funding, and available programs."
       },
       {
         id: "sa_bexar_vso",
         name: "Bexar County Military & Veterans Services Center",
         address: "1422 E. Grayson Street, Suite 400, San Antonio, TX 78208",
         phone: "(210) 335-6775",
-        lat: 29.4426,
-        lon: -98.4612,
-        categories: ["work", "financial", "medical"]
+        website: "https://www.bexar.org/509/Military-and-Veterans-Services",
+        lat: 29.4426, lon: -98.4612,
+        categories: ["work", "financial", "medical"],
+        sourceAccess: ["transit", "phone"],
+        limitation: "Confirm current benefit, employment, and financial assistance services."
       }
     ];
-
-    const NEED_TO_CATEGORIES = {
-      rent: ["financial"],
-      housing: ["financial"],
-      food: ["food"],
-      work: ["work"],
-      medical: ["medical"]
-    };
-
-    const CATEGORY_LABELS = {
-      financial: "Financial / housing",
-      food: "Food",
-      work: "Work / training",
-      medical: "Healthcare"
-    };
 
     const $ = selector => document.querySelector(selector);
 
@@ -1412,7 +1617,7 @@
       const selected = selectedNeeds();
 
       return selected.length
-        ? selected.map(value => labels[value]).join(", ")
+        ? selected.map(value => NEED_LABELS[value]).join(", ")
         : "None selected";
     }
 
@@ -1431,13 +1636,10 @@
     }
 
     function showEntryPanel(panelId) {
-      [
-        "entry-choice",
-        "new-user-welcome",
-        "returning-welcome"
-      ].forEach(id => {
-        document.getElementById(id).hidden = id !== panelId;
-      });
+      ["entry-choice", "new-welcome", "returning-welcome"]
+        .forEach(id => {
+          document.getElementById(id).hidden = id !== panelId;
+        });
 
       const heading = document.querySelector(
         "#" + panelId + " h1"
@@ -1450,7 +1652,7 @@
     }
 
     function showStep(number) {
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 5; i++) {
         $("#step-" + i).hidden = i !== number;
       }
 
@@ -1477,12 +1679,17 @@
 
       if (step === 3) {
         renderMatches();
-        renderPreview();
+      }
+
+      if (step === 4) {
+        renderPlan();
       }
 
       showStep(step);
       window.scrollTo(0, 0);
     }
+
+    /* AI conversation */
 
     function renderConversation() {
       const container = $("#conversation");
@@ -1548,8 +1755,7 @@
     function beginChat() {
       if (!$("#ai-consent").checked) {
         $("#intake-status").textContent =
-          "Please select the consent checkbox before starting " +
-          "the AI conversation.";
+          "Please select the consent checkbox before starting AI.";
 
         return;
       }
@@ -1575,9 +1781,7 @@
     }
 
     async function sendMessage() {
-      if (chatBusy) {
-        return;
-      }
+      if (chatBusy) return;
 
       if (!$("#ai-consent").checked) {
         $("#chat-status").textContent =
@@ -1658,11 +1862,9 @@
 
     function prepareSummary() {
       if (!summaryInitialized) {
-        const manualStory = $("#story").value.trim();
-        const chatStory = userConversationText();
+        $("#summary").value =
+          $("#story").value.trim() || userConversationText();
 
-        // This is an editable fallback, not an AI-generated summary.
-        $("#summary").value = manualStory || chatStory;
         summaryInitialized = true;
       }
 
@@ -1691,9 +1893,7 @@
           "Creating an AI draft will replace the current summary. Continue?"
         );
 
-        if (!replace) {
-          return;
-        }
+        if (!replace) return;
       }
 
       $("#generate-summary").disabled = true;
@@ -1716,14 +1916,29 @@
       }
     }
 
+    /* Review */
+
     function renderReview() {
       const container = $("#review-details");
       container.replaceChildren();
 
       addLine(container, "Support requested", needsText());
+      addLine(
+        container,
+        "Housing situation",
+        HOUSING_LABELS[$("#housing-status").value]
+      );
+      addLine(container, "Date to keep in mind", $("#deadline").value);
       addLine(container, "Area", $("#location").value.trim());
-      addLine(container, "Transportation", $("#transport").value);
+      addLine(
+        container,
+        "Transportation",
+        TRANSPORT_LABELS[$("#transport").value]
+      );
+      addLine(container, "Next-step goal", GOAL_LABELS[$("#goal").value]);
     }
+
+    /* Directory matching */
 
     function approximateDistanceMiles(lat1, lon1, lat2, lon2) {
       const earthRadiusMiles = 3958.8;
@@ -1750,20 +1965,58 @@
       );
     }
 
-    function updateOrganizationChoices() {
-      const main = organizations.find(
-        org => org.id === mainOrganizationId
-      );
+    function getOrganization(id) {
+      return organizations.find(org => org.id === id) || null;
+    }
 
-      const backup = organizations.find(
-        org => org.id === backupOrganizationId
-      );
+    function updateOrganizationChoices() {
+      const main = getOrganization(mainOrganizationId);
+      const backup = getOrganization(backupOrganizationId);
 
       $("#main-choice").textContent =
         "Main option: " + (main ? main.name : "Not selected");
 
       $("#backup-choice").textContent =
         "Backup option: " + (backup ? backup.name : "Not selected");
+    }
+
+    function sourceAccessText(org) {
+      const access = [];
+
+      if (org.sourceAccess.includes("transit")) {
+        access.push("transit access");
+      }
+
+      if (org.sourceAccess.includes("phone")) {
+        access.push("phone contact or intake");
+      }
+
+      return access.length
+        ? access.join(" and ")
+        : "No access information listed";
+    }
+
+    function addWebsite(container, website) {
+      try {
+        const url = new URL(website);
+
+        if (url.protocol !== "https:") {
+          return;
+        }
+
+        const paragraph = document.createElement("p");
+        const link = document.createElement("a");
+
+        link.href = url.href;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Visit listed website";
+
+        paragraph.appendChild(link);
+        container.appendChild(paragraph);
+      } catch {
+        // Do not display invalid links.
+      }
     }
 
     function renderMatches() {
@@ -1784,11 +2037,10 @@
       const area = ZIP_AREAS[zip];
       const radius = Number($("#search-radius").value);
       const categories = selectedCategories();
+      const transport = $("#transport").value;
 
       if (!/^\d{5}$/.test(zip)) {
-        status.textContent =
-          "Please enter a five-digit ZIP code.";
-
+        status.textContent = "Please enter a five-digit ZIP code.";
         return;
       }
 
@@ -1803,8 +2055,7 @@
 
       if (!categories.size) {
         status.textContent =
-          "Go back and select at least one type of support " +
-          "before searching.";
+          "Go back and select at least one type of support before searching.";
 
         return;
       }
@@ -1822,10 +2073,27 @@
             category => categories.has(category)
           );
 
+          let accessFit = 0;
+
+          if (
+            transport === "transit" &&
+            org.sourceAccess.includes("transit")
+          ) {
+            accessFit = 1;
+          }
+
+          if (
+            (transport === "phone" || transport === "challenge") &&
+            org.sourceAccess.includes("phone")
+          ) {
+            accessFit = 1;
+          }
+
           return {
             ...org,
             distance,
-            matchingCategories
+            matchingCategories,
+            accessFit
           };
         })
         .filter(org =>
@@ -1833,6 +2101,8 @@
           org.matchingCategories.length > 0
         )
         .sort((a, b) =>
+          b.matchingCategories.length - a.matchingCategories.length ||
+          b.accessFit - a.accessFit ||
           a.distance - b.distance ||
           a.name.localeCompare(b.name)
         )
@@ -1849,22 +2119,35 @@
 
       status.textContent =
         `Showing ${matches.length} possible option` +
-        `${matches.length === 1 ? "" : "s"} within approximately ` +
-        `${radius} miles of ${area.city}, ${area.state}. ` +
-        `Sorted by straight-line distance, not by eligibility or quality.`;
+        `${matches.length === 1 ? "" : "s"}. ` +
+        `Ordered by listed need categories, then listed access, ` +
+        `then approximate distance. This is not an eligibility decision.`;
 
-      matches.forEach(org => {
+      matches.forEach((org, index) => {
         const article = document.createElement("article");
         article.className = "organization";
 
         const tag = document.createElement("span");
         tag.className = "tag";
-        tag.textContent = "Unverified directory entry";
+        tag.textContent =
+          index === 0
+            ? "Possible starting point · unverified"
+            : "Possible option · unverified";
 
         const heading = document.createElement("h3");
         heading.textContent = org.name;
 
         article.append(tag, heading);
+
+        const matchingText = org.matchingCategories
+          .map(category => CATEGORY_LABELS[category] || category)
+          .join(", ");
+
+        addLine(
+          article,
+          "Why it appears",
+          `The source associates it with ${matchingText}.`
+        );
 
         addLine(
           article,
@@ -1872,29 +2155,40 @@
           `${org.distance.toFixed(1)} miles from the ZIP-area reference point`
         );
 
-        addLine(article, "Listed address", org.address);
-        addLine(article, "Listed phone", org.phone);
-
-        const categoryText = org.matchingCategories
-          .map(category => CATEGORY_LABELS[category] || category)
-          .join(", ");
-
         addLine(
           article,
-          "Why it appears",
-          `The source directory associates it with: ${categoryText}.`
+          "Source-listed access",
+          sourceAccessText(org) + "; confirm before relying on it"
         );
+
+        addLine(article, "Listed address", org.address);
+        addLine(article, "Listed phone", org.phone);
+        addLine(article, "Things to confirm", org.limitation);
+
+        if (
+          selectedNeeds().includes("housing") &&
+          org.categories.includes("financial")
+        ) {
+          const housingNote = document.createElement("p");
+          housingNote.className = "small";
+          housingNote.textContent =
+            "This option is shown because the source has a broad " +
+            "financial category. Housing placement is not confirmed.";
+
+          article.appendChild(housingNote);
+        }
 
         const warning = document.createElement("p");
         warning.className = "small";
         warning.textContent =
-          "Confirm the address, contact details, services, eligibility, " +
-          "and availability directly before relying on this listing.";
+          "This entry has not been verified. Confirm services, " +
+          "eligibility, contact details, and availability directly.";
 
         article.appendChild(warning);
+        addWebsite(article, org.website);
 
         const actions = document.createElement("div");
-        actions.className = "actions no-print";
+        actions.className = "actions";
 
         const mainButton = document.createElement("button");
         mainButton.type = "button";
@@ -1943,6 +2237,49 @@
       });
     }
 
+    /* Action plan */
+
+    function renderPlanOrganizations() {
+      const container = $("#plan-organizations");
+      container.replaceChildren();
+
+      const main = getOrganization(mainOrganizationId);
+      const backup = getOrganization(backupOrganizationId);
+
+      if (!main && !backup) {
+        const message = document.createElement("p");
+
+        message.textContent =
+          "No organization selected yet. You can go back to explore " +
+          "options or continue planning at your own pace.";
+
+        container.appendChild(message);
+        return;
+      }
+
+      [
+        { label: "Main option", org: main },
+        { label: "Backup option", org: backup }
+      ].forEach(item => {
+        if (!item.org) return;
+
+        const section = document.createElement("div");
+        section.className = "organization";
+
+        const heading = document.createElement("h4");
+        heading.textContent = item.label + ": " + item.org.name;
+
+        section.appendChild(heading);
+
+        addLine(section, "Listed phone", item.org.phone);
+        addLine(section, "Listed address", item.org.address);
+        addLine(section, "Confirm", item.org.limitation);
+        addWebsite(section, item.org.website);
+
+        container.appendChild(section);
+      });
+    }
+
     function renderPreview() {
       const container = $("#sharing-preview");
 
@@ -1959,11 +2296,7 @@
       }
 
       if (selected.includes("summary")) {
-        addLine(
-          container,
-          "Summary",
-          $("#summary").value.trim()
-        );
+        addLine(container, "Summary", $("#summary").value.trim());
       }
 
       if (selected.includes("needs")) {
@@ -1971,21 +2304,24 @@
       }
 
       if (selected.includes("location")) {
-        addLine(
-          container,
-          "Area",
-          $("#location").value.trim()
-        );
+        addLine(container, "Area", $("#location").value.trim());
       }
 
       if (selected.includes("transport")) {
         addLine(
           container,
           "Transportation",
-          $("#transport").value
+          TRANSPORT_LABELS[$("#transport").value]
         );
       }
     }
+
+    function renderPlan() {
+      renderPlanOrganizations();
+      renderPreview();
+    }
+
+    /* Reset */
 
     function clearCurrentForm() {
       if (requestController) {
@@ -2000,13 +2336,24 @@
       mainOrganizationId = null;
       backupOrganizationId = null;
 
-      $("#story").value = "";
-      $("#summary").value = "";
-      $("#location").value = "";
+      [
+        "story",
+        "summary",
+        "location",
+        "deadline",
+        "chat-input",
+        "search-zip",
+        "follow-up-date",
+        "tracker-notes"
+      ].forEach(id => {
+        document.getElementById(id).value = "";
+      });
+
+      $("#housing-status").value = "";
       $("#transport").value = "";
-      $("#chat-input").value = "";
-      $("#search-zip").value = "";
+      $("#goal").value = "";
       $("#search-radius").value = "15";
+      $("#tracker-status").value = "Planning";
 
       $$('input[type="checkbox"]').forEach(input => {
         input.checked = false;
@@ -2014,29 +2361,30 @@
 
       $("#conversation").replaceChildren();
       $("#matches").replaceChildren();
+      $("#plan-organizations").replaceChildren();
 
       $("#chat-area").hidden = true;
       $("#manual-area").hidden = true;
       $("#summary-ai-controls").hidden = true;
 
-      $("#intake-status").textContent = "";
-      $("#chat-status").textContent = "";
-      $("#summary-status").textContent = "";
-      $("#save-message").textContent = "";
-      $("#directory-status").textContent = "";
-      $("#copy-status").textContent = "";
+      [
+        "intake-status",
+        "chat-status",
+        "summary-status",
+        "directory-status",
+        "copy-status",
+        "save-message"
+      ].forEach(id => {
+        document.getElementById(id).textContent = "";
+      });
 
-      $("#main-choice").textContent =
-        "Main option: Not selected";
-
-      $("#backup-choice").textContent =
-        "Backup option: Not selected";
+      updateOrganizationChoices();
     }
 
-    // Entry navigation
+    /* Entry navigation */
 
     $("#new-user").addEventListener("click", () => {
-      showEntryPanel("new-user-welcome");
+      showEntryPanel("new-welcome");
     });
 
     $("#returning-user").addEventListener("click", () => {
@@ -2062,7 +2410,7 @@
       openApplication(0);
     });
 
-    // Intake
+    /* Intake navigation */
 
     $("#start-chat").addEventListener("click", beginChat);
 
@@ -2093,7 +2441,7 @@
       $("#story").focus();
     });
 
-    // Navigation
+    /* Main navigation */
 
     $("#to-review").addEventListener("click", () => {
       prepareSummary();
@@ -2106,26 +2454,33 @@
       generateSummary
     );
 
+    $("#to-options").addEventListener("click", () => {
+      renderMatches();
+      showStep(3);
+    });
+
     $("#find-organizations").addEventListener("click", () => {
       directorySearchPerformed = true;
+
+      // New search requires a fresh choice.
       mainOrganizationId = null;
       backupOrganizationId = null;
+
       renderMatches();
     });
 
-    $("#to-options").addEventListener("click", () => {
-      renderMatches();
-      renderPreview();
-      showStep(3);
+    $("#to-plan").addEventListener("click", () => {
+      renderPlan();
+      showStep(4);
     });
 
     $$("[data-go]").forEach(button => {
       button.addEventListener("click", () => {
         const step = Number(button.dataset.go);
 
-        if (step === 2) {
-          renderReview();
-        }
+        if (step === 2) renderReview();
+        if (step === 3) renderMatches();
+        if (step === 4) renderPlan();
 
         showStep(step);
       });
@@ -2150,14 +2505,14 @@
 
         $("#copy-status").textContent =
           "Preview copied. Check where you paste it.";
-      } catch (error) {
+      } catch {
         $("#copy-status").textContent =
           "Could not copy automatically. You can select and copy " +
           "the preview text yourself.";
       }
     });
 
-    $("#print-preview").addEventListener("click", () => {
+    $("#print-plan").addEventListener("click", () => {
       window.print();
     });
 
@@ -2166,15 +2521,25 @@
       showStep(0);
     });
 
-    // Optional browser-local save
+    /* Optional local save */
 
     $("#save-progress").addEventListener("click", () => {
       const progress = {
         story: $("#story").value,
         summary: $("#summary").value,
+        needs: selectedNeeds(),
+        housingStatus: $("#housing-status").value,
+        deadline: $("#deadline").value,
         location: $("#location").value,
         transport: $("#transport").value,
-        needs: selectedNeeds()
+        goal: $("#goal").value,
+        searchZip: $("#search-zip").value,
+        searchRadius: $("#search-radius").value,
+        mainOrganizationId,
+        backupOrganizationId,
+        trackerStatus: $("#tracker-status").value,
+        followUpDate: $("#follow-up-date").value,
+        trackerNotes: $("#tracker-notes").value
       };
 
       try {
@@ -2184,8 +2549,9 @@
         );
 
         $("#save-message").textContent =
-          "Saved in this browser. Delete it from the returning-user screen.";
-      } catch (error) {
+          "Saved in this browser. You can delete the saved copy " +
+          "from the returning-user screen.";
+      } catch {
         $("#save-message").textContent =
           "Progress could not be saved. Your browser may be " +
           "blocking local storage.";
@@ -2200,35 +2566,36 @@
 
         if (!saved) {
           message.textContent =
-            "No saved progress was found in this browser. " +
-            "You can start fresh.";
+            "No saved progress was found in this browser.";
 
           return;
         }
 
         const progress = JSON.parse(saved);
-
         clearCurrentForm();
 
-        $("#story").value =
-          typeof progress.story === "string"
-            ? progress.story
-            : "";
+        const textFields = {
+          story: "story",
+          summary: "summary",
+          location: "location",
+          deadline: "deadline",
+          searchZip: "search-zip",
+          followUpDate: "follow-up-date",
+          trackerNotes: "tracker-notes"
+        };
 
-        $("#summary").value =
-          typeof progress.summary === "string"
-            ? progress.summary
-            : "";
+        Object.entries(textFields).forEach(([key, id]) => {
+          document.getElementById(id).value =
+            typeof progress[key] === "string"
+              ? progress[key]
+              : "";
+        });
 
-        $("#location").value =
-          typeof progress.location === "string"
-            ? progress.location
-            : "";
-
-        $("#transport").value =
-          typeof progress.transport === "string"
-            ? progress.transport
-            : "";
+        $("#housing-status").value = progress.housingStatus || "";
+        $("#transport").value = progress.transport || "";
+        $("#goal").value = progress.goal || "";
+        $("#search-radius").value = progress.searchRadius || "15";
+        $("#tracker-status").value = progress.trackerStatus || "Planning";
 
         const savedNeeds = Array.isArray(progress.needs)
           ? progress.needs
@@ -2238,9 +2605,21 @@
           input.checked = savedNeeds.includes(input.value);
         });
 
+        mainOrganizationId =
+          getOrganization(progress.mainOrganizationId)
+            ? progress.mainOrganizationId
+            : null;
+
+        backupOrganizationId =
+          getOrganization(progress.backupOrganizationId)
+            ? progress.backupOrganizationId
+            : null;
+
         summaryInitialized = true;
-        openApplication(2);
-      } catch (error) {
+
+        // Raw conversation and sharing choices are not restored.
+        openApplication(4);
+      } catch {
         message.textContent =
           "Saved progress could not be opened. You can start fresh.";
       }
@@ -2254,7 +2633,7 @@
 
         message.textContent =
           "Saved progress was deleted from this browser.";
-      } catch (error) {
+      } catch {
         message.textContent =
           "Saved progress could not be deleted. " +
           "Check your browser’s site-data settings.";
