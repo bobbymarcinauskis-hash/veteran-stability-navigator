@@ -11,10 +11,10 @@ const MODEL = process.env.AZURE_OPENAI_DEPLOYMENT || "";
 const AZURE_ENDPOINT =
   "https://veteran.services.ai.azure.com/openai/v1/responses";
 
-const MAX_BODY_BYTES = 150_000;
-const MAX_MESSAGES = 40;
+cconst MAX_BODY_BYTES = 1_500_000;
+const MAX_MESSAGES = 200;
 const MAX_MESSAGE_CHARS = 4_000;
-const MAX_TOTAL_CHARS = 100_000;
+const MAX_TOTAL_CHARS = 300_000;
 
 const ALLOWED_ORGANIZATIONS = new Set([
   "demo_riverbend",
